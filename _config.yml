@@ -2,7 +2,7 @@
 title: JacobKong's Blog
 subtitle: 给今天的你一个机会，去感谢昨天努力的自己！
 welcome_message: <a href="http://www.jianshu.com/users/81a8d024af56/latest_articles" target="_blank">也欢迎来我的简书转转！</a>
-description: 欢迎来到孔伟杰(@JacobKong_Dev)的博客，目前大三，热爱iOS开发，最近在痴迷于算法。
+description: 欢迎来到孔伟杰(@JacobKong_Dev)的博客，目前大四，之前热爱iOS开发:)。
 creator: <a href="http://onev.cat">@onevcat</a>
 
 url: "http://www.jacobkong.com"
@@ -11,7 +11,7 @@ permalink: /:year/:month/:title/
 
 # Format
 highlighter: plain
-markdown: redcarpet
+markdown: kramdown
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript", tables]
 

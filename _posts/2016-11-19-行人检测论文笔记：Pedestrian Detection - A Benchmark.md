@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 行人检测论文笔记：Pedestrian Detection/ A Benchmark
+title: 行人检测论文笔记：Pedestrian Detection - A Benchmark
 date: 2016-11-19 15:32:24.000000000 +09:00
 ---
 

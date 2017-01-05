@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 行人检测论文笔记：Pedestrian Detection/ An Evaluation of the State of the Art.
+title: 行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art
 date: 2016-11-23 15:32:24.000000000 +09:00
 ---
 

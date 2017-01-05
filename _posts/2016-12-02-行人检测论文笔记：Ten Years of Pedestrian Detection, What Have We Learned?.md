@@ -4,7 +4,6 @@ title: 行人检测论文笔记：Ten Years of Pedestrian Detection, What Have W
 date: 2016-12-02 15:32:24.000000000 +09:00
 ---
 
-# 论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?
 ## Abstract
 
 * 这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。

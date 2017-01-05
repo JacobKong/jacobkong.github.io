@@ -4,8 +4,6 @@ title: 深度学习论文笔记：Rich feature hierarchies for accurate object d
 date: 2016-12-06 15:32:24.000000000 +09:00
 ---
 
-# 论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation
-
 ## Abstract
 
 * mAP: mean average precision，平均准确度

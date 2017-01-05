@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 行人检测论文笔记：Fused DNN/ A deep neural network fusion approach to fast and robust pedestrian detection
+title: 行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection
 date: 2016-12-05 15:32:24.000000000 +09:00
 ---
 

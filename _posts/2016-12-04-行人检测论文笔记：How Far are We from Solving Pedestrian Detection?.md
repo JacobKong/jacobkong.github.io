@@ -15,9 +15,14 @@ date: 2016-12-15 15:32:24.000000000 +09:00
 * Intersection over Union（IoU）是什么？
 
   * Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.
+
   * Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.
+
   * As long as we have these two sets of bounding boxes we can apply Intersection over Union.
+
   * An Intersection over Union score > 0.5 is normally considered a “good” prediction.
+
+    ![](https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg)
 
 
 * FPPI: False Positive Per Image

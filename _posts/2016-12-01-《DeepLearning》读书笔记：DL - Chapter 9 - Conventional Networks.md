@@ -24,13 +24,10 @@ date: 2016-12-01 15:32:24.000000000 +09:00
 * 我们将这些多维数组称为 **张量（tensors）** 。
 * 这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。
 * 二维卷积：
-
-![](https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg)
-​	two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 **kernel-ﬂipping**
-
-![](https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg)
-​	后一种会更更容易用机器学习库来实现。
-
+  ![](https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg)
+  two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 **kernel-ﬂipping**
+  ![](https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg)
+  后一种会更更容易用机器学习库来实现。
 * 许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：
 
 ![](https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg)

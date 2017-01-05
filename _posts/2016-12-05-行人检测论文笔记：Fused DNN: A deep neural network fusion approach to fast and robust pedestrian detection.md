@@ -4,7 +4,6 @@ title: 行人检测论文笔记：Fused DNN/ A deep neural network fusion approa
 date: 2016-12-05 15:32:24.000000000 +09:00
 ---
 
-# 论文笔记：Fused DNN: A deep neural network fusion approach to fast and robust pedestrian detection
 ## 相关知识点
 
 * **L1范数** 也称为最小绝对偏差（LAD），最小绝对误差（LAE）。它基本上最小化目标值(Yi)和估计值(f(xi))之间的绝对差(S)的和

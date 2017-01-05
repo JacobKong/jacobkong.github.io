@@ -150,18 +150,17 @@ date: 2016-11-29 15:32:24.000000000 +09:00
 
    *  the numbers of angular(角度盒子的个数）；
 
+   *  the numbers of radias(半径盒子个数)
+   *  the radius of the central bin in pixels（中心仓的半径（以像素为单位））
+   *  the expansion factor for subsequent (半径的伸展因子）
 
-* the numbers of radias(半径盒子个数)
-* the radius of the central bin in pixels（中心仓的半径（以像素为单位））
-   * the expansion factor for subsequent (半径的伸展因子）
+*  为了良好的性能，最佳的参数设置为：4个角度盒子、2个半径盒子、中心盒子半径为4个像素、伸展因子为2
 
-* 为了良好的性能，最佳的参数设置为：4个角度盒子、2个半径盒子、中心盒子半径为4个像素、伸展因子为2
+*  4像素是中央bin的最佳半径，但3和5给出类似的结果。
 
-* 4像素是中央bin的最佳半径，但3和5给出类似的结果。
+*  C-HOG看起来很像基于形状上下文（英语：Shape context）的方法，但不同之处是：C-HOG的区间中包含的细胞单元有多个方向通道，而基于形状上下文的方法仅仅只用到了一个单一的边缘存在数。[4]
 
-* C-HOG看起来很像基于形状上下文（英语：Shape context）的方法，但不同之处是：C-HOG的区间中包含的细胞单元有多个方向通道，而基于形状上下文的方法仅仅只用到了一个单一的边缘存在数。[4]
-
-* Block Normalization schemes：引入v表示一个还没有被归一化的向量，它包含了给定区间（block）的所有直方图信息。||v||k 表示 v 的 k 阶范数，这里的 k={1,2}。用 e 表示一个很小的常数。一共4种不同的块规范化schemes
+*  Block Normalization schemes：引入v表示一个还没有被归一化的向量，它包含了给定区间（block）的所有直方图信息。vk 表示 v 的 k 阶范数，这里的 k={1,2}。用 e 表示一个很小的常数。一共4种不同的块规范化schemes
 
    * L2-morm,
      ![](https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg)
@@ -175,7 +174,7 @@ date: 2016-11-29 15:32:24.000000000 +09:00
 
    * 作者发现：采用L2-Hys, L2-norm, 和 L1-sqrt方式所取得的效果是一样的，L1-norm稍微表现出一点点不可靠性。
 
-* Centre-surround normalization.
+*  Centre-surround normalization.
 
 ### 6.5 Detector Window and Context
 

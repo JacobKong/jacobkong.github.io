@@ -26,10 +26,10 @@ date: 2016-12-01 15:32:24.000000000 +09:00
 * 二维卷积：
 
 ![](https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg)
-* two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 **kernel-ﬂipping**
+​	two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 **kernel-ﬂipping**
 
 ![](https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg)
-* 后一种会更更容易用机器学习库来实现。
+​	后一种会更更容易用机器学习库来实现。
 
 * 许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：
 

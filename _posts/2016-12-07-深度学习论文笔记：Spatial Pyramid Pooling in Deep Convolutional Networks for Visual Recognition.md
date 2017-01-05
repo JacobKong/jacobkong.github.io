@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition
-date: 2016-12-06 15:32:24.000000000 +09:00
+date: 2016-12-07 15:32:24.000000000 +09:00
 ---
 
 ## Abstract

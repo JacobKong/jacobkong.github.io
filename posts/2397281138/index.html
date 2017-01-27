@@ -1,0 +1,870 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 训练" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="文章疑问点
+Human Baseline 的标准是如何确定的?
+Ground-truth是什么意思？
+
+Groun-truth 指的是正确的标注（真实值）
+在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。
+
+
+Intersection over U">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行人检测论文笔记：How Far are We from Solving Pedestrian Detection?">
+<meta property="og:url" content="http://yoursite.com/posts/2397281138/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="文章疑问点
+Human Baseline 的标准是如何确定的?
+Ground-truth是什么意思？
+
+Groun-truth 指的是正确的标注（真实值）
+在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。
+
+
+Intersection over U">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg">
+<meta property="og:updated_time" content="2017-01-26T10:00:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="行人检测论文笔记：How Far are We from Solving Pedestrian Detection?">
+<meta name="twitter:description" content="文章疑问点
+Human Baseline 的标准是如何确定的?
+Ground-truth是什么意思？
+
+Groun-truth 指的是正确的标注（真实值）
+在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。
+
+
+Intersection over U">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/posts/2397281138/"/>
+
+
+
+
+
+  <title> 行人检测论文笔记：How Far are We from Solving Pedestrian Detection? | JacobKong's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">JacobKong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">路漫漫其修远兮......</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2397281138/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                行人检测论文笔记：How Far are We from Solving Pedestrian Detection?
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T06:32:24+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+<li>Human Baseline 的标准是如何确定的?</li>
+<li><p>Ground-truth是什么意思？</p>
+<ul>
+<li>Groun-truth 指的是正确的标注（真实值）</li>
+<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+</ul>
+</li>
+<li><p>Intersection over Union（IoU）是什么？</p>
+<ul>
+<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
+</li>
+<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
+</li>
+<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+</li>
+<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>FPPI: False Positive Per Image</p>
+</li>
+<li><p>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</p>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
+<li>基于Caltech数据集创建了一个人工的基准。</li>
+<li>手工聚合了顶级检测器经常出现的错误。</li>
+<li><p>刻画了定位，前景 vs 背景两方面的错误</p>
+<ul>
+<li>针对定位错误：研究了训练集标记噪声对检测器性能的影响</li>
+<li>前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能</li>
+</ul>
+</li>
+<li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
+</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h2 id="2-Preliminaries"><a href="#2-Preliminaries" class="headerlink" title="2. Preliminaries"></a>2. Preliminaries</h2><h3 id="2-1-Caltech-USA-pedestrian-detection-benchmark"><a href="#2-1-Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="2.1 Caltech-USA pedestrian detection benchmark"></a>2.1 Caltech-USA pedestrian detection benchmark</h3><ul>
+<li><p>最流行的数据集：Caltech-USA、KITTI</p>
+<ul>
+<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
+<li>一共350000个标注、覆盖2300各单一的行人</li>
+<li>测试集：4024帧</li>
+</ul>
+</li>
+<li><p>MR: miss rate</p>
+</li>
+</ul>
+<h3 id="2-2-Filtered-channel-features-detector"><a href="#2-2-Filtered-channel-features-detector" class="headerlink" title="2.2 Filtered channel features detector"></a>2.2 Filtered channel features detector</h3><ul>
+<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
+<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
+<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
+<li>环境和光流可以提高检测（额外的提示）</li>
+</ul>
+<h2 id="3-Analysing-the-state-of-the-art"><a href="#3-Analysing-the-state-of-the-art" class="headerlink" title="3. Analysing the state of the art"></a>3. Analysing the state of the art</h2><h3 id="3-1-Are-we-reaching-saturation"><a href="#3-1-Are-we-reaching-saturation" class="headerlink" title="3.1 Are we reaching saturation?"></a>3.1 Are we reaching saturation?</h3><ul>
+<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
+<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
+<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
+<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
+<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
+</ul>
+<h3 id="3-2-Failure-analysis"><a href="#3-2-Failure-analysis" class="headerlink" title="3.2 Failure analysis"></a>3.2 Failure analysis</h3><p>3.2.1 Error sources</p>
+<ul>
+<li><p>一个检测器可以有两类错误：</p>
+<ul>
+<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
+<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
+</ul>
+</li>
+<li><p>FP聚类成11个分类</p>
+</li>
+<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
+<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
+</ul>
+<p>3.2.2 Oracle test cases</p>
+<ul>
+<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
+</ul>
+<p>3.3. Improved Caltech-USA annotations</p>
+<ul>
+<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
+<li><p>我们的目标是两方面：</p>
+<ul>
+<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
+<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
+</ul>
+</li>
+<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
+</li>
+</ul>
+<h3 id="4-Improving-the-state-of-the-art"><a href="#4-Improving-the-state-of-the-art" class="headerlink" title="4. Improving the state of the art"></a>4. Improving the state of the art</h3><p>4.1. Impact of training annotations</p>
+<ul>
+<li><p>Pruning benefits:</p>
+<ul>
+<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
+<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
+</ul>
+</li>
+<li><p>Alignment benefits:</p>
+<ul>
+<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
+<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
+</li>
+<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
+</li>
+<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>4.2. Convnets for pedestrian detection</p>
+<ul>
+<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
+</li>
+<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
+</li>
+<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
+</li>
+<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
+</li>
+</ul>
+<h3 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h3><ul>
+<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
+</li>
+<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
+</li>
+<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/2903903730/" rel="next" title="行人检测论文笔记：Robust Real-Time Face Detection">
+                <i class="fa fa-chevron-left"></i> 行人检测论文笔记：Robust Real-Time Face Detection
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/3802700508/" rel="prev" title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
+                Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jacob Kong" />
+          <p class="site-author-name" itemprop="name">Jacob Kong</p>
+          <p class="site-description motion-element" itemprop="description">欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JacobKong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/JacobKong_Dev" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacobKong_Dev" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/81a8d024af56" target="_blank" title="JianShu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  JianShu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章疑问点"><span class="nav-number">1.</span> <span class="nav-text">文章疑问点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Preliminaries"><span class="nav-number">4.</span> <span class="nav-text">2. Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Caltech-USA-pedestrian-detection-benchmark"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 Caltech-USA pedestrian detection benchmark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Filtered-channel-features-detector"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 Filtered channel features detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Analysing-the-state-of-the-art"><span class="nav-number">5.</span> <span class="nav-text">3. Analysing the state of the art</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Are-we-reaching-saturation"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 Are we reaching saturation?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Failure-analysis"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 Failure analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Improving-the-state-of-the-art"><span class="nav-number">5.3.</span> <span class="nav-text">4. Improving the state of the art</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.4.</span> <span class="nav-text">5. Summary</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacob Kong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

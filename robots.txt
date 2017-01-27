@@ -1,0 +1,2 @@
+Sitemap: http://jacobkong.github.io/sitemap.xml
+Sitemap: http://jacobkong.github.io/baidusitemap.xml

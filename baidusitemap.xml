@@ -218,21 +218,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/287090227/</loc>
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
-        <pubTime>2016-12-01T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/posts/4241353321/</loc>
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
@@ -254,6 +239,21 @@
         <display>
         <title>深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</title>
         <pubTime>2016-12-06T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/287090227/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
+        <pubTime>2016-12-01T22:32:24.000Z</pubTime>
         
          
            

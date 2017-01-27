@@ -203,21 +203,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/783616645/</loc>
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
-        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/posts/4241353321/</loc>
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
@@ -239,6 +224,21 @@
         <display>
         <title>深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</title>
         <pubTime>2016-12-06T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/783616645/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
+        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
         
          
            

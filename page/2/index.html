@@ -1,0 +1,1877 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JacobKong's Blog">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JacobKong's Blog">
+<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+
+
+
+
+
+  <title> JacobKong's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">JacobKong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">路漫漫其修远兮......</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-search">
+          <a href="/search" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-search"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/05/行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/05/行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection/" itemprop="url">
+                  行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T06:32:24+08:00">
+                2016-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><strong>L1范数</strong> 也称为最小绝对偏差（LAD），最小绝对误差（LAE）。它基本上最小化目标值(Yi)和估计值(f(xi))之间的绝对差(S)的和</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqk8unvtj306d0273ye.jpg" alt=""></p>
+<ul>
+<li>L2范数也称为最小二乘。它基本上最小化目标值(Yi)和估计值(f(xi))之间的差(S)的平方的和</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqk9chp0j305w01wjra.jpg" alt=""></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>所提出的网络融合架构允许多个网络的并行处理来提高速度。</li>
+<li>首先是一个深度卷积网络被训练为一个物体检测器来生成所有有可能的不同尺寸和遮挡的行人候选集。</li>
+<li>然后，多个深度神经网络被并行使用来之后提炼这些行人候选集。</li>
+<li>我们引入基于软拒绝的网络融合方法将来自所有网络的软度量融合在一起，以产生最终置信分数。</li>
+<li>此外，我们提出了一种用于将逐像素语义分割网络（ pixel-wise semantic segmentation network）集成到网络融合架构中作为行人检测器的加强的方法。</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<li>Tradeoff between accuracy and speed.</li>
+<li>其他因素，如拥挤的场景，非人堵塞物体(non-person occluding objects)或不同的行人外观（不同的姿势或服装风格）也使这个Real-time行人检测问题具有挑战性。</li>
+<li>行人检测的一般框架可以分解为：</li>
+<li>region proposal generation,</li>
+<li>feature extraction,</li>
+<li><p>pedestrian verification</p>
+</li>
+<li><p>Fused Deep Neural Network(F-DNN)</p>
+</li>
+<li>该架构包括行人pedestrian candidiate generator，其通过训练深卷积神经网络获得以，从而具有高检测率，虽然有大的假阳性率。</li>
+<li>使用深度扩展卷积和上下文聚合的并行语义分割网络[30]为候选行人提供了另一个软的信任投票，它进一步与候选生成器和分类网络融合。</li>
+</ul>
+<h2 id="2-The-Fused-Deep-Neural-Network"><a href="#2-The-Fused-Deep-Neural-Network" class="headerlink" title="2. The Fused Deep Neural Network"></a>2. The Fused Deep Neural Network</h2><ul>
+<li>提出的网络架构包括行人候选生成器，分类网络和像素级语义分割网络。</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqk6f5o3j30q00iumyv.jpg" alt=""></p>
+<ul>
+<li><p>SSD: a single shot multi-box detector(单镜头多箱检测器)，行人候选生成器是一个single shot multi-box detector（SSD）</p>
+</li>
+<li><p>每个行人候选者与其定位BB坐标和置信度得分相关联。</p>
+</li>
+<li>我们提出了一种新的网络融合方法——称为基于软拒绝的网络融合（SNF）。并非是执行接受或拒绝候选者的硬二进制分类，而是基于来自分类器的候选者的 <strong>聚合度</strong> 来提升或折扣行人候选者的置信度分数。</li>
+<li>我们进一步提出了一种利用具有语义分割（SS）的上下文聚集扩展卷积网络（context aggregation dilated convolutional network with semantic segmentation）作为另一个分类器并将其集成到我们的网络融合架构中的方法。但是在速度上会变得特别慢。</li>
+</ul>
+<h3 id="2-1-Pedestrian-Candidate-Generator"><a href="#2-1-Pedestrian-Candidate-Generator" class="headerlink" title="2.1. Pedestrian Candidate Generator"></a>2.1. Pedestrian Candidate Generator</h3><ul>
+<li>SSD是具有截断VGG16(truncated VGG16)作为基础网络的前馈卷积网络。</li>
+<li>SSD的结构：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfqk7e7e6j30pe07rgmh.jpg" alt=""></p>
+<ul>
+<li><p>L2归一化技术用于缩小特征量</p>
+</li>
+<li><p>对于大小为m×n×p的每个输出层，在每个位置处设置不同尺度和纵横比的一组默认BB。 将3×3×p个卷积内核应用于每个位置以产生关于默认BB位置的分类分数和BB位置偏移。</p>
+</li>
+<li>训练的目标函数是：</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqka1k2nj306u01nq2u.jpg" alt=""></p>
+<h3 id="2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><a href="#2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion" class="headerlink" title="2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion"></a>2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion</h3><ul>
+<li>分类网络由多个二元分类深层神经网络组成，这些网络在第一阶段的生成的行人候选集中训练。</li>
+<li>SNF：考虑一个行人候选人和一个分类器。如果分类器对候选人有高的信任度，我们通过乘以大于1的置信因子乘以候选发生器来提高其原始分数。否则，我们以小于1的缩放因子减小其得分。我们将“置信”定义为至少为ac的分类概率。为了融合所有M个分类器，我们将候选者的原始信任得分与分类网络中所有分类器的信任缩放因子的乘积相乘。</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfqkaszbpj30q202qt9i.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqkaaiiij3086024t8n.jpg" alt=""></p>
+<ul>
+<li>SNF背后的关键思想是，我们不直接接受或拒绝任何候选行人，而是基于分类概率的因素来扩展它们。</li>
+</ul>
+<h3 id="2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><a href="#2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement" class="headerlink" title="2.3. Pixel-wise semantic segmentation for object detection reinforcement"></a>2.3. Pixel-wise semantic segmentation for object detection reinforcement</h3><ul>
+<li>为了执行密集预测，SS网络由完全卷积的VGG16网络组成，其适应于作为前端预测模块的扩展卷积，其输出被馈送到多尺度上下文聚合模块，该多尺度上下文聚合模块由完全卷积网络组成，其卷积层具有增加扩张因子。</li>
+<li>输入图像被缩放并由SS网络直接处理，SS网络产生具有显示出行人类激活像素的一种颜色和显示出背景的其他颜色的二进遮罩。</li>
+<li>我们使用以下策略来融合结果：如果行人像素占据候选BB区域的至少20％，我们接受候选者并保持其得分不变; 否则，我们应用SNF来缩放原始的信任分数。</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqkbeg8wj30g002cwen.jpg" alt=""></p>
+<h2 id="3-Experiments-and-result-analysis"><a href="#3-Experiments-and-result-analysis" class="headerlink" title="3. Experiments and result analysis"></a>3. Experiments and result analysis</h2><h3 id="3-1-Data-and-evaluation-settings"><a href="#3-1-Data-and-evaluation-settings" class="headerlink" title="3.1. Data and evaluation settings"></a>3.1. Data and evaluation settings</h3><h3 id="3-2-Training-details-and-results"><a href="#3-2-Training-details-and-results" class="headerlink" title="3.2. Training details and results"></a>3.2. Training details and results</h3><ul>
+<li><strong>硬拒绝（Hard Rejection）</strong> 被定义为消除由任何分类器分类为假阳性的任何候选者。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/04/行人检测论文笔记：Taking a Deeper Look at Pedestrians/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/04/行人检测论文笔记：Taking a Deeper Look at Pedestrians/" itemprop="url">
+                  行人检测论文笔记：Taking a Deeper Look at Pedestrians
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T06:32:24+08:00">
+                2016-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-1-Related-work"><a href="#1-1-Related-work" class="headerlink" title="1.1. Related work"></a>1.1. Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Training-data"><a href="#2-Training-data" class="headerlink" title="2. Training data"></a>2. Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="3-From-decision-forests-to-neural-networks"><a href="#3-From-decision-forests-to-neural-networks" class="headerlink" title="3. From decision forests to neural networks"></a>3. From decision forests to neural networks</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/02/行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/02/行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?/" itemprop="url">
+                  行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-02T06:32:24+08:00">
+                2016-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
+<li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
+</ul>
+<h2 id="2-Datasets"><a href="#2-Datasets" class="headerlink" title="2 Datasets"></a>2 Datasets</h2><ul>
+<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
+<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
+<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
+<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
+<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
+<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
+</ul>
+<h2 id="3-Main-approaches-to-improve-pedestrian-detection"><a href="#3-Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="3 Main approaches to improve pedestrian detection"></a>3 Main approaches to improve pedestrian detection</h2><ul>
+<li><p>40+种行人检测的方法：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
+</li>
+</ul>
+<ul>
+<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
+</ul>
+<h3 id="3-1-Training-data"><a href="#3-1-Training-data" class="headerlink" title="3.1 Training data"></a>3.1 Training data</h3><h3 id="3-2-Solution-families"><a href="#3-2-Solution-families" class="headerlink" title="3.2 Solution families"></a>3.2 Solution families</h3><ul>
+<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
+</ul>
+<ol>
+<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
+<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
+<li><p>决策林（ChnFtrs，Roerei等）。</p>
+</li>
+<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
+</li>
+</ol>
+<h3 id="3-3-Better-classiﬁers"><a href="#3-3-Better-classiﬁers" class="headerlink" title="3.3 Better classiﬁers"></a>3.3 Better classiﬁers</h3><ul>
+<li>特征和分类器之间的没有明确的界限</li>
+</ul>
+<h3 id="3-4-Additional-data"><a href="#3-4-Additional-data" class="headerlink" title="3.4 Additional data"></a>3.4 Additional data</h3><ul>
+<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
+<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
+</ul>
+<h3 id="3-5-Exploiting-context"><a href="#3-5-Exploiting-context" class="headerlink" title="3.5 Exploiting context"></a>3.5 Exploiting context</h3><ul>
+<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
+</ul>
+<h3 id="3-6-Deformable-parts"><a href="#3-6-Deformable-parts" class="headerlink" title="3.6 Deformable parts"></a>3.6 Deformable parts</h3><ul>
+<li>对于行人检测，结果是有竞争性的，但不显着。</li>
+<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
+</ul>
+<h3 id="3-7-Multi-scale-models"><a href="#3-7-Multi-scale-models" class="headerlink" title="3.7 Multi-scale models"></a>3.7 Multi-scale models</h3><ul>
+<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
+<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
+</ul>
+<h3 id="3-8-Deep-architectures"><a href="#3-8-Deep-architectures" class="headerlink" title="3.8 Deep architectures"></a>3.8 Deep architectures</h3><ul>
+<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
+<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
+</ul>
+<h3 id="3-9-Better-features"><a href="#3-9-Better-features" class="headerlink" title="3.9 Better features"></a>3.9 Better features</h3><ul>
+<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
+<li>越来越多样化的特性已经显示系统地提高性能。</li>
+<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
+<ul>
+<li>6个梯度方向，</li>
+<li>1个梯度幅度</li>
+<li><p>3个颜色通道</p>
+</li>
+<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
+</li>
+</ul>
+</li>
+<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
+</li>
+<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
+</li>
+</ul>
+<h3 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4 Experiments"></a>4 Experiments</h3><ul>
+<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
+<ul>
+<li>更好的特征（§3.9</li>
+<li>附加数据（§3.4）</li>
+<li>上下文信息（§3.5）</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-1-Reviewing-the-eﬀect-of-features-特征的影响"><a href="#4-1-Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="4.1 Reviewing the eﬀect of features(特征的影响)"></a>4.1 Reviewing the eﬀect of features(特征的影响)</h3><ul>
+<li>DCT: (discrete cosine transform)离散余弦变换</li>
+<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
+</ul>
+<h3 id="4-2-Complementarity-of-approaches"><a href="#4-2-Complementarity-of-approaches" class="headerlink" title="4.2 Complementarity of approaches"></a>4.2 Complementarity of approaches</h3><ul>
+<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
+<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
+</ul>
+<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5 Conclusion"></a>5 Conclusion</h2><ul>
+<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
+<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
+<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/01/《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/01/《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks/" itemprop="url">
+                  《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-01T06:32:24+08:00">
+                2016-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
+<li>卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。</li>
+</ul>
+<h3 id="9-1-The-Convolution-Operation"><a href="#9-1-The-Convolution-Operation" class="headerlink" title="9.1 The Convolution Operation"></a>9.1 The Convolution Operation</h3><ul>
+<li>The convolution operation is typically denoted with an asterisk:</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg" alt=""></p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg" alt=""></p>
+<ul>
+<li><p>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</p>
+</li>
+<li><p>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</p>
+</li>
+<li><p>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</p>
+</li>
+<li>这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。</li>
+<li>二维卷积：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg" alt=""><br>two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 <strong>kernel-ﬂipping</strong><br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg" alt=""><br>后一种会更更容易用机器学习库来实现。</li>
+<li>许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg" alt=""></p>
+<ul>
+<li>卷积的一个例子：</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpf8xjmyj30oq0lqn0c.jpg" alt=""></p>
+<ul>
+<li>离散卷积可以被看作是乘以矩阵的乘法。</li>
+<li>Toeplitz矩阵：常对角矩阵（又称特普利茨矩阵）是指每条左上至右下的对角线均为常数的矩阵，不论是正方形或长方形的。</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg" alt=""></p>
+<ul>
+<li><p>在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。</p>
+</li>
+<li><p>卷积通常对应于非常稀疏的矩阵。</p>
+</li>
+<li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
+</ul>
+<h3 id="9-2-Motivation"><a href="#9-2-Motivation" class="headerlink" title="9.2 Motivation"></a>9.2 Motivation</h3><ul>
+<li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
+<ul>
+<li>稀疏的连接（sparse interactions）</li>
+<li>参数共享（parameter sharing）</li>
+<li>等值表示（equivariant representations）</li>
+<li>此外卷积可以处理各种大小输入。</li>
+</ul>
+</li>
+<li><p>Sparse Interactions：这是通过使内核小于输入来实现的。</p>
+<ul>
+<li>我们需要存储更少的参数，这既减少了模型的内存需求，又提高了其统计效率。</li>
+<li>计算输出需要更少的操作。</li>
+<li>在深卷积网络中，较深层中的单元可以与输入的较大部分间接交互，This allows the network to eﬃciently describe complicated interactions between many variables by constructing such interactions from simple building blocks that each describe only sparse interactions.<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpduscrij30ee0eqdho.jpg" alt=""></li>
+<li>Sparse connectivity, viewed from below<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
+<li>Sparse connectivity, viewed from above<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
+<li>在卷积网络的较深层中的单元的接收场大于在浅层中的单元的接收场。这意味着即使卷积网络中的直接连接非常稀疏，更深层中的单元也可以间接地连接到所有或大部分输入图像。</li>
+</ul>
+</li>
+<li><p>Parameter sharing：参数共享是指对模型中的多个函数使用相同的参数。</p>
+<ul>
+<li>也可以叫 <strong>Tied Weights（捆绑权值），因为应用于一个输入的权重的值与在其他地方应用的权重的值有关。</strong></li>
+<li>在卷积神经网络中，卷积核中的每一个元素都会在input中的每一个位置使用。</li>
+<li>在存储器要求和统计效率方面，卷积比密集矩阵乘法显着更有效。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpjpefj30ee0bzgmu.jpg" alt=""></p>
+<ul>
+<li><p>黑色箭头表示在卷积模型中3元素核的中心元素的使用。</p>
+</li>
+<li><p>Equivariant：说一个函数是等变的意味着如果输入改变，输出以相同的方式改变。</p>
+<ul>
+<li>一个函数f(x)与函数g <strong>等变</strong> 如果f(g(x)) = g(f(x)).</li>
+<li>当处理时间序列数据时，这意味着卷积产生一种时间线，显示输入中不同特征的出现。</li>
+<li>This is useful for when we know that some function of a small number of neighboring pixels is useful when applied to multiple input locations.</li>
+<li>卷积不是自然地等同于一些其他变换，例如图像的尺度或旋转的变化。</li>
+</ul>
+</li>
+<li><p>卷积是描述在整个输入上应用小的局部区域的相同线性变换的变换的非常有效的方式。</p>
+</li>
+</ul>
+<h3 id="9-3-Pooling"><a href="#9-3-Pooling" class="headerlink" title="9.3 Pooling"></a>9.3 Pooling</h3><ul>
+<li><p>卷积网络的一个典型层由三个阶段组成:</p>
+<ul>
+<li>在第一阶段，该层并行执行几个卷积以产生一组线性激活（linear activation）。</li>
+<li>在第二阶段，每个线性激活通过非线性激活函数，例如整流线性激活函数。这一阶段成为 <strong>detector stage</strong>.</li>
+<li>在第三阶段，我们使用池化函数（pooing function）来进一步修改层的输出。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdnsj0rj30k00je76j.jpg" alt=""></p>
+<ul>
+<li><p>pooling function是用附近的汇总统计来替换特定位置的网络的输出。</p>
+</li>
+<li><p>在所有情况下，池化有助于使表示变得对于相对于 <strong>输入的小平移</strong> 几乎不变（invariant）。</p>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdmenf3j30vy0qlwk3.jpg" alt=""></p>
+<ul>
+<li><p><strong>如果我们更关心某些特征是否存在而不是完全在哪里，那么本地变换的不变性可以是非常有用的属性。</strong></p>
+</li>
+<li><p>池的使用可以被视为添加一个无限强的先验，层所学习的函数必须对小的变换是不变的。</p>
+</li>
+<li>如果我们在单独的参数化的卷积输出上进行赤化，则特征可以学习到对哪一种变换进行不变。</li>
+<li>利用卷积和pooling的卷积网络架构：</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdrfrclj30jn0orjya.jpg" alt=""></p>
+<h3 id="9-4-Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior"><a href="#9-4-Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior" class="headerlink" title="9.4 Convolution and Pooling as an Inﬁnitely Strong Prior"></a>9.4 Convolution and Pooling as an Inﬁnitely Strong Prior</h3><ul>
+<li>弱先验是具有高熵的先验分布，例如具有高方差的高斯分布。</li>
+<li>强先验具有非常低的熵，例如具有低方差的高斯分布。这样的先验在确定参数在哪里结束方面起更积极的作用。</li>
+<li>总的来说，我们可以认为卷积可以用来为一个层的参数引入一个无限强的先验概率分布。</li>
+<li>同样，池的使用是保证每个单位对小的变换保持不变性的无限强的先验。</li>
+<li><p>但是将卷积网视为具有无限强的先验的完全连接的网络可以给我们一些关于卷积网如何工作的见解。</p>
+<ul>
+<li>一个关键的见解是卷积和池化可能导致欠拟合。</li>
+<li>从这个观点的另一个关键的见解是，我们应该只比较卷积模型与统计学习性能基准中的其他卷积模型。对于许多图像数据集，对于排列不变的模型存在单独的基准，并且必须通过学习发现拓扑的概念，以及具有由他们的设计者硬编码到其中的空间关系的知识的模型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-5-Variants-of-the-Basic-Convolution-Function"><a href="#9-5-Variants-of-the-Basic-Convolution-Function" class="headerlink" title="9.5 Variants of the Basic Convolution Function"></a>9.5 Variants of the Basic Convolution Function</h3><ul>
+<li><p>首先，当我们在神经网络的上下文中提到卷积时，我们通常实际上意味着一种由许多卷积应用并行组成的操作。</p>
+<ul>
+<li>这是因为单个内核的卷积只能提取一种特征，虽然在许多空间位置。 通常我们希望我们网络的每一层都能在许多位置提取多种特征。</li>
+</ul>
+</li>
+<li><p>此外，输入通常不仅仅是是一个网格的真是数据，反而是矢量值的观测网格。</p>
+</li>
+<li><p>这些多通道操作可交换，仅当每个操作具有与输入通道相同数量的输出通道。</p>
+</li>
+<li>我们可能想跳过内核的一些位置，以减少计算成本，我们可以认为这是下采样全卷积函数的输出。</li>
+<li>如果我们只想对输出中每个方向的每s个像素进行采样，那么我们可以定义下采样卷积函数c：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg" alt=""><br>我们将s称为这个下采样卷积的步幅。 也可以为每个运动方向定义一个单独的步幅。</li>
+</ul>
+<ul>
+<li><p>零填充：</p>
+<ul>
+<li>任何卷积网络实现的一个基本特征是具备隐含地对输入V进行零填充以便使其更宽的能力。</li>
+<li>零填充输入允许我们独立地控制内核宽度和输出的大小。</li>
+<li>没有零填充，我们被迫选择快速缩小网络的空间范围并且使用小内核 - 这两个方案，显着地限制了网络的表达力。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg" alt=""></p>
+<ul>
+<li><p>三种zero-padding的情况：</p>
+<ul>
+<li>valid convolution</li>
+<li>same convolution</li>
+<li>full convolution</li>
+</ul>
+</li>
+<li><p>Unshared convolution</p>
+</li>
+<li>Tiled convolution：在卷积层和本地连接层之间提供了折中。我们不是在每个空间位置学习一组独立的权重，而是学习一组内核，从而我们在空间移动时旋转内核。</li>
+<li><p>这三个操作做够计算所有训练一个前向卷积网络需要的梯度，以及基于卷积的转置来训练具有重建函数的卷积网络。</p>
+<ul>
+<li>卷积</li>
+<li>从输出到权值反向传播</li>
+<li>从输出到输入反向传播</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-6-Structured-Outputs"><a href="#9-6-Structured-Outputs" class="headerlink" title="9.6 Structured Outputs"></a>9.6 Structured Outputs</h3><ul>
+<li>卷积网络可以用于输出高维度的结构化对象，而不仅仅是预测分类任务的类标签或回归任务的实际值。</li>
+<li>Pixel labeling：像素标记</li>
+<li>循环周期卷积网络（recurrent convolutional network）：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg" alt=""></p>
+<h3 id="9-7-Data-Types"><a href="#9-7-Data-Types" class="headerlink" title="9.7 Data Types"></a>9.7 Data Types</h3><ul>
+<li><p>与卷积网络一起使用的数据通常由几个通道组成，每个通道是在空间或时间的某个点观察不同的量。</p>
+<ul>
+<li>卷积网络的一个优点是它们还可以处理具有变化的空间范围的输入。</li>
+<li>有时，网络的输出允许具有 <strong>可变大小以及输入</strong> ，例如如果我们想要为输入的每个像素分配类标签。 <strong>在这种情况下，不需要额外的设计工作了</strong> 。</li>
+<li>在其他情况下，网络必须产生一些固定大小的输出，例如，如果我们要为整个图像分配单个类标签。 <strong>在这种情况下，我们必须进行一些额外的设计步骤</strong> ，例如插入一个池化层，其池区域的大小与输入的大小成比例，以 <strong>保持固定数量</strong> 的池化输出。</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-8-Eﬃcient-Convolution-Algorithms"><a href="#9-8-Eﬃcient-Convolution-Algorithms" class="headerlink" title="9.8 Eﬃcient Convolution Algorithms"></a>9.8 Eﬃcient Convolution Algorithms</h3><ul>
+<li>现代卷积网络应用通常涉及包含超过一百万个单元的网络。</li>
+<li><strong>卷积等效于使用傅立叶变换将输入和内核两者转换到频域，执行两个信号的逐点乘法，并使用逆傅里叶变换转换回到时域。</strong></li>
+<li>当内核是可分离的，原始的卷积是效率低下的。</li>
+<li>设计更快的执行卷积或近似卷积的方法，而不损害模型的准确性是一个活跃的研究领域。</li>
+</ul>
+<h3 id="9-9-Random-or-Unsupervised-Features"><a href="#9-9-Random-or-Unsupervised-Features" class="headerlink" title="9.9 Random or Unsupervised Features"></a>9.9 Random or Unsupervised Features</h3><ul>
+<li>通常，卷积网络训练中最昂贵的部分是学习特征。</li>
+<li>降低卷积网络训练成本的一种方式是使用未以受监督方式训练的特征。</li>
+<li><p>有三种不需要监督学习来获得卷积内核的策略：</p>
+<ul>
+<li>一个是简单地 <strong>随机初始化</strong> 它们。</li>
+<li>另一个是用手设计它们，例如通过设置每个内核以在特定方向或尺度检测边缘。</li>
+<li>最后，可以使用无监督标准来学习内核。</li>
+</ul>
+</li>
+<li><p>随机滤波器在卷积网络中通常工作得很好</p>
+</li>
+<li>一个折中的方法是学习特征，但使用： <strong>每个梯度步骤不需要完全正向和反向传播的</strong> 方法。 与多层感知器一样，我们使用 <strong>贪婪层式预训练</strong> ，独立地训练第一层，然后从第一层提取一次所有特征，然后利用这些特征隔离的训练第二层，等等。</li>
+<li>不是一次训练整个卷积层，我们可以训练一个小补丁的模型，如用k-means。 然后，我们可以使用来自这个patch-based的模型的参数来定义卷积层的内核。</li>
+<li>今天，大多数卷积网络以纯粹监督的方式训练，在每次训练迭代中使用通过整个网络的完全正向和反向传播。</li>
+</ul>
+<h3 id="9-10-The-Neuroscientiﬁc-Basis-for-Convolutional-Networks"><a href="#9-10-The-Neuroscientiﬁc-Basis-for-Convolutional-Networks" class="headerlink" title="9.10 The Neuroscientiﬁc Basis for Convolutional Networks"></a>9.10 The Neuroscientiﬁc Basis for Convolutional Networks</h3><h3 id="9-11-Convolutional-Networks-and-the-History-of-Deep-Learning"><a href="#9-11-Convolutional-Networks-and-the-History-of-Deep-Learning" class="headerlink" title="9.11 Convolutional Networks and the History of Deep Learning"></a>9.11 Convolutional Networks and the History of Deep Learning</h3><ul>
+<li>为了处理一维，顺序数据，我们接下来转向神经网络框架的另一个强大的专业化： <strong>循环神经网络（Recurrent neural networks）</strong> 。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/29/行人检测论文笔记：Histograms of Oriented Gradients for Human Detection/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/29/行人检测论文笔记：Histograms of Oriented Gradients for Human Detection/" itemprop="url">
+                  行人检测论文笔记：Histograms of Oriented Gradients for Human Detection
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-29T06:32:24+08:00">
+                2016-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>从TP、FP、TN、FN到ROC曲线、miss rate</p>
+<ul>
+<li>TP：true positive，实际是正例，预测为正例</li>
+<li>FP：false positive，实际为负例，预测为正例</li>
+<li>TN：true negative，实际为负例，预测为负例</li>
+<li>FN：false negative，实际为正例，预测为负例</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrffyhsdj30eu03mjrv.jpg" alt=""></p>
+<ul>
+<li>fnr+tpr=1, fpr+tnr=1</li>
+<li>miss rate = FNR = 1 - true positive<ul>
+<li>对于一个确定的阈值t，FPR和TPR是确定的，得到一个(fpr,tpr)元组。</li>
+<li>当t增加， # FP也减小， # TN增加，则fpr减小；</li>
+<li>当t增加， # TP减小， # FN增加，则tpr减小。</li>
+<li>也就是说，当阈值t从0变化到1，fpr和tpr也单调减小，从(1，1)减小到(0,0)</li>
+<li>miss rate = 1 - true positive rate，那么对应的YoX图像，也就是miss rate - false positive rate图像，就应当是单调下降的曲线。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>定向梯度直方图（HOG）描述符的网格显著优于现有的人体检测特征集。</li>
+<li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
+<li>新的数据集</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<li>第一需求：robust feature set.</li>
+<li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
+<li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
+</ul>
+<h2 id="2-Previous-Work"><a href="#2-Previous-Work" class="headerlink" title="2 Previous Work"></a>2 Previous Work</h2><h2 id="3-Overview-of-the-Method"><a href="#3-Overview-of-the-Method" class="headerlink" title="3 Overview of the Method"></a>3 Overview of the Method</h2><ul>
+<li>The method is based on evaluating well-normalized local histograms of image gradient orientations in a dense grid.</li>
+<li>基本思想是，在一副图像中，局部目标的 <strong>表象</strong> 和 <strong>形状</strong> （appearance and shape）能够被梯度或边缘的方向密度分布很好地描述，即使没有对应的梯度或边缘位置的精确知识。</li>
+<li>具体的实现方法是：首先将图像分成小的连通区域，我们把它叫细胞单元（cell）。然后采集细胞单元中各像素点的梯度的或边缘的方向直方图。最后把这些直方图组合起来就可以构成特征描述器。</li>
+<li>为了提高性能，我们还可以把这些局部直方图在图像的更大的范围内（我们把它叫区间或block）进行对比度归一化（contrast-normalized），所采用的方法是：先计算各直方图在这个区间（block）中的密度，然后根据这个密度对区间中的各个细胞单元做归一化。 <strong>通过这个归一化后，能对光照变化和阴影获得更好的效果。</strong></li>
+<li>整体的物体检测链：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfi9crxj30ww05udiy.jpg" alt=""></p>
+<ul>
+<li><p>这些基于稀疏特征的表示的成功有点遮蔽了HOG作为密集图像描述符的能力和简单性。</p>
+</li>
+<li><p>HOG/SIFT表示方法有几个优点。</p>
+<ul>
+<li>由于HOG方法是在图像的局部细胞单元上操作，所以它对图像几何的（geometric）和光学的（photometric）形变都能保持很好的不变性，这两种形变只会出现在更大的空间领域上。</li>
+<li>他捕捉了局部形状非常具有特征性的边和梯度特征。</li>
+<li>在局部表示中对局部的几何和光度变换的不变性更容易控制。</li>
+<li>如果它们远小于局部空间或方向仓尺寸，则平移或旋转几乎没有差别。</li>
+</ul>
+</li>
+<li><p>作者通过实验发现，在粗的空域抽样（coarse spatial sampling）、精细的方向抽样（fine orientation sampling）以及较强的局部光学归一化（strong local photometric normalization）等条件下，只要行人大体上能够保持直立的姿势，就容许行人有一些细微的肢体动作，这些细微的动作可以被忽略而不影响检测效果。综上所述，HOG方法是特别适合于做图像中的行人检测的。</p>
+</li>
+</ul>
+<h2 id="4-Data-Sets-and-Methodology"><a href="#4-Data-Sets-and-Methodology" class="headerlink" title="4 Data Sets and Methodology"></a>4 Data Sets and Methodology</h2><ul>
+<li>hard examples</li>
+<li>Detection Error Tradeoff (DET) curves on a log-log scale. miss rate(1-Recall / FN/(TP+FN)) verses FPPW. 值越低越好。</li>
+<li>DET图和ROC图提供的信息一眼，但是前者允许小概率更容易的去分布。</li>
+<li>FPPW：NUMBER_OF_FALSE_POSITIVE/NUMBER_OF_WINDOWS</li>
+<li>我们的DET曲线通常相当浅，所以即使非常小的缺失率的改善也等同于在不变缺失率下的情况下FPPW中的大增益。</li>
+</ul>
+<h2 id="5-Overview-of-Results"><a href="#5-Overview-of-Results" class="headerlink" title="5 Overview of Results"></a>5 Overview of Results</h2><ul>
+<li>Generalized Haar Wavelets.</li>
+<li>PCA-SIFT.</li>
+<li>Shape Contexts.</li>
+</ul>
+<h2 id="6-Implementation-and-Performance-Study"><a href="#6-Implementation-and-Performance-Study" class="headerlink" title="6 Implementation and Performance Study"></a>6 Implementation and Performance Study</h2><ul>
+<li><p>默认检测器：</p>
+<ul>
+<li>RGB colour space with no gamma correction</li>
+<li>[−1, 0, 1] gradient filter with no smoothing</li>
+<li>linear gradient voting into 9 orientation bins in 0◦ –180◦</li>
+<li>16×16 pixel blocks of four 8×8 pixel cells</li>
+<li>Gaussian spatial win- dow with σ = 8 pixel</li>
+<li>L2-Hys (Lowe-style clipped L2 norm) block normalization</li>
+<li>block spacing stride of 8 pixels (hence 4-fold coverage of each cell)</li>
+<li>64×128 detection window;</li>
+<li>linear SVM classifier.</li>
+</ul>
+</li>
+<li><p>主要的结论是，为了良好的性能，应该使用细尺度导数（基本上没有平滑），许多定向仓,中等大小，强归一化，重叠的描述符块。</p>
+</li>
+</ul>
+<h3 id="6-1-Gamma-Colour-Normalization"><a href="#6-1-Gamma-Colour-Normalization" class="headerlink" title="6.1 Gamma/Colour Normalization"></a>6.1 Gamma/Colour Normalization</h3><h3 id="6-2-Gradient-Computation"><a href="#6-2-Gradient-Computation" class="headerlink" title="6.2 Gradient Computation"></a>6.2 Gradient Computation</h3><ul>
+<li>最通常用的方法就是简单的应用一个一维的离散的梯度模版分别应用在水平和垂直方向上去。可以使用如下的卷积核进行卷积：</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfj1a8sj3066017q2t.jpg" alt=""></p>
+<h3 id="6-3-Spatial-Orientation-Binning-方向单元划分"><a href="#6-3-Spatial-Orientation-Binning-方向单元划分" class="headerlink" title="6.3 Spatial / Orientation Binning(方向单元划分)"></a>6.3 Spatial / Orientation Binning(方向单元划分)</h3><ul>
+<li>每个块内的每个像素对 <strong>方向直方图</strong> 进行投票</li>
+<li>每个像素基于以其为中心的梯度元素的方向计算边缘取向直方图通道的 加权投票，并且投票被累积到在称为 <strong>单元</strong> 的局部空间区域上的 <strong>方向仓</strong> 中。</li>
+<li>每个块的形状可以是矩形或圆形的</li>
+<li>方向直方图的方向取值可以是0-180度或者0-360度，这取决于梯度是否有符号。无符号梯度（0-180º），有符号梯度（0-360º）</li>
+<li>为了减少混叠，投票在相邻仓中心之间以取向和位置双向内插。</li>
+<li>至于投票的权重，可以是梯度的幅度本身或者是它的函数。投票是像素处的梯度幅度的函数，或者是幅度本身、其平方、其平方根或者表示像素的边缘的软出现/缺失的幅度的限幅形式。在定向编码对于良好的性能是至关重要的。</li>
+<li>梯度幅度本身通常产生最好的结果。其它可选的方案是采用幅度的平方或开方，或者幅度的裁剪版本。</li>
+<li>Dalal和Triggs发现在人的检测实验中，把方向分为 <strong>9个通道(bin)</strong> 效果最好</li>
+</ul>
+<h3 id="6-4-Normalization-and-Descriptor-Blocks"><a href="#6-4-Normalization-and-Descriptor-Blocks" class="headerlink" title="6.4 Normalization and Descriptor Blocks"></a>6.4 Normalization and Descriptor Blocks</h3><ul>
+<li>由于照明的局部变化和前景-背景对比度，梯度强度在可以在很宽范围内变化。所以梯度强度必须要局部地归一化，这需要把方格(cells)集结成更大、在空间上连结的区()</li>
+<li><strong>有效的局部对比度归一化</strong> 对于良好的性能是必不可少的。</li>
+<li>我们评估了多种不同的 <strong>归一化schemes(normalization schemes)</strong> ，他们大多数都是基于将单元格（cells）分组成更大的空间块（spatial blocks）<em>  </em>并且对比地单独对每个块进行归一化。</li>
+<li><strong>最终描述符</strong> 是来自检测窗口中的所有块的归一化单元响应的所有分量的 <strong>向量</strong> 。</li>
+<li><p>R-HOG：R-HOG块和SIFT描述符有许多相似之处，但是他们用途十分不同。</p>
+<ul>
+<li><p>R-HOG跟SIFT描述器看起来很相似，但他们的不同之处是：</p>
+<ul>
+<li>R-HOG是在单一尺度下、密集的网格内、没有对方向排序的情况下被计算出来；</li>
+<li>而SIFT描述器是在多尺度下、稀疏的图像关键点上、对方向排序的情况下被计算出来。</li>
+<li>R-HOG是各区间被组合起来用于对空域信息进行编码，而SIFT的各描述器是单独使用的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>它们在密集网格中以单个尺度计算而没有主要取向对准，并且用作隐式地去编码相对于检测窗口的空间位置的较大代码矢量的一部分，而SIFT在稀疏集合的 <strong>尺度不变关键点处</strong> 被计算，旋转以对准它们的主导方向，并单独使用。</p>
+</li>
+<li>SIFT被优化用于稀疏宽基线匹配，R-HOG用于空间形式的密集鲁棒编码。</li>
+<li><p>R-HOG区块一般来说是多个方格子组成的，由三个参数表示：</p>
+<ul>
+<li>每个区块(block)有多少方格(cell)、</li>
+<li>每个方格(cell)有几个像素(pixel)、</li>
+<li>每个方格(cell)直方图有多少频道(bin)。</li>
+</ul>
+</li>
+<li><p>对于人体检测，3x3的单元块，6x6的像素单元块儿表现最好，同时直方图是9通道。</p>
+</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfhlpopj30ck095gmg.jpg" alt=""></p>
+<ul>
+<li><p>当其太小（1×1单元块，即，单独取向上的归一化）时，有价值的空间信息被抑制。</p>
+</li>
+<li><p>在对直方图做处理之前，给每个区间加一个高斯空域窗口是非常必要的，因为这样可以降低边缘的周围像素点的权重。</p>
+</li>
+<li><p>C-HOG</p>
+<ul>
+<li>每个空间单元包含梯度加权取向单元的堆叠而不是单个取向无关的边缘计数。</li>
+<li>对数极坐标网格最初是由允许附近结构的精细编码与较宽上下文的粗略编码相结合的思想，以及从灵长类动物的 <strong>视野</strong> 到 <strong>V1皮层</strong> 的变换是 <strong>对数的</strong></li>
+<li>然而，具有非常少的径向箱的小描述符反而能给出最好的性能，因此在实践中 <strong>几乎没有不均匀性或上下文</strong> 。</li>
+<li>我们评估了C-HOG几何的两个变体，一个具有 <strong>单个圆形中心细胞</strong> （类似于[14]的GLOH特征），以及中心细胞被分成 <strong>角形扇区的形状上下文</strong> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfkf2vgj302604a0sn.jpg" alt=""></p>
+<ul>
+<li><p>C-HOG的4个参数：</p>
+<ul>
+<li><p>the numbers of angular(角度盒子的个数）；</p>
+</li>
+<li><p>the numbers of radias(半径盒子个数)</p>
+</li>
+<li>the radius of the central bin in pixels（中心仓的半径（以像素为单位））</li>
+<li>the expansion factor for subsequent (半径的伸展因子）</li>
+</ul>
+</li>
+<li><p>为了良好的性能，最佳的参数设置为：4个角度盒子、2个半径盒子、中心盒子半径为4个像素、伸展因子为2</p>
+</li>
+<li><p>4像素是中央bin的最佳半径，但3和5给出类似的结果。</p>
+</li>
+<li><p>C-HOG看起来很像基于形状上下文（英语：Shape context）的方法，但不同之处是：C-HOG的区间中包含的细胞单元有多个方向通道，而基于形状上下文的方法仅仅只用到了一个单一的边缘存在数。[4]</p>
+</li>
+<li><p>Block Normalization schemes：引入v表示一个还没有被归一化的向量，它包含了给定区间（block）的所有直方图信息。vk 表示 v 的 k 阶范数，这里的 k={1,2}。用 e 表示一个很小的常数。一共4种不同的块规范化schemes</p>
+<ul>
+<li><p>L2-morm,<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg" alt=""></p>
+</li>
+<li><p>L2-Hys, 它可以通过先进行L2-norm，对结果进行截短（clipping），然后再重新归一化得到。</p>
+</li>
+<li><p>L1-norm,<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfltceqj304m00ndfp.jpg" alt=""></p>
+</li>
+<li><p>L1-sqrt,L1-norm followed by square root<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfl4bwqj305d00r0sm.jpg" alt=""></p>
+</li>
+<li><p>作者发现：采用L2-Hys, L2-norm, 和 L1-sqrt方式所取得的效果是一样的，L1-norm稍微表现出一点点不可靠性。</p>
+</li>
+</ul>
+</li>
+<li><p>Centre-surround normalization.</p>
+</li>
+</ul>
+<h3 id="6-5-Detector-Window-and-Context"><a href="#6-5-Detector-Window-and-Context" class="headerlink" title="6.5 Detector Window and Context"></a>6.5 Detector Window and Context</h3><h3 id="6-6-Classifier"><a href="#6-6-Classifier" class="headerlink" title="6.6 Classifier"></a>6.6 Classifier</h3><p>最后一步就是把提取的HOG特征输入到SVM分类器中，寻找一个最优超平面作为决策函数。作者采用的方法是：使用免费的SVMLight软件包加上HOG分类器来寻找测试图像中的行人。</p>
+<h3 id="6-7-Discussion"><a href="#6-7-Discussion" class="headerlink" title="6.7 Discussion"></a>6.7 Discussion</h3><ul>
+<li>在甲酸梯度前进行任何程度的平滑处理都会毁掉HOG的结果，因为许多可供的图像信息都是从细尺度的突出边界形成的。</li>
+<li>详单，梯度应该在当前金字塔层的最细可供尺度上被计算，修改或者用于方向投票并且只有在那之后在模糊空间。</li>
+<li>其次，强的局部对比正常化对于良好的结果至关重要，传统的中心环绕样式方案不是最好的选择。</li>
+<li>更好的结果可以通过相对于不同的局部支持对每个元素（边缘，单元）进行几次标准化，并将结果作为独立信号来实现。</li>
+</ul>
+<h2 id="7-Summary-and-Conclusions"><a href="#7-Summary-and-Conclusions" class="headerlink" title="7 Summary and Conclusions"></a>7 Summary and Conclusions</h2><ul>
+<li><p>我们研究了各种描述符参数的影响，并得出结论，在重叠描述符块中的</p>
+<ul>
+<li>精细尺度梯度，</li>
+<li>精细定向binning，</li>
+<li>相对粗糙的空间binning</li>
+<li>高质量局部对比度归一化 对于良好的性能都是重要的。</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/24/行人检测论文笔记：Fast Feature Pyramids for Object Detection?/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/24/行人检测论文笔记：Fast Feature Pyramids for Object Detection?/" itemprop="url">
+                  行人检测论文笔记：Fast Feature Pyramids for Object Detection?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T06:32:24+08:00">
+                2016-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>Overcomplete Representations:</p>
+<ul>
+<li>Overcomplete：Such a complete system is overcomplete if removal of a \phi <em>{j} from the system results in a system (i.e., {\phi </em>{i}}_((i\in J\backslash {j))}) that is still complete.</li>
+<li>In different research, such as signal processing and function approximation, overcompleteness can help researchers to achieve a more stable, more robust, or more compact decomposition than using a basis.[2]</li>
+</ul>
+</li>
+<li><p>Image pyramid：影响金字塔</p>
+<ul>
+<li>影像金字塔由原始影像按一定规则生成的由细到粗不同分辨率的影像集。</li>
+<li>指在同一的空间参照下，根据用户需要以不同分辨率进行存储与显示，形成分辨率由粗到细、数据量由小到大的金字塔结构。</li>
+<li>图像编码和渐进式图像传输</li>
+<li>从图中可以看出, 从金字塔的底层开始每四个相邻的像素经过重采样生成一个新的像素, 依此重复进行, 直到金字塔的顶层。重采样的方法一般有以下三种: 双线性插值、最临近像元法、三次卷积法。</li>
+<li>金字塔是一种能对栅格影像按逐级降低分辨率的拷贝方式存储的方法。通过选择一个与显示区域相似的分辨率，只需进行少量的查询和少量的计算，从而减少显示时间。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg" alt=""></p>
+<ul>
+<li>Gradient Histograms:</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>The computational bottleneck of many modern detectors is the <strong>computation of features</strong> at every scale of a finely-sampled image pyramid.</li>
+<li>The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.</li>
+</ul>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<li>Multi-orientation decompostion: 多向分解，是图像处理中的基本技术。</li>
+<li><p>在每个尺度和方向分别分析图像结构的想法起源于多个来源:</p>
+<ul>
+<li>哺乳动物视觉系统生理学的测量</li>
+<li>有关视觉信息的统计和编码的原则性推理</li>
+<li>谐波分析</li>
+<li>谐波分析（多速率滤波)</li>
+</ul>
+</li>
+<li><p>灵长类视觉系统显示：条纹皮层细胞（粗略的等价于图像的小波展开）在数量上超过视网膜神经节细胞（图像像素的近似表示）10^2到10^3.</p>
+</li>
+<li>这些表示相对于视点，照明和图像变形的变化的鲁棒性是Overcomplete Representations 优越性能的促成因素。</li>
+<li>不幸的是，更高的检测正确率通常伴随着更高的计算开销。</li>
+<li>在计算开销和为了提高检测和降低错误率而使用更复杂的表示之间是没有必要做权衡的。</li>
+<li>自然图像具有分形统计，使得我们可以利用这一点来更可靠的预测图像跨尺度结构。</li>
+<li><p>我们证明了我们提出的快速特征金字塔与三个不同的检测框架的有效性：</p>
+<ul>
+<li>积分通道特征（ICF）</li>
+<li>聚集通道特征（积分通道特征的新颖变体）</li>
+<li>可变形零件模型（DPM）</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><ul>
+<li>Scale Space Theory: 尺度空间理论</li>
+<li>Cascades, coarse-to-fine search, distance transforms, etc., 全部都关注于对提前计算好的图像特征来优化分类速度。</li>
+<li>本方法专注于快速特征金字塔的构建，因此与上面的方法可以起到互补的效果。</li>
+<li>行人检测的最佳执行方法[31]和PASCAL VOC [38]是基于多尺度特征金字塔的滑动窗[21]，[29]，[35]; 快速特征金字塔非常适合于这种滑动窗口检测器。</li>
+</ul>
+<h2 id="3-Multiscale-Gradient-Histograms"><a href="#3-Multiscale-Gradient-Histograms" class="headerlink" title="3. Multiscale Gradient Histograms"></a>3. Multiscale Gradient Histograms</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+          
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jacob Kong" />
+          <p class="site-author-name" itemprop="name">Jacob Kong</p>
+          <p class="site-description motion-element" itemprop="description">欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JacobKong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/JacobKong_Dev" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacobKong_Dev" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/81a8d024af56" target="_blank" title="JianShu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  JianShu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacob Kong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -3,23 +3,48 @@
 
 
     
-    
-    
   <url>
-    <loc>http://yoursite.com/posts/1679631826/</loc>
-    <lastmod>2017-01-27T05:17:19.000Z</lastmod>
+    <loc>http://yoursite.com/posts/2903903730/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
-        <title>深度学习论文笔记：Fast R-CNN</title>
-        <pubTime>2016-12-07T22:32:24.000Z</pubTime>
+        <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
+        <pubTime>2016-12-14T22:32:24.000Z</pubTime>
         
-        <tag>Deep Learning, 深度学习, Object Detection, 目标检测</tag>
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/2735857030/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Fast Feature Pyramids for Object Detection?</title>
+        <pubTime>2016-11-23T22:32:24.000Z</pubTime>
+        
+        <tag>Pedestrian Detection, 行人检测</tag>
          
          
            
-             
-              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/3084343215/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</title>
+        <pubTime>2016-11-28T22:32:24.000Z</pubTime>
+        
+         
+           
         </display>
     </data>
     </url>
@@ -27,7 +52,7 @@
     
   <url>
     <loc>http://yoursite.com/posts/3091185356/</loc>
-    <lastmod>2017-01-27T05:13:52.000Z</lastmod>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
         <title>行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art</title>
@@ -46,8 +71,68 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/287090227/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
+        <pubTime>2016-12-01T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/783616645/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
+        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/285415955/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/2397281138/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
+        <pubTime>2016-12-14T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/4124170924/</loc>
-    <lastmod>2017-01-27T05:13:24.000Z</lastmod>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
         <title>行人检测论文笔记：Pedestrian Detection - A Benchmark</title>
@@ -66,70 +151,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/2735857030/</loc>
-    <lastmod>2017-01-27T04:32:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Fast Feature Pyramids for Object Detection?</title>
-        <pubTime>2016-11-23T22:32:24.000Z</pubTime>
-        
-        <tag>Pedestrian Detection, 行人检测</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/2397281138/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
-        <pubTime>2016-12-14T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/285415955/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/783616645/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
-        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/posts/2553947436/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
         <title>行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection</title>
@@ -143,23 +166,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/4241353321/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation</title>
-        <pubTime>2016-12-05T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/posts/3802700508/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
         <title>Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b</title>
@@ -173,8 +181,23 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/4241353321/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation</title>
+        <pubTime>2016-12-05T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/3054155989/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
         <title>深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</title>
@@ -188,47 +211,24 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/287090227/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
+    <loc>http://yoursite.com/posts/1679631826/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
-        <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
-        <pubTime>2016-12-01T22:32:24.000Z</pubTime>
+        <title>深度学习论文笔记：Fast R-CNN</title>
+        <pubTime>2016-12-07T22:32:24.000Z</pubTime>
         
+        <tag>Deep Learning, 深度学习, Object Detection, 目标检测</tag>
+         
          
            
+             
+              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+          
         </display>
     </data>
     </url>
 
     
-  <url>
-    <loc>http://yoursite.com/posts/3084343215/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</title>
-        <pubTime>2016-11-28T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
     
-  <url>
-    <loc>http://yoursite.com/posts/2903903730/</loc>
-    <lastmod>2017-01-26T10:00:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
-        <pubTime>2016-12-14T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
 </urlset>

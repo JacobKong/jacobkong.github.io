@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/posts/2903903730/</loc>
+    
+    <lastmod>2017-01-28T07:35:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/posts/1679631826/</loc>
     
     <lastmod>2017-01-27T07:09:34.000Z</lastmod>
@@ -44,14 +51,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/posts/2397281138/</loc>
+    <loc>http://yoursite.com/posts/4241353321/</loc>
     
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/posts/2903903730/</loc>
+    <loc>http://yoursite.com/posts/3054155989/</loc>
     
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     
@@ -72,20 +79,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/posts/4241353321/</loc>
-    
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/posts/3054155989/</loc>
-    
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/posts/783616645/</loc>
     
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
@@ -94,6 +87,13 @@
   
   <url>
     <loc>http://yoursite.com/posts/287090227/</loc>
+    
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/posts/2397281138/</loc>
     
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     

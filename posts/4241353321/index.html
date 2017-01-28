@@ -91,12 +91,7 @@ mAP: mean average precision，平均准确度
 我们的方法结合两个关键的见解：
 
 第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
-当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。
-
-
-
-Introduction
-关于各种视觉识别任务的上">
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
 <meta property="og:url" content="http://yoursite.com/posts/4241353321/index.html">
@@ -106,13 +101,8 @@ mAP: mean average precision，平均准确度
 我们的方法结合两个关键的见解：
 
 第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
-当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。
-
-
-
-Introduction
-关于各种视觉识别任务的上">
-<meta property="og:updated_time" content="2017-01-28T08:12:14.000Z">
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
+<meta property="og:updated_time" content="2017-01-28T09:00:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
 <meta name="twitter:description" content="Abstract
@@ -120,12 +110,7 @@ mAP: mean average precision，平均准确度
 我们的方法结合两个关键的见解：
 
 第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
-当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。
-
-
-
-Introduction
-关于各种视觉识别任务的上">
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
 
 
 
@@ -432,6 +417,17 @@ Introduction
 
           
           
+             <span id="/posts/4241353321/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -457,6 +453,7 @@ Introduction
 </ul>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
 <li><p>实现这个结果需要解决两个问题：</p>
@@ -472,7 +469,6 @@ Introduction
 <li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
 <li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Object-detection-with-R-CNN"><a href="#Object-detection-with-R-CNN" class="headerlink" title="Object detection with R-CNN"></a>Object detection with R-CNN</h2><ul>
 <li><p>我们的对象检测系统由三个模块组成:</p>
 <ul>
@@ -1074,6 +1070,113 @@ Introduction
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("YzdOPGD6UVitIPREYUH017Yt-gzGzoHsz", "W0g9MHOvC23K6PV4r2loD7d0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

@@ -112,7 +112,7 @@ Intersection over U">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg">
-<meta property="og:updated_time" content="2017-01-28T08:21:50.000Z">
+<meta property="og:updated_time" content="2017-01-28T09:00:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：How Far are We from Solving Pedestrian Detection?">
 <meta name="twitter:description" content="文章疑问点
@@ -431,6 +431,17 @@ Intersection over U">
 
           
           
+             <span id="/posts/2397281138/" class="leancloud_visitors" data-flag-title="行人检测论文笔记：How Far are We from Solving Pedestrian Detection?">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -470,11 +481,10 @@ Intersection over U">
 </li>
 </ul>
 <ul>
-<li><p>FPPI: False Positive Per Image</p>
-</li>
-<li><p>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</p>
-</li>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
 </ul>
+<a id="more"></a>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
 <li>基于Caltech数据集创建了一个人工的基准。</li>
@@ -488,8 +498,7 @@ Intersection over U">
 <li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
 </li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><a id="more"></a>
-<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
 <li><p>最流行的数据集：Caltech-USA、KITTI</p>
 <ul>
 <li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
@@ -1113,6 +1122,113 @@ Intersection over U">
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("YzdOPGD6UVitIPREYUH017Yt-gzGzoHsz", "W0g9MHOvC23K6PV4r2loD7d0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

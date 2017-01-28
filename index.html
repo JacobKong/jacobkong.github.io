@@ -384,6 +384,17 @@
 
           
           
+             <span id="/posts/3802700508/" class="leancloud_visitors" data-flag-title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -534,6 +545,17 @@
 
           
           
+             <span id="/posts/1679631826/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Fast R-CNN">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -558,14 +580,6 @@
 <li>本文提出一种基于快速区域的卷积网络方法（快速R-CNN）用于对象检测。</li>
 <li>快速R-CNN采用多项创新技术来提高训练和测试速度，同时提高检测精度。</li>
 <li>采用VGG16的网络：VGG: 16 layers of 3x3 convolution interleaved with max pooling + 3 fully-connected layers</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>物体检测相对于图像分类是更复杂的，应为需要物体准确的位置。<ul>
-<li>首先，必须处理许多候选对象位置（通常称为“proposal”）。</li>
-<li>其次，这些候选者只提供粗略的定位，必须进行精确定位才能实现精确定位。</li>
-<li>这些问题的解决方案经常损害 <strong>速度</strong> ， <strong>准确性</strong> 或 <strong>简单性</strong> 。</li>
-</ul>
-</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
@@ -704,6 +718,17 @@
 
           
           
+             <span id="/posts/3054155989/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -725,42 +750,6 @@
 <li>现有的深卷积神经网络（CNN）需要固定尺寸（例如，224×224）的输入图像。</li>
 <li>新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。</li>
 <li>使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。</li>
-</ul>
-<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><ul>
-<li>在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例如，224×224），其限制了输入图像的宽高比和比例。</li>
-<li>Cropping</li>
-<li>Warping-&gt;unwanted geometric distortion(不需要的几何失真)</li>
-<li><p>那么为什么CNN需要固定输入大小？</p>
-<ul>
-<li>CNN主要由两部分组成：卷积层和跟随的完全连接的层。</li>
-<li>事实上，卷积层不需要固定的图像大小，并且可以生成任何大小的特征图</li>
-<li>另一方面，根据定义：完全连接的层需要具有固定尺寸/长度输入。所以固定尺寸完全来自于 <strong>全连接层</strong></li>
-</ul>
-</li>
-<li><p>我们提出了一个spatial pyramid pooling（空间金字塔池化层）来去掉额昂罗固定输入的约束。</p>
-</li>
-<li><p>具体来说，我们在最后一个卷积层的顶部添加一个SPP层。 SPP层汇集特征并产生固定长度的输出，然后馈送到完全连接的层（或其他分类器）。</p>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfnxkqg21j30jl03hwf2.jpg" alt=""></p>
-<ul>
-<li><p>SPP对于深度CNN有着一些显著的特性：</p>
-<ul>
-<li>1）SPP能够生成固定长度的输出，而不管输入大小，而在以前的深度网络[3]中使用的滑动窗口池不能;</li>
-<li>2）SPP使用多级空间仓，而滑动窗口池仅使用单个窗口大小。 多层池化已被证明对于对象变形是鲁棒的[15];</li>
-<li>3）由于输入尺度的灵活性，SPP可以在可变尺度上提取的特征。</li>
-</ul>
-</li>
-<li><p>实验表明，这种多尺寸训练与传统的单尺寸训练一样收敛，并导致更好的测试精度。</p>
-</li>
-<li><p>SPP的优点是与特定的CNN设计是正交的。</p>
-</li>
-<li><p>Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.</p>
-</li>
-<li><p>VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.</p>
-</li>
-<li><p>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</p>
-</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
@@ -899,6 +888,17 @@
 
           
           
+             <span id="/posts/4241353321/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -924,21 +924,6 @@
 <li>当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。</li>
 </ul>
 </li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
-<li><p>实现这个结果需要解决两个问题：</p>
-<ul>
-<li>利用深度网络将对象定位</li>
-<li>仅利用少量的注释检测数据来训练训练高容量模型。</li>
-</ul>
-</li>
-<li>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</li>
-<li>在测试时，我们的方法为输入图像生成大约2000个类别无关区域提案，使用CNN从每个proposal中提取固定长度的特征向量，然后使用类别特定的线性SVM对每个区域进行分类。</li>
-<li>检测中面临的第二个挑战是标记的数据不足，目前可用的数据数量不足以训练大型CNN。这个问题的常规解决方案是使用无监督预训练，然后是监督 fine-tuning。</li>
-<li>我们发现，对于CNN，有很大比例的参数（94%）可以在检测精度的适度降低的情况下被去除。</li>
-<li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
-<li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1076,6 +1061,17 @@
           
 
           
+          
+             <span id="/posts/2553947436/" class="leancloud_visitors" data-flag-title="行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -1559,6 +1555,113 @@
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("YzdOPGD6UVitIPREYUH017Yt-gzGzoHsz", "W0g9MHOvC23K6PV4r2loD7d0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

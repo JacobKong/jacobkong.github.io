@@ -130,7 +130,7 @@ The convolution operation is typically denoted with an asterisk:
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg">
-<meta property="og:updated_time" content="2017-01-28T08:20:32.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:59:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks">
 <meta name="twitter:description" content="Chapter 9 Convolutional Networks（卷积神经网络）
@@ -451,6 +451,17 @@ The convolution operation is typically denoted with an asterisk:
 
           
           
+             <span id="/posts/783616645/" class="leancloud_visitors" data-flag-title="《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -477,12 +488,12 @@ The convolution operation is typically denoted with an asterisk:
 <p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg" alt=""></p>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg" alt=""></p>
 <ul>
-<li><p>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</p>
-</li>
-<li><p>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</p>
-</li>
-<li><p>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</p>
-</li>
+<li>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</li>
+<li>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</li>
+<li>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。</li>
 <li>二维卷积：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg" alt=""><br>two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 <strong>kernel-ﬂipping</strong><br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg" alt=""><br>后一种会更更容易用机器学习库来实现。</li>
 <li>许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：</li>
@@ -502,7 +513,6 @@ The convolution operation is typically denoted with an asterisk:
 <li>卷积通常对应于非常稀疏的矩阵。</li>
 <li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
 </ul>
-<a id="more"></a>
 <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
 <li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
 <ul>
@@ -1196,6 +1206,113 @@ The convolution operation is typically denoted with an asterisk:
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("YzdOPGD6UVitIPREYUH017Yt-gzGzoHsz", "W0g9MHOvC23K6PV4r2loD7d0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 

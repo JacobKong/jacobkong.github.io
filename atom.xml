@@ -36,7 +36,7 @@
     <link href="http://yoursite.com/posts/1679631826/"/>
     <id>http://yoursite.com/posts/1679631826/</id>
     <published>2016-12-07T22:32:24.000Z</published>
-    <updated>2017-01-28T07:40:29.000Z</updated>
+    <updated>2017-01-28T09:01:06.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>mAP：detection quality.</li>
@@ -46,6 +46,7 @@
 <li>快速R-CNN采用多项创新技术来提高训练和测试速度，同时提高检测精度。</li>
 <li>采用VGG16的网络：VGG: 16 layers of 3x3 convolution interleaved with max pooling + 3 fully-connected layers</li>
 </ul>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>物体检测相对于图像分类是更复杂的，应为需要物体准确的位置。<ul>
 <li>首先，必须处理许多候选对象位置（通常称为“proposal”）。</li>
@@ -54,7 +55,6 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="R-CNN-and-SPPnet"><a href="#R-CNN-and-SPPnet" class="headerlink" title="R-CNN and SPPnet"></a>R-CNN and SPPnet</h3><ul>
 <li>R-CNN(Region-based Convolution Network)具有几个显著的缺点：<ul>
 <li>训练是一个多级管道。</li>
@@ -176,14 +176,6 @@
 &lt;li&gt;快速R-CNN采用多项创新技术来提高训练和测试速度，同时提高检测精度。&lt;/li&gt;
 &lt;li&gt;采用VGG16的网络：VGG: 16 layers of 3x3 convolution interleaved with max pooling + 3 fully-connected layers&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;物体检测相对于图像分类是更复杂的，应为需要物体准确的位置。&lt;ul&gt;
-&lt;li&gt;首先，必须处理许多候选对象位置（通常称为“proposal”）。&lt;/li&gt;
-&lt;li&gt;其次，这些候选者只提供粗略的定位，必须进行精确定位才能实现精确定位。&lt;/li&gt;
-&lt;li&gt;这些问题的解决方案经常损害 &lt;strong&gt;速度&lt;/strong&gt; ， &lt;strong&gt;准确性&lt;/strong&gt; 或 &lt;strong&gt;简单性&lt;/strong&gt; 。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -205,13 +197,14 @@
     <link href="http://yoursite.com/posts/3054155989/"/>
     <id>http://yoursite.com/posts/3054155989/</id>
     <published>2016-12-06T22:32:24.000Z</published>
-    <updated>2017-01-28T08:12:08.000Z</updated>
+    <updated>2017-01-28T09:00:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>现有的深卷积神经网络（CNN）需要固定尺寸（例如，224×224）的输入图像。</li>
 <li>新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。</li>
 <li>使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。</li>
 </ul>
+<a id="more"></a>
 <h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><ul>
 <li>在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例如，224×224），其限制了输入图像的宽高比和比例。</li>
 <li>Cropping</li>
@@ -248,7 +241,6 @@
 <li><p>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</p>
 </li>
 </ul>
-<a id="more"></a>
 <h2 id="DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><a href="#DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING" class="headerlink" title="DEEP NETWORKS WITH SPATIAL PYRAMID POOLING"></a>DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</h2><ul>
 <li>输入图像中的这些形状激活在相应位置的feature map</li>
 </ul>
@@ -281,42 +273,6 @@
 &lt;li&gt;新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。&lt;/li&gt;
 &lt;li&gt;使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;INTRODUCTION&quot;&gt;&lt;a href=&quot;#INTRODUCTION&quot; class=&quot;headerlink&quot; title=&quot;INTRODUCTION&quot;&gt;&lt;/a&gt;INTRODUCTION&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例如，224×224），其限制了输入图像的宽高比和比例。&lt;/li&gt;
-&lt;li&gt;Cropping&lt;/li&gt;
-&lt;li&gt;Warping-&amp;gt;unwanted geometric distortion(不需要的几何失真)&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;那么为什么CNN需要固定输入大小？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CNN主要由两部分组成：卷积层和跟随的完全连接的层。&lt;/li&gt;
-&lt;li&gt;事实上，卷积层不需要固定的图像大小，并且可以生成任何大小的特征图&lt;/li&gt;
-&lt;li&gt;另一方面，根据定义：完全连接的层需要具有固定尺寸/长度输入。所以固定尺寸完全来自于 &lt;strong&gt;全连接层&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;我们提出了一个spatial pyramid pooling（空间金字塔池化层）来去掉额昂罗固定输入的约束。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;具体来说，我们在最后一个卷积层的顶部添加一个SPP层。 SPP层汇集特征并产生固定长度的输出，然后馈送到完全连接的层（或其他分类器）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfnxkqg21j30jl03hwf2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;SPP对于深度CNN有着一些显著的特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1）SPP能够生成固定长度的输出，而不管输入大小，而在以前的深度网络[3]中使用的滑动窗口池不能;&lt;/li&gt;
-&lt;li&gt;2）SPP使用多级空间仓，而滑动窗口池仅使用单个窗口大小。 多层池化已被证明对于对象变形是鲁棒的[15];&lt;/li&gt;
-&lt;li&gt;3）由于输入尺度的灵活性，SPP可以在可变尺度上提取的特征。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;实验表明，这种多尺寸训练与传统的单尺寸训练一样收敛，并导致更好的测试精度。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;SPP的优点是与特定的CNN设计是正交的。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -338,7 +294,7 @@
     <link href="http://yoursite.com/posts/4241353321/"/>
     <id>http://yoursite.com/posts/4241353321/</id>
     <published>2016-12-05T22:32:24.000Z</published>
-    <updated>2017-01-28T08:12:14.000Z</updated>
+    <updated>2017-01-28T09:00:43.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>mAP: mean average precision，平均准确度</li>
@@ -349,6 +305,7 @@
 </ul>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
 <li><p>实现这个结果需要解决两个问题：</p>
@@ -364,7 +321,6 @@
 <li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
 <li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Object-detection-with-R-CNN"><a href="#Object-detection-with-R-CNN" class="headerlink" title="Object detection with R-CNN"></a>Object detection with R-CNN</h2><ul>
 <li><p>我们的对象检测系统由三个模块组成:</p>
 <ul>
@@ -444,21 +400,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;实现这个结果需要解决两个问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;利用深度网络将对象定位&lt;/li&gt;
-&lt;li&gt;仅利用少量的注释检测数据来训练训练高容量模型。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;我们通过在“使用区域识别”范例内操作，来解决CNN定位问题&lt;/li&gt;
-&lt;li&gt;在测试时，我们的方法为输入图像生成大约2000个类别无关区域提案，使用CNN从每个proposal中提取固定长度的特征向量，然后使用类别特定的线性SVM对每个区域进行分类。&lt;/li&gt;
-&lt;li&gt;检测中面临的第二个挑战是标记的数据不足，目前可用的数据数量不足以训练大型CNN。这个问题的常规解决方案是使用无监督预训练，然后是监督 fine-tuning。&lt;/li&gt;
-&lt;li&gt;我们发现，对于CNN，有很大比例的参数（94%）可以在检测精度的适度降低的情况下被去除。&lt;/li&gt;
-&lt;li&gt;我们证明一个简单的 &lt;strong&gt;边界框回归方法（bounding box regression）&lt;/strong&gt; 显着减少误定位，这是主要的误差模式(error mode)。&lt;/li&gt;
-&lt;li&gt;在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -480,7 +421,7 @@
     <link href="http://yoursite.com/posts/2553947436/"/>
     <id>http://yoursite.com/posts/2553947436/</id>
     <published>2016-12-04T22:32:24.000Z</published>
-    <updated>2017-01-28T08:12:21.000Z</updated>
+    <updated>2017-01-28T09:00:31.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><strong>L1范数</strong> 也称为最小绝对偏差（LAD），最小绝对误差（LAE）。它基本上最小化目标值(Yi)和估计值(f(xi))之间的绝对差(S)的和</li>
@@ -848,7 +789,7 @@
     <link href="http://yoursite.com/posts/2397281138/"/>
     <id>http://yoursite.com/posts/2397281138/</id>
     <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:21:50.000Z</updated>
+    <updated>2017-01-28T09:00:05.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
 <li>Human Baseline 的标准是如何确定的?</li>
@@ -873,11 +814,10 @@
 </li>
 </ul>
 <ul>
-<li><p>FPPI: False Positive Per Image</p>
-</li>
-<li><p>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</p>
-</li>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
 </ul>
+<a id="more"></a>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
 <li>基于Caltech数据集创建了一个人工的基准。</li>
@@ -891,8 +831,7 @@
 <li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
 </li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><a id="more"></a>
-<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
 <li><p>最流行的数据集：Caltech-USA、KITTI</p>
 <ul>
 <li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
@@ -1008,25 +947,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;FPPI: False Positive Per Image&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
+&lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;调查了当前最先进的方法与“完美单帧检测器”之间的差距。&lt;/li&gt;
-&lt;li&gt;基于Caltech数据集创建了一个人工的基准。&lt;/li&gt;
-&lt;li&gt;手工聚合了顶级检测器经常出现的错误。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;刻画了定位，前景 vs 背景两方面的错误&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;针对定位错误：研究了训练集标记噪声对检测器性能的影响&lt;/li&gt;
-&lt;li&gt;前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;提供了一个新的、更纯净的训练/测试标注集。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;
     
     </summary>
     
@@ -1248,7 +1171,7 @@
     <link href="http://yoursite.com/posts/783616645/"/>
     <id>http://yoursite.com/posts/783616645/</id>
     <published>2016-11-30T22:32:24.000Z</published>
-    <updated>2017-01-28T08:20:32.000Z</updated>
+    <updated>2017-01-28T08:59:38.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
 <li>卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。</li>
@@ -1260,12 +1183,12 @@
 <p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg" alt=""></p>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg" alt=""></p>
 <ul>
-<li><p>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</p>
-</li>
-<li><p>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</p>
-</li>
-<li><p>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</p>
-</li>
+<li>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</li>
+<li>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</li>
+<li>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。</li>
 <li>二维卷积：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg" alt=""><br>two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 <strong>kernel-ﬂipping</strong><br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg" alt=""><br>后一种会更更容易用机器学习库来实现。</li>
 <li>许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：</li>
@@ -1285,7 +1208,6 @@
 <li>卷积通常对应于非常稀疏的矩阵。</li>
 <li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
 </ul>
-<a id="more"></a>
 <h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
 <li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
 <ul>
@@ -1462,30 +1384,9 @@
 &lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 &lt;strong&gt;输入&lt;/strong&gt; ，第二个参数（在本例中为函数w）作为 &lt;strong&gt;内核&lt;/strong&gt; 。 &lt;strong&gt;输出&lt;/strong&gt; 有时称为 &lt;strong&gt;特征映射(feature map)&lt;/strong&gt; 。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在机器学习应用中， &lt;strong&gt;输入&lt;/strong&gt; 通常是多维数据数组，并且 &lt;strong&gt;内核&lt;/strong&gt; 通常是由学习算法调整的多维参数数组。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;我们将这些多维数组称为 &lt;strong&gt;张量（tensors）&lt;/strong&gt; 。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。&lt;/li&gt;
-&lt;li&gt;二维卷积：&lt;br&gt;&lt;img src=&quot;https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 &lt;strong&gt;kernel-ﬂipping&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;后一种会更更容易用机器学习库来实现。&lt;/li&gt;
-&lt;li&gt;许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;卷积的一个例子：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpf8xjmyj30oq0lqn0c.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;离散卷积可以被看作是乘以矩阵的乘法。&lt;/li&gt;
-&lt;li&gt;Toeplitz矩阵：常对角矩阵（又称特普利茨矩阵）是指每条左上至右下的对角线均为常数的矩阵，不论是正方形或长方形的。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。&lt;/li&gt;
-&lt;li&gt;卷积通常对应于非常稀疏的矩阵。&lt;/li&gt;
-&lt;li&gt;任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。&lt;/li&gt;
+&lt;li&gt;在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 &lt;strong&gt;输入&lt;/strong&gt; ，第二个参数（在本例中为函数w）作为 &lt;strong&gt;内核&lt;/strong&gt; 。 &lt;strong&gt;输出&lt;/strong&gt; 有时称为 &lt;strong&gt;特征映射(feature map)&lt;/strong&gt; 。&lt;/li&gt;
+&lt;li&gt;在机器学习应用中， &lt;strong&gt;输入&lt;/strong&gt; 通常是多维数据数组，并且 &lt;strong&gt;内核&lt;/strong&gt; 通常是由学习算法调整的多维参数数组。&lt;/li&gt;
+&lt;li&gt;我们将这些多维数组称为 &lt;strong&gt;张量（tensors）&lt;/strong&gt; 。&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>
@@ -1504,7 +1405,7 @@
     <link href="http://yoursite.com/posts/3084343215/"/>
     <id>http://yoursite.com/posts/3084343215/</id>
     <published>2016-11-28T22:32:24.000Z</published>
-    <updated>2017-01-28T08:19:34.000Z</updated>
+    <updated>2017-01-28T08:59:18.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><p>从TP、FP、TN、FN到ROC曲线、miss rate</p>
@@ -1528,6 +1429,7 @@
 </ul>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>定向梯度直方图（HOG）描述符的网格显著优于现有的人体检测特征集。</li>
 <li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
@@ -1538,7 +1440,6 @@
 <li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
 <li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Previous-Work"><a href="#Previous-Work" class="headerlink" title="Previous Work"></a>Previous Work</h2><h2 id="Overview-of-the-Method"><a href="#Overview-of-the-Method" class="headerlink" title="Overview of the Method"></a>Overview of the Method</h2><ul>
 <li>The method is based on evaluating well-normalized local histograms of image gradient orientations in a dense grid.</li>
 <li>基本思想是，在一副图像中，局部目标的 <strong>表象</strong> 和 <strong>形状</strong> （appearance and shape）能够被梯度或边缘的方向密度分布很好地描述，即使没有对应的梯度或边缘位置的精确知识。</li>
@@ -1726,16 +1627,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;定向梯度直方图（HOG）描述符的网格显著优于现有的人体检测特征集。&lt;/li&gt;
-&lt;li&gt;在重叠描述符块中的 &lt;strong&gt;精细尺度梯度&lt;/strong&gt; ， &lt;strong&gt;精细定向分箱&lt;/strong&gt; ， &lt;strong&gt;相对粗略的空间分箱&lt;/strong&gt; 和 &lt;strong&gt;高质量局部对比度标准化&lt;/strong&gt; 对于良好的结果都是重要的。&lt;/li&gt;
-&lt;li&gt;新的数据集&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;第一需求：robust feature set.&lt;/li&gt;
-&lt;li&gt;我们研究了人类监测的特征集问题，发现 &lt;strong&gt;本地归一化的定向梯度直方图（HOG）&lt;/strong&gt; 描述符提供优异的性能相对于其他现有特征集包括小波。&lt;/li&gt;
-&lt;li&gt;提出的描述符让人联想到 &lt;strong&gt;边缘方向直方图&lt;/strong&gt; [4,5]， &lt;strong&gt;SIFT描述符&lt;/strong&gt; [12]和 &lt;strong&gt;形状上下文&lt;/strong&gt; [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -1757,7 +1648,7 @@
     <link href="http://yoursite.com/posts/2735857030/"/>
     <id>http://yoursite.com/posts/2735857030/</id>
     <published>2016-11-23T22:32:24.000Z</published>
-    <updated>2017-01-28T08:18:43.000Z</updated>
+    <updated>2017-01-28T08:59:04.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><p>Overcomplete Representations:</p>
@@ -1780,6 +1671,7 @@
 <ul>
 <li>Gradient Histograms:</li>
 </ul>
+<a id="more"></a>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>The computational bottleneck of many modern detectors is the <strong>computation of features</strong> at every scale of a finely-sampled image pyramid.</li>
 <li>The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.</li>
@@ -1808,7 +1700,6 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
 <h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
 <li>Scale Space Theory: 尺度空间理论</li>
 <li>Cascades, coarse-to-fine search, distance transforms, etc., 全部都关注于对提前计算好的图像特征来优化分类速度。</li>
@@ -1840,34 +1731,6 @@
 &lt;ul&gt;
 &lt;li&gt;Gradient Histograms:&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;The computational bottleneck of many modern detectors is the &lt;strong&gt;computation of features&lt;/strong&gt; at every scale of a finely-sampled image pyramid.&lt;/li&gt;
-&lt;li&gt;The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Multi-orientation decompostion: 多向分解，是图像处理中的基本技术。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;在每个尺度和方向分别分析图像结构的想法起源于多个来源:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;哺乳动物视觉系统生理学的测量&lt;/li&gt;
-&lt;li&gt;有关视觉信息的统计和编码的原则性推理&lt;/li&gt;
-&lt;li&gt;谐波分析&lt;/li&gt;
-&lt;li&gt;谐波分析（多速率滤波)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;灵长类视觉系统显示：条纹皮层细胞（粗略的等价于图像的小波展开）在数量上超过视网膜神经节细胞（图像像素的近似表示）10^2到10^3.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;这些表示相对于视点，照明和图像变形的变化的鲁棒性是Overcomplete Representations 优越性能的促成因素。&lt;/li&gt;
-&lt;li&gt;不幸的是，更高的检测正确率通常伴随着更高的计算开销。&lt;/li&gt;
-&lt;li&gt;在计算开销和为了提高检测和降低错误率而使用更复杂的表示之间是没有必要做权衡的。&lt;/li&gt;
-&lt;li&gt;自然图像具有分形统计，使得我们可以利用这一点来更可靠的预测图像跨尺度结构。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;我们证明了我们提出的快速特征金字塔与三个不同的检测框架的有效性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;积分通道特征（ICF）&lt;/li&gt;
-&lt;li&gt;聚集通道特征（积分通道特征的新颖变体）&lt;/li&gt;
-&lt;li&gt;可变形零件模型（DPM）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -1889,7 +1752,7 @@
     <link href="http://yoursite.com/posts/3091185356/"/>
     <id>http://yoursite.com/posts/3091185356/</id>
     <published>2016-11-22T22:32:24.000Z</published>
-    <updated>2017-01-28T08:18:24.000Z</updated>
+    <updated>2017-01-28T08:58:52.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>对数正态分布（lognormally distributed）：对数为正态分布的任意随机变量的概率分布。<ul>
@@ -1921,6 +1784,7 @@
 <li>NMS:Non-maximum Suppression(非极大值抑制):可看成一种局部极大值搜索，这里的局部极大值要比他的邻域值都要大。这里的邻域表示有两个参数：维度和n-邻域。</li>
 <li>LBP: Local Binary Patterns</li>
 </ul>
+<a id="more"></a>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>单目图像的行人检测方法持续的在发展。</li>
 <li>多种数据集+广泛变化的评估方法-&gt;导致方法之间直接的比较很困难。</li>
@@ -1940,7 +1804,6 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
 <h3 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h3><ul>
 <li>Data set.<ul>
 <li>350,000行人标注框BB</li>
@@ -2122,25 +1985,6 @@
 &lt;li&gt;NMS:Non-maximum Suppression(非极大值抑制):可看成一种局部极大值搜索，这里的局部极大值要比他的邻域值都要大。这里的邻域表示有两个参数：维度和n-邻域。&lt;/li&gt;
 &lt;li&gt;LBP: Local Binary Patterns&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;单目图像的行人检测方法持续的在发展。&lt;/li&gt;
-&lt;li&gt;多种数据集+广泛变化的评估方法-&amp;gt;导致方法之间直接的比较很困难。&lt;/li&gt;
-&lt;li&gt;三个贡献：&lt;ul&gt;
-&lt;li&gt;数据集；&lt;/li&gt;
-&lt;li&gt;精炼的pre-image评估方法；&lt;/li&gt;
-&lt;li&gt;对现有state-of-art检测器进行比较评估。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;行人检测在 &lt;strong&gt;低像素&lt;/strong&gt; 和 &lt;strong&gt;部分遮挡&lt;/strong&gt; 行人情况下依旧表现失望。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;对现有行人检测方法的一些疑问：&lt;ul&gt;
-&lt;li&gt;Do current detectors work well?&lt;/li&gt;
-&lt;li&gt;What is the best ap- proach?” “What are the main failure modes?&lt;/li&gt;
-&lt;li&gt;What are the most productive research directions?&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     
@@ -2164,7 +2008,7 @@
     <link href="http://yoursite.com/posts/4124170924/"/>
     <id>http://yoursite.com/posts/4124170924/</id>
     <published>2016-11-19T03:48:55.000Z</published>
-    <updated>2017-01-28T08:17:32.000Z</updated>
+    <updated>2017-01-28T08:58:33.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>k折交叉验证</li>
@@ -2181,12 +2025,12 @@
 <li>衡量了现有的检测系统。</li>
 <li>分析了一般的常见失败情况。</li>
 </ul>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>INRIA数据集。</li>
 <li>现有数据集的缺陷。</li>
 <li>贡献（4方面）。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><ul>
 <li>介绍了Caltech数据集的数据内容，标记等。</li>
 <li><p>Scale(等级，范围)根据行人的图片大小，将行人分为3个范围：near（80或者更多像素）、medium（30-80像素之间）、far（30像素或更少）。</p>
@@ -2268,11 +2112,6 @@
 &lt;li&gt;证明了平常用的逐个窗口检测的方法是有瑕疵的，在完整的图片上会预测失败。&lt;/li&gt;
 &lt;li&gt;衡量了现有的检测系统。&lt;/li&gt;
 &lt;li&gt;分析了一般的常见失败情况。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;INRIA数据集。&lt;/li&gt;
-&lt;li&gt;现有数据集的缺陷。&lt;/li&gt;
-&lt;li&gt;贡献（4方面）。&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>

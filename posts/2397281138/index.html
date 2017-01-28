@@ -112,7 +112,7 @@ Intersection over U">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg">
-<meta property="og:updated_time" content="2017-01-27T06:47:52.000Z">
+<meta property="og:updated_time" content="2017-01-28T07:43:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：How Far are We from Solving Pedestrian Detection?">
 <meta name="twitter:description" content="文章疑问点
@@ -379,8 +379,8 @@ Intersection over U">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T06:32:24+08:00">
-                2016-12-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-04T06:32:24+08:00">
+                2016-12-04
               </time>
             
 
@@ -466,7 +466,7 @@ Intersection over U">
 <li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
 </li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h2 id="2-Preliminaries"><a href="#2-Preliminaries" class="headerlink" title="2. Preliminaries"></a>2. Preliminaries</h2><h3 id="2-1-Caltech-USA-pedestrian-detection-benchmark"><a href="#2-1-Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="2.1 Caltech-USA pedestrian detection benchmark"></a>2.1 Caltech-USA pedestrian detection benchmark</h3><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
 <li><p>最流行的数据集：Caltech-USA、KITTI</p>
 <ul>
 <li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
@@ -477,21 +477,20 @@ Intersection over U">
 <li><p>MR: miss rate</p>
 </li>
 </ul>
-<h3 id="2-2-Filtered-channel-features-detector"><a href="#2-2-Filtered-channel-features-detector" class="headerlink" title="2.2 Filtered channel features detector"></a>2.2 Filtered channel features detector</h3><ul>
+<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
 <li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
 <li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
 <li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
 <li>环境和光流可以提高检测（额外的提示）</li>
 </ul>
-<h2 id="3-Analysing-the-state-of-the-art"><a href="#3-Analysing-the-state-of-the-art" class="headerlink" title="3. Analysing the state of the art"></a>3. Analysing the state of the art</h2><h3 id="3-1-Are-we-reaching-saturation"><a href="#3-1-Are-we-reaching-saturation" class="headerlink" title="3.1 Are we reaching saturation?"></a>3.1 Are we reaching saturation?</h3><ul>
+<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
 <li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
 <li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
 <li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
 <li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
 <li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
 </ul>
-<h3 id="3-2-Failure-analysis"><a href="#3-2-Failure-analysis" class="headerlink" title="3.2 Failure analysis"></a>3.2 Failure analysis</h3><p>3.2.1 Error sources</p>
-<ul>
+<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
 <li><p>一个检测器可以有两类错误：</p>
 <ul>
 <li>假阳性（检测到了背景，或者很弱的定位检测）</li>
@@ -503,12 +502,10 @@ Intersection over U">
 <li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
 <li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
 </ul>
-<p>3.2.2 Oracle test cases</p>
-<ul>
+<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
 <li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
 </ul>
-<p>3.3. Improved Caltech-USA annotations</p>
-<ul>
+<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
 <li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
 <li><p>我们的目标是两方面：</p>
 <ul>
@@ -519,8 +516,7 @@ Intersection over U">
 <li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
 </li>
 </ul>
-<h3 id="4-Improving-the-state-of-the-art"><a href="#4-Improving-the-state-of-the-art" class="headerlink" title="4. Improving the state of the art"></a>4. Improving the state of the art</h3><p>4.1. Impact of training annotations</p>
-<ul>
+<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
 <li><p>Pruning benefits:</p>
 <ul>
 <li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
@@ -539,8 +535,7 @@ Intersection over U">
 </ul>
 </li>
 </ul>
-<p>4.2. Convnets for pedestrian detection</p>
-<ul>
+<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
 <li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
 </li>
 <li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
@@ -551,7 +546,7 @@ Intersection over U">
 <li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
 </li>
 </ul>
-<h3 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h3><ul>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
 <li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
 </li>
 <li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
@@ -586,8 +581,8 @@ Intersection over U">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/1679631826/" rel="next" title="深度学习论文笔记：Fast R-CNN">
-                <i class="fa fa-chevron-left"></i> 深度学习论文笔记：Fast R-CNN
+              <a href="/posts/285415955/" rel="next" title="行人检测论文笔记：Taking a Deeper Look at Pedestrians">
+                <i class="fa fa-chevron-left"></i> 行人检测论文笔记：Taking a Deeper Look at Pedestrians
               </a>
             
           </div>
@@ -596,8 +591,8 @@ Intersection over U">
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/3802700508/" rel="prev" title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
-                Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b <i class="fa fa-chevron-right"></i>
+              <a href="/posts/2903903730/" rel="prev" title="行人检测论文笔记：Robust Real-Time Face Detection">
+                行人检测论文笔记：Robust Real-Time Face Detection <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -792,7 +787,7 @@ Intersection over U">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章疑问点"><span class="nav-number">1.</span> <span class="nav-text">文章疑问点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Preliminaries"><span class="nav-number">4.</span> <span class="nav-text">2. Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Caltech-USA-pedestrian-detection-benchmark"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 Caltech-USA pedestrian detection benchmark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Filtered-channel-features-detector"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 Filtered channel features detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Analysing-the-state-of-the-art"><span class="nav-number">5.</span> <span class="nav-text">3. Analysing the state of the art</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Are-we-reaching-saturation"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 Are we reaching saturation?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Failure-analysis"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 Failure analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Improving-the-state-of-the-art"><span class="nav-number">5.3.</span> <span class="nav-text">4. Improving the state of the art</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.4.</span> <span class="nav-text">5. Summary</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文章疑问点"><span class="nav-number">1.</span> <span class="nav-text">文章疑问点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Preliminaries"><span class="nav-number">4.</span> <span class="nav-text">Preliminaries</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caltech-USA-pedestrian-detection-benchmark"><span class="nav-number">4.1.</span> <span class="nav-text">Caltech-USA pedestrian detection benchmark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filtered-channel-features-detector"><span class="nav-number">4.2.</span> <span class="nav-text">Filtered channel features detector</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analyzing-the-state-of-the-art"><span class="nav-number">5.</span> <span class="nav-text">Analyzing the state of the art</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Are-we-reaching-saturation"><span class="nav-number">5.1.</span> <span class="nav-text">Are we reaching saturation?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Failure-analysis"><span class="nav-number">5.2.</span> <span class="nav-text">Failure analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Error-sources"><span class="nav-number">5.2.1.</span> <span class="nav-text">Error sources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Oracle-test-cases"><span class="nav-number">5.2.2.</span> <span class="nav-text">Oracle test cases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Improved-Caltech-USA-annotations"><span class="nav-number">5.2.3.</span> <span class="nav-text">Improved Caltech-USA annotations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Improving-the-state-of-the-art"><span class="nav-number">5.3.</span> <span class="nav-text">Improving the state of the art</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Impact-of-training-annotations"><span class="nav-number">5.3.1.</span> <span class="nav-text">Impact of training annotations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Convnets-for-pedestrian-detection"><span class="nav-number">5.3.2.</span> <span class="nav-text">Convnets for pedestrian detection</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary"><span class="nav-number">5.4.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></div>
             
 
           </div>

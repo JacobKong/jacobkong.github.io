@@ -4,8 +4,38 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/3054155989/</loc>
+    <lastmod>2017-01-28T07:44:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</title>
+        <pubTime>2016-12-06T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/2397281138/</loc>
+    <lastmod>2017-01-28T07:43:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
+        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/1679631826/</loc>
-    <lastmod>2017-01-28T07:39:04.000Z</lastmod>
+    <lastmod>2017-01-28T07:40:29.000Z</lastmod>
     <data>
         <display>
         <title>深度学习论文笔记：Fast R-CNN</title>
@@ -165,36 +195,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/285415955/</loc>
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/783616645/</loc>
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
-        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/posts/2553947436/</loc>
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
@@ -225,12 +225,27 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/3054155989/</loc>
+    <loc>http://yoursite.com/posts/285415955/</loc>
     <lastmod>2017-01-27T06:47:52.000Z</lastmod>
     <data>
         <display>
-        <title>深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</title>
-        <pubTime>2016-12-06T22:32:24.000Z</pubTime>
+        <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/783616645/</loc>
+    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>《DeepLearning》读书笔记：DL - Chapter 9 - Conventional Networks</title>
+        <pubTime>2016-11-30T22:32:24.000Z</pubTime>
         
          
            
@@ -246,21 +261,6 @@
         <display>
         <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
         <pubTime>2016-12-01T22:32:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/2397281138/</loc>
-    <lastmod>2017-01-27T06:47:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
-        <pubTime>2016-12-14T22:32:24.000Z</pubTime>
         
          
            

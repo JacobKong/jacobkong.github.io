@@ -68,11 +68,13 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 训练" />
+  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
 
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="JacobKong's Blog" type="application/atom+xml" />
 
 
 
@@ -105,8 +107,8 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
-      author: '博主'
+      userId: '6269586705494312000',
+      author: 'JacobKong_Dev'
     },
     algolia: {
       applicationID: '',
@@ -133,6 +135,15 @@
 
   
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89889116-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
 
   <script type="text/javascript">
@@ -244,9 +255,39 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'qwpH936HXK5KmdfNnB1U','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -261,6 +302,395 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3084343215/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/posts/3084343215/" itemprop="url">
+                  行人检测论文笔记：Histograms of Oriented Gradients for Human Detection
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-29T06:32:24+08:00">
+                2016-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/3084343215/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3084343215/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>从TP、FP、TN、FN到ROC曲线、miss rate</p>
+<ul>
+<li>TP：true positive，实际是正例，预测为正例</li>
+<li>FP：false positive，实际为负例，预测为正例</li>
+<li>TN：true negative，实际为负例，预测为负例</li>
+<li>FN：false negative，实际为正例，预测为负例</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrffyhsdj30eu03mjrv.jpg" alt=""></p>
+<ul>
+<li>fnr+tpr=1, fpr+tnr=1</li>
+<li>miss rate = FNR = 1 - true positive<ul>
+<li>对于一个确定的阈值t，FPR和TPR是确定的，得到一个(fpr,tpr)元组。</li>
+<li>当t增加， # FP也减小， # TN增加，则fpr减小；</li>
+<li>当t增加， # TP减小， # FN增加，则tpr减小。</li>
+<li>也就是说，当阈值t从0变化到1，fpr和tpr也单调减小，从(1，1)减小到(0,0)</li>
+<li>miss rate = 1 - true positive rate，那么对应的YoX图像，也就是miss rate - false positive rate图像，就应当是单调下降的曲线。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>定向梯度直方图（HOG）描述符的网格显著优于现有的人体检测特征集。</li>
+<li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
+<li>新的数据集</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>第一需求：robust feature set.</li>
+<li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
+<li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3084343215/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2735857030/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/posts/2735857030/" itemprop="url">
+                  行人检测论文笔记：Fast Feature Pyramids for Object Detection?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T06:32:24+08:00">
+                2016-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/2735857030/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2735857030/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>Overcomplete Representations:</p>
+<ul>
+<li>Overcomplete：Such a complete system is overcomplete if removal of a \phi <em>{j} from the system results in a system (i.e., {\phi </em>{i}}_((i\in J\backslash {j))}) that is still complete.</li>
+<li>In different research, such as signal processing and function approximation, overcompleteness can help researchers to achieve a more stable, more robust, or more compact decomposition than using a basis.[2]</li>
+</ul>
+</li>
+<li><p>Image pyramid：影响金字塔</p>
+<ul>
+<li>影像金字塔由原始影像按一定规则生成的由细到粗不同分辨率的影像集。</li>
+<li>指在同一的空间参照下，根据用户需要以不同分辨率进行存储与显示，形成分辨率由粗到细、数据量由小到大的金字塔结构。</li>
+<li>图像编码和渐进式图像传输</li>
+<li>从图中可以看出, 从金字塔的底层开始每四个相邻的像素经过重采样生成一个新的像素, 依此重复进行, 直到金字塔的顶层。重采样的方法一般有以下三种: 双线性插值、最临近像元法、三次卷积法。</li>
+<li>金字塔是一种能对栅格影像按逐级降低分辨率的拷贝方式存储的方法。通过选择一个与显示区域相似的分辨率，只需进行少量的查询和少量的计算，从而减少显示时间。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg" alt=""></p>
+<ul>
+<li>Gradient Histograms:</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>The computational bottleneck of many modern detectors is the <strong>computation of features</strong> at every scale of a finely-sampled image pyramid.</li>
+<li>The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Multi-orientation decompostion: 多向分解，是图像处理中的基本技术。</li>
+<li><p>在每个尺度和方向分别分析图像结构的想法起源于多个来源:</p>
+<ul>
+<li>哺乳动物视觉系统生理学的测量</li>
+<li>有关视觉信息的统计和编码的原则性推理</li>
+<li>谐波分析</li>
+<li>谐波分析（多速率滤波)</li>
+</ul>
+</li>
+<li><p>灵长类视觉系统显示：条纹皮层细胞（粗略的等价于图像的小波展开）在数量上超过视网膜神经节细胞（图像像素的近似表示）10^2到10^3.</p>
+</li>
+<li>这些表示相对于视点，照明和图像变形的变化的鲁棒性是Overcomplete Representations 优越性能的促成因素。</li>
+<li>不幸的是，更高的检测正确率通常伴随着更高的计算开销。</li>
+<li>在计算开销和为了提高检测和降低错误率而使用更复杂的表示之间是没有必要做权衡的。</li>
+<li>自然图像具有分形统计，使得我们可以利用这一点来更可靠的预测图像跨尺度结构。</li>
+<li><p>我们证明了我们提出的快速特征金字塔与三个不同的检测框架的有效性：</p>
+<ul>
+<li>积分通道特征（ICF）</li>
+<li>聚集通道特征（积分通道特征的新颖变体）</li>
+<li>可变形零件模型（DPM）</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2735857030/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -382,8 +812,7 @@
 
       
         
-          
-            <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>对数正态分布（lognormally distributed）：对数为正态分布的任意随机变量的概率分布。<ul>
 <li>如果 X 是正态分布的随机变量，则 exp(X)为对数正态分布.</li>
 <li>如果 Y 是对数正态分布，则 ln(Y) 为正态分布。</li>
@@ -424,7 +853,7 @@
 </li>
 <li>行人检测在 <strong>低像素</strong> 和 <strong>部分遮挡</strong> 行人情况下依旧表现失望。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>对现有行人检测方法的一些疑问：<ul>
 <li>Do current detectors work well?</li>
 <li>What is the best ap- proach?” “What are the main failure modes?</li>
@@ -432,155 +861,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-1-Contributions"><a href="#1-1-Contributions" class="headerlink" title="1.1 Contributions"></a>1.1 Contributions</h3><ul>
-<li>Data set.<ul>
-<li>350,000行人标注框BB</li>
-<li>250,000帧</li>
-<li>遮挡和时间上相似的也被标注。</li>
-<li>对行人等级、遮挡、位置进行了统计</li>
-</ul>
-</li>
-<li>Evaluation methodology.</li>
-<li>Evaluation.<ul>
-<li>评估了16个有代表性的先进的行人检测器</li>
-</ul>
-</li>
-<li>两个团队发布的surveys与作者的工作是互补的。<ul>
-<li>Geronimo——先进的司机助手系统中的行人检测。</li>
-<li>Enzweiler and Gavrila——发布Daimler检测数据集</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-The-Caltech-Pedestrian-Data-Set"><a href="#2-The-Caltech-Pedestrian-Data-Set" class="headerlink" title="2 The Caltech Pedestrian Data Set"></a>2 The Caltech Pedestrian Data Set</h2><h3 id="2-1-Data-Collection-and-Ground-Truthing"><a href="#2-1-Data-Collection-and-Ground-Truthing" class="headerlink" title="2.1 Data Collection and Ground Truthing"></a>2.1 Data Collection and Ground Truthing</h3><ul>
-<li>当一个标注器在至少两帧中在同一个行人上标注了边界框，则边界框利用3次插值在中间帧进行标注</li>
-<li>BB-full</li>
-<li>BB-vis: 被遮挡行人可见区域标注框</li>
-<li>三种标注：<ul>
-<li>Person</li>
-<li>People</li>
-<li>Person?</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-2-Data-Set-Statistics"><a href="#2-2-Data-Set-Statistics" class="headerlink" title="2.2 Data Set Statistics"></a>2.2 Data Set Statistics</h3><ul>
-<li>行人的高度、宽度都类似对数正态分布。</li>
-<li>如果多变量中的每个变量符合对数正态分布，则这些变量的线性组合也符合正态分布。</li>
-<li>BB 横纵比 w/ h, log(w /h) = log(w)-log(h).</li>
-<li>由于行人姿势（手、肘）的原因，会导致行人宽度变化。</li>
-<li>h=Hf/ d. H=1.8m, d=1800 /hm</li>
-<li>大部分行人都被观察为medium scale，为了安全系统，检测也必须发生在这个scale。</li>
-<li>通过对遮挡情况的统计，总体来说，遮挡情况远远没有统一， <strong>利用这个发现可以挡住提高行人检测器的性能。</strong></li>
-<li>不仅遮挡是高度不一致的， <strong>遮挡的类型也是有明显额外的结构。</strong></li>
-<li>通过对比ground truth和HOG检测器检测出的行人位置进行同样的统计对比，有如下的图，可以发现，利用行人位置这一约束条件可以合理的加快检测但是只能适当的减少假正例。</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fbfr6mn9ccj308q01ldfr.jpg" alt=""></p>
-<h3 id="2-3-Training-and-Testing-Data"><a href="#2-3-Training-and-Testing-Data" class="headerlink" title="2.3 Training and Testing Data"></a>2.3 Training and Testing Data</h3><ul>
-<li>四种训练/测试情景<ul>
-<li>Scenario ext0:</li>
-<li>Scenario ext1:</li>
-<li>Scenario cal0:</li>
-<li>Scenario cal1:</li>
-</ul>
-</li>
-<li>作者应该在检测器开发过程中使用 ext0/cal0，并且只在完成所有参数后再 ext1/cal1下进行评估。</li>
-</ul>
-<h3 id="2-4-Comparison-of-Pedestrian-Data-Sets"><a href="#2-4-Comparison-of-Pedestrian-Data-Sets" class="headerlink" title="2.4 Comparison of Pedestrian Data Sets"></a>2.4 Comparison of Pedestrian Data Sets</h3><ul>
-<li>Imaging setup.</li>
-<li>Data set size.</li>
-<li>Data set type.</li>
-<li>Pedestrian scale.</li>
-<li>Data set properties.</li>
-</ul>
-<h2 id="3-Evaluation-Methodology"><a href="#3-Evaluation-Methodology" class="headerlink" title="3 Evaluation Methodology"></a>3 Evaluation Methodology</h2><h3 id="3-1-Full-Image-Evaluation"><a href="#3-1-Full-Image-Evaluation" class="headerlink" title="3.1 Full Image Evaluation"></a>3.1 Full Image Evaluation</h3><ul>
-<li>对阈值小于0.6的评估就不用关心了。</li>
-<li>具有最高置信度的检测首先被匹配；如果一个被检测到的BB匹配到多个ground truth边界框，则具有最高覆盖率的匹配将被使用。</li>
-<li>没有被匹配到的BBdt算作假正例，没有被匹配道德BBgt被称为假负例。</li>
-<li>通过改变检测置信度的阈值，画出miss rate-FPPI的曲线图来比较各个检测器。这种图比准确率-召回率的图更好，因为对于汽车应用，as typically there is an upper limit on the acceptable false positives per image rate independent of pedestrian density.</li>
-<li>利用 <strong>对数平均 遗漏率</strong> 来总结检测器的性能。在（10^-2~10^0）范围的对数空间中，通过9个FPPI率平均计算miss rate来得到</li>
-</ul>
-<h3 id="3-2-Filtering-Ground-Truth"><a href="#3-2-Filtering-Ground-Truth" class="headerlink" title="3.2 Filtering Ground Truth"></a>3.2 Filtering Ground Truth</h3><ul>
-<li>BBig: 被选择忽略的Ground truth. 被忽略的区域。</li>
-<li>将BBgt设为被忽略和丢弃掉这个样本是不一样的；后者代表这个样本是一个假正例。</li>
-</ul>
-<h3 id="3-3-Filtering-Detections"><a href="#3-3-Filtering-Detections" class="headerlink" title="3.3 Filtering Detections"></a>3.3 Filtering Detections</h3><ul>
-<li>考虑三种可能的过滤策略：<ul>
-<li>strict filtering: 在匹配之前删除所选范围之外的所有检测。</li>
-<li>postfiltering: 在所选评价范围外的检测允许与范围内的BBgt匹配。</li>
-<li>expanded filtering: 类似于严格过滤，除了在评估之前去除扩展评估范围之外的所有检测</li>
-</ul>
-</li>
-<li>Expanded filtering 在 strict filtering 和 postfiltering之间做了很好的妥协。</li>
-<li>在整个评估工作中，我们使用expanded filtering(r=1.25)。</li>
-</ul>
-<h3 id="3-4-Standardizing-Aspect-Ratios"><a href="#3-4-Standardizing-Aspect-Ratios" class="headerlink" title="3.4 Standardizing Aspect Ratios"></a>3.4 Standardizing Aspect Ratios</h3><ul>
-<li>标准化GT和DT的aspect ratio，这样做会从检测器设计中删除无关的任意选择，并有助于性能比较。</li>
-<li>一般来说，探测器的长宽比取决于开发过程中使用的数据集，通常在训练后选择。</li>
-<li>我们建议将所有BB标准化为0.41的长宽比（Caltech数据集中的对数 - 平均长宽比）。</li>
-<li>我们保持BB高度和中心固定，同时调整宽度.</li>
-<li>重要的是检测器和ground truth纵横比匹配。</li>
-</ul>
-<h3 id="3-5-Per-Window-versus-Full-Image-Evaluation"><a href="#3-5-Per-Window-versus-Full-Image-Evaluation" class="headerlink" title="3.5 Per-Window versus Full Image Evaluation"></a>3.5 Per-Window versus Full Image Evaluation</h3><ul>
-<li>PM 评估方法通常用来比较分类器（检测器的返利）或者用来评估系统对于自动兴趣区域生成的性能。</li>
-<li>PW结果是从其 <strong>原始出版物</strong> 中产生的。</li>
-<li>全图像结果是通过评估同一行人但在其 <strong>原始图像上下文</strong> 中获得的。</li>
-<li>将一个二分类转化为一个检测器所做的选择包括：<ul>
-<li>包括空间和尺度跨度</li>
-<li>非最大抑制的选择。会影响图像的性能。</li>
-<li>在PW评估期间测试的窗口通常不同于在全图像检测期间测试的窗口，</li>
-</ul>
-</li>
-<li>假阳性可能来自对身体部位或不正确的尺度或位置的检测</li>
-<li>假阴性可能源于被测试的窗户和真实的行人位置或来自NMS之间的轻微不对准。</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6loh02j30as08vwey.jpg" alt=""></p>
-<h2 id="4-检测算法"><a href="#4-检测算法" class="headerlink" title="4 检测算法"></a>4 检测算法</h2><h3 id="4-1-Survey-of-the-State-of-the-Art"><a href="#4-1-Survey-of-the-State-of-the-Art" class="headerlink" title="4.1 Survey of the State of the Art"></a>4.1 Survey of the State of the Art</h3><ul>
-<li>Papageorgiou and Poggio [16]提出了第一个滑动窗口检测器。将支持向量机（SVM）应用于多尺度Haar小波的过度完备字典。</li>
-<li>Viola和Jones( <strong>VJ</strong> )[44]基于这些想法，引入了用于快速特征计算的积分图像和用于有效检测的级联结构，以及利用AdaBoost进行自动特征选择。这些想法继续作为现代探测器的基础。</li>
-<li>随着基于梯度的特征的采用带来了巨大的收益。</li>
-<li>受SIFT [45]启发，Dalal和Triggs [HOG][7]通过显示相对于基于强度的特征的实质性增益，普及了用于检测的定向梯度特征的直方图（HOG）。</li>
-<li>现在，HOG特征的变体的数量已经大大增加，几乎所有现代检测器以某种形式利用它们。</li>
-<li>Shape features（形状特征）也是一个用于检测经常用到的线索.</li>
-<li>Boosting用于学习头部，躯干，腿部和全身检测器.</li>
-<li>Shapelets: 是从局部区块中的梯度辨别地学习的形状描述符.</li>
-<li>Boosting用来将多个Shapelet结合成一个整体的检测器。</li>
-<li>Motion是人类感知的另一个重要提示; 然而，成功地将运动特征结合到检测器中已证明对于移动的相机具有挑战性。</li>
-<li>虽然没有迹象表明单个特征由于HOG，但附加特征可以提供一些互补信息。</li>
-</ul>
-<h3 id="4-2-Evaluated-Detectors"><a href="#4-2-Evaluated-Detectors" class="headerlink" title="4.2 Evaluated Detectors"></a>4.2 Evaluated Detectors</h3><ul>
-<li>直接从作者处得到提前训练好的检测器。</li>
-<li>这些检测器通常遵循滑动窗口范例，其需要对检测窗口进行特征提取，二分类和密集多尺度扫描，随后进行非极大值抑制。</li>
-<li>Features：几乎所有的现代检测器都使用了都写形式的梯度直方图。</li>
-<li>Learning：因为它们的理论保证，可扩展性和良好的性能，支持向量机[16]和boosting[44]是最受欢迎的选择。</li>
-<li>Boosting自动执行特征选择。一些检测器（在“特征学习”列中用标记指示）在分类器训练之前或与分类器训练一起学习更小或中等大小的特征集合。</li>
-<li>Detection details：两种主要的非最大抑制方法：<ul>
-<li>Mean shift(MS)模型估计</li>
-<li>Pairwise max(PM)抑制：根据充分的重叠丢弃可信度较低的每对检测</li>
-<li>PM*：允许检测去匹配另一检测的任意子区域。</li>
-</ul>
-</li>
-<li>Implementation notes</li>
-</ul>
-<h2 id="5-Performance-Evaluation"><a href="#5-Performance-Evaluation" class="headerlink" title="5 Performance Evaluation"></a>5 Performance Evaluation</h2><h3 id="5-1-Performance-on-the-Caltech-Data-Set"><a href="#5-1-Performance-on-the-Caltech-Data-Set" class="headerlink" title="5.1 Performance on the Caltech Data Set"></a>5.1 Performance on the Caltech Data Set</h3><ul>
-<li>Overall：绝对性能很弱。</li>
-<li>Scale</li>
-<li>Occlusion</li>
-<li>Reasonale：性能在中等规模或部分封闭的行人的检测很差，而对于远距离或在重度封闭的情况下，它的性能特别差。这促使我们评估超过50像素高的行人在没有或部分遮挡（这些在没有很多上下文的情况下清晰可见）的性能。 <strong>我们将这称为合理的评估设置。</strong></li>
-<li>Localization</li>
-</ul>
-<h3 id="5-2-Evaluation-on-Multiple-Data-Sets"><a href="#5-2-Evaluation-on-Multiple-Data-Sets" class="headerlink" title="5.2 Evaluation on Multiple Data Sets"></a>5.2 Evaluation on Multiple Data Sets</h3><h3 id="5-3-Statistical-Significance（统计显著性）"><a href="#5-3-Statistical-Significance（统计显著性）" class="headerlink" title="5.3 Statistical Significance（统计显著性）"></a>5.3 Statistical Significance（统计显著性）</h3><ul>
-<li>关键的洞察力是将每个数据集上的绝对性能转换为算法排名，从而消除不同数据集难度的影响。</li>
-<li>我们使用非对数Friedman检验和posthoc分析来分析统计学显着性.</li>
-<li>对于我们的分析，我们使用 <strong>非参数Friedman测试</strong> 以及 <strong>Shaffer posthoc test</strong></li>
-<li>我们基于其对数平均丢失率（在合理的评估设置下测试）对每个数据折叠上的检测器进行排名。 该程序为14个检测器得到做总共28个排名。</li>
-</ul>
-<h3 id="5-4-Runtime-Analysis"><a href="#5-4-Runtime-Analysis" class="headerlink" title="5.4 Runtime Analysis"></a>5.4 Runtime Analysis</h3><ul>
-<li>总的来说，运行时和精度之间似乎没有很强的相关性。</li>
-</ul>
-<h2 id="6-Discussion"><a href="#6-Discussion" class="headerlink" title="6 Discussion"></a>6 Discussion</h2><ul>
-<li>应该注意，单帧性能是整个系统性能的下限，跟踪，上下文信息和额外传感器的使用可以帮助减少假警报并提高检测率（参见[2]）。</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3091185356/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -728,8 +1015,7 @@
 
       
         
-          
-            <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>k折交叉验证</li>
 <li>Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）可以看做是抑制不是极大值的元素，搜索局部的极大值的搜索问题，NMS是许多计算机视觉算法的部分。<ul>
 <li>这个局部代表的是一个邻域，邻域有两个参数可变，一是邻域的维数，二是邻域的大小。</li>
@@ -744,76 +1030,18 @@
 <li>衡量了现有的检测系统。</li>
 <li>分析了一般的常见失败情况。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>INRIA数据集。</li>
 <li>现有数据集的缺陷。</li>
 <li>贡献（4方面）。</li>
 </ul>
-<h2 id="2-Dataset"><a href="#2-Dataset" class="headerlink" title="2. Dataset"></a>2. Dataset</h2><ul>
-<li>介绍了Caltech数据集的数据内容，标记等。</li>
-<li><p>Scale(等级，范围)根据行人的图片大小，将行人分为3个范围：near（80或者更多像素）、medium（30-80像素之间）、far（30像素或更少）。</p>
-<ul>
-<li>大约68%的行人位于中等大小范围。</li>
-<li>对于medium范围的加测对于汽车应用是十分重要的。</li>
-<li>我们应当在整个工作中利用ner/ medium /far之间的区别。</li>
-</ul>
-</li>
-<li><p>Occlusion(遮挡)</p>
-<ul>
-<li>遮挡的行人通过两个框来标注。</li>
-<li>29%的行人从来没有被挡住</li>
-<li>53%的呗挡在一部分帧</li>
-<li>19%的在所有帧中都被挡</li>
-</ul>
-</li>
-<li><p>Position(位置)：由于视点和地表形状的原因约束着行人值出现在图片的特定区域，经过分析，行人文职更加集中而不是突然出现的。</p>
-</li>
-<li>数据捕捉了超过11种场景:0-5用来作为训练，6-10用来作为测试</li>
-<li><p>设置了三个具体的训练/测试场景</p>
-<ul>
-<li>Scenario-A：在所有外部数据上进行训练，在会话6-10上进行测试。这样允许在已经存在的方法上不进行重新训练就能进行广泛的调查。</li>
-<li>Scenario-B：利用会话0-5进行6折交叉验证，每次使用5个session来进行训练，第6个进行测试，然后在验证集上融合结果，在政策训练集上汇报检测器的表现。</li>
-<li>Scenario-C：用0-5会话来训练，用6-10会话来测试。（完整测试）</li>
-</ul>
-</li>
-<li><p>与现有的数据集的比较：</p>
-<ul>
-<li>广泛使用的‘人’数据集：MIT LabelMe的子集和PASCAL VOC数据集。</li>
-<li>现有数据集可以分为两类：一类是人数据集包含了人的各种姿势，另一类是行人数据集包含了垂直的人（站立或者行走），但主要是从一个较为限制的视点进行观察的。</li>
-<li>从摄影师处收集的数据集都存在 <strong>选择偏差</strong> ，但是监控视频有着有限的背景，移动拍摄的数据会极大的排除了选择偏差。</li>
-<li>INRIA偏向于打的，大部分未遮挡的行人</li>
-<li>其他相关的数据集有：DC，ETH</li>
-</ul>
-</li>
-<li>Caltech数据集最先进和重要的方面，而且这是目前第一个数据集与时间相对应的标注框和详细遮挡标签。</li>
-</ul>
-<h2 id="3-评估方法"><a href="#3-评估方法" class="headerlink" title="3. 评估方法"></a>3. 评估方法</h2><ul>
-<li>现有的已建立的评估行人检测方法是有瑕疵的。</li>
-<li>pre-window VS pre-image</li>
-<li>pre-window：逐窗口检测器在图像上被密集扫描并且邻近的检测被合并，比如使用NMS。</li>
-<li>一个典型的假设是：较好的pre-window分数会在一整个图片上带来更好的表现；然而在实际中pre-window表现在预测pre-image性能时失败。</li>
-<li>不是所有检测系统都是基于华东窗口的，而且pre-window方法对这类系统的评估是不可能的。</li>
-</ul>
-<h3 id="3-1-Pre-image-evaluation"><a href="#3-1-Pre-image-evaluation" class="headerlink" title="3.1 Pre-image evaluation"></a>3.1 Pre-image evaluation</h3><ul>
-<li>利用PASCAL物体检测挑战中的修改过的scheme版本进行单帧检测。</li>
-<li>一个检测系统需要输入一个图像并且为每个检测返回一个边界框或者一个分数或者一个置信度。这个系统应该可以执行多等级检测以及必要的NMS或者其他后期处理。</li>
-<li>评估应该在最后生成的被检测到的边界框中执行。</li>
-<li>PASCAL估计：重叠区域必须超过50%：</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqwf7ettj309801oglo.jpg" alt=""></p>
-<ul>
-<li>为了比较方法，通过变化检测置信度的阈值，我们画出了纵坐标miss rate，横坐标每张图像假正例（FPPI）的图像。对于某些任务，更倾向于使用查准-召回曲线，比如汽车应用，典型的已经有一个可接受的FPPI上限，并且独立于行人行人密度。</li>
-<li>引入ignore regions。这一区域不需要匹配，匹配上不算是TP，没有匹配上也不算FN。</li>
-<li>只有完整的标注框才能用来匹配，不是可见的标注框，甚至对于部分遮挡的行人。</li>
-</ul>
-<h2 id="4-Evaluation-Results"><a href="#4-Evaluation-Results" class="headerlink" title="4. Evaluation Results"></a>4. Evaluation Results</h2><ul>
-<li>Overall</li>
-<li>Scale</li>
-<li>Occlusion</li>
-<li>Aspect ratio</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/4124170924/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -897,7 +1125,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -906,7 +1134,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -914,6 +1142,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
@@ -947,11 +1182,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://www.jianshu.com/u/81a8d024af56" target="_blank" title="JianShu">
+                <a href="http://www.jianshu.com/u/81a8d024af56" target="_blank" title="简书">
                   
-                    <i class="fa fa-fw fa-globe"></i>
+                    <i class="fa fa-fw fa-heartbeat"></i>
                   
-                  JianShu
+                  简书
                 </a>
               </span>
             
@@ -983,7 +1218,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2016 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -1122,6 +1357,130 @@
 
   
   
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
 
   
 

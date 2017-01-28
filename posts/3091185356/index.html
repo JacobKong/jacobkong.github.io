@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Pedestrian Detection,行人检测," />
+  <meta name="keywords" content="Pedestrian Detection,行人检测,Review,综述,Caltech," />
 
 
 
@@ -118,7 +118,7 @@
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6kv30dj30f701mmx5.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcjw1fbfr6mn9ccj308q01ldfr.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6loh02j30as08vwey.jpg">
-<meta property="og:updated_time" content="2017-01-27T07:04:50.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:18:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art">
 <meta name="twitter:description" content="知识点
@@ -497,7 +497,7 @@
 </li>
 <li>行人检测在 <strong>低像素</strong> 和 <strong>部分遮挡</strong> 行人情况下依旧表现失望。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>对现有行人检测方法的一些疑问：<ul>
 <li>Do current detectors work well?</li>
 <li>What is the best ap- proach?” “What are the main failure modes?</li>
@@ -505,7 +505,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-1-Contributions"><a href="#1-1-Contributions" class="headerlink" title="1.1 Contributions"></a>1.1 Contributions</h3><ul>
+<a id="more"></a>
+<h3 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h3><ul>
 <li>Data set.<ul>
 <li>350,000行人标注框BB</li>
 <li>250,000帧</li>
@@ -524,7 +525,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-The-Caltech-Pedestrian-Data-Set"><a href="#2-The-Caltech-Pedestrian-Data-Set" class="headerlink" title="2 The Caltech Pedestrian Data Set"></a>2 The Caltech Pedestrian Data Set</h2><h3 id="2-1-Data-Collection-and-Ground-Truthing"><a href="#2-1-Data-Collection-and-Ground-Truthing" class="headerlink" title="2.1 Data Collection and Ground Truthing"></a>2.1 Data Collection and Ground Truthing</h3><ul>
+<h2 id="The-Caltech-Pedestrian-Data-Set"><a href="#The-Caltech-Pedestrian-Data-Set" class="headerlink" title="The Caltech Pedestrian Data Set"></a>The Caltech Pedestrian Data Set</h2><h3 id="Data-Collection-and-Ground-Truthing"><a href="#Data-Collection-and-Ground-Truthing" class="headerlink" title="Data Collection and Ground Truthing"></a>Data Collection and Ground Truthing</h3><ul>
 <li>当一个标注器在至少两帧中在同一个行人上标注了边界框，则边界框利用3次插值在中间帧进行标注</li>
 <li>BB-full</li>
 <li>BB-vis: 被遮挡行人可见区域标注框</li>
@@ -535,7 +536,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-2-Data-Set-Statistics"><a href="#2-2-Data-Set-Statistics" class="headerlink" title="2.2 Data Set Statistics"></a>2.2 Data Set Statistics</h3><ul>
+<h3 id="Data-Set-Statistics"><a href="#Data-Set-Statistics" class="headerlink" title="Data Set Statistics"></a>Data Set Statistics</h3><ul>
 <li>行人的高度、宽度都类似对数正态分布。</li>
 <li>如果多变量中的每个变量符合对数正态分布，则这些变量的线性组合也符合正态分布。</li>
 <li>BB 横纵比 w/ h, log(w /h) = log(w)-log(h).</li>
@@ -547,7 +548,7 @@
 <li>通过对比ground truth和HOG检测器检测出的行人位置进行同样的统计对比，有如下的图，可以发现，利用行人位置这一约束条件可以合理的加快检测但是只能适当的减少假正例。</li>
 </ul>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fbfr6mn9ccj308q01ldfr.jpg" alt=""></p>
-<h3 id="2-3-Training-and-Testing-Data"><a href="#2-3-Training-and-Testing-Data" class="headerlink" title="2.3 Training and Testing Data"></a>2.3 Training and Testing Data</h3><ul>
+<h3 id="Training-and-Testing-Data"><a href="#Training-and-Testing-Data" class="headerlink" title="Training and Testing Data"></a>Training and Testing Data</h3><ul>
 <li>四种训练/测试情景<ul>
 <li>Scenario ext0:</li>
 <li>Scenario ext1:</li>
@@ -557,25 +558,25 @@
 </li>
 <li>作者应该在检测器开发过程中使用 ext0/cal0，并且只在完成所有参数后再 ext1/cal1下进行评估。</li>
 </ul>
-<h3 id="2-4-Comparison-of-Pedestrian-Data-Sets"><a href="#2-4-Comparison-of-Pedestrian-Data-Sets" class="headerlink" title="2.4 Comparison of Pedestrian Data Sets"></a>2.4 Comparison of Pedestrian Data Sets</h3><ul>
+<h3 id="Comparison-of-Pedestrian-Data-Sets"><a href="#Comparison-of-Pedestrian-Data-Sets" class="headerlink" title="Comparison of Pedestrian Data Sets"></a>Comparison of Pedestrian Data Sets</h3><ul>
 <li>Imaging setup.</li>
 <li>Data set size.</li>
 <li>Data set type.</li>
 <li>Pedestrian scale.</li>
 <li>Data set properties.</li>
 </ul>
-<h2 id="3-Evaluation-Methodology"><a href="#3-Evaluation-Methodology" class="headerlink" title="3 Evaluation Methodology"></a>3 Evaluation Methodology</h2><h3 id="3-1-Full-Image-Evaluation"><a href="#3-1-Full-Image-Evaluation" class="headerlink" title="3.1 Full Image Evaluation"></a>3.1 Full Image Evaluation</h3><ul>
+<h2 id="Evaluation-Methodology"><a href="#Evaluation-Methodology" class="headerlink" title="Evaluation Methodology"></a>Evaluation Methodology</h2><h3 id="Full-Image-Evaluation"><a href="#Full-Image-Evaluation" class="headerlink" title="Full Image Evaluation"></a>Full Image Evaluation</h3><ul>
 <li>对阈值小于0.6的评估就不用关心了。</li>
 <li>具有最高置信度的检测首先被匹配；如果一个被检测到的BB匹配到多个ground truth边界框，则具有最高覆盖率的匹配将被使用。</li>
 <li>没有被匹配到的BBdt算作假正例，没有被匹配道德BBgt被称为假负例。</li>
 <li>通过改变检测置信度的阈值，画出miss rate-FPPI的曲线图来比较各个检测器。这种图比准确率-召回率的图更好，因为对于汽车应用，as typically there is an upper limit on the acceptable false positives per image rate independent of pedestrian density.</li>
 <li>利用 <strong>对数平均 遗漏率</strong> 来总结检测器的性能。在（10^-2~10^0）范围的对数空间中，通过9个FPPI率平均计算miss rate来得到</li>
 </ul>
-<h3 id="3-2-Filtering-Ground-Truth"><a href="#3-2-Filtering-Ground-Truth" class="headerlink" title="3.2 Filtering Ground Truth"></a>3.2 Filtering Ground Truth</h3><ul>
+<h3 id="Filtering-Ground-Truth"><a href="#Filtering-Ground-Truth" class="headerlink" title="Filtering Ground Truth"></a>Filtering Ground Truth</h3><ul>
 <li>BBig: 被选择忽略的Ground truth. 被忽略的区域。</li>
 <li>将BBgt设为被忽略和丢弃掉这个样本是不一样的；后者代表这个样本是一个假正例。</li>
 </ul>
-<h3 id="3-3-Filtering-Detections"><a href="#3-3-Filtering-Detections" class="headerlink" title="3.3 Filtering Detections"></a>3.3 Filtering Detections</h3><ul>
+<h3 id="Filtering-Detections"><a href="#Filtering-Detections" class="headerlink" title="Filtering Detections"></a>Filtering Detections</h3><ul>
 <li>考虑三种可能的过滤策略：<ul>
 <li>strict filtering: 在匹配之前删除所选范围之外的所有检测。</li>
 <li>postfiltering: 在所选评价范围外的检测允许与范围内的BBgt匹配。</li>
@@ -585,14 +586,14 @@
 <li>Expanded filtering 在 strict filtering 和 postfiltering之间做了很好的妥协。</li>
 <li>在整个评估工作中，我们使用expanded filtering(r=1.25)。</li>
 </ul>
-<h3 id="3-4-Standardizing-Aspect-Ratios"><a href="#3-4-Standardizing-Aspect-Ratios" class="headerlink" title="3.4 Standardizing Aspect Ratios"></a>3.4 Standardizing Aspect Ratios</h3><ul>
+<h3 id="Standardizing-Aspect-Ratios"><a href="#Standardizing-Aspect-Ratios" class="headerlink" title="Standardizing Aspect Ratios"></a>Standardizing Aspect Ratios</h3><ul>
 <li>标准化GT和DT的aspect ratio，这样做会从检测器设计中删除无关的任意选择，并有助于性能比较。</li>
 <li>一般来说，探测器的长宽比取决于开发过程中使用的数据集，通常在训练后选择。</li>
 <li>我们建议将所有BB标准化为0.41的长宽比（Caltech数据集中的对数 - 平均长宽比）。</li>
 <li>我们保持BB高度和中心固定，同时调整宽度.</li>
 <li>重要的是检测器和ground truth纵横比匹配。</li>
 </ul>
-<h3 id="3-5-Per-Window-versus-Full-Image-Evaluation"><a href="#3-5-Per-Window-versus-Full-Image-Evaluation" class="headerlink" title="3.5 Per-Window versus Full Image Evaluation"></a>3.5 Per-Window versus Full Image Evaluation</h3><ul>
+<h3 id="Per-Window-versus-Full-Image-Evaluation"><a href="#Per-Window-versus-Full-Image-Evaluation" class="headerlink" title="Per-Window versus Full Image Evaluation"></a>Per-Window versus Full Image Evaluation</h3><ul>
 <li>PM 评估方法通常用来比较分类器（检测器的返利）或者用来评估系统对于自动兴趣区域生成的性能。</li>
 <li>PW结果是从其 <strong>原始出版物</strong> 中产生的。</li>
 <li>全图像结果是通过评估同一行人但在其 <strong>原始图像上下文</strong> 中获得的。</li>
@@ -606,7 +607,7 @@
 <li>假阴性可能源于被测试的窗户和真实的行人位置或来自NMS之间的轻微不对准。</li>
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6loh02j30as08vwey.jpg" alt=""></p>
-<h2 id="4-检测算法"><a href="#4-检测算法" class="headerlink" title="4 检测算法"></a>4 检测算法</h2><h3 id="4-1-Survey-of-the-State-of-the-Art"><a href="#4-1-Survey-of-the-State-of-the-Art" class="headerlink" title="4.1 Survey of the State of the Art"></a>4.1 Survey of the State of the Art</h3><ul>
+<h2 id="检测算法"><a href="#检测算法" class="headerlink" title="检测算法"></a>检测算法</h2><h3 id="Survey-of-the-State-of-the-Art"><a href="#Survey-of-the-State-of-the-Art" class="headerlink" title="Survey of the State of the Art"></a>Survey of the State of the Art</h3><ul>
 <li>Papageorgiou and Poggio [16]提出了第一个滑动窗口检测器。将支持向量机（SVM）应用于多尺度Haar小波的过度完备字典。</li>
 <li>Viola和Jones( <strong>VJ</strong> )[44]基于这些想法，引入了用于快速特征计算的积分图像和用于有效检测的级联结构，以及利用AdaBoost进行自动特征选择。这些想法继续作为现代探测器的基础。</li>
 <li>随着基于梯度的特征的采用带来了巨大的收益。</li>
@@ -619,7 +620,7 @@
 <li>Motion是人类感知的另一个重要提示; 然而，成功地将运动特征结合到检测器中已证明对于移动的相机具有挑战性。</li>
 <li>虽然没有迹象表明单个特征由于HOG，但附加特征可以提供一些互补信息。</li>
 </ul>
-<h3 id="4-2-Evaluated-Detectors"><a href="#4-2-Evaluated-Detectors" class="headerlink" title="4.2 Evaluated Detectors"></a>4.2 Evaluated Detectors</h3><ul>
+<h3 id="Evaluated-Detectors"><a href="#Evaluated-Detectors" class="headerlink" title="Evaluated Detectors"></a>Evaluated Detectors</h3><ul>
 <li>直接从作者处得到提前训练好的检测器。</li>
 <li>这些检测器通常遵循滑动窗口范例，其需要对检测窗口进行特征提取，二分类和密集多尺度扫描，随后进行非极大值抑制。</li>
 <li>Features：几乎所有的现代检测器都使用了都写形式的梯度直方图。</li>
@@ -633,23 +634,23 @@
 </li>
 <li>Implementation notes</li>
 </ul>
-<h2 id="5-Performance-Evaluation"><a href="#5-Performance-Evaluation" class="headerlink" title="5 Performance Evaluation"></a>5 Performance Evaluation</h2><h3 id="5-1-Performance-on-the-Caltech-Data-Set"><a href="#5-1-Performance-on-the-Caltech-Data-Set" class="headerlink" title="5.1 Performance on the Caltech Data Set"></a>5.1 Performance on the Caltech Data Set</h3><ul>
+<h2 id="Performance-Evaluation"><a href="#Performance-Evaluation" class="headerlink" title="Performance Evaluation"></a>Performance Evaluation</h2><h3 id="Performance-on-the-Caltech-Data-Set"><a href="#Performance-on-the-Caltech-Data-Set" class="headerlink" title="Performance on the Caltech Data Set"></a>Performance on the Caltech Data Set</h3><ul>
 <li>Overall：绝对性能很弱。</li>
 <li>Scale</li>
 <li>Occlusion</li>
 <li>Reasonale：性能在中等规模或部分封闭的行人的检测很差，而对于远距离或在重度封闭的情况下，它的性能特别差。这促使我们评估超过50像素高的行人在没有或部分遮挡（这些在没有很多上下文的情况下清晰可见）的性能。 <strong>我们将这称为合理的评估设置。</strong></li>
 <li>Localization</li>
 </ul>
-<h3 id="5-2-Evaluation-on-Multiple-Data-Sets"><a href="#5-2-Evaluation-on-Multiple-Data-Sets" class="headerlink" title="5.2 Evaluation on Multiple Data Sets"></a>5.2 Evaluation on Multiple Data Sets</h3><h3 id="5-3-Statistical-Significance（统计显著性）"><a href="#5-3-Statistical-Significance（统计显著性）" class="headerlink" title="5.3 Statistical Significance（统计显著性）"></a>5.3 Statistical Significance（统计显著性）</h3><ul>
+<h3 id="Evaluation-on-Multiple-Data-Sets"><a href="#Evaluation-on-Multiple-Data-Sets" class="headerlink" title="Evaluation on Multiple Data Sets"></a>Evaluation on Multiple Data Sets</h3><h3 id="Statistical-Significance（统计显著性）"><a href="#Statistical-Significance（统计显著性）" class="headerlink" title="Statistical Significance（统计显著性）"></a>Statistical Significance（统计显著性）</h3><ul>
 <li>关键的洞察力是将每个数据集上的绝对性能转换为算法排名，从而消除不同数据集难度的影响。</li>
 <li>我们使用非对数Friedman检验和posthoc分析来分析统计学显着性.</li>
 <li>对于我们的分析，我们使用 <strong>非参数Friedman测试</strong> 以及 <strong>Shaffer posthoc test</strong></li>
 <li>我们基于其对数平均丢失率（在合理的评估设置下测试）对每个数据折叠上的检测器进行排名。 该程序为14个检测器得到做总共28个排名。</li>
 </ul>
-<h3 id="5-4-Runtime-Analysis"><a href="#5-4-Runtime-Analysis" class="headerlink" title="5.4 Runtime Analysis"></a>5.4 Runtime Analysis</h3><ul>
+<h3 id="Runtime-Analysis"><a href="#Runtime-Analysis" class="headerlink" title="Runtime Analysis"></a>Runtime Analysis</h3><ul>
 <li>总的来说，运行时和精度之间似乎没有很强的相关性。</li>
 </ul>
-<h2 id="6-Discussion"><a href="#6-Discussion" class="headerlink" title="6 Discussion"></a>6 Discussion</h2><ul>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><ul>
 <li>应该注意，单帧性能是整个系统性能的下限，跟踪，上下文信息和额外传感器的使用可以帮助减少假警报并提高检测率（参见[2]）。</li>
 </ul>
 
@@ -678,6 +679,12 @@
             <a href="/tags/Pedestrian-Detection/" rel="tag"># Pedestrian Detection</a>
           
             <a href="/tags/行人检测/" rel="tag"># 行人检测</a>
+          
+            <a href="/tags/Review/" rel="tag"># Review</a>
+          
+            <a href="/tags/综述/" rel="tag"># 综述</a>
+          
+            <a href="/tags/Caltech/" rel="tag"># Caltech</a>
           
         </div>
       
@@ -803,7 +810,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -812,7 +819,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -892,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1 Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Contributions"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 Contributions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-The-Caltech-Pedestrian-Data-Set"><span class="nav-number">4.</span> <span class="nav-text">2 The Caltech Pedestrian Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Data-Collection-and-Ground-Truthing"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 Data Collection and Ground Truthing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Data-Set-Statistics"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 Data Set Statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Training-and-Testing-Data"><span class="nav-number">4.3.</span> <span class="nav-text">2.3 Training and Testing Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Comparison-of-Pedestrian-Data-Sets"><span class="nav-number">4.4.</span> <span class="nav-text">2.4 Comparison of Pedestrian Data Sets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Evaluation-Methodology"><span class="nav-number">5.</span> <span class="nav-text">3 Evaluation Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Full-Image-Evaluation"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 Full Image Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Filtering-Ground-Truth"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 Filtering Ground Truth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Filtering-Detections"><span class="nav-number">5.3.</span> <span class="nav-text">3.3 Filtering Detections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Standardizing-Aspect-Ratios"><span class="nav-number">5.4.</span> <span class="nav-text">3.4 Standardizing Aspect Ratios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Per-Window-versus-Full-Image-Evaluation"><span class="nav-number">5.5.</span> <span class="nav-text">3.5 Per-Window versus Full Image Evaluation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-检测算法"><span class="nav-number">6.</span> <span class="nav-text">4 检测算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Survey-of-the-State-of-the-Art"><span class="nav-number">6.1.</span> <span class="nav-text">4.1 Survey of the State of the Art</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Evaluated-Detectors"><span class="nav-number">6.2.</span> <span class="nav-text">4.2 Evaluated Detectors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Performance-Evaluation"><span class="nav-number">7.</span> <span class="nav-text">5 Performance Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Performance-on-the-Caltech-Data-Set"><span class="nav-number">7.1.</span> <span class="nav-text">5.1 Performance on the Caltech Data Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Evaluation-on-Multiple-Data-Sets"><span class="nav-number">7.2.</span> <span class="nav-text">5.2 Evaluation on Multiple Data Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-Statistical-Significance（统计显著性）"><span class="nav-number">7.3.</span> <span class="nav-text">5.3 Statistical Significance（统计显著性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Runtime-Analysis"><span class="nav-number">7.4.</span> <span class="nav-text">5.4 Runtime Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Discussion"><span class="nav-number">8.</span> <span class="nav-text">6 Discussion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Contributions"><span class="nav-number">3.1.</span> <span class="nav-text">Contributions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Caltech-Pedestrian-Data-Set"><span class="nav-number">4.</span> <span class="nav-text">The Caltech Pedestrian Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Collection-and-Ground-Truthing"><span class="nav-number">4.1.</span> <span class="nav-text">Data Collection and Ground Truthing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Set-Statistics"><span class="nav-number">4.2.</span> <span class="nav-text">Data Set Statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-and-Testing-Data"><span class="nav-number">4.3.</span> <span class="nav-text">Training and Testing Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison-of-Pedestrian-Data-Sets"><span class="nav-number">4.4.</span> <span class="nav-text">Comparison of Pedestrian Data Sets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation-Methodology"><span class="nav-number">5.</span> <span class="nav-text">Evaluation Methodology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-Image-Evaluation"><span class="nav-number">5.1.</span> <span class="nav-text">Full Image Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filtering-Ground-Truth"><span class="nav-number">5.2.</span> <span class="nav-text">Filtering Ground Truth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filtering-Detections"><span class="nav-number">5.3.</span> <span class="nav-text">Filtering Detections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Standardizing-Aspect-Ratios"><span class="nav-number">5.4.</span> <span class="nav-text">Standardizing Aspect Ratios</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Per-Window-versus-Full-Image-Evaluation"><span class="nav-number">5.5.</span> <span class="nav-text">Per-Window versus Full Image Evaluation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测算法"><span class="nav-number">6.</span> <span class="nav-text">检测算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Survey-of-the-State-of-the-Art"><span class="nav-number">6.1.</span> <span class="nav-text">Survey of the State of the Art</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluated-Detectors"><span class="nav-number">6.2.</span> <span class="nav-text">Evaluated Detectors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-Evaluation"><span class="nav-number">7.</span> <span class="nav-text">Performance Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-on-the-Caltech-Data-Set"><span class="nav-number">7.1.</span> <span class="nav-text">Performance on the Caltech Data Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation-on-Multiple-Data-Sets"><span class="nav-number">7.2.</span> <span class="nav-text">Evaluation on Multiple Data Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Statistical-Significance（统计显著性）"><span class="nav-number">7.3.</span> <span class="nav-text">Statistical Significance（统计显著性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Runtime-Analysis"><span class="nav-number">7.4.</span> <span class="nav-text">Runtime Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Discussion"><span class="nav-number">8.</span> <span class="nav-text">Discussion</span></a></li></ol></div>
             
 
           </div>

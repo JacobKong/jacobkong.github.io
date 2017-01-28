@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Pedestrian Detection,行人检测," />
+  <meta name="keywords" content="Pedestrian Detection,行人检测,Review,综述,Caltech," />
 
 
 
@@ -101,7 +101,7 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
 这个局部代表的是一个邻域，邻域有两个参数可变，一是邻域的维数，二是邻域的大小。
 在行人检测中，滑动窗口经提取特征，经分类器分类识别后，每个窗口都会得到一个分数。但是滑动窗口会导致很多窗口与其他窗">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqwf7ettj309801oglo.jpg">
-<meta property="og:updated_time" content="2017-01-27T07:04:36.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:17:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：Pedestrian Detection - A Benchmark">
 <meta name="twitter:description" content="知识点
@@ -447,12 +447,13 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
 <li>衡量了现有的检测系统。</li>
 <li>分析了一般的常见失败情况。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>INRIA数据集。</li>
 <li>现有数据集的缺陷。</li>
 <li>贡献（4方面）。</li>
 </ul>
-<h2 id="2-Dataset"><a href="#2-Dataset" class="headerlink" title="2. Dataset"></a>2. Dataset</h2><ul>
+<a id="more"></a>
+<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><ul>
 <li>介绍了Caltech数据集的数据内容，标记等。</li>
 <li><p>Scale(等级，范围)根据行人的图片大小，将行人分为3个范围：near（80或者更多像素）、medium（30-80像素之间）、far（30像素或更少）。</p>
 <ul>
@@ -490,14 +491,14 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
 </li>
 <li>Caltech数据集最先进和重要的方面，而且这是目前第一个数据集与时间相对应的标注框和详细遮挡标签。</li>
 </ul>
-<h2 id="3-评估方法"><a href="#3-评估方法" class="headerlink" title="3. 评估方法"></a>3. 评估方法</h2><ul>
+<h2 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h2><ul>
 <li>现有的已建立的评估行人检测方法是有瑕疵的。</li>
 <li>pre-window VS pre-image</li>
 <li>pre-window：逐窗口检测器在图像上被密集扫描并且邻近的检测被合并，比如使用NMS。</li>
 <li>一个典型的假设是：较好的pre-window分数会在一整个图片上带来更好的表现；然而在实际中pre-window表现在预测pre-image性能时失败。</li>
 <li>不是所有检测系统都是基于华东窗口的，而且pre-window方法对这类系统的评估是不可能的。</li>
 </ul>
-<h3 id="3-1-Pre-image-evaluation"><a href="#3-1-Pre-image-evaluation" class="headerlink" title="3.1 Pre-image evaluation"></a>3.1 Pre-image evaluation</h3><ul>
+<h3 id="Pre-image-evaluation"><a href="#Pre-image-evaluation" class="headerlink" title="Pre-image evaluation"></a>Pre-image evaluation</h3><ul>
 <li>利用PASCAL物体检测挑战中的修改过的scheme版本进行单帧检测。</li>
 <li>一个检测系统需要输入一个图像并且为每个检测返回一个边界框或者一个分数或者一个置信度。这个系统应该可以执行多等级检测以及必要的NMS或者其他后期处理。</li>
 <li>评估应该在最后生成的被检测到的边界框中执行。</li>
@@ -509,7 +510,7 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
 <li>引入ignore regions。这一区域不需要匹配，匹配上不算是TP，没有匹配上也不算FN。</li>
 <li>只有完整的标注框才能用来匹配，不是可见的标注框，甚至对于部分遮挡的行人。</li>
 </ul>
-<h2 id="4-Evaluation-Results"><a href="#4-Evaluation-Results" class="headerlink" title="4. Evaluation Results"></a>4. Evaluation Results</h2><ul>
+<h2 id="Evaluation-Results"><a href="#Evaluation-Results" class="headerlink" title="Evaluation Results"></a>Evaluation Results</h2><ul>
 <li>Overall</li>
 <li>Scale</li>
 <li>Occlusion</li>
@@ -541,6 +542,12 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
             <a href="/tags/Pedestrian-Detection/" rel="tag"># Pedestrian Detection</a>
           
             <a href="/tags/行人检测/" rel="tag"># 行人检测</a>
+          
+            <a href="/tags/Review/" rel="tag"># Review</a>
+          
+            <a href="/tags/综述/" rel="tag"># 综述</a>
+          
+            <a href="/tags/Caltech/" rel="tag"># Caltech</a>
           
         </div>
       
@@ -662,7 +669,7 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -671,7 +678,7 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -751,7 +758,7 @@ Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Dataset"><span class="nav-number">4.</span> <span class="nav-text">2. Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-评估方法"><span class="nav-number">5.</span> <span class="nav-text">3. 评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Pre-image-evaluation"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 Pre-image evaluation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Evaluation-Results"><span class="nav-number">6.</span> <span class="nav-text">4. Evaluation Results</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">4.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估方法"><span class="nav-number">5.</span> <span class="nav-text">评估方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pre-image-evaluation"><span class="nav-number">5.1.</span> <span class="nav-text">Pre-image evaluation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluation-Results"><span class="nav-number">6.</span> <span class="nav-text">Evaluation Results</span></a></li></ol></div>
             
 
           </div>

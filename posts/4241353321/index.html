@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -95,8 +95,8 @@ mAP: mean average precision，平均准确度
 
 
 
-1. Introduction
-关于各种视觉识别任">
+Introduction
+关于各种视觉识别任务的上">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
 <meta property="og:url" content="http://yoursite.com/posts/4241353321/index.html">
@@ -110,9 +110,9 @@ mAP: mean average precision，平均准确度
 
 
 
-1. Introduction
-关于各种视觉识别任">
-<meta property="og:updated_time" content="2017-01-27T06:47:52.000Z">
+Introduction
+关于各种视觉识别任务的上">
+<meta property="og:updated_time" content="2017-01-28T08:12:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
 <meta name="twitter:description" content="Abstract
@@ -124,8 +124,8 @@ mAP: mean average precision，平均准确度
 
 
 
-1. Introduction
-关于各种视觉识别任">
+Introduction
+关于各种视觉识别任务的上">
 
 
 
@@ -391,6 +391,28 @@ mAP: mean average precision，平均准确度
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -435,7 +457,7 @@ mAP: mean average precision，平均准确度
 </ul>
 </li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
 <li><p>实现这个结果需要解决两个问题：</p>
 <ul>
@@ -443,15 +465,15 @@ mAP: mean average precision，平均准确度
 <li>仅利用少量的注释检测数据来训练训练高容量模型。</li>
 </ul>
 </li>
-<li><p>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</p>
-</li>
+<li>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</li>
 <li>在测试时，我们的方法为输入图像生成大约2000个类别无关区域提案，使用CNN从每个proposal中提取固定长度的特征向量，然后使用类别特定的线性SVM对每个区域进行分类。</li>
 <li>检测中面临的第二个挑战是标记的数据不足，目前可用的数据数量不足以训练大型CNN。这个问题的常规解决方案是使用无监督预训练，然后是监督 fine-tuning。</li>
 <li>我们发现，对于CNN，有很大比例的参数（94%）可以在检测精度的适度降低的情况下被去除。</li>
 <li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
 <li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
 </ul>
-<h2 id="2-Object-detection-with-R-CNN"><a href="#2-Object-detection-with-R-CNN" class="headerlink" title="2. Object detection with R-CNN"></a>2. Object detection with R-CNN</h2><ul>
+<a id="more"></a>
+<h2 id="Object-detection-with-R-CNN"><a href="#Object-detection-with-R-CNN" class="headerlink" title="Object detection with R-CNN"></a>Object detection with R-CNN</h2><ul>
 <li><p>我们的对象检测系统由三个模块组成:</p>
 <ul>
 <li>首先生成类别独立(category-independent)区域proposal。 这些proposal定义了可用于检测器的候选检测集合。</li>
@@ -460,7 +482,7 @@ mAP: mean average precision，平均准确度
 </ul>
 </li>
 </ul>
-<h3 id="2-1-Module-design"><a href="#2-1-Module-design" class="headerlink" title="2.1. Module design"></a>2.1. Module design</h3><ul>
+<h3 id="Module-design"><a href="#Module-design" class="headerlink" title="Module design"></a>Module design</h3><ul>
 <li><p>Region proposals: 目前有很多用来生成category-independent的region proposal的方法：</p>
 <ul>
 <li>Objectness</li>
@@ -477,7 +499,7 @@ mAP: mean average precision，平均准确度
 </li>
 <li>无论候选区域的大小或宽高比如何，我们都会将其周围的紧密边界框中的所有像素装到所需的大小(227x227像素尺寸)。</li>
 </ul>
-<h3 id="2-2-Test-time-detection"><a href="#2-2-Test-time-detection" class="headerlink" title="2.2. Test-time detection"></a>2.2. Test-time detection</h3><ul>
+<h3 id="Test-time-detection"><a href="#Test-time-detection" class="headerlink" title="Test-time detection"></a>Test-time detection</h3><ul>
 <li>在测试时，我们对测试图像运行选择性搜索以提取大约2000个区域建议（我们在所有实验中使用选择性搜索的“快速模式（fast mode）”）。</li>
 <li>给定图像中的所有得分区域，我们应用贪心非最大抑制(greedy non-maximum suppression)（对于每个类独立地），如果与的饭较高的区域有重叠，且IoU大于学习到的阈值，则该拒绝区域。</li>
 <li><p>Run-time analysis.两个属性使检测更高校。</p>
@@ -488,31 +510,31 @@ mAP: mean average precision，平均准确度
 </ul>
 </li>
 </ul>
-<h3 id="2-3-Training"><a href="#2-3-Training" class="headerlink" title="2.3. Training"></a>2.3. Training</h3><ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
 <li>除了用随机初始化的21路分类层（对于20个VOC类加上背景）替换CNN的ImageNet特定的1000路分类层之外，CNN架构是不变的。</li>
 <li>我们将所有region proposal与一个ground-truth重叠为IoU&gt;0.5，作为该框类的阳性，其余作为阴性。</li>
 <li>我们以0.001的学习速率（初始预训练速率的1/10）开始SGD，这允许精细调整进行，而不是破坏初始化。</li>
 <li>一旦提取特征并应用训练标签，我们对每个类优化一个线性SVM。</li>
 <li>由于训练数据太大，无法记忆，我们采用标准 <strong>hard negative mining method</strong> 。</li>
 </ul>
-<h3 id="2-4-Results-on-PASCAL-VOC-2010-12"><a href="#2-4-Results-on-PASCAL-VOC-2010-12" class="headerlink" title="2.4. Results on PASCAL VOC 2010-12"></a>2.4. Results on PASCAL VOC 2010-12</h3><h2 id="3-Visualization-ablation-and-modes-of-error"><a href="#3-Visualization-ablation-and-modes-of-error" class="headerlink" title="3. Visualization, ablation, and modes of error"></a>3. Visualization, ablation, and modes of error</h2><h3 id="3-1-Visualizing-learned-features"><a href="#3-1-Visualizing-learned-features" class="headerlink" title="3.1. Visualizing learned features"></a>3.1. Visualizing learned features</h3><ul>
+<h3 id="Results-on-PASCAL-VOC-2010-12"><a href="#Results-on-PASCAL-VOC-2010-12" class="headerlink" title="Results on PASCAL VOC 2010-12"></a>Results on PASCAL VOC 2010-12</h3><h2 id="Visualization-ablation-and-modes-of-error"><a href="#Visualization-ablation-and-modes-of-error" class="headerlink" title="Visualization, ablation, and modes of error"></a>Visualization, ablation, and modes of error</h2><h3 id="Visualizing-learned-features"><a href="#Visualizing-learned-features" class="headerlink" title="Visualizing learned features"></a>Visualizing learned features</h3><ul>
 <li>pool-5，是网络第五个也是最后一个卷基层的max-pool层的输出。（是一个max-pooling层）</li>
 <li>The pool-5 feature map is 6 × 6 × 256 = 9216维。</li>
 <li>忽略边界效应，每个pool-5单元在原始227×227像素输入中具有195×195像素的接收场。</li>
 </ul>
-<h3 id="3-2-Ablation-studies"><a href="#3-2-Ablation-studies" class="headerlink" title="3.2. Ablation studies"></a>3.2. Ablation studies</h3><ul>
+<h3 id="Ablation-studies"><a href="#Ablation-studies" class="headerlink" title="Ablation studies"></a>Ablation studies</h3><ul>
 <li>Fc6与pool-5全连接，为了计算特征，他它将 <strong>4096×9216的权重矩阵乘以pool-5的feature map</strong> （重新形成为9216维矢量），然后添加偏差矢量。</li>
 <li>Fc7是网络的最后一层，通过将由fc 6计算的特征乘以 <strong>4096×4096</strong> 权重矩阵，并类似地添加偏置矢量和应用半波整流来实现。</li>
 <li>大多数CNN的表示能力来自它的卷积层，而不是来自大得多的密集连接的层。</li>
 <li>All R-CNN variants strongly outperform the three DPM baselines</li>
 </ul>
-<h3 id="3-3-Detection-error-analysis"><a href="#3-3-Detection-error-analysis" class="headerlink" title="3.3. Detection error analysis"></a>3.3. Detection error analysis</h3><h3 id="3-4-Bounding-box-regression"><a href="#3-4-Bounding-box-regression" class="headerlink" title="3.4. Bounding box regression"></a>3.4. Bounding box regression</h3><h2 id="4-Semantic-segmentation"><a href="#4-Semantic-segmentation" class="headerlink" title="4. Semantic segmentation"></a>4. Semantic segmentation</h2><ul>
+<h3 id="Detection-error-analysis"><a href="#Detection-error-analysis" class="headerlink" title="Detection error analysis"></a>Detection error analysis</h3><h3 id="Bounding-box-regression"><a href="#Bounding-box-regression" class="headerlink" title="Bounding box regression"></a>Bounding box regression</h3><h2 id="Semantic-segmentation"><a href="#Semantic-segmentation" class="headerlink" title="Semantic segmentation"></a>Semantic segmentation</h2><ul>
 <li>full</li>
 <li>fg</li>
 <li>full+fg</li>
 <li>The fg strategy slightly outperforms full, indicating that the masked region shape provides a stronger signal, matching our intuition.</li>
 </ul>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
 <li>之前最好的性能系统是将多个低级图像特征与来自对象检测器和场景分类器的高级上下文组合在一起的复杂集合。</li>
 <li>本文提出了一个简单和可扩展的对象检测算法，与PASCAL VOC 2012上的最佳以前的结果相比提供30％的相对改进。</li>
 <li>我们推测“supervised pre-training/domain-speciﬁc ﬁne-tuning”范例将对各种数据缺乏的视觉问题高度有效。</li>
@@ -537,6 +559,18 @@ mAP: mean average precision，平均准确度
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
       
 
       
@@ -660,7 +694,7 @@ mAP: mean average precision，平均准确度
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -669,7 +703,7 @@ mAP: mean average precision，平均准确度
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -749,7 +783,7 @@ mAP: mean average precision，平均准确度
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Object-detection-with-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">2. Object detection with R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Module-design"><span class="nav-number">3.1.</span> <span class="nav-text">2.1. Module design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Test-time-detection"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. Test-time detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Training"><span class="nav-number">3.3.</span> <span class="nav-text">2.3. Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Results-on-PASCAL-VOC-2010-12"><span class="nav-number">3.4.</span> <span class="nav-text">2.4. Results on PASCAL VOC 2010-12</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Visualization-ablation-and-modes-of-error"><span class="nav-number">4.</span> <span class="nav-text">3. Visualization, ablation, and modes of error</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Visualizing-learned-features"><span class="nav-number">4.1.</span> <span class="nav-text">3.1. Visualizing learned features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Ablation-studies"><span class="nav-number">4.2.</span> <span class="nav-text">3.2. Ablation studies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Detection-error-analysis"><span class="nav-number">4.3.</span> <span class="nav-text">3.3. Detection error analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Bounding-box-regression"><span class="nav-number">4.4.</span> <span class="nav-text">3.4. Bounding box regression</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Semantic-segmentation"><span class="nav-number">5.</span> <span class="nav-text">4. Semantic segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Conclusion"><span class="nav-number">6.</span> <span class="nav-text">5. Conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-detection-with-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">Object detection with R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-design"><span class="nav-number">3.1.</span> <span class="nav-text">Module design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-time-detection"><span class="nav-number">3.2.</span> <span class="nav-text">Test-time detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">3.3.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results-on-PASCAL-VOC-2010-12"><span class="nav-number">3.4.</span> <span class="nav-text">Results on PASCAL VOC 2010-12</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visualization-ablation-and-modes-of-error"><span class="nav-number">4.</span> <span class="nav-text">Visualization, ablation, and modes of error</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualizing-learned-features"><span class="nav-number">4.1.</span> <span class="nav-text">Visualizing learned features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablation-studies"><span class="nav-number">4.2.</span> <span class="nav-text">Ablation studies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detection-error-analysis"><span class="nav-number">4.3.</span> <span class="nav-text">Detection error analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bounding-box-regression"><span class="nav-number">4.4.</span> <span class="nav-text">Bounding box regression</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-segmentation"><span class="nav-number">5.</span> <span class="nav-text">Semantic segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>

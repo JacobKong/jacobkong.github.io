@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -91,8 +91,8 @@
 新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。
 使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。
 
-1 INTRODUCTION
-在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小">
+INTRODUCTION
+在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition">
 <meta property="og:url" content="http://yoursite.com/posts/3054155989/index.html">
@@ -102,11 +102,11 @@
 新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。
 使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。
 
-1 INTRODUCTION
-在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小">
+INTRODUCTION
+在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfnxkqg21j30jl03hwf2.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfnxjqg0ej30h50lfai3.jpg">
-<meta property="og:updated_time" content="2017-01-28T07:44:24.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:12:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition">
 <meta name="twitter:description" content="Abstract
@@ -114,8 +114,8 @@
 新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。
 使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。
 
-1 INTRODUCTION
-在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小">
+INTRODUCTION
+在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例">
 <meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfnxkqg21j30jl03hwf2.jpg">
 
 
@@ -382,6 +382,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -422,7 +444,7 @@
 <li>新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。</li>
 <li>使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。</li>
 </ul>
-<h2 id="1-INTRODUCTION"><a href="#1-INTRODUCTION" class="headerlink" title="1 INTRODUCTION"></a>1 INTRODUCTION</h2><ul>
+<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><ul>
 <li>在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例如，224×224），其限制了输入图像的宽高比和比例。</li>
 <li>Cropping</li>
 <li>Warping-&gt;unwanted geometric distortion(不需要的几何失真)</li>
@@ -449,15 +471,20 @@
 </li>
 <li><p>实验表明，这种多尺寸训练与传统的单尺寸训练一样收敛，并导致更好的测试精度。</p>
 </li>
-<li>SPP的优点是与特定的CNN设计是正交的。</li>
-<li>Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.</li>
-<li>VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.</li>
-<li>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</li>
+<li><p>SPP的优点是与特定的CNN设计是正交的。</p>
+</li>
+<li><p>Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.</p>
+</li>
+<li><p>VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.</p>
+</li>
+<li><p>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</p>
+</li>
 </ul>
-<h2 id="2-DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><a href="#2-DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING" class="headerlink" title="2 DEEP NETWORKS WITH SPATIAL PYRAMID POOLING"></a>2 DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</h2><ul>
+<a id="more"></a>
+<h2 id="DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><a href="#DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING" class="headerlink" title="DEEP NETWORKS WITH SPATIAL PYRAMID POOLING"></a>DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</h2><ul>
 <li>输入图像中的这些形状激活在相应位置的feature map</li>
 </ul>
-<h3 id="2-2-The-Spatial-Pyramid-Pooling-Layer"><a href="#2-2-The-Spatial-Pyramid-Pooling-Layer" class="headerlink" title="2.2 The Spatial Pyramid Pooling Layer"></a>2.2 The Spatial Pyramid Pooling Layer</h3><ul>
+<h3 id="The-Spatial-Pyramid-Pooling-Layer"><a href="#The-Spatial-Pyramid-Pooling-Layer" class="headerlink" title="The Spatial Pyramid Pooling Layer"></a>The Spatial Pyramid Pooling Layer</h3><ul>
 <li>Bag-of-Words (BoW) approach-&gt;用来将生成的特征进行pool从而产生固定长度的向量。</li>
 <li>空间金字塔池提高BoW，因为它可以通过在局部空间仓中汇集来 <strong>维护空间信息</strong> 。</li>
 <li><p>“global pooling” operation</p>
@@ -467,16 +494,16 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-3-Training-the-Network"><a href="#2-3-Training-the-Network" class="headerlink" title="2.3 Training the Network"></a>2.3 Training the Network</h3><ul>
+<h3 id="Training-the-Network"><a href="#Training-the-Network" class="headerlink" title="Training the Network"></a>Training the Network</h3><ul>
 <li>Single-size training</li>
 <li>Multi-size training</li>
 </ul>
-<h2 id="3-SPP-NET-FOR-IMAGE-CLASSIFICATION"><a href="#3-SPP-NET-FOR-IMAGE-CLASSIFICATION" class="headerlink" title="3. SPP-NET FOR IMAGE CLASSIFICATION"></a>3. SPP-NET FOR IMAGE CLASSIFICATION</h2><h2 id="4-SPP-NET-FOR-OBJECT-DETECTION"><a href="#4-SPP-NET-FOR-OBJECT-DETECTION" class="headerlink" title="4. SPP-NET FOR OBJECT DETECTION"></a>4. SPP-NET FOR OBJECT DETECTION</h2><ul>
+<h2 id="SPP-NET-FOR-IMAGE-CLASSIFICATION"><a href="#SPP-NET-FOR-IMAGE-CLASSIFICATION" class="headerlink" title="SPP-NET FOR IMAGE CLASSIFICATION"></a>SPP-NET FOR IMAGE CLASSIFICATION</h2><h2 id="SPP-NET-FOR-OBJECT-DETECTION"><a href="#SPP-NET-FOR-OBJECT-DETECTION" class="headerlink" title="SPP-NET FOR OBJECT DETECTION"></a>SPP-NET FOR OBJECT DETECTION</h2><ul>
 <li>对于R-CNN来说，Feature extraction is the major timing bottleneck in testing.</li>
 <li>对于我们的SPP-net来说，我们从一整张图片中值提取一次特征。</li>
 <li>On the contrary, our method enables feature extraction in <strong>arbitrary windows</strong> from the deep convolutional feature maps.</li>
 </ul>
-<h3 id="4-1-Detection-Algorithm"><a href="#4-1-Detection-Algorithm" class="headerlink" title="4.1 Detection Algorithm"></a>4.1 Detection Algorithm</h3><p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfnxjqg0ej30h50lfai3.jpg" alt=""></p>
+<h3 id="Detection-Algorithm"><a href="#Detection-Algorithm" class="headerlink" title="Detection Algorithm"></a>Detection Algorithm</h3><p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfnxjqg0ej30h50lfai3.jpg" alt=""></p>
 
       
     </div>
@@ -497,6 +524,18 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
       
 
       
@@ -620,7 +659,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -629,7 +668,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -709,7 +748,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-INTRODUCTION"><span class="nav-number">2.</span> <span class="nav-text">1 INTRODUCTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><span class="nav-number">3.</span> <span class="nav-text">2 DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-The-Spatial-Pyramid-Pooling-Layer"><span class="nav-number">3.1.</span> <span class="nav-text">2.2 The Spatial Pyramid Pooling Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Training-the-Network"><span class="nav-number">3.2.</span> <span class="nav-text">2.3 Training the Network</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SPP-NET-FOR-IMAGE-CLASSIFICATION"><span class="nav-number">4.</span> <span class="nav-text">3. SPP-NET FOR IMAGE CLASSIFICATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-SPP-NET-FOR-OBJECT-DETECTION"><span class="nav-number">5.</span> <span class="nav-text">4. SPP-NET FOR OBJECT DETECTION</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Detection-Algorithm"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Detection Algorithm</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INTRODUCTION"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><span class="nav-number">3.</span> <span class="nav-text">DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Spatial-Pyramid-Pooling-Layer"><span class="nav-number">3.1.</span> <span class="nav-text">The Spatial Pyramid Pooling Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-the-Network"><span class="nav-number">3.2.</span> <span class="nav-text">Training the Network</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPP-NET-FOR-IMAGE-CLASSIFICATION"><span class="nav-number">4.</span> <span class="nav-text">SPP-NET FOR IMAGE CLASSIFICATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPP-NET-FOR-OBJECT-DETECTION"><span class="nav-number">5.</span> <span class="nav-text">SPP-NET FOR OBJECT DETECTION</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Detection-Algorithm"><span class="nav-number">5.1.</span> <span class="nav-text">Detection Algorithm</span></a></li></ol></li></ol></div>
             
 
           </div>

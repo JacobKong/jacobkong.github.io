@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -120,7 +120,7 @@ Abstract
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfqkaszbpj30q202qt9i.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqkaaiiij3086024t8n.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqkbeg8wj30g002cwen.jpg">
-<meta property="og:updated_time" content="2017-01-27T06:47:52.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:12:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection">
 <meta name="twitter:description" content="相关知识点
@@ -400,6 +400,28 @@ Abstract
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -450,7 +472,8 @@ Abstract
 <li>我们引入基于软拒绝的网络融合方法将来自所有网络的软度量融合在一起，以产生最终置信分数。</li>
 <li>此外，我们提出了一种用于将逐像素语义分割网络（ pixel-wise semantic segmentation network）集成到网络融合架构中作为行人检测器的加强的方法。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>Tradeoff between accuracy and speed.</li>
 <li>其他因素，如拥挤的场景，非人堵塞物体(non-person occluding objects)或不同的行人外观（不同的姿势或服装风格）也使这个Real-time行人检测问题具有挑战性。</li>
 <li>行人检测的一般框架可以分解为：</li>
@@ -463,7 +486,7 @@ Abstract
 <li>该架构包括行人pedestrian candidiate generator，其通过训练深卷积神经网络获得以，从而具有高检测率，虽然有大的假阳性率。</li>
 <li>使用深度扩展卷积和上下文聚合的并行语义分割网络[30]为候选行人提供了另一个软的信任投票，它进一步与候选生成器和分类网络融合。</li>
 </ul>
-<h2 id="2-The-Fused-Deep-Neural-Network"><a href="#2-The-Fused-Deep-Neural-Network" class="headerlink" title="2. The Fused Deep Neural Network"></a>2. The Fused Deep Neural Network</h2><ul>
+<h2 id="The-Fused-Deep-Neural-Network"><a href="#The-Fused-Deep-Neural-Network" class="headerlink" title="The Fused Deep Neural Network"></a>The Fused Deep Neural Network</h2><ul>
 <li>提出的网络架构包括行人候选生成器，分类网络和像素级语义分割网络。</li>
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqk6f5o3j30q00iumyv.jpg" alt=""></p>
@@ -475,7 +498,7 @@ Abstract
 <li>我们提出了一种新的网络融合方法——称为基于软拒绝的网络融合（SNF）。并非是执行接受或拒绝候选者的硬二进制分类，而是基于来自分类器的候选者的 <strong>聚合度</strong> 来提升或折扣行人候选者的置信度分数。</li>
 <li>我们进一步提出了一种利用具有语义分割（SS）的上下文聚集扩展卷积网络（context aggregation dilated convolutional network with semantic segmentation）作为另一个分类器并将其集成到我们的网络融合架构中的方法。但是在速度上会变得特别慢。</li>
 </ul>
-<h3 id="2-1-Pedestrian-Candidate-Generator"><a href="#2-1-Pedestrian-Candidate-Generator" class="headerlink" title="2.1. Pedestrian Candidate Generator"></a>2.1. Pedestrian Candidate Generator</h3><ul>
+<h3 id="Pedestrian-Candidate-Generator"><a href="#Pedestrian-Candidate-Generator" class="headerlink" title="Pedestrian Candidate Generator"></a>Pedestrian Candidate Generator</h3><ul>
 <li>SSD是具有截断VGG16(truncated VGG16)作为基础网络的前馈卷积网络。</li>
 <li>SSD的结构：</li>
 </ul>
@@ -488,7 +511,7 @@ Abstract
 <li>训练的目标函数是：</li>
 </ul>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqka1k2nj306u01nq2u.jpg" alt=""></p>
-<h3 id="2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><a href="#2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion" class="headerlink" title="2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion"></a>2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion</h3><ul>
+<h3 id="Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><a href="#Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion" class="headerlink" title="Classiﬁcation Network and Soft-rejection based DNN Fusion"></a>Classiﬁcation Network and Soft-rejection based DNN Fusion</h3><ul>
 <li>分类网络由多个二元分类深层神经网络组成，这些网络在第一阶段的生成的行人候选集中训练。</li>
 <li>SNF：考虑一个行人候选人和一个分类器。如果分类器对候选人有高的信任度，我们通过乘以大于1的置信因子乘以候选发生器来提高其原始分数。否则，我们以小于1的缩放因子减小其得分。我们将“置信”定义为至少为ac的分类概率。为了融合所有M个分类器，我们将候选者的原始信任得分与分类网络中所有分类器的信任缩放因子的乘积相乘。</li>
 </ul>
@@ -497,13 +520,13 @@ Abstract
 <ul>
 <li>SNF背后的关键思想是，我们不直接接受或拒绝任何候选行人，而是基于分类概率的因素来扩展它们。</li>
 </ul>
-<h3 id="2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><a href="#2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement" class="headerlink" title="2.3. Pixel-wise semantic segmentation for object detection reinforcement"></a>2.3. Pixel-wise semantic segmentation for object detection reinforcement</h3><ul>
+<h3 id="Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><a href="#Pixel-wise-semantic-segmentation-for-object-detection-reinforcement" class="headerlink" title="Pixel-wise semantic segmentation for object detection reinforcement"></a>Pixel-wise semantic segmentation for object detection reinforcement</h3><ul>
 <li>为了执行密集预测，SS网络由完全卷积的VGG16网络组成，其适应于作为前端预测模块的扩展卷积，其输出被馈送到多尺度上下文聚合模块，该多尺度上下文聚合模块由完全卷积网络组成，其卷积层具有增加扩张因子。</li>
 <li>输入图像被缩放并由SS网络直接处理，SS网络产生具有显示出行人类激活像素的一种颜色和显示出背景的其他颜色的二进遮罩。</li>
 <li>我们使用以下策略来融合结果：如果行人像素占据候选BB区域的至少20％，我们接受候选者并保持其得分不变; 否则，我们应用SNF来缩放原始的信任分数。</li>
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqkbeg8wj30g002cwen.jpg" alt=""></p>
-<h2 id="3-Experiments-and-result-analysis"><a href="#3-Experiments-and-result-analysis" class="headerlink" title="3. Experiments and result analysis"></a>3. Experiments and result analysis</h2><h3 id="3-1-Data-and-evaluation-settings"><a href="#3-1-Data-and-evaluation-settings" class="headerlink" title="3.1. Data and evaluation settings"></a>3.1. Data and evaluation settings</h3><h3 id="3-2-Training-details-and-results"><a href="#3-2-Training-details-and-results" class="headerlink" title="3.2. Training details and results"></a>3.2. Training details and results</h3><ul>
+<h2 id="Experiments-and-result-analysis"><a href="#Experiments-and-result-analysis" class="headerlink" title="Experiments and result analysis"></a>Experiments and result analysis</h2><h3 id="Data-and-evaluation-settings"><a href="#Data-and-evaluation-settings" class="headerlink" title="Data and evaluation settings"></a>Data and evaluation settings</h3><h3 id="Training-details-and-results"><a href="#Training-details-and-results" class="headerlink" title="Training details and results"></a>Training details and results</h3><ul>
 <li><strong>硬拒绝（Hard Rejection）</strong> 被定义为消除由任何分类器分类为假阳性的任何候选者。</li>
 </ul>
 
@@ -526,6 +549,18 @@ Abstract
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
       
 
       
@@ -649,7 +684,7 @@ Abstract
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -658,7 +693,7 @@ Abstract
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -738,7 +773,7 @@ Abstract
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关知识点"><span class="nav-number">1.</span> <span class="nav-text">相关知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-The-Fused-Deep-Neural-Network"><span class="nav-number">4.</span> <span class="nav-text">2. The Fused Deep Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Pedestrian-Candidate-Generator"><span class="nav-number">4.1.</span> <span class="nav-text">2.1. Pedestrian Candidate Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><span class="nav-number">4.2.</span> <span class="nav-text">2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><span class="nav-number">4.3.</span> <span class="nav-text">2.3. Pixel-wise semantic segmentation for object detection reinforcement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Experiments-and-result-analysis"><span class="nav-number">5.</span> <span class="nav-text">3. Experiments and result analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Data-and-evaluation-settings"><span class="nav-number">5.1.</span> <span class="nav-text">3.1. Data and evaluation settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Training-details-and-results"><span class="nav-number">5.2.</span> <span class="nav-text">3.2. Training details and results</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关知识点"><span class="nav-number">1.</span> <span class="nav-text">相关知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Fused-Deep-Neural-Network"><span class="nav-number">4.</span> <span class="nav-text">The Fused Deep Neural Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pedestrian-Candidate-Generator"><span class="nav-number">4.1.</span> <span class="nav-text">Pedestrian Candidate Generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><span class="nav-number">4.2.</span> <span class="nav-text">Classiﬁcation Network and Soft-rejection based DNN Fusion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><span class="nav-number">4.3.</span> <span class="nav-text">Pixel-wise semantic segmentation for object detection reinforcement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments-and-result-analysis"><span class="nav-number">5.</span> <span class="nav-text">Experiments and result analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-and-evaluation-settings"><span class="nav-number">5.1.</span> <span class="nav-text">Data and evaluation settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-details-and-results"><span class="nav-number">5.2.</span> <span class="nav-text">Training details and results</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -423,8 +423,7 @@
 
       
         
-          
-            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><p>从TP、FP、TN、FN到ROC曲线、miss rate</p>
 <ul>
 <li>TP：true positive，实际是正例，预测为正例</li>
@@ -451,174 +450,18 @@
 <li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
 <li>新的数据集</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>第一需求：robust feature set.</li>
 <li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
 <li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
 </ul>
-<h2 id="2-Previous-Work"><a href="#2-Previous-Work" class="headerlink" title="2 Previous Work"></a>2 Previous Work</h2><h2 id="3-Overview-of-the-Method"><a href="#3-Overview-of-the-Method" class="headerlink" title="3 Overview of the Method"></a>3 Overview of the Method</h2><ul>
-<li>The method is based on evaluating well-normalized local histograms of image gradient orientations in a dense grid.</li>
-<li>基本思想是，在一副图像中，局部目标的 <strong>表象</strong> 和 <strong>形状</strong> （appearance and shape）能够被梯度或边缘的方向密度分布很好地描述，即使没有对应的梯度或边缘位置的精确知识。</li>
-<li>具体的实现方法是：首先将图像分成小的连通区域，我们把它叫细胞单元（cell）。然后采集细胞单元中各像素点的梯度的或边缘的方向直方图。最后把这些直方图组合起来就可以构成特征描述器。</li>
-<li>为了提高性能，我们还可以把这些局部直方图在图像的更大的范围内（我们把它叫区间或block）进行对比度归一化（contrast-normalized），所采用的方法是：先计算各直方图在这个区间（block）中的密度，然后根据这个密度对区间中的各个细胞单元做归一化。 <strong>通过这个归一化后，能对光照变化和阴影获得更好的效果。</strong></li>
-<li>整体的物体检测链：</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfi9crxj30ww05udiy.jpg" alt=""></p>
-<ul>
-<li><p>这些基于稀疏特征的表示的成功有点遮蔽了HOG作为密集图像描述符的能力和简单性。</p>
-</li>
-<li><p>HOG/SIFT表示方法有几个优点。</p>
-<ul>
-<li>由于HOG方法是在图像的局部细胞单元上操作，所以它对图像几何的（geometric）和光学的（photometric）形变都能保持很好的不变性，这两种形变只会出现在更大的空间领域上。</li>
-<li>他捕捉了局部形状非常具有特征性的边和梯度特征。</li>
-<li>在局部表示中对局部的几何和光度变换的不变性更容易控制。</li>
-<li>如果它们远小于局部空间或方向仓尺寸，则平移或旋转几乎没有差别。</li>
-</ul>
-</li>
-<li><p>作者通过实验发现，在粗的空域抽样（coarse spatial sampling）、精细的方向抽样（fine orientation sampling）以及较强的局部光学归一化（strong local photometric normalization）等条件下，只要行人大体上能够保持直立的姿势，就容许行人有一些细微的肢体动作，这些细微的动作可以被忽略而不影响检测效果。综上所述，HOG方法是特别适合于做图像中的行人检测的。</p>
-</li>
-</ul>
-<h2 id="4-Data-Sets-and-Methodology"><a href="#4-Data-Sets-and-Methodology" class="headerlink" title="4 Data Sets and Methodology"></a>4 Data Sets and Methodology</h2><ul>
-<li>hard examples</li>
-<li>Detection Error Tradeoff (DET) curves on a log-log scale. miss rate(1-Recall / FN/(TP+FN)) verses FPPW. 值越低越好。</li>
-<li>DET图和ROC图提供的信息一眼，但是前者允许小概率更容易的去分布。</li>
-<li>FPPW：NUMBER_OF_FALSE_POSITIVE/NUMBER_OF_WINDOWS</li>
-<li>我们的DET曲线通常相当浅，所以即使非常小的缺失率的改善也等同于在不变缺失率下的情况下FPPW中的大增益。</li>
-</ul>
-<h2 id="5-Overview-of-Results"><a href="#5-Overview-of-Results" class="headerlink" title="5 Overview of Results"></a>5 Overview of Results</h2><ul>
-<li>Generalized Haar Wavelets.</li>
-<li>PCA-SIFT.</li>
-<li>Shape Contexts.</li>
-</ul>
-<h2 id="6-Implementation-and-Performance-Study"><a href="#6-Implementation-and-Performance-Study" class="headerlink" title="6 Implementation and Performance Study"></a>6 Implementation and Performance Study</h2><ul>
-<li><p>默认检测器：</p>
-<ul>
-<li>RGB colour space with no gamma correction</li>
-<li>[−1, 0, 1] gradient filter with no smoothing</li>
-<li>linear gradient voting into 9 orientation bins in 0◦ –180◦</li>
-<li>16×16 pixel blocks of four 8×8 pixel cells</li>
-<li>Gaussian spatial win- dow with σ = 8 pixel</li>
-<li>L2-Hys (Lowe-style clipped L2 norm) block normalization</li>
-<li>block spacing stride of 8 pixels (hence 4-fold coverage of each cell)</li>
-<li>64×128 detection window;</li>
-<li>linear SVM classifier.</li>
-</ul>
-</li>
-<li><p>主要的结论是，为了良好的性能，应该使用细尺度导数（基本上没有平滑），许多定向仓,中等大小，强归一化，重叠的描述符块。</p>
-</li>
-</ul>
-<h3 id="6-1-Gamma-Colour-Normalization"><a href="#6-1-Gamma-Colour-Normalization" class="headerlink" title="6.1 Gamma/Colour Normalization"></a>6.1 Gamma/Colour Normalization</h3><h3 id="6-2-Gradient-Computation"><a href="#6-2-Gradient-Computation" class="headerlink" title="6.2 Gradient Computation"></a>6.2 Gradient Computation</h3><ul>
-<li>最通常用的方法就是简单的应用一个一维的离散的梯度模版分别应用在水平和垂直方向上去。可以使用如下的卷积核进行卷积：</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfj1a8sj3066017q2t.jpg" alt=""></p>
-<h3 id="6-3-Spatial-Orientation-Binning-方向单元划分"><a href="#6-3-Spatial-Orientation-Binning-方向单元划分" class="headerlink" title="6.3 Spatial / Orientation Binning(方向单元划分)"></a>6.3 Spatial / Orientation Binning(方向单元划分)</h3><ul>
-<li>每个块内的每个像素对 <strong>方向直方图</strong> 进行投票</li>
-<li>每个像素基于以其为中心的梯度元素的方向计算边缘取向直方图通道的 加权投票，并且投票被累积到在称为 <strong>单元</strong> 的局部空间区域上的 <strong>方向仓</strong> 中。</li>
-<li>每个块的形状可以是矩形或圆形的</li>
-<li>方向直方图的方向取值可以是0-180度或者0-360度，这取决于梯度是否有符号。无符号梯度（0-180º），有符号梯度（0-360º）</li>
-<li>为了减少混叠，投票在相邻仓中心之间以取向和位置双向内插。</li>
-<li>至于投票的权重，可以是梯度的幅度本身或者是它的函数。投票是像素处的梯度幅度的函数，或者是幅度本身、其平方、其平方根或者表示像素的边缘的软出现/缺失的幅度的限幅形式。在定向编码对于良好的性能是至关重要的。</li>
-<li>梯度幅度本身通常产生最好的结果。其它可选的方案是采用幅度的平方或开方，或者幅度的裁剪版本。</li>
-<li>Dalal和Triggs发现在人的检测实验中，把方向分为 <strong>9个通道(bin)</strong> 效果最好</li>
-</ul>
-<h3 id="6-4-Normalization-and-Descriptor-Blocks"><a href="#6-4-Normalization-and-Descriptor-Blocks" class="headerlink" title="6.4 Normalization and Descriptor Blocks"></a>6.4 Normalization and Descriptor Blocks</h3><ul>
-<li>由于照明的局部变化和前景-背景对比度，梯度强度在可以在很宽范围内变化。所以梯度强度必须要局部地归一化，这需要把方格(cells)集结成更大、在空间上连结的区()</li>
-<li><strong>有效的局部对比度归一化</strong> 对于良好的性能是必不可少的。</li>
-<li>我们评估了多种不同的 <strong>归一化schemes(normalization schemes)</strong> ，他们大多数都是基于将单元格（cells）分组成更大的空间块（spatial blocks）<em>  </em>并且对比地单独对每个块进行归一化。</li>
-<li><strong>最终描述符</strong> 是来自检测窗口中的所有块的归一化单元响应的所有分量的 <strong>向量</strong> 。</li>
-<li><p>R-HOG：R-HOG块和SIFT描述符有许多相似之处，但是他们用途十分不同。</p>
-<ul>
-<li><p>R-HOG跟SIFT描述器看起来很相似，但他们的不同之处是：</p>
-<ul>
-<li>R-HOG是在单一尺度下、密集的网格内、没有对方向排序的情况下被计算出来；</li>
-<li>而SIFT描述器是在多尺度下、稀疏的图像关键点上、对方向排序的情况下被计算出来。</li>
-<li>R-HOG是各区间被组合起来用于对空域信息进行编码，而SIFT的各描述器是单独使用的。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>它们在密集网格中以单个尺度计算而没有主要取向对准，并且用作隐式地去编码相对于检测窗口的空间位置的较大代码矢量的一部分，而SIFT在稀疏集合的 <strong>尺度不变关键点处</strong> 被计算，旋转以对准它们的主导方向，并单独使用。</p>
-</li>
-<li>SIFT被优化用于稀疏宽基线匹配，R-HOG用于空间形式的密集鲁棒编码。</li>
-<li><p>R-HOG区块一般来说是多个方格子组成的，由三个参数表示：</p>
-<ul>
-<li>每个区块(block)有多少方格(cell)、</li>
-<li>每个方格(cell)有几个像素(pixel)、</li>
-<li>每个方格(cell)直方图有多少频道(bin)。</li>
-</ul>
-</li>
-<li><p>对于人体检测，3x3的单元块，6x6的像素单元块儿表现最好，同时直方图是9通道。</p>
-</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfhlpopj30ck095gmg.jpg" alt=""></p>
-<ul>
-<li><p>当其太小（1×1单元块，即，单独取向上的归一化）时，有价值的空间信息被抑制。</p>
-</li>
-<li><p>在对直方图做处理之前，给每个区间加一个高斯空域窗口是非常必要的，因为这样可以降低边缘的周围像素点的权重。</p>
-</li>
-<li><p>C-HOG</p>
-<ul>
-<li>每个空间单元包含梯度加权取向单元的堆叠而不是单个取向无关的边缘计数。</li>
-<li>对数极坐标网格最初是由允许附近结构的精细编码与较宽上下文的粗略编码相结合的思想，以及从灵长类动物的 <strong>视野</strong> 到 <strong>V1皮层</strong> 的变换是 <strong>对数的</strong></li>
-<li>然而，具有非常少的径向箱的小描述符反而能给出最好的性能，因此在实践中 <strong>几乎没有不均匀性或上下文</strong> 。</li>
-<li>我们评估了C-HOG几何的两个变体，一个具有 <strong>单个圆形中心细胞</strong> （类似于[14]的GLOH特征），以及中心细胞被分成 <strong>角形扇区的形状上下文</strong> 。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfkf2vgj302604a0sn.jpg" alt=""></p>
-<ul>
-<li><p>C-HOG的4个参数：</p>
-<ul>
-<li><p>the numbers of angular(角度盒子的个数）；</p>
-</li>
-<li><p>the numbers of radias(半径盒子个数)</p>
-</li>
-<li>the radius of the central bin in pixels（中心仓的半径（以像素为单位））</li>
-<li>the expansion factor for subsequent (半径的伸展因子）</li>
-</ul>
-</li>
-<li><p>为了良好的性能，最佳的参数设置为：4个角度盒子、2个半径盒子、中心盒子半径为4个像素、伸展因子为2</p>
-</li>
-<li><p>4像素是中央bin的最佳半径，但3和5给出类似的结果。</p>
-</li>
-<li><p>C-HOG看起来很像基于形状上下文（英语：Shape context）的方法，但不同之处是：C-HOG的区间中包含的细胞单元有多个方向通道，而基于形状上下文的方法仅仅只用到了一个单一的边缘存在数。[4]</p>
-</li>
-<li><p>Block Normalization schemes：引入v表示一个还没有被归一化的向量，它包含了给定区间（block）的所有直方图信息。vk 表示 v 的 k 阶范数，这里的 k={1,2}。用 e 表示一个很小的常数。一共4种不同的块规范化schemes</p>
-<ul>
-<li><p>L2-morm,<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg" alt=""></p>
-</li>
-<li><p>L2-Hys, 它可以通过先进行L2-norm，对结果进行截短（clipping），然后再重新归一化得到。</p>
-</li>
-<li><p>L1-norm,<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfltceqj304m00ndfp.jpg" alt=""></p>
-</li>
-<li><p>L1-sqrt,L1-norm followed by square root<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfl4bwqj305d00r0sm.jpg" alt=""></p>
-</li>
-<li><p>作者发现：采用L2-Hys, L2-norm, 和 L1-sqrt方式所取得的效果是一样的，L1-norm稍微表现出一点点不可靠性。</p>
-</li>
-</ul>
-</li>
-<li><p>Centre-surround normalization.</p>
-</li>
-</ul>
-<h3 id="6-5-Detector-Window-and-Context"><a href="#6-5-Detector-Window-and-Context" class="headerlink" title="6.5 Detector Window and Context"></a>6.5 Detector Window and Context</h3><h3 id="6-6-Classifier"><a href="#6-6-Classifier" class="headerlink" title="6.6 Classifier"></a>6.6 Classifier</h3><p>最后一步就是把提取的HOG特征输入到SVM分类器中，寻找一个最优超平面作为决策函数。作者采用的方法是：使用免费的SVMLight软件包加上HOG分类器来寻找测试图像中的行人。</p>
-<h3 id="6-7-Discussion"><a href="#6-7-Discussion" class="headerlink" title="6.7 Discussion"></a>6.7 Discussion</h3><ul>
-<li>在甲酸梯度前进行任何程度的平滑处理都会毁掉HOG的结果，因为许多可供的图像信息都是从细尺度的突出边界形成的。</li>
-<li>详单，梯度应该在当前金字塔层的最细可供尺度上被计算，修改或者用于方向投票并且只有在那之后在模糊空间。</li>
-<li>其次，强的局部对比正常化对于良好的结果至关重要，传统的中心环绕样式方案不是最好的选择。</li>
-<li>更好的结果可以通过相对于不同的局部支持对每个元素（边缘，单元）进行几次标准化，并将结果作为独立信号来实现。</li>
-</ul>
-<h2 id="7-Summary-and-Conclusions"><a href="#7-Summary-and-Conclusions" class="headerlink" title="7 Summary and Conclusions"></a>7 Summary and Conclusions</h2><ul>
-<li><p>我们研究了各种描述符参数的影响，并得出结论，在重叠描述符块中的</p>
-<ul>
-<li>精细尺度梯度，</li>
-<li>精细定向binning，</li>
-<li>相对粗糙的空间binning</li>
-<li>高质量局部对比度归一化 对于良好的性能都是重要的。</li>
-</ul>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3084343215/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -766,8 +609,7 @@
 
       
         
-          
-            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><p>Overcomplete Representations:</p>
 <ul>
 <li>Overcomplete：Such a complete system is overcomplete if removal of a \phi <em>{j} from the system results in a system (i.e., {\phi </em>{i}}_((i\in J\backslash {j))}) that is still complete.</li>
@@ -792,7 +634,7 @@
 <li>The computational bottleneck of many modern detectors is the <strong>computation of features</strong> at every scale of a finely-sampled image pyramid.</li>
 <li>The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>Multi-orientation decompostion: 多向分解，是图像处理中的基本技术。</li>
 <li><p>在每个尺度和方向分别分析图像结构的想法起源于多个来源:</p>
 <ul>
@@ -816,14 +658,13 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2. Related Work"></a>2. Related Work</h2><ul>
-<li>Scale Space Theory: 尺度空间理论</li>
-<li>Cascades, coarse-to-fine search, distance transforms, etc., 全部都关注于对提前计算好的图像特征来优化分类速度。</li>
-<li>本方法专注于快速特征金字塔的构建，因此与上面的方法可以起到互补的效果。</li>
-<li>行人检测的最佳执行方法[31]和PASCAL VOC [38]是基于多尺度特征金字塔的滑动窗[21]，[29]，[35]; 快速特征金字塔非常适合于这种滑动窗口检测器。</li>
-</ul>
-<h2 id="3-Multiscale-Gradient-Histograms"><a href="#3-Multiscale-Gradient-Histograms" class="headerlink" title="3. Multiscale Gradient Histograms"></a>3. Multiscale Gradient Histograms</h2>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2735857030/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -971,8 +812,7 @@
 
       
         
-          
-            <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>对数正态分布（lognormally distributed）：对数为正态分布的任意随机变量的概率分布。<ul>
 <li>如果 X 是正态分布的随机变量，则 exp(X)为对数正态分布.</li>
 <li>如果 Y 是对数正态分布，则 ln(Y) 为正态分布。</li>
@@ -1013,7 +853,7 @@
 </li>
 <li>行人检测在 <strong>低像素</strong> 和 <strong>部分遮挡</strong> 行人情况下依旧表现失望。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>对现有行人检测方法的一些疑问：<ul>
 <li>Do current detectors work well?</li>
 <li>What is the best ap- proach?” “What are the main failure modes?</li>
@@ -1021,155 +861,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-1-Contributions"><a href="#1-1-Contributions" class="headerlink" title="1.1 Contributions"></a>1.1 Contributions</h3><ul>
-<li>Data set.<ul>
-<li>350,000行人标注框BB</li>
-<li>250,000帧</li>
-<li>遮挡和时间上相似的也被标注。</li>
-<li>对行人等级、遮挡、位置进行了统计</li>
-</ul>
-</li>
-<li>Evaluation methodology.</li>
-<li>Evaluation.<ul>
-<li>评估了16个有代表性的先进的行人检测器</li>
-</ul>
-</li>
-<li>两个团队发布的surveys与作者的工作是互补的。<ul>
-<li>Geronimo——先进的司机助手系统中的行人检测。</li>
-<li>Enzweiler and Gavrila——发布Daimler检测数据集</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-The-Caltech-Pedestrian-Data-Set"><a href="#2-The-Caltech-Pedestrian-Data-Set" class="headerlink" title="2 The Caltech Pedestrian Data Set"></a>2 The Caltech Pedestrian Data Set</h2><h3 id="2-1-Data-Collection-and-Ground-Truthing"><a href="#2-1-Data-Collection-and-Ground-Truthing" class="headerlink" title="2.1 Data Collection and Ground Truthing"></a>2.1 Data Collection and Ground Truthing</h3><ul>
-<li>当一个标注器在至少两帧中在同一个行人上标注了边界框，则边界框利用3次插值在中间帧进行标注</li>
-<li>BB-full</li>
-<li>BB-vis: 被遮挡行人可见区域标注框</li>
-<li>三种标注：<ul>
-<li>Person</li>
-<li>People</li>
-<li>Person?</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-2-Data-Set-Statistics"><a href="#2-2-Data-Set-Statistics" class="headerlink" title="2.2 Data Set Statistics"></a>2.2 Data Set Statistics</h3><ul>
-<li>行人的高度、宽度都类似对数正态分布。</li>
-<li>如果多变量中的每个变量符合对数正态分布，则这些变量的线性组合也符合正态分布。</li>
-<li>BB 横纵比 w/ h, log(w /h) = log(w)-log(h).</li>
-<li>由于行人姿势（手、肘）的原因，会导致行人宽度变化。</li>
-<li>h=Hf/ d. H=1.8m, d=1800 /hm</li>
-<li>大部分行人都被观察为medium scale，为了安全系统，检测也必须发生在这个scale。</li>
-<li>通过对遮挡情况的统计，总体来说，遮挡情况远远没有统一， <strong>利用这个发现可以挡住提高行人检测器的性能。</strong></li>
-<li>不仅遮挡是高度不一致的， <strong>遮挡的类型也是有明显额外的结构。</strong></li>
-<li>通过对比ground truth和HOG检测器检测出的行人位置进行同样的统计对比，有如下的图，可以发现，利用行人位置这一约束条件可以合理的加快检测但是只能适当的减少假正例。</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fbfr6mn9ccj308q01ldfr.jpg" alt=""></p>
-<h3 id="2-3-Training-and-Testing-Data"><a href="#2-3-Training-and-Testing-Data" class="headerlink" title="2.3 Training and Testing Data"></a>2.3 Training and Testing Data</h3><ul>
-<li>四种训练/测试情景<ul>
-<li>Scenario ext0:</li>
-<li>Scenario ext1:</li>
-<li>Scenario cal0:</li>
-<li>Scenario cal1:</li>
-</ul>
-</li>
-<li>作者应该在检测器开发过程中使用 ext0/cal0，并且只在完成所有参数后再 ext1/cal1下进行评估。</li>
-</ul>
-<h3 id="2-4-Comparison-of-Pedestrian-Data-Sets"><a href="#2-4-Comparison-of-Pedestrian-Data-Sets" class="headerlink" title="2.4 Comparison of Pedestrian Data Sets"></a>2.4 Comparison of Pedestrian Data Sets</h3><ul>
-<li>Imaging setup.</li>
-<li>Data set size.</li>
-<li>Data set type.</li>
-<li>Pedestrian scale.</li>
-<li>Data set properties.</li>
-</ul>
-<h2 id="3-Evaluation-Methodology"><a href="#3-Evaluation-Methodology" class="headerlink" title="3 Evaluation Methodology"></a>3 Evaluation Methodology</h2><h3 id="3-1-Full-Image-Evaluation"><a href="#3-1-Full-Image-Evaluation" class="headerlink" title="3.1 Full Image Evaluation"></a>3.1 Full Image Evaluation</h3><ul>
-<li>对阈值小于0.6的评估就不用关心了。</li>
-<li>具有最高置信度的检测首先被匹配；如果一个被检测到的BB匹配到多个ground truth边界框，则具有最高覆盖率的匹配将被使用。</li>
-<li>没有被匹配到的BBdt算作假正例，没有被匹配道德BBgt被称为假负例。</li>
-<li>通过改变检测置信度的阈值，画出miss rate-FPPI的曲线图来比较各个检测器。这种图比准确率-召回率的图更好，因为对于汽车应用，as typically there is an upper limit on the acceptable false positives per image rate independent of pedestrian density.</li>
-<li>利用 <strong>对数平均 遗漏率</strong> 来总结检测器的性能。在（10^-2~10^0）范围的对数空间中，通过9个FPPI率平均计算miss rate来得到</li>
-</ul>
-<h3 id="3-2-Filtering-Ground-Truth"><a href="#3-2-Filtering-Ground-Truth" class="headerlink" title="3.2 Filtering Ground Truth"></a>3.2 Filtering Ground Truth</h3><ul>
-<li>BBig: 被选择忽略的Ground truth. 被忽略的区域。</li>
-<li>将BBgt设为被忽略和丢弃掉这个样本是不一样的；后者代表这个样本是一个假正例。</li>
-</ul>
-<h3 id="3-3-Filtering-Detections"><a href="#3-3-Filtering-Detections" class="headerlink" title="3.3 Filtering Detections"></a>3.3 Filtering Detections</h3><ul>
-<li>考虑三种可能的过滤策略：<ul>
-<li>strict filtering: 在匹配之前删除所选范围之外的所有检测。</li>
-<li>postfiltering: 在所选评价范围外的检测允许与范围内的BBgt匹配。</li>
-<li>expanded filtering: 类似于严格过滤，除了在评估之前去除扩展评估范围之外的所有检测</li>
-</ul>
-</li>
-<li>Expanded filtering 在 strict filtering 和 postfiltering之间做了很好的妥协。</li>
-<li>在整个评估工作中，我们使用expanded filtering(r=1.25)。</li>
-</ul>
-<h3 id="3-4-Standardizing-Aspect-Ratios"><a href="#3-4-Standardizing-Aspect-Ratios" class="headerlink" title="3.4 Standardizing Aspect Ratios"></a>3.4 Standardizing Aspect Ratios</h3><ul>
-<li>标准化GT和DT的aspect ratio，这样做会从检测器设计中删除无关的任意选择，并有助于性能比较。</li>
-<li>一般来说，探测器的长宽比取决于开发过程中使用的数据集，通常在训练后选择。</li>
-<li>我们建议将所有BB标准化为0.41的长宽比（Caltech数据集中的对数 - 平均长宽比）。</li>
-<li>我们保持BB高度和中心固定，同时调整宽度.</li>
-<li>重要的是检测器和ground truth纵横比匹配。</li>
-</ul>
-<h3 id="3-5-Per-Window-versus-Full-Image-Evaluation"><a href="#3-5-Per-Window-versus-Full-Image-Evaluation" class="headerlink" title="3.5 Per-Window versus Full Image Evaluation"></a>3.5 Per-Window versus Full Image Evaluation</h3><ul>
-<li>PM 评估方法通常用来比较分类器（检测器的返利）或者用来评估系统对于自动兴趣区域生成的性能。</li>
-<li>PW结果是从其 <strong>原始出版物</strong> 中产生的。</li>
-<li>全图像结果是通过评估同一行人但在其 <strong>原始图像上下文</strong> 中获得的。</li>
-<li>将一个二分类转化为一个检测器所做的选择包括：<ul>
-<li>包括空间和尺度跨度</li>
-<li>非最大抑制的选择。会影响图像的性能。</li>
-<li>在PW评估期间测试的窗口通常不同于在全图像检测期间测试的窗口，</li>
-</ul>
-</li>
-<li>假阳性可能来自对身体部位或不正确的尺度或位置的检测</li>
-<li>假阴性可能源于被测试的窗户和真实的行人位置或来自NMS之间的轻微不对准。</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6loh02j30as08vwey.jpg" alt=""></p>
-<h2 id="4-检测算法"><a href="#4-检测算法" class="headerlink" title="4 检测算法"></a>4 检测算法</h2><h3 id="4-1-Survey-of-the-State-of-the-Art"><a href="#4-1-Survey-of-the-State-of-the-Art" class="headerlink" title="4.1 Survey of the State of the Art"></a>4.1 Survey of the State of the Art</h3><ul>
-<li>Papageorgiou and Poggio [16]提出了第一个滑动窗口检测器。将支持向量机（SVM）应用于多尺度Haar小波的过度完备字典。</li>
-<li>Viola和Jones( <strong>VJ</strong> )[44]基于这些想法，引入了用于快速特征计算的积分图像和用于有效检测的级联结构，以及利用AdaBoost进行自动特征选择。这些想法继续作为现代探测器的基础。</li>
-<li>随着基于梯度的特征的采用带来了巨大的收益。</li>
-<li>受SIFT [45]启发，Dalal和Triggs [HOG][7]通过显示相对于基于强度的特征的实质性增益，普及了用于检测的定向梯度特征的直方图（HOG）。</li>
-<li>现在，HOG特征的变体的数量已经大大增加，几乎所有现代检测器以某种形式利用它们。</li>
-<li>Shape features（形状特征）也是一个用于检测经常用到的线索.</li>
-<li>Boosting用于学习头部，躯干，腿部和全身检测器.</li>
-<li>Shapelets: 是从局部区块中的梯度辨别地学习的形状描述符.</li>
-<li>Boosting用来将多个Shapelet结合成一个整体的检测器。</li>
-<li>Motion是人类感知的另一个重要提示; 然而，成功地将运动特征结合到检测器中已证明对于移动的相机具有挑战性。</li>
-<li>虽然没有迹象表明单个特征由于HOG，但附加特征可以提供一些互补信息。</li>
-</ul>
-<h3 id="4-2-Evaluated-Detectors"><a href="#4-2-Evaluated-Detectors" class="headerlink" title="4.2 Evaluated Detectors"></a>4.2 Evaluated Detectors</h3><ul>
-<li>直接从作者处得到提前训练好的检测器。</li>
-<li>这些检测器通常遵循滑动窗口范例，其需要对检测窗口进行特征提取，二分类和密集多尺度扫描，随后进行非极大值抑制。</li>
-<li>Features：几乎所有的现代检测器都使用了都写形式的梯度直方图。</li>
-<li>Learning：因为它们的理论保证，可扩展性和良好的性能，支持向量机[16]和boosting[44]是最受欢迎的选择。</li>
-<li>Boosting自动执行特征选择。一些检测器（在“特征学习”列中用标记指示）在分类器训练之前或与分类器训练一起学习更小或中等大小的特征集合。</li>
-<li>Detection details：两种主要的非最大抑制方法：<ul>
-<li>Mean shift(MS)模型估计</li>
-<li>Pairwise max(PM)抑制：根据充分的重叠丢弃可信度较低的每对检测</li>
-<li>PM*：允许检测去匹配另一检测的任意子区域。</li>
-</ul>
-</li>
-<li>Implementation notes</li>
-</ul>
-<h2 id="5-Performance-Evaluation"><a href="#5-Performance-Evaluation" class="headerlink" title="5 Performance Evaluation"></a>5 Performance Evaluation</h2><h3 id="5-1-Performance-on-the-Caltech-Data-Set"><a href="#5-1-Performance-on-the-Caltech-Data-Set" class="headerlink" title="5.1 Performance on the Caltech Data Set"></a>5.1 Performance on the Caltech Data Set</h3><ul>
-<li>Overall：绝对性能很弱。</li>
-<li>Scale</li>
-<li>Occlusion</li>
-<li>Reasonale：性能在中等规模或部分封闭的行人的检测很差，而对于远距离或在重度封闭的情况下，它的性能特别差。这促使我们评估超过50像素高的行人在没有或部分遮挡（这些在没有很多上下文的情况下清晰可见）的性能。 <strong>我们将这称为合理的评估设置。</strong></li>
-<li>Localization</li>
-</ul>
-<h3 id="5-2-Evaluation-on-Multiple-Data-Sets"><a href="#5-2-Evaluation-on-Multiple-Data-Sets" class="headerlink" title="5.2 Evaluation on Multiple Data Sets"></a>5.2 Evaluation on Multiple Data Sets</h3><h3 id="5-3-Statistical-Significance（统计显著性）"><a href="#5-3-Statistical-Significance（统计显著性）" class="headerlink" title="5.3 Statistical Significance（统计显著性）"></a>5.3 Statistical Significance（统计显著性）</h3><ul>
-<li>关键的洞察力是将每个数据集上的绝对性能转换为算法排名，从而消除不同数据集难度的影响。</li>
-<li>我们使用非对数Friedman检验和posthoc分析来分析统计学显着性.</li>
-<li>对于我们的分析，我们使用 <strong>非参数Friedman测试</strong> 以及 <strong>Shaffer posthoc test</strong></li>
-<li>我们基于其对数平均丢失率（在合理的评估设置下测试）对每个数据折叠上的检测器进行排名。 该程序为14个检测器得到做总共28个排名。</li>
-</ul>
-<h3 id="5-4-Runtime-Analysis"><a href="#5-4-Runtime-Analysis" class="headerlink" title="5.4 Runtime Analysis"></a>5.4 Runtime Analysis</h3><ul>
-<li>总的来说，运行时和精度之间似乎没有很强的相关性。</li>
-</ul>
-<h2 id="6-Discussion"><a href="#6-Discussion" class="headerlink" title="6 Discussion"></a>6 Discussion</h2><ul>
-<li>应该注意，单帧性能是整个系统性能的下限，跟踪，上下文信息和额外传感器的使用可以帮助减少假警报并提高检测率（参见[2]）。</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3091185356/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1317,8 +1015,7 @@
 
       
         
-          
-            <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>k折交叉验证</li>
 <li>Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）可以看做是抑制不是极大值的元素，搜索局部的极大值的搜索问题，NMS是许多计算机视觉算法的部分。<ul>
 <li>这个局部代表的是一个邻域，邻域有两个参数可变，一是邻域的维数，二是邻域的大小。</li>
@@ -1333,76 +1030,18 @@
 <li>衡量了现有的检测系统。</li>
 <li>分析了一般的常见失败情况。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>INRIA数据集。</li>
 <li>现有数据集的缺陷。</li>
 <li>贡献（4方面）。</li>
 </ul>
-<h2 id="2-Dataset"><a href="#2-Dataset" class="headerlink" title="2. Dataset"></a>2. Dataset</h2><ul>
-<li>介绍了Caltech数据集的数据内容，标记等。</li>
-<li><p>Scale(等级，范围)根据行人的图片大小，将行人分为3个范围：near（80或者更多像素）、medium（30-80像素之间）、far（30像素或更少）。</p>
-<ul>
-<li>大约68%的行人位于中等大小范围。</li>
-<li>对于medium范围的加测对于汽车应用是十分重要的。</li>
-<li>我们应当在整个工作中利用ner/ medium /far之间的区别。</li>
-</ul>
-</li>
-<li><p>Occlusion(遮挡)</p>
-<ul>
-<li>遮挡的行人通过两个框来标注。</li>
-<li>29%的行人从来没有被挡住</li>
-<li>53%的呗挡在一部分帧</li>
-<li>19%的在所有帧中都被挡</li>
-</ul>
-</li>
-<li><p>Position(位置)：由于视点和地表形状的原因约束着行人值出现在图片的特定区域，经过分析，行人文职更加集中而不是突然出现的。</p>
-</li>
-<li>数据捕捉了超过11种场景:0-5用来作为训练，6-10用来作为测试</li>
-<li><p>设置了三个具体的训练/测试场景</p>
-<ul>
-<li>Scenario-A：在所有外部数据上进行训练，在会话6-10上进行测试。这样允许在已经存在的方法上不进行重新训练就能进行广泛的调查。</li>
-<li>Scenario-B：利用会话0-5进行6折交叉验证，每次使用5个session来进行训练，第6个进行测试，然后在验证集上融合结果，在政策训练集上汇报检测器的表现。</li>
-<li>Scenario-C：用0-5会话来训练，用6-10会话来测试。（完整测试）</li>
-</ul>
-</li>
-<li><p>与现有的数据集的比较：</p>
-<ul>
-<li>广泛使用的‘人’数据集：MIT LabelMe的子集和PASCAL VOC数据集。</li>
-<li>现有数据集可以分为两类：一类是人数据集包含了人的各种姿势，另一类是行人数据集包含了垂直的人（站立或者行走），但主要是从一个较为限制的视点进行观察的。</li>
-<li>从摄影师处收集的数据集都存在 <strong>选择偏差</strong> ，但是监控视频有着有限的背景，移动拍摄的数据会极大的排除了选择偏差。</li>
-<li>INRIA偏向于打的，大部分未遮挡的行人</li>
-<li>其他相关的数据集有：DC，ETH</li>
-</ul>
-</li>
-<li>Caltech数据集最先进和重要的方面，而且这是目前第一个数据集与时间相对应的标注框和详细遮挡标签。</li>
-</ul>
-<h2 id="3-评估方法"><a href="#3-评估方法" class="headerlink" title="3. 评估方法"></a>3. 评估方法</h2><ul>
-<li>现有的已建立的评估行人检测方法是有瑕疵的。</li>
-<li>pre-window VS pre-image</li>
-<li>pre-window：逐窗口检测器在图像上被密集扫描并且邻近的检测被合并，比如使用NMS。</li>
-<li>一个典型的假设是：较好的pre-window分数会在一整个图片上带来更好的表现；然而在实际中pre-window表现在预测pre-image性能时失败。</li>
-<li>不是所有检测系统都是基于华东窗口的，而且pre-window方法对这类系统的评估是不可能的。</li>
-</ul>
-<h3 id="3-1-Pre-image-evaluation"><a href="#3-1-Pre-image-evaluation" class="headerlink" title="3.1 Pre-image evaluation"></a>3.1 Pre-image evaluation</h3><ul>
-<li>利用PASCAL物体检测挑战中的修改过的scheme版本进行单帧检测。</li>
-<li>一个检测系统需要输入一个图像并且为每个检测返回一个边界框或者一个分数或者一个置信度。这个系统应该可以执行多等级检测以及必要的NMS或者其他后期处理。</li>
-<li>评估应该在最后生成的被检测到的边界框中执行。</li>
-<li>PASCAL估计：重叠区域必须超过50%：</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqwf7ettj309801oglo.jpg" alt=""></p>
-<ul>
-<li>为了比较方法，通过变化检测置信度的阈值，我们画出了纵坐标miss rate，横坐标每张图像假正例（FPPI）的图像。对于某些任务，更倾向于使用查准-召回曲线，比如汽车应用，典型的已经有一个可接受的FPPI上限，并且独立于行人行人密度。</li>
-<li>引入ignore regions。这一区域不需要匹配，匹配上不算是TP，没有匹配上也不算FN。</li>
-<li>只有完整的标注框才能用来匹配，不是可见的标注框，甚至对于部分遮挡的行人。</li>
-</ul>
-<h2 id="4-Evaluation-Results"><a href="#4-Evaluation-Results" class="headerlink" title="4. Evaluation Results"></a>4. Evaluation Results</h2><ul>
-<li>Overall</li>
-<li>Scale</li>
-<li>Occlusion</li>
-<li>Aspect ratio</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/4124170924/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1486,7 +1125,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1495,7 +1134,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

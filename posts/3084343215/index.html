@@ -126,7 +126,7 @@ miss rate = FNR = 1">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfltceqj304m00ndfp.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfl4bwqj305d00r0sm.jpg">
-<meta property="og:updated_time" content="2017-01-27T07:05:33.000Z">
+<meta property="og:updated_time" content="2017-01-28T08:19:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行人检测论文笔记：Histograms of Oriented Gradients for Human Detection">
 <meta name="twitter:description" content="相关知识点
@@ -493,12 +493,13 @@ miss rate = FNR = 1">
 <li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
 <li>新的数据集</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>第一需求：robust feature set.</li>
 <li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
 <li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
 </ul>
-<h2 id="2-Previous-Work"><a href="#2-Previous-Work" class="headerlink" title="2 Previous Work"></a>2 Previous Work</h2><h2 id="3-Overview-of-the-Method"><a href="#3-Overview-of-the-Method" class="headerlink" title="3 Overview of the Method"></a>3 Overview of the Method</h2><ul>
+<a id="more"></a>
+<h2 id="Previous-Work"><a href="#Previous-Work" class="headerlink" title="Previous Work"></a>Previous Work</h2><h2 id="Overview-of-the-Method"><a href="#Overview-of-the-Method" class="headerlink" title="Overview of the Method"></a>Overview of the Method</h2><ul>
 <li>The method is based on evaluating well-normalized local histograms of image gradient orientations in a dense grid.</li>
 <li>基本思想是，在一副图像中，局部目标的 <strong>表象</strong> 和 <strong>形状</strong> （appearance and shape）能够被梯度或边缘的方向密度分布很好地描述，即使没有对应的梯度或边缘位置的精确知识。</li>
 <li>具体的实现方法是：首先将图像分成小的连通区域，我们把它叫细胞单元（cell）。然后采集细胞单元中各像素点的梯度的或边缘的方向直方图。最后把这些直方图组合起来就可以构成特征描述器。</li>
@@ -520,19 +521,19 @@ miss rate = FNR = 1">
 <li><p>作者通过实验发现，在粗的空域抽样（coarse spatial sampling）、精细的方向抽样（fine orientation sampling）以及较强的局部光学归一化（strong local photometric normalization）等条件下，只要行人大体上能够保持直立的姿势，就容许行人有一些细微的肢体动作，这些细微的动作可以被忽略而不影响检测效果。综上所述，HOG方法是特别适合于做图像中的行人检测的。</p>
 </li>
 </ul>
-<h2 id="4-Data-Sets-and-Methodology"><a href="#4-Data-Sets-and-Methodology" class="headerlink" title="4 Data Sets and Methodology"></a>4 Data Sets and Methodology</h2><ul>
+<h2 id="Data-Sets-and-Methodology"><a href="#Data-Sets-and-Methodology" class="headerlink" title="Data Sets and Methodology"></a>Data Sets and Methodology</h2><ul>
 <li>hard examples</li>
 <li>Detection Error Tradeoff (DET) curves on a log-log scale. miss rate(1-Recall / FN/(TP+FN)) verses FPPW. 值越低越好。</li>
 <li>DET图和ROC图提供的信息一眼，但是前者允许小概率更容易的去分布。</li>
 <li>FPPW：NUMBER_OF_FALSE_POSITIVE/NUMBER_OF_WINDOWS</li>
 <li>我们的DET曲线通常相当浅，所以即使非常小的缺失率的改善也等同于在不变缺失率下的情况下FPPW中的大增益。</li>
 </ul>
-<h2 id="5-Overview-of-Results"><a href="#5-Overview-of-Results" class="headerlink" title="5 Overview of Results"></a>5 Overview of Results</h2><ul>
+<h2 id="Overview-of-Results"><a href="#Overview-of-Results" class="headerlink" title="Overview of Results"></a>Overview of Results</h2><ul>
 <li>Generalized Haar Wavelets.</li>
 <li>PCA-SIFT.</li>
 <li>Shape Contexts.</li>
 </ul>
-<h2 id="6-Implementation-and-Performance-Study"><a href="#6-Implementation-and-Performance-Study" class="headerlink" title="6 Implementation and Performance Study"></a>6 Implementation and Performance Study</h2><ul>
+<h2 id="Implementation-and-Performance-Study"><a href="#Implementation-and-Performance-Study" class="headerlink" title="Implementation and Performance Study"></a>Implementation and Performance Study</h2><ul>
 <li><p>默认检测器：</p>
 <ul>
 <li>RGB colour space with no gamma correction</li>
@@ -549,11 +550,11 @@ miss rate = FNR = 1">
 <li><p>主要的结论是，为了良好的性能，应该使用细尺度导数（基本上没有平滑），许多定向仓,中等大小，强归一化，重叠的描述符块。</p>
 </li>
 </ul>
-<h3 id="6-1-Gamma-Colour-Normalization"><a href="#6-1-Gamma-Colour-Normalization" class="headerlink" title="6.1 Gamma/Colour Normalization"></a>6.1 Gamma/Colour Normalization</h3><h3 id="6-2-Gradient-Computation"><a href="#6-2-Gradient-Computation" class="headerlink" title="6.2 Gradient Computation"></a>6.2 Gradient Computation</h3><ul>
+<h3 id="Gamma-Colour-Normalization"><a href="#Gamma-Colour-Normalization" class="headerlink" title="Gamma/Colour Normalization"></a>Gamma/Colour Normalization</h3><h3 id="Gradient-Computation"><a href="#Gradient-Computation" class="headerlink" title="Gradient Computation"></a>Gradient Computation</h3><ul>
 <li>最通常用的方法就是简单的应用一个一维的离散的梯度模版分别应用在水平和垂直方向上去。可以使用如下的卷积核进行卷积：</li>
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfj1a8sj3066017q2t.jpg" alt=""></p>
-<h3 id="6-3-Spatial-Orientation-Binning-方向单元划分"><a href="#6-3-Spatial-Orientation-Binning-方向单元划分" class="headerlink" title="6.3 Spatial / Orientation Binning(方向单元划分)"></a>6.3 Spatial / Orientation Binning(方向单元划分)</h3><ul>
+<h3 id="Spatial-Orientation-Binning-方向单元划分"><a href="#Spatial-Orientation-Binning-方向单元划分" class="headerlink" title="Spatial / Orientation Binning(方向单元划分)"></a>Spatial / Orientation Binning(方向单元划分)</h3><ul>
 <li>每个块内的每个像素对 <strong>方向直方图</strong> 进行投票</li>
 <li>每个像素基于以其为中心的梯度元素的方向计算边缘取向直方图通道的 加权投票，并且投票被累积到在称为 <strong>单元</strong> 的局部空间区域上的 <strong>方向仓</strong> 中。</li>
 <li>每个块的形状可以是矩形或圆形的</li>
@@ -563,7 +564,7 @@ miss rate = FNR = 1">
 <li>梯度幅度本身通常产生最好的结果。其它可选的方案是采用幅度的平方或开方，或者幅度的裁剪版本。</li>
 <li>Dalal和Triggs发现在人的检测实验中，把方向分为 <strong>9个通道(bin)</strong> 效果最好</li>
 </ul>
-<h3 id="6-4-Normalization-and-Descriptor-Blocks"><a href="#6-4-Normalization-and-Descriptor-Blocks" class="headerlink" title="6.4 Normalization and Descriptor Blocks"></a>6.4 Normalization and Descriptor Blocks</h3><ul>
+<h3 id="Normalization-and-Descriptor-Blocks"><a href="#Normalization-and-Descriptor-Blocks" class="headerlink" title="Normalization and Descriptor Blocks"></a>Normalization and Descriptor Blocks</h3><ul>
 <li>由于照明的局部变化和前景-背景对比度，梯度强度在可以在很宽范围内变化。所以梯度强度必须要局部地归一化，这需要把方格(cells)集结成更大、在空间上连结的区()</li>
 <li><strong>有效的局部对比度归一化</strong> 对于良好的性能是必不可少的。</li>
 <li>我们评估了多种不同的 <strong>归一化schemes(normalization schemes)</strong> ，他们大多数都是基于将单元格（cells）分组成更大的空间块（spatial blocks）<em>  </em>并且对比地单独对每个块进行归一化。</li>
@@ -642,14 +643,14 @@ miss rate = FNR = 1">
 <li><p>Centre-surround normalization.</p>
 </li>
 </ul>
-<h3 id="6-5-Detector-Window-and-Context"><a href="#6-5-Detector-Window-and-Context" class="headerlink" title="6.5 Detector Window and Context"></a>6.5 Detector Window and Context</h3><h3 id="6-6-Classifier"><a href="#6-6-Classifier" class="headerlink" title="6.6 Classifier"></a>6.6 Classifier</h3><p>最后一步就是把提取的HOG特征输入到SVM分类器中，寻找一个最优超平面作为决策函数。作者采用的方法是：使用免费的SVMLight软件包加上HOG分类器来寻找测试图像中的行人。</p>
-<h3 id="6-7-Discussion"><a href="#6-7-Discussion" class="headerlink" title="6.7 Discussion"></a>6.7 Discussion</h3><ul>
+<h3 id="Detector-Window-and-Context"><a href="#Detector-Window-and-Context" class="headerlink" title="Detector Window and Context"></a>Detector Window and Context</h3><h3 id="Classifier"><a href="#Classifier" class="headerlink" title="Classifier"></a>Classifier</h3><p>最后一步就是把提取的HOG特征输入到SVM分类器中，寻找一个最优超平面作为决策函数。作者采用的方法是：使用免费的SVMLight软件包加上HOG分类器来寻找测试图像中的行人。</p>
+<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><ul>
 <li>在甲酸梯度前进行任何程度的平滑处理都会毁掉HOG的结果，因为许多可供的图像信息都是从细尺度的突出边界形成的。</li>
 <li>详单，梯度应该在当前金字塔层的最细可供尺度上被计算，修改或者用于方向投票并且只有在那之后在模糊空间。</li>
 <li>其次，强的局部对比正常化对于良好的结果至关重要，传统的中心环绕样式方案不是最好的选择。</li>
 <li>更好的结果可以通过相对于不同的局部支持对每个元素（边缘，单元）进行几次标准化，并将结果作为独立信号来实现。</li>
 </ul>
-<h2 id="7-Summary-and-Conclusions"><a href="#7-Summary-and-Conclusions" class="headerlink" title="7 Summary and Conclusions"></a>7 Summary and Conclusions</h2><ul>
+<h2 id="Summary-and-Conclusions"><a href="#Summary-and-Conclusions" class="headerlink" title="Summary and Conclusions"></a>Summary and Conclusions</h2><ul>
 <li><p>我们研究了各种描述符参数的影响，并得出结论，在重叠描述符块中的</p>
 <ul>
 <li>精细尺度梯度，</li>
@@ -814,7 +815,7 @@ miss rate = FNR = 1">
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -823,7 +824,7 @@ miss rate = FNR = 1">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -903,7 +904,7 @@ miss rate = FNR = 1">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关知识点"><span class="nav-number">1.</span> <span class="nav-text">相关知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-number">3.</span> <span class="nav-text">1 Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Previous-Work"><span class="nav-number">4.</span> <span class="nav-text">2 Previous Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Overview-of-the-Method"><span class="nav-number">5.</span> <span class="nav-text">3 Overview of the Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Data-Sets-and-Methodology"><span class="nav-number">6.</span> <span class="nav-text">4 Data Sets and Methodology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Overview-of-Results"><span class="nav-number">7.</span> <span class="nav-text">5 Overview of Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Implementation-and-Performance-Study"><span class="nav-number">8.</span> <span class="nav-text">6 Implementation and Performance Study</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Gamma-Colour-Normalization"><span class="nav-number">8.1.</span> <span class="nav-text">6.1 Gamma/Colour Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Gradient-Computation"><span class="nav-number">8.2.</span> <span class="nav-text">6.2 Gradient Computation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Spatial-Orientation-Binning-方向单元划分"><span class="nav-number">8.3.</span> <span class="nav-text">6.3 Spatial / Orientation Binning(方向单元划分)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-Normalization-and-Descriptor-Blocks"><span class="nav-number">8.4.</span> <span class="nav-text">6.4 Normalization and Descriptor Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-Detector-Window-and-Context"><span class="nav-number">8.5.</span> <span class="nav-text">6.5 Detector Window and Context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-Classifier"><span class="nav-number">8.6.</span> <span class="nav-text">6.6 Classifier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-Discussion"><span class="nav-number">8.7.</span> <span class="nav-text">6.7 Discussion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Summary-and-Conclusions"><span class="nav-number">9.</span> <span class="nav-text">7 Summary and Conclusions</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#相关知识点"><span class="nav-number">1.</span> <span class="nav-text">相关知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Previous-Work"><span class="nav-number">4.</span> <span class="nav-text">Previous Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-the-Method"><span class="nav-number">5.</span> <span class="nav-text">Overview of the Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Sets-and-Methodology"><span class="nav-number">6.</span> <span class="nav-text">Data Sets and Methodology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview-of-Results"><span class="nav-number">7.</span> <span class="nav-text">Overview of Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-and-Performance-Study"><span class="nav-number">8.</span> <span class="nav-text">Implementation and Performance Study</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gamma-Colour-Normalization"><span class="nav-number">8.1.</span> <span class="nav-text">Gamma/Colour Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient-Computation"><span class="nav-number">8.2.</span> <span class="nav-text">Gradient Computation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spatial-Orientation-Binning-方向单元划分"><span class="nav-number">8.3.</span> <span class="nav-text">Spatial / Orientation Binning(方向单元划分)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalization-and-Descriptor-Blocks"><span class="nav-number">8.4.</span> <span class="nav-text">Normalization and Descriptor Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detector-Window-and-Context"><span class="nav-number">8.5.</span> <span class="nav-text">Detector Window and Context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Classifier"><span class="nav-number">8.6.</span> <span class="nav-text">Classifier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Discussion"><span class="nav-number">8.7.</span> <span class="nav-text">Discussion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-and-Conclusions"><span class="nav-number">9.</span> <span class="nav-text">Summary and Conclusions</span></a></li></ol></div>
             
 
           </div>

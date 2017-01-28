@@ -663,6 +663,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -699,13 +721,12 @@
 
       
         
-          
-            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>现有的深卷积神经网络（CNN）需要固定尺寸（例如，224×224）的输入图像。</li>
 <li>新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。</li>
 <li>使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。</li>
 </ul>
-<h2 id="1-INTRODUCTION"><a href="#1-INTRODUCTION" class="headerlink" title="1 INTRODUCTION"></a>1 INTRODUCTION</h2><ul>
+<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><ul>
 <li>在CNN的训练和测试中存在技术问题：普遍的CNN需要固定的输入图像大小（例如，224×224），其限制了输入图像的宽高比和比例。</li>
 <li>Cropping</li>
 <li>Warping-&gt;unwanted geometric distortion(不需要的几何失真)</li>
@@ -732,36 +753,22 @@
 </li>
 <li><p>实验表明，这种多尺寸训练与传统的单尺寸训练一样收敛，并导致更好的测试精度。</p>
 </li>
-<li>SPP的优点是与特定的CNN设计是正交的。</li>
-<li>Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.</li>
-<li>VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.</li>
-<li>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</li>
-</ul>
-<h2 id="2-DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING"><a href="#2-DEEP-NETWORKS-WITH-SPATIAL-PYRAMID-POOLING" class="headerlink" title="2 DEEP NETWORKS WITH SPATIAL PYRAMID POOLING"></a>2 DEEP NETWORKS WITH SPATIAL PYRAMID POOLING</h2><ul>
-<li>输入图像中的这些形状激活在相应位置的feature map</li>
-</ul>
-<h3 id="2-2-The-Spatial-Pyramid-Pooling-Layer"><a href="#2-2-The-Spatial-Pyramid-Pooling-Layer" class="headerlink" title="2.2 The Spatial Pyramid Pooling Layer"></a>2.2 The Spatial Pyramid Pooling Layer</h3><ul>
-<li>Bag-of-Words (BoW) approach-&gt;用来将生成的特征进行pool从而产生固定长度的向量。</li>
-<li>空间金字塔池提高BoW，因为它可以通过在局部空间仓中汇集来 <strong>维护空间信息</strong> 。</li>
-<li><p>“global pooling” operation</p>
-<ul>
-<li>a global average pooling</li>
-<li>a global average pooling</li>
-</ul>
+<li><p>SPP的优点是与特定的CNN设计是正交的。</p>
+</li>
+<li><p>Caltech101: L. Fei-Fei, R. Fergus, and P. Perona, “Learning generative visual models from few training examples: An incremental bayesian approach tested on 101 object categories,” CVIU, 2007.</p>
+</li>
+<li><p>VOC 2007: M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman, “The PASCAL Visual Object Classes Challenge 2007 (VOC2007) Results,” 2007.</p>
+</li>
+<li><p>但是R-CNN中的特征计算是耗时的，因为它对每个图像的数千个wraped区域的原始像素重复应用深卷积网络。而本文提出的方法可以在一整张图像上只跑一次卷积层</p>
 </li>
 </ul>
-<h3 id="2-3-Training-the-Network"><a href="#2-3-Training-the-Network" class="headerlink" title="2.3 Training the Network"></a>2.3 Training the Network</h3><ul>
-<li>Single-size training</li>
-<li>Multi-size training</li>
-</ul>
-<h2 id="3-SPP-NET-FOR-IMAGE-CLASSIFICATION"><a href="#3-SPP-NET-FOR-IMAGE-CLASSIFICATION" class="headerlink" title="3. SPP-NET FOR IMAGE CLASSIFICATION"></a>3. SPP-NET FOR IMAGE CLASSIFICATION</h2><h2 id="4-SPP-NET-FOR-OBJECT-DETECTION"><a href="#4-SPP-NET-FOR-OBJECT-DETECTION" class="headerlink" title="4. SPP-NET FOR OBJECT DETECTION"></a>4. SPP-NET FOR OBJECT DETECTION</h2><ul>
-<li>对于R-CNN来说，Feature extraction is the major timing bottleneck in testing.</li>
-<li>对于我们的SPP-net来说，我们从一整张图片中值提取一次特征。</li>
-<li>On the contrary, our method enables feature extraction in <strong>arbitrary windows</strong> from the deep convolutional feature maps.</li>
-</ul>
-<h3 id="4-1-Detection-Algorithm"><a href="#4-1-Detection-Algorithm" class="headerlink" title="4.1 Detection Algorithm"></a>4.1 Detection Algorithm</h3><p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfnxjqg0ej30h50lfai3.jpg" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3054155989/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -851,6 +858,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -887,8 +916,7 @@
 
       
         
-          
-            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>mAP: mean average precision，平均准确度</li>
 <li><p>我们的方法结合两个关键的见解：</p>
 <ul>
@@ -897,7 +925,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
 <li><p>实现这个结果需要解决两个问题：</p>
 <ul>
@@ -905,82 +933,20 @@
 <li>仅利用少量的注释检测数据来训练训练高容量模型。</li>
 </ul>
 </li>
-<li><p>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</p>
-</li>
+<li>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</li>
 <li>在测试时，我们的方法为输入图像生成大约2000个类别无关区域提案，使用CNN从每个proposal中提取固定长度的特征向量，然后使用类别特定的线性SVM对每个区域进行分类。</li>
 <li>检测中面临的第二个挑战是标记的数据不足，目前可用的数据数量不足以训练大型CNN。这个问题的常规解决方案是使用无监督预训练，然后是监督 fine-tuning。</li>
 <li>我们发现，对于CNN，有很大比例的参数（94%）可以在检测精度的适度降低的情况下被去除。</li>
 <li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
 <li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
 </ul>
-<h2 id="2-Object-detection-with-R-CNN"><a href="#2-Object-detection-with-R-CNN" class="headerlink" title="2. Object detection with R-CNN"></a>2. Object detection with R-CNN</h2><ul>
-<li><p>我们的对象检测系统由三个模块组成:</p>
-<ul>
-<li>首先生成类别独立(category-independent)区域proposal。 这些proposal定义了可用于检测器的候选检测集合。</li>
-<li>第二个模块是大卷积神经网络，从每个区域提取固定长度的特征向量。</li>
-<li>第三个模块是一类特定类型的线性SVM。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-1-Module-design"><a href="#2-1-Module-design" class="headerlink" title="2.1. Module design"></a>2.1. Module design</h3><ul>
-<li><p>Region proposals: 目前有很多用来生成category-independent的region proposal的方法：</p>
-<ul>
-<li>Objectness</li>
-<li>selective search</li>
-<li>category-independent object proposals</li>
-<li>constrained parametric min-cuts (CPMC)</li>
-<li>multi-scale combinatorial grouping</li>
-<li>detect mitotic cells by applying a CNN to regularly-spaced square crops, which are a special case of region proposals.(通过将CNN应用于规则间隔的方形作物来检测有丝分裂细胞，这是区域提案的特殊情况。)</li>
-</ul>
-</li>
-<li><p>虽然R-CNN与特定区域建议方法无关，但我们使用选择性搜索(selective search)来实现与先前检测工作的受控比较</p>
-</li>
-<li><p>Feature extraction:我们从每个区域提案中提取一个4096维特征向量，特征通过前向传播对227×227 RGB图像通过 <strong>五个卷积层和两个完全连接的层</strong> 计算。</p>
-</li>
-<li>无论候选区域的大小或宽高比如何，我们都会将其周围的紧密边界框中的所有像素装到所需的大小(227x227像素尺寸)。</li>
-</ul>
-<h3 id="2-2-Test-time-detection"><a href="#2-2-Test-time-detection" class="headerlink" title="2.2. Test-time detection"></a>2.2. Test-time detection</h3><ul>
-<li>在测试时，我们对测试图像运行选择性搜索以提取大约2000个区域建议（我们在所有实验中使用选择性搜索的“快速模式（fast mode）”）。</li>
-<li>给定图像中的所有得分区域，我们应用贪心非最大抑制(greedy non-maximum suppression)（对于每个类独立地），如果与的饭较高的区域有重叠，且IoU大于学习到的阈值，则该拒绝区域。</li>
-<li><p>Run-time analysis.两个属性使检测更高校。</p>
-<ul>
-<li>首先，所有CNN参数在所有类别中共享。</li>
-<li>第二，CNN计算的特征向量与其他常见方法（例如具有视觉词袋编码的空间棱金字塔）相比是 <strong>低维的</strong> 。</li>
-<li>唯一的类特定(class-specific)计算是特征和SVM权重之间的点积和非最大抑制。</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-3-Training"><a href="#2-3-Training" class="headerlink" title="2.3. Training"></a>2.3. Training</h3><ul>
-<li>除了用随机初始化的21路分类层（对于20个VOC类加上背景）替换CNN的ImageNet特定的1000路分类层之外，CNN架构是不变的。</li>
-<li>我们将所有region proposal与一个ground-truth重叠为IoU&gt;0.5，作为该框类的阳性，其余作为阴性。</li>
-<li>我们以0.001的学习速率（初始预训练速率的1/10）开始SGD，这允许精细调整进行，而不是破坏初始化。</li>
-<li>一旦提取特征并应用训练标签，我们对每个类优化一个线性SVM。</li>
-<li>由于训练数据太大，无法记忆，我们采用标准 <strong>hard negative mining method</strong> 。</li>
-</ul>
-<h3 id="2-4-Results-on-PASCAL-VOC-2010-12"><a href="#2-4-Results-on-PASCAL-VOC-2010-12" class="headerlink" title="2.4. Results on PASCAL VOC 2010-12"></a>2.4. Results on PASCAL VOC 2010-12</h3><h2 id="3-Visualization-ablation-and-modes-of-error"><a href="#3-Visualization-ablation-and-modes-of-error" class="headerlink" title="3. Visualization, ablation, and modes of error"></a>3. Visualization, ablation, and modes of error</h2><h3 id="3-1-Visualizing-learned-features"><a href="#3-1-Visualizing-learned-features" class="headerlink" title="3.1. Visualizing learned features"></a>3.1. Visualizing learned features</h3><ul>
-<li>pool-5，是网络第五个也是最后一个卷基层的max-pool层的输出。（是一个max-pooling层）</li>
-<li>The pool-5 feature map is 6 × 6 × 256 = 9216维。</li>
-<li>忽略边界效应，每个pool-5单元在原始227×227像素输入中具有195×195像素的接收场。</li>
-</ul>
-<h3 id="3-2-Ablation-studies"><a href="#3-2-Ablation-studies" class="headerlink" title="3.2. Ablation studies"></a>3.2. Ablation studies</h3><ul>
-<li>Fc6与pool-5全连接，为了计算特征，他它将 <strong>4096×9216的权重矩阵乘以pool-5的feature map</strong> （重新形成为9216维矢量），然后添加偏差矢量。</li>
-<li>Fc7是网络的最后一层，通过将由fc 6计算的特征乘以 <strong>4096×4096</strong> 权重矩阵，并类似地添加偏置矢量和应用半波整流来实现。</li>
-<li>大多数CNN的表示能力来自它的卷积层，而不是来自大得多的密集连接的层。</li>
-<li>All R-CNN variants strongly outperform the three DPM baselines</li>
-</ul>
-<h3 id="3-3-Detection-error-analysis"><a href="#3-3-Detection-error-analysis" class="headerlink" title="3.3. Detection error analysis"></a>3.3. Detection error analysis</h3><h3 id="3-4-Bounding-box-regression"><a href="#3-4-Bounding-box-regression" class="headerlink" title="3.4. Bounding box regression"></a>3.4. Bounding box regression</h3><h2 id="4-Semantic-segmentation"><a href="#4-Semantic-segmentation" class="headerlink" title="4. Semantic segmentation"></a>4. Semantic segmentation</h2><ul>
-<li>full</li>
-<li>fg</li>
-<li>full+fg</li>
-<li>The fg strategy slightly outperforms full, indicating that the masked region shape provides a stronger signal, matching our intuition.</li>
-</ul>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a>5. Conclusion</h2><ul>
-<li>之前最好的性能系统是将多个低级图像特征与来自对象检测器和场景分类器的高级上下文组合在一起的复杂集合。</li>
-<li>本文提出了一个简单和可扩展的对象检测算法，与PASCAL VOC 2012上的最佳以前的结果相比提供30％的相对改进。</li>
-<li>我们推测“supervised pre-training/domain-speciﬁc ﬁne-tuning”范例将对各种数据缺乏的视觉问题高度有效。</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/4241353321/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1070,6 +1036,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1106,8 +1094,7 @@
 
       
         
-          
-            <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
 <li><strong>L1范数</strong> 也称为最小绝对偏差（LAD），最小绝对误差（LAE）。它基本上最小化目标值(Yi)和估计值(f(xi))之间的绝对差(S)的和</li>
 </ul>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqk8unvtj306d0273ye.jpg" alt=""></p>
@@ -1122,64 +1109,13 @@
 <li>我们引入基于软拒绝的网络融合方法将来自所有网络的软度量融合在一起，以产生最终置信分数。</li>
 <li>此外，我们提出了一种用于将逐像素语义分割网络（ pixel-wise semantic segmentation network）集成到网络融合架构中作为行人检测器的加强的方法。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><ul>
-<li>Tradeoff between accuracy and speed.</li>
-<li>其他因素，如拥挤的场景，非人堵塞物体(non-person occluding objects)或不同的行人外观（不同的姿势或服装风格）也使这个Real-time行人检测问题具有挑战性。</li>
-<li>行人检测的一般框架可以分解为：</li>
-<li>region proposal generation,</li>
-<li>feature extraction,</li>
-<li><p>pedestrian verification</p>
-</li>
-<li><p>Fused Deep Neural Network(F-DNN)</p>
-</li>
-<li>该架构包括行人pedestrian candidiate generator，其通过训练深卷积神经网络获得以，从而具有高检测率，虽然有大的假阳性率。</li>
-<li>使用深度扩展卷积和上下文聚合的并行语义分割网络[30]为候选行人提供了另一个软的信任投票，它进一步与候选生成器和分类网络融合。</li>
-</ul>
-<h2 id="2-The-Fused-Deep-Neural-Network"><a href="#2-The-Fused-Deep-Neural-Network" class="headerlink" title="2. The Fused Deep Neural Network"></a>2. The Fused Deep Neural Network</h2><ul>
-<li>提出的网络架构包括行人候选生成器，分类网络和像素级语义分割网络。</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqk6f5o3j30q00iumyv.jpg" alt=""></p>
-<ul>
-<li><p>SSD: a single shot multi-box detector(单镜头多箱检测器)，行人候选生成器是一个single shot multi-box detector（SSD）</p>
-</li>
-<li><p>每个行人候选者与其定位BB坐标和置信度得分相关联。</p>
-</li>
-<li>我们提出了一种新的网络融合方法——称为基于软拒绝的网络融合（SNF）。并非是执行接受或拒绝候选者的硬二进制分类，而是基于来自分类器的候选者的 <strong>聚合度</strong> 来提升或折扣行人候选者的置信度分数。</li>
-<li>我们进一步提出了一种利用具有语义分割（SS）的上下文聚集扩展卷积网络（context aggregation dilated convolutional network with semantic segmentation）作为另一个分类器并将其集成到我们的网络融合架构中的方法。但是在速度上会变得特别慢。</li>
-</ul>
-<h3 id="2-1-Pedestrian-Candidate-Generator"><a href="#2-1-Pedestrian-Candidate-Generator" class="headerlink" title="2.1. Pedestrian Candidate Generator"></a>2.1. Pedestrian Candidate Generator</h3><ul>
-<li>SSD是具有截断VGG16(truncated VGG16)作为基础网络的前馈卷积网络。</li>
-<li>SSD的结构：</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfqk7e7e6j30pe07rgmh.jpg" alt=""></p>
-<ul>
-<li><p>L2归一化技术用于缩小特征量</p>
-</li>
-<li><p>对于大小为m×n×p的每个输出层，在每个位置处设置不同尺度和纵横比的一组默认BB。 将3×3×p个卷积内核应用于每个位置以产生关于默认BB位置的分类分数和BB位置偏移。</p>
-</li>
-<li>训练的目标函数是：</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqka1k2nj306u01nq2u.jpg" alt=""></p>
-<h3 id="2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion"><a href="#2-2-Classiﬁcation-Network-and-Soft-rejection-based-DNN-Fusion" class="headerlink" title="2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion"></a>2.2. Classiﬁcation Network and Soft-rejection based DNN Fusion</h3><ul>
-<li>分类网络由多个二元分类深层神经网络组成，这些网络在第一阶段的生成的行人候选集中训练。</li>
-<li>SNF：考虑一个行人候选人和一个分类器。如果分类器对候选人有高的信任度，我们通过乘以大于1的置信因子乘以候选发生器来提高其原始分数。否则，我们以小于1的缩放因子减小其得分。我们将“置信”定义为至少为ac的分类概率。为了融合所有M个分类器，我们将候选者的原始信任得分与分类网络中所有分类器的信任缩放因子的乘积相乘。</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfqkaszbpj30q202qt9i.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfqkaaiiij3086024t8n.jpg" alt=""></p>
-<ul>
-<li>SNF背后的关键思想是，我们不直接接受或拒绝任何候选行人，而是基于分类概率的因素来扩展它们。</li>
-</ul>
-<h3 id="2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement"><a href="#2-3-Pixel-wise-semantic-segmentation-for-object-detection-reinforcement" class="headerlink" title="2.3. Pixel-wise semantic segmentation for object detection reinforcement"></a>2.3. Pixel-wise semantic segmentation for object detection reinforcement</h3><ul>
-<li>为了执行密集预测，SS网络由完全卷积的VGG16网络组成，其适应于作为前端预测模块的扩展卷积，其输出被馈送到多尺度上下文聚合模块，该多尺度上下文聚合模块由完全卷积网络组成，其卷积层具有增加扩张因子。</li>
-<li>输入图像被缩放并由SS网络直接处理，SS网络产生具有显示出行人类激活像素的一种颜色和显示出背景的其他颜色的二进遮罩。</li>
-<li>我们使用以下策略来融合结果：如果行人像素占据候选BB区域的至少20％，我们接受候选者并保持其得分不变; 否则，我们应用SNF来缩放原始的信任分数。</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqkbeg8wj30g002cwen.jpg" alt=""></p>
-<h2 id="3-Experiments-and-result-analysis"><a href="#3-Experiments-and-result-analysis" class="headerlink" title="3. Experiments and result analysis"></a>3. Experiments and result analysis</h2><h3 id="3-1-Data-and-evaluation-settings"><a href="#3-1-Data-and-evaluation-settings" class="headerlink" title="3.1. Data and evaluation settings"></a>3.1. Data and evaluation settings</h3><h3 id="3-2-Training-details-and-results"><a href="#3-2-Training-details-and-results" class="headerlink" title="3.2. Training details and results"></a>3.2. Training details and results</h3><ul>
-<li><strong>硬拒绝（Hard Rejection）</strong> 被定义为消除由任何分类器分类为假阳性的任何候选者。</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2553947436/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1433,6 +1369,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1469,8 +1427,7 @@
 
       
         
-          
-            <h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+          <h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
 <li>Human Baseline 的标准是如何确定的?</li>
 <li><p>Ground-truth是什么意思？</p>
 <ul>
@@ -1511,97 +1468,14 @@
 <li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
 </li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
-<li><p>最流行的数据集：Caltech-USA、KITTI</p>
-<ul>
-<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
-<li>一共350000个标注、覆盖2300各单一的行人</li>
-<li>测试集：4024帧</li>
-</ul>
-</li>
-<li><p>MR: miss rate</p>
-</li>
-</ul>
-<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
-<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
-<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
-<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
-<li>环境和光流可以提高检测（额外的提示）</li>
-</ul>
-<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
-<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
-<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
-<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
-<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
-<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
-</ul>
-<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
-<li><p>一个检测器可以有两类错误：</p>
-<ul>
-<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
-<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
-</ul>
-</li>
-<li><p>FP聚类成11个分类</p>
-</li>
-<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
-<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
-</ul>
-<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
-<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
-</ul>
-<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
-<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
-<li><p>我们的目标是两方面：</p>
-<ul>
-<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
-<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
-</ul>
-</li>
-<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
-</li>
-</ul>
-<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
-<li><p>Pruning benefits:</p>
-<ul>
-<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
-<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
-</ul>
-</li>
-<li><p>Alignment benefits:</p>
-<ul>
-<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
-<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
-</li>
-<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
-</li>
-<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
-<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
-</li>
-<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
-</li>
-<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
-</li>
-<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
-</li>
-</ul>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
-<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
-</li>
-<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
-</li>
-<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
-</li>
-</ul>
-
-          
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2397281138/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1691,6 +1565,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1727,8 +1623,7 @@
 
       
         
-          
-            <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-1-Related-work"><a href="#1-1-Related-work" class="headerlink" title="1.1. Related work"></a>1.1. Related work</h3><ul>
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
 <li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
 <li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
 <li>DBN-Mut: extended to ac- count for person-to-person relations</li>
@@ -1745,15 +1640,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="2-Training-data"><a href="#2-Training-data" class="headerlink" title="2. Training data"></a>2. Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="3-From-decision-forests-to-neural-networks"><a href="#3-From-decision-forests-to-neural-networks" class="headerlink" title="3. From decision forests to neural networks"></a>3. From decision forests to neural networks</h3>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/285415955/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1843,6 +1736,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1879,105 +1794,20 @@
 
       
         
-          
-            <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
 </ul>
-<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
 <li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
 </ul>
-<h2 id="2-Datasets"><a href="#2-Datasets" class="headerlink" title="2 Datasets"></a>2 Datasets</h2><ul>
-<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
-<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
-<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
-<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
-<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
-<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
-</ul>
-<h2 id="3-Main-approaches-to-improve-pedestrian-detection"><a href="#3-Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="3 Main approaches to improve pedestrian detection"></a>3 Main approaches to improve pedestrian detection</h2><ul>
-<li><p>40+种行人检测的方法：</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
-</li>
-</ul>
-<ul>
-<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
-</ul>
-<h3 id="3-1-Training-data"><a href="#3-1-Training-data" class="headerlink" title="3.1 Training data"></a>3.1 Training data</h3><h3 id="3-2-Solution-families"><a href="#3-2-Solution-families" class="headerlink" title="3.2 Solution families"></a>3.2 Solution families</h3><ul>
-<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
-</ul>
-<ol>
-<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
-<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
-<li><p>决策林（ChnFtrs，Roerei等）。</p>
-</li>
-<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
-</li>
-</ol>
-<h3 id="3-3-Better-classiﬁers"><a href="#3-3-Better-classiﬁers" class="headerlink" title="3.3 Better classiﬁers"></a>3.3 Better classiﬁers</h3><ul>
-<li>特征和分类器之间的没有明确的界限</li>
-</ul>
-<h3 id="3-4-Additional-data"><a href="#3-4-Additional-data" class="headerlink" title="3.4 Additional data"></a>3.4 Additional data</h3><ul>
-<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
-<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
-</ul>
-<h3 id="3-5-Exploiting-context"><a href="#3-5-Exploiting-context" class="headerlink" title="3.5 Exploiting context"></a>3.5 Exploiting context</h3><ul>
-<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
-</ul>
-<h3 id="3-6-Deformable-parts"><a href="#3-6-Deformable-parts" class="headerlink" title="3.6 Deformable parts"></a>3.6 Deformable parts</h3><ul>
-<li>对于行人检测，结果是有竞争性的，但不显着。</li>
-<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
-</ul>
-<h3 id="3-7-Multi-scale-models"><a href="#3-7-Multi-scale-models" class="headerlink" title="3.7 Multi-scale models"></a>3.7 Multi-scale models</h3><ul>
-<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
-<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
-</ul>
-<h3 id="3-8-Deep-architectures"><a href="#3-8-Deep-architectures" class="headerlink" title="3.8 Deep architectures"></a>3.8 Deep architectures</h3><ul>
-<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
-<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
-</ul>
-<h3 id="3-9-Better-features"><a href="#3-9-Better-features" class="headerlink" title="3.9 Better features"></a>3.9 Better features</h3><ul>
-<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
-<li>越来越多样化的特性已经显示系统地提高性能。</li>
-<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
-<ul>
-<li>6个梯度方向，</li>
-<li>1个梯度幅度</li>
-<li><p>3个颜色通道</p>
-</li>
-<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
-</li>
-</ul>
-</li>
-<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
-</li>
-<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
-</li>
-</ul>
-<h3 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4 Experiments"></a>4 Experiments</h3><ul>
-<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
-<ul>
-<li>更好的特征（§3.9</li>
-<li>附加数据（§3.4）</li>
-<li>上下文信息（§3.5）</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-1-Reviewing-the-eﬀect-of-features-特征的影响"><a href="#4-1-Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="4.1 Reviewing the eﬀect of features(特征的影响)"></a>4.1 Reviewing the eﬀect of features(特征的影响)</h3><ul>
-<li>DCT: (discrete cosine transform)离散余弦变换</li>
-<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
-</ul>
-<h3 id="4-2-Complementarity-of-approaches"><a href="#4-2-Complementarity-of-approaches" class="headerlink" title="4.2 Complementarity of approaches"></a>4.2 Complementarity of approaches</h3><ul>
-<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
-<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
-</ul>
-<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5 Conclusion"></a>5 Conclusion</h2><ul>
-<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
-<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
-<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/287090227/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2067,6 +1897,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -2103,11 +1955,10 @@
 
       
         
-          
-            <h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
+          <h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
 <li>卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。</li>
 </ul>
-<h3 id="9-1-The-Convolution-Operation"><a href="#9-1-The-Convolution-Operation" class="headerlink" title="9.1 The Convolution Operation"></a>9.1 The Convolution Operation</h3><ul>
+<h3 id="The-Convolution-Operation"><a href="#The-Convolution-Operation" class="headerlink" title="The Convolution Operation"></a>The Convolution Operation</h3><ul>
 <li>The convolution operation is typically denoted with an asterisk:</li>
 </ul>
 <p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg" alt=""></p>
@@ -2135,176 +1986,17 @@
 </ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg" alt=""></p>
 <ul>
-<li><p>在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。</p>
-</li>
-<li><p>卷积通常对应于非常稀疏的矩阵。</p>
-</li>
+<li>在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。</li>
+<li>卷积通常对应于非常稀疏的矩阵。</li>
 <li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
 </ul>
-<h3 id="9-2-Motivation"><a href="#9-2-Motivation" class="headerlink" title="9.2 Motivation"></a>9.2 Motivation</h3><ul>
-<li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
-<ul>
-<li>稀疏的连接（sparse interactions）</li>
-<li>参数共享（parameter sharing）</li>
-<li>等值表示（equivariant representations）</li>
-<li>此外卷积可以处理各种大小输入。</li>
-</ul>
-</li>
-<li><p>Sparse Interactions：这是通过使内核小于输入来实现的。</p>
-<ul>
-<li>我们需要存储更少的参数，这既减少了模型的内存需求，又提高了其统计效率。</li>
-<li>计算输出需要更少的操作。</li>
-<li>在深卷积网络中，较深层中的单元可以与输入的较大部分间接交互，This allows the network to eﬃciently describe complicated interactions between many variables by constructing such interactions from simple building blocks that each describe only sparse interactions.<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpduscrij30ee0eqdho.jpg" alt=""></li>
-<li>Sparse connectivity, viewed from below<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
-<li>Sparse connectivity, viewed from above<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
-<li>在卷积网络的较深层中的单元的接收场大于在浅层中的单元的接收场。这意味着即使卷积网络中的直接连接非常稀疏，更深层中的单元也可以间接地连接到所有或大部分输入图像。</li>
-</ul>
-</li>
-<li><p>Parameter sharing：参数共享是指对模型中的多个函数使用相同的参数。</p>
-<ul>
-<li>也可以叫 <strong>Tied Weights（捆绑权值），因为应用于一个输入的权重的值与在其他地方应用的权重的值有关。</strong></li>
-<li>在卷积神经网络中，卷积核中的每一个元素都会在input中的每一个位置使用。</li>
-<li>在存储器要求和统计效率方面，卷积比密集矩阵乘法显着更有效。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpjpefj30ee0bzgmu.jpg" alt=""></p>
-<ul>
-<li><p>黑色箭头表示在卷积模型中3元素核的中心元素的使用。</p>
-</li>
-<li><p>Equivariant：说一个函数是等变的意味着如果输入改变，输出以相同的方式改变。</p>
-<ul>
-<li>一个函数f(x)与函数g <strong>等变</strong> 如果f(g(x)) = g(f(x)).</li>
-<li>当处理时间序列数据时，这意味着卷积产生一种时间线，显示输入中不同特征的出现。</li>
-<li>This is useful for when we know that some function of a small number of neighboring pixels is useful when applied to multiple input locations.</li>
-<li>卷积不是自然地等同于一些其他变换，例如图像的尺度或旋转的变化。</li>
-</ul>
-</li>
-<li><p>卷积是描述在整个输入上应用小的局部区域的相同线性变换的变换的非常有效的方式。</p>
-</li>
-</ul>
-<h3 id="9-3-Pooling"><a href="#9-3-Pooling" class="headerlink" title="9.3 Pooling"></a>9.3 Pooling</h3><ul>
-<li><p>卷积网络的一个典型层由三个阶段组成:</p>
-<ul>
-<li>在第一阶段，该层并行执行几个卷积以产生一组线性激活（linear activation）。</li>
-<li>在第二阶段，每个线性激活通过非线性激活函数，例如整流线性激活函数。这一阶段成为 <strong>detector stage</strong>.</li>
-<li>在第三阶段，我们使用池化函数（pooing function）来进一步修改层的输出。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdnsj0rj30k00je76j.jpg" alt=""></p>
-<ul>
-<li><p>pooling function是用附近的汇总统计来替换特定位置的网络的输出。</p>
-</li>
-<li><p>在所有情况下，池化有助于使表示变得对于相对于 <strong>输入的小平移</strong> 几乎不变（invariant）。</p>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdmenf3j30vy0qlwk3.jpg" alt=""></p>
-<ul>
-<li><p><strong>如果我们更关心某些特征是否存在而不是完全在哪里，那么本地变换的不变性可以是非常有用的属性。</strong></p>
-</li>
-<li><p>池的使用可以被视为添加一个无限强的先验，层所学习的函数必须对小的变换是不变的。</p>
-</li>
-<li>如果我们在单独的参数化的卷积输出上进行赤化，则特征可以学习到对哪一种变换进行不变。</li>
-<li>利用卷积和pooling的卷积网络架构：</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdrfrclj30jn0orjya.jpg" alt=""></p>
-<h3 id="9-4-Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior"><a href="#9-4-Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior" class="headerlink" title="9.4 Convolution and Pooling as an Inﬁnitely Strong Prior"></a>9.4 Convolution and Pooling as an Inﬁnitely Strong Prior</h3><ul>
-<li>弱先验是具有高熵的先验分布，例如具有高方差的高斯分布。</li>
-<li>强先验具有非常低的熵，例如具有低方差的高斯分布。这样的先验在确定参数在哪里结束方面起更积极的作用。</li>
-<li>总的来说，我们可以认为卷积可以用来为一个层的参数引入一个无限强的先验概率分布。</li>
-<li>同样，池的使用是保证每个单位对小的变换保持不变性的无限强的先验。</li>
-<li><p>但是将卷积网视为具有无限强的先验的完全连接的网络可以给我们一些关于卷积网如何工作的见解。</p>
-<ul>
-<li>一个关键的见解是卷积和池化可能导致欠拟合。</li>
-<li>从这个观点的另一个关键的见解是，我们应该只比较卷积模型与统计学习性能基准中的其他卷积模型。对于许多图像数据集，对于排列不变的模型存在单独的基准，并且必须通过学习发现拓扑的概念，以及具有由他们的设计者硬编码到其中的空间关系的知识的模型。</li>
-</ul>
-</li>
-</ul>
-<h3 id="9-5-Variants-of-the-Basic-Convolution-Function"><a href="#9-5-Variants-of-the-Basic-Convolution-Function" class="headerlink" title="9.5 Variants of the Basic Convolution Function"></a>9.5 Variants of the Basic Convolution Function</h3><ul>
-<li><p>首先，当我们在神经网络的上下文中提到卷积时，我们通常实际上意味着一种由许多卷积应用并行组成的操作。</p>
-<ul>
-<li>这是因为单个内核的卷积只能提取一种特征，虽然在许多空间位置。 通常我们希望我们网络的每一层都能在许多位置提取多种特征。</li>
-</ul>
-</li>
-<li><p>此外，输入通常不仅仅是是一个网格的真是数据，反而是矢量值的观测网格。</p>
-</li>
-<li><p>这些多通道操作可交换，仅当每个操作具有与输入通道相同数量的输出通道。</p>
-</li>
-<li>我们可能想跳过内核的一些位置，以减少计算成本，我们可以认为这是下采样全卷积函数的输出。</li>
-<li>如果我们只想对输出中每个方向的每s个像素进行采样，那么我们可以定义下采样卷积函数c：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg" alt=""><br>我们将s称为这个下采样卷积的步幅。 也可以为每个运动方向定义一个单独的步幅。</li>
-</ul>
-<ul>
-<li><p>零填充：</p>
-<ul>
-<li>任何卷积网络实现的一个基本特征是具备隐含地对输入V进行零填充以便使其更宽的能力。</li>
-<li>零填充输入允许我们独立地控制内核宽度和输出的大小。</li>
-<li>没有零填充，我们被迫选择快速缩小网络的空间范围并且使用小内核 - 这两个方案，显着地限制了网络的表达力。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg" alt=""></p>
-<ul>
-<li><p>三种zero-padding的情况：</p>
-<ul>
-<li>valid convolution</li>
-<li>same convolution</li>
-<li>full convolution</li>
-</ul>
-</li>
-<li><p>Unshared convolution</p>
-</li>
-<li>Tiled convolution：在卷积层和本地连接层之间提供了折中。我们不是在每个空间位置学习一组独立的权重，而是学习一组内核，从而我们在空间移动时旋转内核。</li>
-<li><p>这三个操作做够计算所有训练一个前向卷积网络需要的梯度，以及基于卷积的转置来训练具有重建函数的卷积网络。</p>
-<ul>
-<li>卷积</li>
-<li>从输出到权值反向传播</li>
-<li>从输出到输入反向传播</li>
-</ul>
-</li>
-</ul>
-<h3 id="9-6-Structured-Outputs"><a href="#9-6-Structured-Outputs" class="headerlink" title="9.6 Structured Outputs"></a>9.6 Structured Outputs</h3><ul>
-<li>卷积网络可以用于输出高维度的结构化对象，而不仅仅是预测分类任务的类标签或回归任务的实际值。</li>
-<li>Pixel labeling：像素标记</li>
-<li>循环周期卷积网络（recurrent convolutional network）：</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg" alt=""></p>
-<h3 id="9-7-Data-Types"><a href="#9-7-Data-Types" class="headerlink" title="9.7 Data Types"></a>9.7 Data Types</h3><ul>
-<li><p>与卷积网络一起使用的数据通常由几个通道组成，每个通道是在空间或时间的某个点观察不同的量。</p>
-<ul>
-<li>卷积网络的一个优点是它们还可以处理具有变化的空间范围的输入。</li>
-<li>有时，网络的输出允许具有 <strong>可变大小以及输入</strong> ，例如如果我们想要为输入的每个像素分配类标签。 <strong>在这种情况下，不需要额外的设计工作了</strong> 。</li>
-<li>在其他情况下，网络必须产生一些固定大小的输出，例如，如果我们要为整个图像分配单个类标签。 <strong>在这种情况下，我们必须进行一些额外的设计步骤</strong> ，例如插入一个池化层，其池区域的大小与输入的大小成比例，以 <strong>保持固定数量</strong> 的池化输出。</li>
-</ul>
-</li>
-</ul>
-<h3 id="9-8-Eﬃcient-Convolution-Algorithms"><a href="#9-8-Eﬃcient-Convolution-Algorithms" class="headerlink" title="9.8 Eﬃcient Convolution Algorithms"></a>9.8 Eﬃcient Convolution Algorithms</h3><ul>
-<li>现代卷积网络应用通常涉及包含超过一百万个单元的网络。</li>
-<li><strong>卷积等效于使用傅立叶变换将输入和内核两者转换到频域，执行两个信号的逐点乘法，并使用逆傅里叶变换转换回到时域。</strong></li>
-<li>当内核是可分离的，原始的卷积是效率低下的。</li>
-<li>设计更快的执行卷积或近似卷积的方法，而不损害模型的准确性是一个活跃的研究领域。</li>
-</ul>
-<h3 id="9-9-Random-or-Unsupervised-Features"><a href="#9-9-Random-or-Unsupervised-Features" class="headerlink" title="9.9 Random or Unsupervised Features"></a>9.9 Random or Unsupervised Features</h3><ul>
-<li>通常，卷积网络训练中最昂贵的部分是学习特征。</li>
-<li>降低卷积网络训练成本的一种方式是使用未以受监督方式训练的特征。</li>
-<li><p>有三种不需要监督学习来获得卷积内核的策略：</p>
-<ul>
-<li>一个是简单地 <strong>随机初始化</strong> 它们。</li>
-<li>另一个是用手设计它们，例如通过设置每个内核以在特定方向或尺度检测边缘。</li>
-<li>最后，可以使用无监督标准来学习内核。</li>
-</ul>
-</li>
-<li><p>随机滤波器在卷积网络中通常工作得很好</p>
-</li>
-<li>一个折中的方法是学习特征，但使用： <strong>每个梯度步骤不需要完全正向和反向传播的</strong> 方法。 与多层感知器一样，我们使用 <strong>贪婪层式预训练</strong> ，独立地训练第一层，然后从第一层提取一次所有特征，然后利用这些特征隔离的训练第二层，等等。</li>
-<li>不是一次训练整个卷积层，我们可以训练一个小补丁的模型，如用k-means。 然后，我们可以使用来自这个patch-based的模型的参数来定义卷积层的内核。</li>
-<li>今天，大多数卷积网络以纯粹监督的方式训练，在每次训练迭代中使用通过整个网络的完全正向和反向传播。</li>
-</ul>
-<h3 id="9-10-The-Neuroscientiﬁc-Basis-for-Convolutional-Networks"><a href="#9-10-The-Neuroscientiﬁc-Basis-for-Convolutional-Networks" class="headerlink" title="9.10 The Neuroscientiﬁc Basis for Convolutional Networks"></a>9.10 The Neuroscientiﬁc Basis for Convolutional Networks</h3><h3 id="9-11-Convolutional-Networks-and-the-History-of-Deep-Learning"><a href="#9-11-Convolutional-Networks-and-the-History-of-Deep-Learning" class="headerlink" title="9.11 Convolutional Networks and the History of Deep Learning"></a>9.11 Convolutional Networks and the History of Deep Learning</h3><ul>
-<li>为了处理一维，顺序数据，我们接下来转向神经网络框架的另一个强大的专业化： <strong>循环神经网络（Recurrent neural networks）</strong> 。</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/783616645/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2388,7 +2080,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2397,7 +2089,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

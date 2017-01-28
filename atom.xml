@@ -191,7 +191,7 @@
     <link href="http://yoursite.com/posts/1679631826/"/>
     <id>http://yoursite.com/posts/1679631826/</id>
     <published>2016-12-07T22:32:24.000Z</published>
-    <updated>2017-01-27T07:09:34.000Z</updated>
+    <updated>2017-01-28T07:39:04.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>mAP：detection quality.</li>
@@ -238,11 +238,10 @@
 <li>特征缓存不需要磁盘存储</li>
 </ol>
 <h2 id="Fast-R-CNN-architecture-and-training"><a href="#Fast-R-CNN-architecture-and-training" class="headerlink" title="Fast R-CNN architecture and training"></a>Fast R-CNN architecture and training</h2><ul>
-<li>整体框架</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfo7na6fij30jk0efdju.jpg" alt=""></p>
+<li><p>整体框架<br>  <img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfo7na6fij30jk0efdju.jpg" alt=""></p>
+</li>
+<li><p>快速R-CNN网络将整个图像和一组对象位置作为输入。</p>
 <ul>
-<li>快速R-CNN网络将整个图像和一组对象位置作为输入。<ul>
 <li>网络首先使用几个卷积（conv）和最大池层来处理整个图像，以产生conv feature map。</li>
 <li>然后，对于每个对象proposal， <strong>感兴趣区域（RoI）池层</strong> 从特征图中抽取固定长度的特征向量。</li>
 <li>每个特征向量被馈送到完全连接（fc）层序列，其最终分支成两个同级输出层：<ul>
@@ -278,18 +277,19 @@
 <li>在Fast R-CNN训练中， <strong>随机梯度下降（SGD）小批量分层采样</strong> ，首先通过采样N个图像，然后通过从每个图像采样 <strong>R/N个</strong> RoIs。</li>
 <li>关键的是，来自同一图像的RoI在向前和向后传递中 <strong>共享计算</strong> 和存储。</li>
 <li>此外为了分层采样，Fast R-CNN使用了一个流水线训练过程，利用一个fine-tuning阶段来联合优化一个softmax分类器和bounding box回归，而非训练一个softmax分类器，SVMs，和regression在三个独立的阶段。</li>
-<li>Multi-task loss：<ul>
-<li>两个loss，以下分别介绍：<ul>
+<li><p>Multi-task loss：</p>
+<ul>
+<li><p>两个loss，以下分别介绍：</p>
+<ul>
 <li>对于分类loss，是一个N+1路的softmax输出，其中的N是类别个数，1是背景。</li>
 <li>对于回归loss，是一个4xN路输出的regressor，也就是说对于每个类别都会训练一个单独的regressor的意思，比较有意思的是，这里regressor的loss不是L2的，而是一个平滑的L1，形式如下：</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfo7oia0ij30bg05n74f.jpg" alt=""></p>
-<ul>
-<li>我们利用一个multi-task loss L 在每个被标注的RoI上来联合训练分类器和bounding box regression</li>
+</li>
+</ul>
+</li>
+<li><p>我们利用一个multi-task loss L 在每个被标注的RoI上来联合训练分类器和bounding box regression</p>
+</li>
 <li>Mini-batch sampling：在微调时，每个SGD的mini-batch是随机找两个图片，R为128，因此每个图上取样64个RoI。从object proposal中选25%的RoI，就是和ground-truth交叠至少为0.5的。剩下的作为背景。</li>
 <li><p>Back-propagation through RoI pooling layers：</p>
 <ul>
@@ -624,53 +624,11 @@
   </entry>
   
   <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-27T06:47:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-1-Related-work"><a href="#1-1-Related-work" class="headerlink" title="1.1. Related work"></a>1.1. Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Training-data"><a href="#2-Training-data" class="headerlink" title="2. Training data"></a>2. Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="3-From-decision-forests-to-neural-networks"><a href="#3-From-decision-forests-to-neural-networks" class="headerlink" title="3. From decision forests to neural networks"></a>3. From decision forests to neural networks</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-Introduction&quot;&gt;&lt;a href=&quot;#1-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Introduction&quot;&gt;&lt;/a&gt;1. Introduction&lt;/h2&gt;&lt;h3 id=&quot;1-1-Related-wor
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
     <link href="http://yoursite.com/posts/2903903730/"/>
     <id>http://yoursite.com/posts/2903903730/</id>
     <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T07:35:46.000Z</updated>
+    <updated>2017-01-28T07:37:22.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>傅里叶变换的一个推论：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg" alt=""></li>
@@ -916,6 +874,48 @@
       <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
     
       <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-27T06:47:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a>1. Introduction</h2><h3 id="1-1-Related-work"><a href="#1-1-Related-work" class="headerlink" title="1.1. Related work"></a>1.1. Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Training-data"><a href="#2-Training-data" class="headerlink" title="2. Training data"></a>2. Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="3-From-decision-forests-to-neural-networks"><a href="#3-From-decision-forests-to-neural-networks" class="headerlink" title="3. From decision forests to neural networks"></a>3. From decision forests to neural networks</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-Introduction&quot;&gt;&lt;a href=&quot;#1-Introduction&quot; class=&quot;headerlink&quot; title=&quot;1. Introduction&quot;&gt;&lt;/a&gt;1. Introduction&lt;/h2&gt;&lt;h3 id=&quot;1-1-Related-wor
+    
+    </summary>
+    
     
   </entry>
   

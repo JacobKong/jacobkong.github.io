@@ -584,75 +584,6 @@
   </entry>
   
   <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:13:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
-&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
-&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
-&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
-&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
-&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
-&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
-&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
-&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
-&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
     <link href="http://yoursite.com/posts/2397281138/"/>
     <id>http://yoursite.com/posts/2397281138/</id>
@@ -1085,6 +1016,75 @@
       <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
     
       <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-28T08:13:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
+&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
+&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
+&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
+&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
+&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
+&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
+&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
+&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -2181,6 +2181,266 @@
       <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
     
       <category term="Caltech" scheme="http://yoursite.com/tags/Caltech/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>南清北复交北航哈工大中科院华科保研记</title>
+    <link href="http://yoursite.com/posts/3356325341/"/>
+    <id>http://yoursite.com/posts/3356325341/</id>
+    <published>2016-08-22T02:26:55.000Z</published>
+    <updated>2017-02-01T08:33:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>7月23号从中科院软件所参加完夏令营回来，我的漫长的保研路也算是告一段落。</p>
+<p>8月12号东软实训结束，8月13号坐上回家的火车，8月14号到家，然后就一直吃喝睡到今天，拿回来的几本书也没看几眼，本来打算着回来继续充实一下，去备战9，10月份的推免，现在看来时间又都荒废了……开学还是乖乖到学校吧，再这样下去一直待在家感觉要成废人一个了，我还是喜欢忙碌充实的感觉。</p>
+<p>一直想着要把这次宝贵的保研经历记录一下，好给学弟学妹一个参考。学弟学妹们可以结合自身情况，大概了解一下保研流程，部分学校保研考核要求，从而少走一些弯路，去到自己理想中的学校。</p>
+<h2 id="个人基本情况"><a href="#个人基本情况" class="headerlink" title="个人基本情况"></a>个人基本情况</h2><p>把我的个人情况大概说一下，学弟学妹可以对比自己情况，有个参考。</p>
+<ul>
+<li>绩点排名：5/262</li>
+<li>四级：611分</li>
+<li>六级：503分</li>
+<li>科研竞赛情况：无科研，无论文，无国奖，无励志奖学金，无ACM，仅有一个蓝桥和美赛SP（其实没什么价值），总的来说也就是成绩好一点，但有时候高的成绩排名会是一个很好的敲门砖。</li>
+</ul>
+<h2 id="为什么我要保研"><a href="#为什么我要保研" class="headerlink" title="为什么我要保研"></a>为什么我要保研</h2><p>本来我是做iOS开发的，想要毕业后直接找工作，不准备读研的。但是直到大三上学期的时候通过和学长学姐交流，我才了解到保研夏令营这一回事，由于学长学姐都去了很好的高校读研，而且当时我的排名还不错，于是我思考了好长时间，权衡了读研和找工作的利弊，我决定毕业后继续读研。如果有同样疑惑的学弟学妹，我的建议是：能出国的话，那肯定出国；能保研的话，那肯定最好不要放弃这个来之不易的机会，当然这也不是绝对的。</p>
+<h2 id="我的保研路"><a href="#我的保研路" class="headerlink" title="我的保研路"></a>我的保研路</h2><h3 id="报名参加过的夏令营"><a href="#报名参加过的夏令营" class="headerlink" title="报名参加过的夏令营"></a>报名参加过的夏令营</h3><p>这一部分是我报名相应学校夏令营后，对方给予我入营资格的学校，以下是按参加顺序记录：</p>
+<h4 id="1-南大计算机"><a href="#1-南大计算机" class="headerlink" title="1. 南大计算机"></a>1. 南大计算机</h4><ul>
+<li><p>网址：<a href="http://cs.nju.edu.cn/ee/57/c1654a126551/page.htm" target="_blank" rel="external">南京大学计算机系2016“本科生开放日”申请流程</a></p>
+</li>
+<li><p>时间：5月13日-5月15日</p>
+</li>
+<li><p>入营条件：985院校的话，绩点排名前5%基本可以入营</p>
+</li>
+<li><p>吃住补助：LAMDA实验室报销车票，住宿费，但是南大不报销车票，但管吃管住，住的很高级的宾馆，条件特别好。</p>
+</li>
+<li><p>参营记录：</p>
+<p>南大的夏令营是开的最早的一个计算机夏令营，正因为开的早，很多同学都蠢蠢欲试，导致南大夏令营会有很多同学报名，这次有1000多个报名的，但是最后入营的只有300人，但只要绩点排名前5%基本可以入营。</p>
+<p>如果你想要之后从事”机器学习与数据挖掘“相关领域的科研工作，那么南大的<a href="http://lamda.nju.edu.cn/CH.MainPage.ashx" target="_blank" rel="external">LAMDA实验室</a>是一个再好不过的选择了，由周志华教授作为带头人，南大的这个实验室在国内外上知名度很高，科研能力也很厉害。</p>
+<p>但是LAMDA实验室是<strong>单独招生的</strong>，每年会有两批保研生的申请，所以要想申请LAMDA实验室，还需要在申请南大夏令营之外单独申请这个实验室的面试考核。申请的时候需要一份简历，一份研究动机说明，一份成绩单，这三份材料是让对方了解你的唯一途径，所以需要好好准备润色，虽然我是在截止日期前一天才急急忙忙的才提交的，但还是进入了初选，拿到了LAMDA实验室的面试资格。LAMDA实验室会在南大夏令营前一天组织面试，而且给报销往返车票及一晚的住宿费，还是很不错的。</p>
+<p>下面说一下LAMDA大概的面试流程及问题。在申报LAMDA实验室之前会填三个导师志愿，我当时填的周志华、吴建鑫、俞扬，但到了现场才知道LAMDA会把你的材料分别送给所填报的三个老师，他们分别决定是否允许你参加他们每个人的面试，如果有老师允许你面试，那么你就拿到了面试资格，否则的话，说明没有老师看上你的简历，你也就没有面试资格。所以在填报导师的时候，除非自己简历特别光鲜，否则那种特别牛老师就不要填了，相当于浪费一个机会。在面试的时候，你会先去面试选中你的老师，面试完之后，你其实可以再去面试其他该实验室的老师，从而增加你进入该实验室的机会，即使你当时没有报他的研究生。我是5月12号参加的面试，当时只有吴建鑫老师给了我面试机会，面试完他之后我又去找了詹德川老师，最后我是被詹德川老师录取。面试吴建鑫老师的时候，问题如下：</p>
+<ul>
+<li>方差的计算方法，他会提前写好一个方差表达式问你对不对，如果不对的话请写出正确的表达式；</li>
+<li>方差中的n-1含义；</li>
+<li>如果写一个程序计算方差，那么计算一次内存访问几次；</li>
+<li>本科做过的项目，项目内容；</li>
+<li>机器学习了解多少，看过什么；</li>
+<li>了不了解本人是做什么研究的。</li>
+</ul>
+<p>面试詹德川老师的时候，我不知道其他人是什么情况，但我是全程英文面试，问到的问题如下，<strong>注意：以下问题需要英文作答，实在英语回答不了，可以中文，不必有太大压力</strong>：</p>
+<ul>
+<li>自我介绍一下；</li>
+<li>介绍一下做过的项目；</li>
+<li>介绍一下梯度下降法是什么；</li>
+<li>介绍一下牛顿迭代是什么；</li>
+<li>什么是特征值，特征值的含义；</li>
+<li>唠嗑。</li>
+</ul>
+<p>面试完当天晚上就会有邮件通知是否面试通过，最后我是被詹德川老师录取，但是通过LAMDA面试并不代表你就能100%能进入LAMDA读研了，最重要的一关是拿到南大夏令营的优秀营员，只有这样，通过两轮考核才能进入LAMDA。</p>
+<p>下面说一下南大夏令营的流程，主要是三部分：各个实验室介绍、机试、面试，其中最最重要的是机试，只要机试通过，90%就能拿到优秀营员。</p>
+<p>机试这次一共4道题，以前听说6道题，只要AC出其中的两道题就肯定没问题了，多做无用，有罚时，考核方式：OJ，题型：算法+数据结构，难度：ACM一般难度的题。这次的具体题目如下：</p>
+<ul>
+<li>最大子串和；</li>
+<li>无向图最长路径</li>
+<li>表达式求值；</li>
+<li>给一棵树求最长的路径。</li>
+</ul>
+<p>面试问题如下（由于分组面试，每组没人问题不一样）：</p>
+<ul>
+<li>解释一下什么是时间复杂度；</li>
+<li>快排的时间复杂度；</li>
+<li>快排最坏时间复杂度为什么是$O(n^2)$，如何优化快排最坏时间复杂度；</li>
+<li>看成绩单，问如何进行文献检索</li>
+<li>英文回答：如何利用文献检索知识去检索一个机器学习的问题</li>
+</ul>
+<p>15号上午面试完毕，提交完材料，填完导师志愿，下午就可以走了，导师志愿基本只有第一志愿有用，而且有些导师有一个点招权（反正我目前貌似只知道黄宜华老师有点招权，点招了我身边好多同学，但他们都拒绝了。。。他是搞大数据很厉害的一个老师，如果对这方面感兴趣，成绩排名又靠前的话，千万记住找这个老师报名，多一个机会！）。</p>
+<p>南大之旅也就这样结束了，接下来会在官网上公布优秀营员的名单。</p>
+</li>
+</ul>
+<h4 id="2-复旦计算机"><a href="#2-复旦计算机" class="headerlink" title="2. 复旦计算机"></a>2. 复旦计算机</h4><ul>
+<li><p>网址： <a href="http://www.cs.fudan.edu.cn/?p=19403" target="_blank" rel="external">2016年复旦大学计算机科学技术学院和软件学院优秀大学生夏令营活动报名通知</a></p>
+</li>
+<li><p>时间：7月4日~7月8日</p>
+</li>
+<li><p>入营条件：对于东北大学计算机软件专业的同学，每个专业只会给一个入营资格，所以排名最高的那个人才能入营</p>
+</li>
+<li><p>吃住补助：报销单程的路费（无论什么以硬卧为准），管吃住，条件都还不错。</p>
+</li>
+<li><p>参营记录：</p>
+<p>复旦大学计算机虽然排名没有东大计算机高，但是毕竟复旦，还在上海，所以还是很值得去试一试的，但上海的学校貌似都比较”傲娇“，给的名额真的特别少，考核也是很严格的，这次去了复旦才知道一共有600个人报名夏令营，最后只有50个人入营，而且最后在这50个人中只会发放14个拟录取，所以这个从这个录取比例可以看出竞争很激烈，还是需要认真的准备。</p>
+<p>夏令营是在复旦大学张江校区举行，为期5天，主要活动包括：</p>
+<ul>
+<li>学术报告。将邀请在学术研究方面有建树的教师进行学术报告，介绍计算机科学技术学院和软件学院最新的研究方向和研究成果，为期2天；</li>
+<li>课题组的学术讨论。进入感兴趣的课题组和老师进行进一步的交流，参加课题组的科研活动； 可以提前联系导师，趁早去找老师唠一唠，让他认识你，了解你，而最好在面试之前就定下导师，否则面试会减分；</li>
+<li>考核。上午机试，下午面试，面试的时候分两组，每组5个老师，老师手中会有你的机试成绩，所以机试好的话，给老师印象会很好，也就是说只要机试分数高，进复旦就容易很多了。</li>
+</ul>
+<p>复旦搞计算机视觉和媒体（视频、图片）大数据分析的居多，基本很多老师都在围绕这个来展开科研工作的。</p>
+<p>下面说一下机试。机试这次和以往完全不一样，虽然也是OJ，但这次是给你3个大题，每个大题中有3个小题，每个小题之间的区别就是约束条件和数据量级不同，对应的题目难易程度也是不一样的，所以和ACM的题型还不太一样。具体题目记得不太清楚，大概如下：</p>
+<ul>
+<li>第一题类似迷宫问题，利用BFS求解，一个n*n个方格组成的方阵，里面可能有若干个门，每个门对应着一把钥匙，钥匙会出现在某个方格中，所以要想开门就必须先把钥匙拿到，你需要给出从起点到终点的可能路径之和，迷宫会有多种多样。三个小问分别是：<ul>
+<li>对于1*n的迷宫，求出问题的解。</li>
+<li>对于n*n的迷宫，没有门，求出问题的解。</li>
+<li>对于n*n的迷宫，有门，求出问题解。</li>
+</ul>
+</li>
+<li>第二题貌似是车过桥问题，由于桥有限高，所以车需要有不同的装载方案来过不同的桥，貌似需要求解出装载方案，这个题没有仔细看。</li>
+<li>第三题很常规的一道ACM字符串题目，具体题目记不太清，但是主要考察你在特别大的数量级下能否在规定时间内求出解。</li>
+</ul>
+<p>下面说一下面试。面试分两组，而且有专业面试和英语面试两个环节，每组同学到相应的组面试，面试问题大概如下：</p>
+</li>
+</ul>
+<ul>
+<li>专业面试：<ul>
+<li>自我介绍；</li>
+<li>介绍项目，做过什么，项目具体内容是什么；</li>
+<li>机器学习了解多少，如何学习的；</li>
+<li>说一下神经网络的优点缺点；</li>
+<li>自我感觉机试做的怎么样；</li>
+<li>学院院长是谁；</li>
+<li>选好导师没有。</li>
+</ul>
+</li>
+<li><p>英语面试：</p>
+<ul>
+<li>自我介绍；</li>
+<li>说一下媒体大数据是什么。</li>
+</ul>
+<p>面试问题大概如上，面试还是很快地，面试完基本就可以走了，回去等着邮件通知是否通过即可，没有通过的还可以继续申报9月份的推免面试，这次是和本校学生一起竞争，所以竞争会更加激烈。还是一句话：”得机试者得天下“，虽然竞争激烈，但是只要机试分数高，胜算还是很大的。</p>
+</li>
+</ul>
+<h4 id="3-北航计算机"><a href="#3-北航计算机" class="headerlink" title="3. 北航计算机"></a>3. 北航计算机</h4><ul>
+<li><p>网址：<a href="http://scse.buaa.edu.cn/buaa-css-web/toTemplateAction.action?baseTemplateId=5849c5bd-9d91-4b4a-ad6b-1f4acbb781e7&amp;templateType=ARTICLE_TEMPLATE&amp;curSelNavId=NOTICE_PUBLICITY&amp;language=0" target="_blank" rel="external">报考2017年北航计算机学院硕士研究生 7月11~12日暑期宣传活动通知</a></p>
+</li>
+<li><p>时间：7月11日~7月12日</p>
+</li>
+<li><p>入营条件：对于985学校的学生，绩点排名前5%基本会有入营资格</p>
+</li>
+<li><p>吃住补助：什么都不报销！！！！不论吃的、住的！！！！</p>
+</li>
+<li><p>参营记录：</p>
+<p>从复旦回来一天后，我就到了北航参加北航计算机夏令营，北航听说这次入营的有500多人，所以不包吃住很正常，因为根本管不过来。</p>
+<p>北航夏令营只有两天，第一天机试，第二天面试，空余时间可以提前找一找联系的老师。北航有一个免机试政策，就是有CCF（计算机职业资格认证考试）成绩的同学，只要成绩在200分以上，带着成绩单去就可以免机试，还是不错的，可以省去机试好好准备面试了。</p>
+<p>下面说一下机试，北航机试一共就两个题，分两场，两场题目不一样，做完只会显示是否编译通过，不会有任何错误提示信息，所以做完你也不知道是不是能把所有样例都通过，比较坑。我所参加的那场题目如下：</p>
+<ul>
+<li>找出一串数字中，连续递增子串的最大个数</li>
+<li>哈弗曼树构造，编码</li>
+</ul>
+<p>北航不同的是机试不通过的话，是无法参加面试，而且面试是需要交100块钱的。面试的话，你需要学会去引导老师，让他去问你知道的东西，这样你才能把自己的优势展现出来。</p>
+<p>面试结束后，千万不要走，因为晚上会贴出拟录取名单，第二天还会给你发拟录取证明，这个是不能代领的，所以面试结束最好先别急着走，等你拿到拟录取名单，就可以安安心心回家了。</p>
+</li>
+</ul>
+<h4 id="4-哈工大计算机"><a href="#4-哈工大计算机" class="headerlink" title="4. 哈工大计算机"></a>4. 哈工大计算机</h4><ul>
+<li><p>网址：没有通知，我是当时加了一个哈工大保研群才知道哈工大计算机的保研面试安排，群号：212632913</p>
+</li>
+<li><p>时间：7月17号</p>
+</li>
+<li><p>入营条件：感兴趣都可以去面试</p>
+</li>
+<li><p>参营记录：</p>
+<p>哈工大计算机推免面试是分面试点的，当时在东大有一个面试点，而且一两天后就会出结果和你签拟录取合同，从而省下你专门跑到哈尔滨面试，还是很人性化的。哈工大面试分三个老师分别面试，分别面试三个方面：逻辑思维、专业知识、动手能力，老师都很和蔼的，根本不用紧张。下面是面试问到的问题：</p>
+<ul>
+<li>逻辑思维<ul>
+<li>给你一道逻辑题，让你选出正确答案；</li>
+<li>家乡是哪儿，毕竟是在哈尔滨，怕有些同学适应不了环境；</li>
+<li>高考成绩等唠嗑性问题。</li>
+</ul>
+</li>
+<li>专业知识<ul>
+<li>大学什么科目学的比较好</li>
+<li>B树是什么，主要作用是什么；</li>
+<li>B树在数据库中如何应用；</li>
+<li>给你很多学生的成绩，如何利用B树来进行检索；</li>
+<li>反正基本围绕B树，因为是我引导的老师到这个问题上的；</li>
+<li>机器学习了解多少。</li>
+</ul>
+</li>
+<li>动手能力<ul>
+<li>做过的项目；</li>
+<li>涉及到的算法有什么。</li>
+</ul>
+</li>
+</ul>
+<p>面试完一两天基本就会出结果，我在签协议的时候，老师是这样和我说的：虽然我们不想招软件学院的学生，但是学校给的要求是：只要是985院校的学生，但凡不是特别差的，就都招了吧。。。所以，想要报哈工大或者想找一个保底的学校，最好不要放弃这个机会。</p>
+</li>
+</ul>
+<h4 id="5-中科院软件所"><a href="#5-中科院软件所" class="headerlink" title="5. 中科院软件所"></a>5. 中科院软件所</h4><ul>
+<li><p>网址：<a href="http://www.is.cas.cn/yjsjy/zsxx/201605/t20160524_4608413.html" target="_blank" rel="external">中国科学院大学2016年全国大学生“软件与网络”夏令营通知</a></p>
+</li>
+<li><p>时间：7月18日-7月23日</p>
+</li>
+<li><p>入营条件：对于东北大学学生，绩点排名前20%基本都会有入营资格</p>
+</li>
+<li><p>吃住补助：报销去程车票，提供住宿（学生公寓、两人间、环境感觉不好），给100元的饭卡，可在食堂和超市消费。</p>
+</li>
+<li><p>参营记录：</p>
+<p>原本我并没有报名软件所的夏令营，只是报名了计算所的夏令营，因为我以为中科院只能报名一个研究院。但是计算所好像不是特别欢迎软件专业的学生，所以对于计算所，软件学院入营的同学屈指可数，而计算机学院入营的同学有十几个吧，最后我也没有入营计算所。</p>
+<p>没有入营计算所的我以为我的夏令营就这样结束了，看着身边很多同学去参加软件所的夏令营，我当时真的是特别后悔为什么脑子短路不报软件所的夏令营。但是在软件所开营的前一天，我和另一个同样没有报名的同学得到消息说没有报名可以去现场报名，于是我们当天晚上头脑一热，就买了去北京的<strong>硬座</strong>，连夜坐到北京，准备霸面。在前一天去北京的车上，我们提前联系了几个老师，说明了一下自己情况。</p>
+<p>第二天早晨到北京后，我们直奔中科院。由于没有任何计划，也不知道去了联系哪个老师，如何临时报名，就一直在软件所里面呆坐着。幸运的是直到下午，在同学和一个软件所学姐的帮助下，我们找到了软件所研究生办事处主任李彩丽老师，提交了部分材料，办了手续，领了公寓钥匙，才算报了名。（顺便说一句，李彩丽老师人特别好，有什么问题她都会尽量帮忙的！）由于软件所夏令营持续到23号，而我和另一个同学当时22号还要去参加华科夏令营，我们经过了长时间的心理斗争，决定放弃华科的夏令营。至此，我的软件所夏令营才幸运地开始，所以，保研过程中的许多机会都需要去争取的，运气也是很重要的，即使有时候觉得不可能，也要试一试，说不定运气好就得到了这个机会！</p>
+<p>下面正式介绍一下软件所夏令营。软件所夏令营为期6天，来来回回基本就一个星期了。这6天里，第一天报道，然后接下来两天一样的听报告，但是在第二天听报告的下午需要填报两个实验室的志愿，这个志愿其实只有第一志愿有用，填完志愿后会当场统计人数，看有没有扎堆，如果有的话，可以当场改志愿，让每个实验室人数尽量均衡。关于各个实验室的好坏，这里有一篇挺公正的介绍——<a href="http://www.cskaoyan.com/thread-161418-1-1.html" target="_blank" rel="external">中科院软件所各实验室情况简要介绍</a>，总的来说：软工中心最好，人机最不受欢迎吧，学弟学妹填志愿的时候要注意，当然最好的实验室报的人也最多，录取比例当然更低。我当时报名的是天基和国重。</p>
+<p>报完志愿后，第二天各个实验室就都开始各自的考核了，有的有机试、笔试、面试，有的只有笔试和面试，由于我报的天基，那么我只能说一说天基的考核方式了。天基只有笔试和面试，笔试的话其实考的都是很基础的东西，包括OS、计网、机组（考了很多选择）、数学、数据结构、算法等，平常认真考试的话，基本没什么问题。</p>
+<p>下面说一下面试，面试最主要的就是3分钟的个人介绍PPT，所有老师提问都是通过你的PPT来提问，所以这个PPT需要废话少说，把你最精彩的部分讲出来，但是所有部分需要尽量真实，最好不要给自己挖坑跳就可以了，自我介绍完会有一个英文问答题目，然后就是老师提问时间了，我被问到的问题有：</p>
+<ul>
+<li>机器学习了解哪些算法；</li>
+<li>逻辑回归和线性回归的区别是什么；</li>
+<li>如果想要进王浩老师组（因为我提前联系的这个老师），想做什么？</li>
+</ul>
+<p>软件所面试大概就是这样了，接下来就可以回去等官网公示优秀营员了。这次的录取比例没有说的那么高，除国重实验室很多老师单独招生比较特殊外，所有实验室基本是50%的录取率。</p>
+<p>需要提一下，天基里面只有王浩老师的研究组还不错，其他的话就千万不要考虑了！！！！</p>
+</li>
+</ul>
+<h3 id="报名未能参加的夏令营"><a href="#报名未能参加的夏令营" class="headerlink" title="报名未能参加的夏令营"></a>报名未能参加的夏令营</h3><p>这一部分是我报名相应学校夏令营后，对方没有给予我入营资格或者由于某些原因我没有去的学校。</p>
+<h4 id="1-清华计算机"><a href="#1-清华计算机" class="headerlink" title="1. 清华计算机"></a>1. 清华计算机</h4><ul>
+<li>网址：<a href="http://www.cs.tsinghua.edu.cn/publish/cs/4723/2016/20160505085141209166544/20160505085141209166544_.html" target="_blank" rel="external">关于举办2016年暑期全国优秀大学生夏令营的预通知</a></li>
+<li>时间：7月16日－7月18日</li>
+<li>入营条件：我觉得基本只有专业第一可以去吧，除非你在科研竞赛特别优秀，否则基本没戏。注意这个只能是直博。</li>
+<li>具体介绍：参考信息安全章博亨大神的日志：<a href="http://www.jianshu.com/p/89e6a9352cbc?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weixin&amp;from=timeline&amp;isappinstalled=0" target="_blank" rel="external">南大、清华、北大、上交、中科院、北航等高校夏令营保送经历</a></li>
+</ul>
+<h4 id="2-北大信科"><a href="#2-北大信科" class="headerlink" title="2. 北大信科"></a>2. 北大信科</h4><ul>
+<li>网址：<a href="http://eecs.pku.edu.cn/index.aspx?menuid=4&amp;type=articleinfo&amp;lanmuid=116&amp;infoid=4242&amp;language=cn" target="_blank" rel="external">北京大学信息科学技术学院关于举办2016年信息学科优秀大学生夏令营的通知（第一轮）-北京大学信息科学技术学院</a></li>
+<li>时间：7月13日-7月15日</li>
+<li>入营条件：北大信科除了对绩点排名要求前5%外，还需要有很高的综合素质，所以成绩不是唯一因素，这次入营的软件工程专业的同学有两个，分别排名第2名和第11名。</li>
+<li>具体介绍：参考章博亨大神的日志：<a href="http://www.jianshu.com/p/89e6a9352cbc?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weixin&amp;from=timeline&amp;isappinstalled=0" target="_blank" rel="external">南大、清华、北大、上交、中科院、北航等高校夏令营保送经历</a>，还有胡少晗大神的保研经历（目前还没有链接，有了的话我会更新）</li>
+</ul>
+<h4 id="3-上交计算机"><a href="#3-上交计算机" class="headerlink" title="3. 上交计算机"></a>3. 上交计算机</h4><ul>
+<li>网址：上交计算机没有夏令营，只有一个直硕面试，这个是没有网址的，但是这个和上交软件夏令营是同时开始报名的，可以关注一下：<a href="http://yjwb.seiee.sjtu.edu.cn/yjwb/info/11369.htm" target="_blank" rel="external">关于上海交通大学“2017软件工程优才夏令营”的通知</a></li>
+<li>时间：貌似是7月2号，挤不太清楚了，反正只有一天时间，可以当天去当天回。</li>
+<li>入营条件：前面有提到，上交计算机只给一个专业一个直硕名额、一个直博名额，所以谁名次高，谁就有机会去（也不一定，还是报名试试吧）。</li>
+<li>具体介绍：<br>对于我个人来说，我当初以为我能获得面试资格，就提前联系了几个老师，其中和<a href="http://www.cs.sjtu.edu.cn/PeopleDetail.aspx?id=82" target="_blank" rel="external">申瑞民</a>老师和<a href="http://www.cs.sjtu.edu.cn/PeopleDetail.aspx?id=63" target="_blank" rel="external">朱其立</a>老师分别进行了视频面试，他们都同意只要我获得上交直硕面试资格，参加考核，就收我作为他们的研究生，可惜我并没有获得直硕面试资格，所以比较遗憾。（朱其立老师英文名是Kenny Zhu，这个老师可能从国外回来的老师，所以他和我Skype的是时候全程英文交流，还是需要准备一下，具体考核方式可以参照章博亨大神的日志上交那部分：<a href="http://www.jianshu.com/p/89e6a9352cbc?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weixin&amp;from=timeline&amp;isappinstalled=0" target="_blank" rel="external">南大、清华、北大、上交、中科院、北航等高校夏令营保送经历</a>）</li>
+</ul>
+<h4 id="4-中科院计算所"><a href="#4-中科院计算所" class="headerlink" title="4. 中科院计算所"></a>4. 中科院计算所</h4><ul>
+<li>网址：<a href="http://www.ict.cas.cn/shye/tzgg/201605/t20160513_4601562.html" target="_blank" rel="external">“计算未来”全国大学生计算技术暑期研修班招生简章</a></li>
+<li>时间：7月17-7月23日</li>
+<li>入营条件：之前提到，计算所不太喜欢收软件学院的学生，所以每个专业只给一两个名额，谁名次高谁就可以去</li>
+<li>具体介绍：参考章博亨大神的日志：<a href="http://www.jianshu.com/p/89e6a9352cbc?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weixin&amp;from=timeline&amp;isappinstalled=0" target="_blank" rel="external">南大、清华、北大、上交、中科院、北航等高校夏令营保送经历</a></li>
+</ul>
+<h4 id="5-华科"><a href="#5-华科" class="headerlink" title="5. 华科"></a>5. 华科</h4><ul>
+<li><p>网址：<a href="http://cs.hust.edu.cn/tongzhi/xq?id=10581&amp;type=50" target="_blank" rel="external">关于举办“2016年华中科技大学计算机学院优秀大学生夏令营”活动的通知</a></p>
+</li>
+<li><p>时间：7月21-7月22日</p>
+</li>
+<li><p>入营条件：985排名前15%，或者你在竞赛方面有突出表现+可以获得保研资格</p>
+</li>
+<li><p>具体介绍：</p>
+<p>华科由于和软件所时间重了，所以我没有去，据说华科只有机试，3道题，一个半小时，人工判题，比较简单，985的同学去了基本可以拿到优秀营员，也是个不错的选择。</p>
+</li>
+</ul>
+<h2 id="一些体会"><a href="#一些体会" class="headerlink" title="一些体会"></a>一些体会</h2><p>通过这次夏令营，有以下几个体会，也当做给学弟学妹的一些建议吧。</p>
+<ul>
+<li>保研不像想象中的那么容易。很多985院校的同学以为只要成绩好，保研到好学校很容易，其实并不是，因为有很多你不认识的人，他们比你学校好，成绩优异，科研竞赛经历丰富。所以成绩并不能代表一切，它最多只能是一块儿敲门砖，把你带到你想进的夏令营，但当你进入夏令营后，决定你水平的不单单是成绩，更重要的是综合素质，比如基础知识、编程能力、语言表达能力等种种因素。如何利用你三年学到的知识拿到优秀营员才是关键。不要总想着拿成绩说事，try to prove it!</li>
+<li>抓住一切可能的机会。保研的路上，你可能觉得身心俱疲，可能觉得这个机会没什么价值，可能觉得这个机会哪有那么容易获得，如果是那么也不会是留给我的，我还是一遍歇着吧。但我想说的是，千万不要因为你的懒惰，你的想当然，让一个又一个机会从你手中溜走，因为任何事情只有尝试后，你才有资格评价，而且很多时候，这个机会就是为你准备的，你不去争取，你就一无所获。就像阿姆的《Lose yourself》歌词所说：Look, if you had one shot, or one opportunity to seize everything you ever wanted. In one moment, would you capture it, or just let it slip? 我想选择前者总是没有错的。</li>
+<li>机会留是给有准备的人。通过这次保研，我感受最深的就是机试，真的是”得机试者得天下“。机试一直是我的薄弱之处，虽然在努力刷题提高机试水平，但是由于我没有参加过ACM，意识到的时间晚，没有时间去准备机试，所以短短的时间是无法有质的飞跃，导致我在机试上摔了一次又一次，”成功地“与很多到手的机会失之交臂，痛悔不已。所以我希望学弟学妹们一定要好好准备机试，没事多刷题（C/C++，千万不要用Java），到时候才会有临危不乱，秒杀众生的感觉，只要夏令营机试过了，你也就基本没问题了。当然，面试也是要好好准备的，经常复习四大专业课，高数、高代、概率论等数学课，这样到时候大概过一遍就行了。还有一年时间，争取多参加一些科研和竞赛，这是很加分的，如果你能通过这些”套到“一个好导师，何乐而不为呢！最后要说的是，尽早确定下来将来读研的研究方向，早一点去看一些相关专业书，争取利用剩下的一年时间跟老师做一做相关方向的科研，这会对你的简历增加不少光彩！So go for it!</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;7月23号从中科院软件所参加完夏令营回来，我的漫长的保研路也算是告一段落。&lt;/p&gt;
+&lt;p&gt;8月12号东软实训结束，8月13号坐上回家的火车，
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="保研" scheme="http://yoursite.com/tags/%E4%BF%9D%E7%A0%94/"/>
     
   </entry>
   

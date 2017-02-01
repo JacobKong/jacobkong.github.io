@@ -68,13 +68,13 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Caffe," />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="JacobKong's Blog" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="JacobKong Blog" type="application/atom+xml" />
 
 
 
@@ -86,16 +86,25 @@
 
 
 
-<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="description" content="Abstract
+Region Proposal的计算是基于Region Proposal算法来假设物体位置的物体检测网络比如：SPPnet, Fast R-CNN运行时间的瓶颈。
+Faster R-CNN引入了Region Proposal Network（RPN）来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是cost free的。
+RPN-&amp;gt;预测物体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
+<meta property="og:title" content="深度学习论文笔记：Faster R-CNN">
 <meta property="og:url" content="http://yoursite.com/posts/3802700508/index.html">
-<meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
-<meta property="og:updated_time" content="2017-01-27T07:06:36.000Z">
+<meta property="og:site_name" content="JacobKong Blog">
+<meta property="og:description" content="Abstract
+Region Proposal的计算是基于Region Proposal算法来假设物体位置的物体检测网络比如：SPPnet, Fast R-CNN运行时间的瓶颈。
+Faster R-CNN引入了Region Proposal Network（RPN）来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是cost free的。
+RPN-&amp;gt;预测物体">
+<meta property="og:updated_time" content="2017-02-01T01:48:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
-<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="twitter:title" content="深度学习论文笔记：Faster R-CNN">
+<meta name="twitter:description" content="Abstract
+Region Proposal的计算是基于Region Proposal算法来假设物体位置的物体检测网络比如：SPPnet, Fast R-CNN运行时间的瓶颈。
+Faster R-CNN引入了Region Proposal Network（RPN）来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是cost free的。
+RPN-&amp;gt;预测物体">
 
 
 
@@ -129,7 +138,7 @@
 
 
 
-  <title> Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b | JacobKong's Blog </title>
+  <title> 深度学习论文笔记：Faster R-CNN | JacobKong Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -179,7 +188,7 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">JacobKong's Blog</span>
+      <span class="site-title">JacobKong Blog</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -310,9 +319,9 @@
   </span>
 
   <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
+    <meta itemprop="name" content="JacobKong Blog">
     <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+      <img style="display:none;" itemprop="url image" alt="JacobKong Blog" src="">
     </span>
   </span>
 
@@ -325,7 +334,7 @@
             
             
               
-                Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b
+                深度学习论文笔记：Faster R-CNN
               
             
           </h1>
@@ -351,6 +360,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -370,7 +401,7 @@
 
           
           
-             <span id="/posts/3802700508/" class="leancloud_visitors" data-flag-title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b">
+             <span id="/posts/3802700508/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Faster R-CNN">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -397,7 +428,42 @@
       
 
       
-        
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
+<li>Faster R-CNN引入了<strong>Region Proposal Network（RPN）</strong>来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是<strong>cost free</strong>的。</li>
+<li>RPN-&gt;预测物体边界（object bounds）和在每一位置的分数（objectness score）</li>
+<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——使用“attention”机制。</li>
+<li>300 proposals pre image.</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>RP是当前许多先进检测系统的瓶颈。</li>
+<li>Region proposal methods:<ul>
+<li>Selective Search: one of the most popular method </li>
+<li>EdgeBoxes: trade off between proposal quality and speed.</li>
+<li>region proposal这一步依旧和检测网络花费同样多的时间。</li>
+</ul>
+</li>
+<li>Fast R-CNN生成的feature map 也能用来生成RP。在这些卷积特征之上我们通过这样的方式构建RPN：通过添加几个额外的卷积层来模拟一个regular grid上每一个位置的regress region bounds和objectness scores。<strong>所以RPN也是一种fully convolutional network(FCN)</strong>，从而可以端到端训练来产生detection proposals。</li>
+<li><strong>anchor boxes</strong>：references at multiple scales and aspect ratios. 我们的方法可以看成pyramid of regression reference，从而避免枚举多尺寸、多横纵比的images或者filters</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>R-CNN主要是一个分类器，他不能预测object bounds，他的准确性依赖于Region proposal模块的表现</li>
+</ul>
+<h2 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h2><ul>
+<li>由两个模块组成：<ul>
+<li>第一个模块：A deep fuuly convolutional network that proposes regions.</li>
+<li>第二个模块：Fast R-CNN检测器</li>
+</ul>
+</li>
+<li><strong>Attention mechanisms</strong>：RPN module告诉Fast R-CNN module 往哪里看（where to look）</li>
+</ul>
+<h3 id="Region-Proposal-Networks"><a href="#Region-Proposal-Networks" class="headerlink" title="Region Proposal Networks"></a>Region Proposal Networks</h3><ul>
+<li>输入：一张任意尺寸的图片</li>
+<li>输出：一组矩形object proposal</li>
+<li>A fully convolutional network</li>
+</ul>
+
       
     </div>
 
@@ -420,7 +486,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Caffe/" rel="tag"># Caffe</a>
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -453,7 +525,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="posts/3802700508/"
-     data-title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b"
+     data-title="深度学习论文笔记：Faster R-CNN"
      data-content=""
      data-url="http://yoursite.com/posts/3802700508/">
   <div class="ds-share-inline">
@@ -486,7 +558,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="posts/3802700508/"
-           data-title="Caffe安装：Ubuntu 16.04+CUDA 8.0+cudnn v5.0+MATLABR2016b" data-url="http://yoursite.com/posts/3802700508/">
+           data-title="深度学习论文笔记：Faster R-CNN" data-url="http://yoursite.com/posts/3802700508/">
       </div>
     
   </div>
@@ -510,8 +582,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -542,7 +623,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -612,6 +693,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">4.</span> <span class="nav-text">Faster R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Region-Proposal-Networks"><span class="nav-number">4.1.</span> <span class="nav-text">Region Proposal Networks</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-02T11:27:09.000Z</updated>
+  <updated>2017-02-02T11:29:18.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3802700508/"/>
     <id>http://yoursite.com/posts/3802700508/</id>
     <published>2016-12-16T22:32:24.000Z</published>
-    <updated>2017-02-02T11:27:09.000Z</updated>
+    <updated>2017-02-02T11:29:18.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
@@ -69,7 +69,7 @@
 <li><em>cls layer</em>：有k个输出</li>
 </ul>
 </li>
-<li>k个proposal相对于k个参考框（reference boxes）而参数化，我们将参考狂称为<strong>anchor</strong>。</li>
+<li>k个proposal相对于k个参考框（reference boxes）而参数化，我们将参考框称为<strong>anchor</strong>。</li>
 <li>一个anchor位于sliding window的中间，同时关联着一个scale和aspect ration。</li>
 </ul>
 <h5 id="Translation-Invariant-Anchors-平移不变性"><a href="#Translation-Invariant-Anchors-平移不变性" class="headerlink" title="Translation-Invariant Anchors(平移不变性)"></a>Translation-Invariant Anchors(平移不变性)</h5><ul>

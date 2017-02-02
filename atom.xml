@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-01T01:48:25.000Z</updated>
+  <updated>2017-02-02T11:05:09.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3802700508/"/>
     <id>http://yoursite.com/posts/3802700508/</id>
     <published>2016-12-16T22:32:24.000Z</published>
-    <updated>2017-02-01T01:48:25.000Z</updated>
+    <updated>2017-02-02T11:05:09.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
@@ -53,9 +53,91 @@
 <li><strong>Attention mechanisms</strong>：RPN module告诉Fast R-CNN module 往哪里看（where to look）</li>
 </ul>
 <h3 id="Region-Proposal-Networks"><a href="#Region-Proposal-Networks" class="headerlink" title="Region Proposal Networks"></a>Region Proposal Networks</h3><ul>
-<li>输入：一张任意尺寸的图片</li>
-<li>输出：一组矩形object proposal</li>
-<li>A fully convolutional network</li>
+<li><p>输入：一张任意尺寸的图片</p>
+</li>
+<li><p>输出：一组矩形object proposal</p>
+</li>
+<li><p>A fully convolutional network</p>
+</li>
+<li><p>生成region proposal的思路：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcb3fr2k40j30cq07tt9a.jpg" alt=""></p>
+<p>each sliding window被映射成low-dimensional feature(ZF: 256-d, VGG: 512-d, 之后跟着ReLU层)</p>
+</li>
+</ul>
+<h4 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h4><ul>
+<li>在每个sliding-window位置，同时预测几个RP，设k为每个位置最大可能的proposal：<ul>
+<li><em>reg layer</em>：有4k个输出</li>
+<li><em>cls layer</em>：有k个输出</li>
+</ul>
+</li>
+<li>k个proposal相对于k个参考框（reference boxes）而参数化，我们将参考狂称为<strong>anchor</strong>。</li>
+<li>一个anchor位于sliding window的中间，同时关联着一个scale和aspect ration。</li>
+</ul>
+<h5 id="Translation-Invariant-Anchors-平移不变性"><a href="#Translation-Invariant-Anchors-平移不变性" class="headerlink" title="Translation-Invariant Anchors(平移不变性)"></a>Translation-Invariant Anchors(平移不变性)</h5><ul>
+<li>如果移动了一张图像中的一个物体，这proposal应该也移动了，而且相同的函数可以预测出热议未知的proposal。MultiBox不具备如此功能</li>
+<li>平移不变性可以减少模型大小。</li>
+</ul>
+<h5 id="Multi-Scale-Anchor-as-Regression-References"><a href="#Multi-Scale-Anchor-as-Regression-References" class="headerlink" title="Multi-Scale Anchor as Regression References"></a>Multi-Scale Anchor as Regression References</h5><ul>
+<li>Two popular ways for multi-scale predictions:<ul>
+<li>第一种：based on image/feature pyramids, 如：DPM and CNN-based methods。图像被resized成不同尺寸，然后为每一种尺寸计算feature maps(HOG或者deep convolutional features)。这种方法比较<strong>费时</strong>。</li>
+<li>第二种：use sliding windows of multiple scales (and/or aspect ratios) on the feature maps.——<strong>filters金字塔</strong>。第二种方法经常和第一种方法联合使用</li>
+</ul>
+</li>
+<li>本论文的方法：<strong>anchor金字塔</strong>——more cost-efficient，只依靠单尺寸的图像和feature map。</li>
+<li>The design of multiscale anchors is a <strong>key </strong>component for <strong>sharing features</strong> without extra cost for addressing scales.</li>
+</ul>
+<h4 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h4><ul>
+<li><p>每个anchor有一个二元标签（是物体或者不是）</p>
+</li>
+<li><p>两类anchor是有<strong>正标签</strong>的：</p>
+<ul>
+<li>anchor/anchors with highest IoU overlap with a ground-truth box</li>
+<li>an anchor that has IoU overlap higher than 0.7 with any ground-truth box.</li>
+</ul>
+</li>
+<li><p>如果一个anchor和任何ground-truth boxes的IoU值小于0.3，那么该anchor为<strong>负标签</strong></p>
+</li>
+<li><p>非正非负样本对training objective没有用。</p>
+</li>
+<li><p>Loss Function：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcjw1fcbwo1ut3hj309q02hjrj.jpg" alt=""></p>
+</li>
+<li><p>Bounding box regression</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcbyiywha8j308k0300sy.jpg" alt=""></p>
+<p>这个可以考虑为从anchor box回归到附近的ground truth box。</p>
+</li>
+</ul>
+<h4 id="Training-RPNs"><a href="#Training-RPNs" class="headerlink" title="Training RPNs"></a>Training RPNs</h4><ul>
+<li><strong>image-centric</strong> sampling strategy</li>
+<li>mini-batch: arises from a single image that contains many positive and negative example anchors.</li>
+<li>随机在一张图片中采样256个anchors来计算一个mini-batch的loss function。正负anchors = 1:1.</li>
+<li>all new layers的<strong>权值初始化</strong>：高斯分布$(\mu = 0, \sigma = 0.01)$，all other layers（比如共享卷积层）用ImageNet来<strong>权值初始化</strong>。用ZF net来进行进行<strong>微调</strong>。</li>
+<li><strong>学习率</strong>：0.001(60k)-&gt;0.0001(20k)</li>
+<li><strong>动量</strong>：0.9</li>
+<li><strong>weight decay</strong>: 0.0005</li>
+</ul>
+<h3 id="Sharing-Feature-for-RPN-and-Fast-R-CNN"><a href="#Sharing-Feature-for-RPN-and-Fast-R-CNN" class="headerlink" title="Sharing Feature for RPN and Fast R-CNN"></a>Sharing Feature for RPN and Fast R-CNN</h3><ul>
+<li><p><strong>sharing convolutional layers between the two networks, rather than learning two separate networks</strong></p>
+</li>
+<li><p>三种特征共享的方法：</p>
+<ul>
+<li><p>Alternating training：迭代，先训练PRN，然后用proposal去训练Fast R-CNN。被Fast R-CNN微调的网络然后用来初始化PRN，以此迭代。本论文所有的实现都是使用该方法。</p>
+</li>
+<li><p>Approximate joint training：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fccbdrnzhij30bd0b1gml.jpg" alt=""></p>
+<p>RPN和Fast R-CNN融合到一个网络中进行训练。不考虑Bounding Boxes。</p>
+</li>
+<li><p>Non-approximate joint training: 考虑Bounding Boxes。</p>
+</li>
+</ul>
+</li>
+<li><p>4-step Alternating Training:</p>
+<ul>
+<li>Step 1: train the RPN, initialized with an ImageNet-pre-trained model and ﬁne-tuned end-to-end for the region proposal task.</li>
+<li>Step 2: train a separate detection network by Fast R-CNN using the proposals generated by the step-1 RPN. 同样使用ImageNet-pre-trained model来初始化。<strong>此时两个网络并没有共享卷积层。</strong></li>
+<li>Step 3: use the detector network to initialize RPN training but we ﬁx the shared convolutional layers and only ﬁne-tune the layers unique to RPN. <strong>现在两个网络共享卷积层</strong></li>
+<li>Step 4: keeping the shared convolutional layers ﬁxed, we ﬁne-tune the unique layers of Fast R-CNN.</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     
@@ -766,6 +848,75 @@
   </entry>
   
   <entry>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-28T08:13:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
+&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
+&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
+&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
+&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
+&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
+&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
+&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
+&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
     <link href="http://yoursite.com/posts/2903903730/"/>
     <id>http://yoursite.com/posts/2903903730/</id>
@@ -1016,75 +1167,6 @@
       <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
     
       <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:13:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
-&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
-&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
-&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
-&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
-&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
-&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
-&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
-&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
-&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

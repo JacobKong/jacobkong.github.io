@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-06T03:27:54.000Z</updated>
+  <updated>2017-02-06T03:52:01.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/2094641206/"/>
     <id>http://yoursite.com/posts/2094641206/</id>
     <published>2017-02-02T11:49:53.000Z</published>
-    <updated>2017-02-06T03:27:54.000Z</updated>
+    <updated>2017-02-06T03:52:01.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>之前的物体检测的方法是使用分类器来进行检测。</li>
@@ -74,8 +74,7 @@
 </li>
 <li><p>每个网格单元也预测<strong>C</strong>个条件类概率，$Pr(Class_i|Object)$，<strong>在一个网格单元包含一个物体的前提下，它属于某个类的概率</strong>。我们只为每个网格单元预测一组类概率，而不考虑框B的数量。</p>
 </li>
-<li><p>在测试的时候，通过如下公式来给出对弈某一个box来说某一类的confidence score：</p>
-<p>$$Pr(Class<em>i|Object)<em>Pr(Object)</em>IOU^{truth}</em>{pred}=Pr(Class<em>i)*IOU^{truth}</em>{pred}$$</p>
+<li><p>在测试的时候，通过如下公式来给出对弈某一个box来说某一类的confidence score：<br>$$<br>Pr(Class<em>i|Object)<em>Pr(Object)</em>IOU^{truth}</em>{pred}=Pr(Class<em>i)*IOU^{truth}</em>{pred}<br>$$</p>
 </li>
 <li><p>Model示例：</p>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg" alt=""></p>
@@ -92,7 +91,7 @@
 </li>
 <li><p>24个卷积层，之后跟着2个全连接层</p>
 </li>
-<li><p>最终输出是$7<em>7</em>30$的张量。</p>
+<li><p>最终输出是7 <em> 7 </em> 30的张量。</p>
 </li>
 <li><p>Fast YOLO和YOLO之间所有的训练和测试参数一样。</p>
 </li>
@@ -1035,6 +1034,75 @@
   </entry>
   
   <entry>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-28T08:13:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
+&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
+&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
+&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
+&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
+&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
+&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
+&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
+&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
     <link href="http://yoursite.com/posts/2397281138/"/>
     <id>http://yoursite.com/posts/2397281138/</id>
@@ -1213,75 +1281,6 @@
       <category term="Review" scheme="http://yoursite.com/tags/Review/"/>
     
       <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:13:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
-&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
-&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
-&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
-&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
-&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
-&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
-&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
-&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
-&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

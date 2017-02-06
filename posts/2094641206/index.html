@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -86,15 +86,35 @@
 
 
 
-<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JacobKong Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Object-Detection/index.html">
+<meta name="description" content="Abstract
+之前的物体检测的方法是使用分类器来进行检测。
+相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
+本论文的YOLO模型能达到45fps的实时图像处理效果。
+Fast YOLO：小型的网络版本，可达到155fps。
+与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection">
+<meta property="og:url" content="http://yoursite.com/posts/2094641206/index.html">
 <meta property="og:site_name" content="JacobKong Blog">
-<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta property="og:description" content="Abstract
+之前的物体检测的方法是使用分类器来进行检测。
+相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
+本论文的YOLO模型能达到45fps的实时图像处理效果。
+Fast YOLO：小型的网络版本，可达到155fps。
+与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcgkv58b9lj30oc0aota4.jpg">
+<meta property="og:updated_time" content="2017-02-06T03:27:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JacobKong Blog">
-<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="twitter:title" content="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection">
+<meta name="twitter:description" content="Abstract
+之前的物体检测的方法是使用分类器来进行检测。
+相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
+本论文的YOLO模型能达到45fps的实时图像处理效果。
+Fast YOLO：小型的网络版本，可达到155fps。
+与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
+<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg">
 
 
 
@@ -122,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Object-Detection/"/>
+  <link rel="canonical" href="http://yoursite.com/posts/2094641206/"/>
 
 
 
 
 
-  <title> 标签: Object Detection | JacobKong Blog </title>
+  <title> 深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection | JacobKong Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +188,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -290,277 +310,311 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Object Detection
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2094641206/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-02-02T19:49:53+08:00"
-              content="2017-02-02" >
-          02-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/3802700508/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：Faster R-CNN</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-17T06:32:24+08:00"
-              content="2016-12-17" >
-          12-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/1679631826/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：Fast R-CNN</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-08T06:32:24+08:00"
-              content="2016-12-08" >
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/3054155989/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-07T06:32:24+08:00"
-              content="2016-12-07" >
-          12-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/4241353321/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-06T06:32:24+08:00"
-              content="2016-12-06" >
-          12-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2553947436/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-05T06:32:24+08:00"
-              content="2016-12-05" >
-          12-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2903903730/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Robust Real-Time Face Detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-04T06:32:24+08:00"
-              content="2016-12-04" >
-          12-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/3084343215/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-29T06:32:24+08:00"
-              content="2016-11-29" >
-          11-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2735857030/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Fast Feature Pyramids for Object Detection?</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-24T06:32:24+08:00"
-              content="2016-11-24" >
-          11-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2094641206/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-02T19:49:53+08:00">
+                2017-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/2094641206/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2094641206/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/2094641206/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>之前的物体检测的方法是使用分类器来进行检测。</li>
+<li>相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。</li>
+<li>本论文的YOLO模型能达到45fps的实时图像处理效果。</li>
+<li>Fast YOLO：小型的网络版本，可达到155fps。</li>
+<li>与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><p>DPM: use a sliding window approach where the classiﬁer is run at evenly spaced locations over the entire image.</p>
+</li>
+<li><p>R-CNN: use region proposal methods to ﬁrst generate potential bounding boxes in an image and then run a classiﬁer on these proposed boxes. 具有<strong>slow</strong>和<strong>hard to optimize</strong>的缺点。</p>
+</li>
+<li><p>本论文将目标检测问题重新组织成<strong>single regression problem</strong>. 从图像像素转为<strong>bounding box coordinates</strong>和<strong>class probabilities</strong>.</p>
+</li>
+<li><p>YOLO框架：</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg" alt=""></p>
+<ul>
+<li>A <strong>single convolutional network</strong> simultaneously predicts multiple bounding boxes and class probabilities for those boxes.</li>
+<li>YOLO trains on full images and directly optimizes detection performance.</li>
+</ul>
+</li>
+<li><p>YOLO模型的优势：</p>
+<ul>
+<li>First, YOLO is extremely <strong>fast</strong>.<ul>
+<li>regression problem.</li>
+<li>no batch processing on a Titan X.</li>
+</ul>
+</li>
+<li>Second, YOLO reasons globally about the image when making predictions.<ul>
+<li>YOLO makes <strong>less than half</strong> the number of background errors compared to Fast R-CNN.</li>
+</ul>
+</li>
+<li>Third, YOLO learns <strong>generalizable representations</strong> of objects.</li>
+</ul>
+</li>
+<li><p>YOLO在准确性方面依旧落后与其他先进的检测系统，但是可以快速的标注图片中的物体，特别是小物体。</p>
+</li>
+</ul>
+<h2 id="Unified-Detection"><a href="#Unified-Detection" class="headerlink" title="Unified Detection"></a>Unified Detection</h2><ul>
+<li><p>本论文将物体检测中单独的组件统一到一个单一的神经网络中。网络利用整个图像的各个特征来预测每一个BB。而且同时为一张图片中所有的类预测所用的BB。</p>
+</li>
+<li><p>YOLO可以<strong>end-to-end</strong>来训练，而且能在保持高平均准确率的同时达到<strong>实时要求</strong>。</p>
+</li>
+<li><p>系统将输入图片分为$S*S$的网格单元。如果物体的中心落入某个格子，那么这个格子将会用来检测这个物体。</p>
+</li>
+<li><p>每个网格单元会预测<strong>B</strong>个bounding box以及这些框的置信值。</p>
+</li>
+<li><p>每个bounding box会有5个预测值：$x,y,w,h$和置信值confidence，$confidence = Pr(Object)*IOU^{truth}_{pred}$.</p>
+</li>
+<li><p>每个网格单元也预测<strong>C</strong>个条件类概率，$Pr(Class_i|Object)$，<strong>在一个网格单元包含一个物体的前提下，它属于某个类的概率</strong>。我们只为每个网格单元预测一组类概率，而不考虑框B的数量。</p>
+</li>
+<li><p>在测试的时候，通过如下公式来给出对弈某一个box来说某一类的confidence score：</p>
+<p>$$Pr(Class<em>i|Object)<em>Pr(Object)</em>IOU^{truth}</em>{pred}=Pr(Class<em>i)*IOU^{truth}</em>{pred}$$</p>
+</li>
+<li><p>Model示例：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg" alt=""></p>
+<p>每个grid cell预测B个bounding boxes，每个框的confidence和C个类概率。</p>
+</li>
+</ul>
+<h3 id="Network-Design"><a href="#Network-Design" class="headerlink" title="Network Design"></a>Network Design</h3><ul>
+<li><p>YOLO网络结构图：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fcgkv58b9lj30oc0aota4.jpg" alt=""></p>
+</li>
+<li><p>起初的<strong>卷积层</strong>用来从图像中提取特征。</p>
+</li>
+<li><p>全连接层用来预测输出的概率和坐标。</p>
+</li>
+<li><p>24个卷积层，之后跟着2个全连接层</p>
+</li>
+<li><p>最终输出是$7<em>7</em>30$的张量。</p>
+</li>
+<li><p>Fast YOLO和YOLO之间所有的训练和测试参数一样。</p>
+</li>
+<li><p>在ImageNet上进行卷积层的预训练。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3802700508/" rel="next" title="深度学习论文笔记：Faster R-CNN">
+                <i class="fa fa-chevron-left"></i> 深度学习论文笔记：Faster R-CNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="posts/2094641206/"
+     data-title="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection"
+     data-content=""
+     data-url="http://yoursite.com/posts/2094641206/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
           
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/2094641206/"
+           data-title="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection" data-url="http://yoursite.com/posts/2094641206/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -580,8 +634,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -682,6 +745,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unified-Detection"><span class="nav-number">3.</span> <span class="nav-text">Unified Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-Design"><span class="nav-number">3.1.</span> <span class="nav-text">Network Design</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -788,6 +867,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

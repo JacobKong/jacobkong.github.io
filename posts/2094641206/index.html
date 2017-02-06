@@ -105,7 +105,7 @@ Fast YOLO：小型的网络版本，可达到155fps。
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcgkv58b9lj30oc0aota4.jpg">
-<meta property="og:updated_time" content="2017-02-06T04:06:19.000Z">
+<meta property="og:updated_time" content="2017-02-06T04:07:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：You Only Look Once - Unified, Real-Time Object Detection">
 <meta name="twitter:description" content="Abstract
@@ -490,7 +490,7 @@ Fast YOLO：小型的网络版本，可达到155fps。
 </li>
 <li><p>每个网格单元也预测<strong>C</strong>个条件类概率，$Pr(Class_i|Object)$，<strong>在一个网格单元包含一个物体的前提下，它属于某个类的概率</strong>。我们只为每个网格单元预测一组类概率，而不考虑框B的数量。</p>
 </li>
-<li><p>在测试的时候，通过如下公式来给出对弈某一个box来说某一类的confidence score：<br>$$<br>Pr(Class_{i}|Object)<em>Pr(Object)</em>IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pred}<br>$$</p>
+<li><p>在测试的时候，通过如下公式来给出对弈某一个box来说某一类的confidence score：<br>$$<br>Pr(Class_{i}|Object)<br>$$</p>
 </li>
 <li><p>Model示例：</p>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg" alt=""></p>

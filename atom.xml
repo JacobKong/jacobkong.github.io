@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-08T03:59:50.000Z</updated>
+  <updated>2017-02-08T12:45:28.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,91 @@
     <link href="http://yoursite.com/posts/2102833929/"/>
     <id>http://yoursite.com/posts/2102833929/</id>
     <published>2017-02-08T03:56:20.000Z</published>
-    <updated>2017-02-08T03:59:50.000Z</updated>
+    <updated>2017-02-08T12:45:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
+<li>利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。</li>
+<li>提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测。</strong></li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>目前，许多检测方法依旧约束在很小的物体集上。</li>
+<li>目前，目标检测数据集相比于用于分类和标注的数据集来说，是有限制的。<ul>
+<li>最常见的检测数据集包含数十到数十万的图像，具有几十到几百个标签，比如Pascal、CoCo、ImageNet。 </li>
+<li>分类数据集具有数以百万计的图像，具有数万或数十万种类别，如ImageNet。</li>
+</ul>
+</li>
+<li>目标检测数据集永远不会达到和分类数据集一样的等级。</li>
+<li>本论文提出一种方法，利用分类数据集来作为检测数据集，将两种截然不同的数据集结合。</li>
+<li>本论文提出一个在目标检测和分类数据集上联合训练的方法。<strong>此方法利用标记的检测图像学习精确定位对象，而它使用分类图像增加其词汇和鲁棒性。</strong></li>
+</ul>
+<h2 id="Better"><a href="#Better" class="headerlink" title="Better"></a>Better</h2><ul>
+<li><p>YOLO产生很多的定位错误。而且YOLO相比于region proposal-based方法有着相对较低的recall（查全率）。<strong>所以主要任务是在保持分类准确率的前提下，提高recall和减少定位错误。</strong></p>
+</li>
+<li><p>我们从过去的工作中融合了我们自己的各种新想法，以提高YOLO的性能。 结果的摘要可以在表中找到：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg" alt=""></p>
+</li>
+<li><p><strong>Batch Normalization</strong>：得到2%的mAP的提升，使用Batch Normalization，我们可以从模型中删除dropout，而不会出现过度缺陷。</p>
+</li>
+<li><p><strong>High Resolution Classiﬁer</strong>：对于YOLOv2，我们首先在ImageNet对全部448×448分辨率图像上进行10epochs的微调来调整分类网络。  然后我们在检测时调整resulting network。 这种高分辨率分类网络使我们增加了近4％的mAP。</p>
+</li>
+<li><p><strong>Convolutional With Anchor Boxes</strong>：预测BB的偏移而不是坐标可以简化了问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</p>
+<ul>
+<li>我们移去了pooling层，使得网络的卷积层的输出有更高的像素。</li>
+<li>同时将网络缩减到在416*416像素的图片上操作。 我们这样做是因为我们想要特征图中具有奇数个位置，因此存在单个中心单元。</li>
+<li>当我们移动到anchor boxes时，我们也将class prediction机制与空间位置解耦，而是为每个anchor box预测的类和对象。 同YOLO一样，objectness prediction仍然预测ground truth和所提出的框的IOU，并且class predictions预测该类的条件概率，假定存在对象。(没太懂)</li>
+</ul>
+</li>
+<li><p><strong>Dimension Clusters</strong></p>
+<ul>
+<li><p>将YOLO与anchor boxes结合有两个问题，<strong>第一个是anchor box的长宽是认为选定的。</strong></p>
+</li>
+<li><p>我们不是手动选择先验（priors），而是在训练集边界框上运行k-means聚类，以自动找到好的先验。</p>
+</li>
+<li><p>我们真正想要的是导致良好的IOU分数的priors，这是独立于盒子的大小。 因此，对于我们的distance metric，我们使用：</p>
+<script type="math/tex; mode=display">
+d(box, centroid) = 1-IOU(box,centroid)</script></li>
+<li><p>我们选择<strong>k = 5</strong>作为模型复杂性和高召回率之间的良好权衡。这样非常不同于相比于人工选择的boxes。更多的又高又瘦的boxes。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Direct location prediction</strong>：</p>
+<ul>
+<li><p>将YOLO与anchor boxes结合有两个问题，<strong>第二个模型不稳定，特别是在早期迭代中。</strong></p>
+</li>
+<li><p>并非预测偏移，我们遵循YOLO的方法并预测相对于网格单元的位置的位置坐标。 这将ground truth限制在0和1之间。我们使用<strong>逻辑激活</strong>来约束网络的预测落在该范围内。</p>
+</li>
+<li><p>网络为每一个BB预测5个坐标：$t_x, t_y, t_w, t_h, t_o$.</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg" alt=""></p>
+</li>
+<li><p>结合Dimension Clusters和Direct location prediction，YOLO提升5%的mAP。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Fine-Grained Features</strong></p>
+<ul>
+<li>修改后的YOLO在13<em>13的feature map上进行检测。 虽然这对于大对象是足够的，但是它可以从用于定位较小对象的<em>*细粒度特征</em></em>中受益。</li>
+<li>添加一个传递层，将分辨率从前面的层变为从26 x 26分辨率。</li>
+</ul>
+</li>
+<li><p><strong>Multi-Scale Training</strong></p>
+<ul>
+<li>我们希望YOLOv2可以足够鲁邦在不同尺寸的images上进行训练。</li>
+<li>并非使用固定的输入图像尺寸，我们在每几次迭代后改变网络。每10batches，我们的网络随机选择一个新的图像尺寸。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Faster"><a href="#Faster" class="headerlink" title="Faster"></a>Faster</h2>]]></content>
     
     <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。&lt;/li&gt;
+&lt;li&gt;利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。&lt;/li&gt;
+&lt;li&gt;提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。&lt;strong&gt;这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

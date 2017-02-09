@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-08T12:45:28.000Z</updated>
+  <updated>2017-02-09T03:48:55.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/2102833929/"/>
     <id>http://yoursite.com/posts/2102833929/</id>
     <published>2017-02-08T03:56:20.000Z</published>
-    <updated>2017-02-08T12:45:28.000Z</updated>
+    <updated>2017-02-09T03:48:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
@@ -45,23 +45,24 @@
 <li><p>我们从过去的工作中融合了我们自己的各种新想法，以提高YOLO的性能。 结果的摘要可以在表中找到：</p>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg" alt=""></p>
 </li>
-<li><p><strong>Batch Normalization</strong>：得到2%的mAP的提升，使用Batch Normalization，我们可以从模型中删除dropout，而不会出现过度缺陷。</p>
-</li>
-<li><p><strong>High Resolution Classiﬁer</strong>：对于YOLOv2，我们首先在ImageNet对全部448×448分辨率图像上进行10epochs的微调来调整分类网络。  然后我们在检测时调整resulting network。 这种高分辨率分类网络使我们增加了近4％的mAP。</p>
-</li>
-<li><p><strong>Convolutional With Anchor Boxes</strong>：预测BB的偏移而不是坐标可以简化了问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</p>
-<ul>
+</ul>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a><strong>Batch Normalization</strong></h3><ul>
+<li>得到2%的mAP的提升，使用Batch Normalization，我们可以从模型中删除dropout，而不会出现过度缺陷。</li>
+</ul>
+<h3 id="High-Resolution-Classiﬁer"><a href="#High-Resolution-Classiﬁer" class="headerlink" title="High Resolution Classiﬁer"></a><strong>High Resolution Classiﬁer</strong></h3><ul>
+<li>对于YOLOv2，我们首先在ImageNet对全部448×448分辨率图像上进行10epochs的微调来调整分类网络。  然后我们在检测时调整resulting network。 这种高分辨率分类网络使我们增加了近4％的mAP。</li>
+</ul>
+<h3 id="Convolutional-With-Anchor-Boxes"><a href="#Convolutional-With-Anchor-Boxes" class="headerlink" title="Convolutional With Anchor Boxes"></a><strong>Convolutional With Anchor Boxes</strong></h3><ul>
+<li>预测BB的偏移而不是坐标可以简化了问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</li>
 <li>我们移去了pooling层，使得网络的卷积层的输出有更高的像素。</li>
 <li>同时将网络缩减到在416*416像素的图片上操作。 我们这样做是因为我们想要特征图中具有奇数个位置，因此存在单个中心单元。</li>
 <li>当我们移动到anchor boxes时，我们也将class prediction机制与空间位置解耦，而是为每个anchor box预测的类和对象。 同YOLO一样，objectness prediction仍然预测ground truth和所提出的框的IOU，并且class predictions预测该类的条件概率，假定存在对象。(没太懂)</li>
 </ul>
-</li>
-<li><p><strong>Dimension Clusters</strong></p>
-<ul>
+<h3 id="Dimension-Clusters"><a href="#Dimension-Clusters" class="headerlink" title="Dimension Clusters"></a><strong>Dimension Clusters</strong></h3><ul>
 <li><p>将YOLO与anchor boxes结合有两个问题，<strong>第一个是anchor box的长宽是认为选定的。</strong></p>
 </li>
 <li><p>我们不是手动选择先验（priors），而是在训练集边界框上运行k-means聚类，以自动找到好的先验。</p>
-</li>
+<ul>
 <li><p>我们真正想要的是导致良好的IOU分数的priors，这是独立于盒子的大小。 因此，对于我们的distance metric，我们使用：</p>
 <script type="math/tex; mode=display">
 d(box, centroid) = 1-IOU(box,centroid)</script></li>
@@ -69,34 +70,52 @@ d(box, centroid) = 1-IOU(box,centroid)</script></li>
 </li>
 </ul>
 </li>
-<li><p><strong>Direct location prediction</strong>：</p>
-<ul>
+</ul>
+<h3 id="Direct-location-prediction"><a href="#Direct-location-prediction" class="headerlink" title="Direct location prediction"></a><strong>Direct location prediction</strong></h3><ul>
 <li><p>将YOLO与anchor boxes结合有两个问题，<strong>第二个模型不稳定，特别是在早期迭代中。</strong></p>
 </li>
 <li><p>并非预测偏移，我们遵循YOLO的方法并预测相对于网格单元的位置的位置坐标。 这将ground truth限制在0和1之间。我们使用<strong>逻辑激活</strong>来约束网络的预测落在该范围内。</p>
 </li>
 <li><p>网络为每一个BB预测5个坐标：$t_x, t_y, t_w, t_h, t_o$.</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg" alt="">  <img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg" alt=""></p>
 </li>
 <li><p>结合Dimension Clusters和Direct location prediction，YOLO提升5%的mAP。</p>
 </li>
 </ul>
-</li>
-<li><p><strong>Fine-Grained Features</strong></p>
-<ul>
+<h3 id="Fine-Grained-Features"><a href="#Fine-Grained-Features" class="headerlink" title="Fine-Grained Features"></a><strong>Fine-Grained Features</strong></h3><ul>
 <li>修改后的YOLO在13<em>13的feature map上进行检测。 虽然这对于大对象是足够的，但是它可以从用于定位较小对象的<em>*细粒度特征</em></em>中受益。</li>
 <li>添加一个传递层，将分辨率从前面的层变为从26 x 26分辨率。</li>
 </ul>
-</li>
-<li><p><strong>Multi-Scale Training</strong></p>
-<ul>
+<h3 id="Multi-Scale-Training"><a href="#Multi-Scale-Training" class="headerlink" title="Multi-Scale Training"></a><strong>Multi-Scale Training</strong></h3><ul>
 <li>我们希望YOLOv2可以足够鲁邦在不同尺寸的images上进行训练。</li>
 <li>并非使用固定的输入图像尺寸，我们在每几次迭代后改变网络。每10batches，我们的网络随机选择一个新的图像尺寸。</li>
 </ul>
+<h2 id="Faster"><a href="#Faster" class="headerlink" title="Faster"></a>Faster</h2><ul>
+<li>大多数检测框架依赖VGG-16作为基本特征提取器。VGG-16是一个强大、准确的分类网络，但是也很复杂。</li>
+<li>YOLO框架使用的基于Googlenet架构的修改后的网络。比VGG-16快速，但是准确性比VGG-16稍差。</li>
+</ul>
+<h3 id="Darknet-19"><a href="#Darknet-19" class="headerlink" title="Darknet-19"></a>Darknet-19</h3><ul>
+<li><p>供YOLOv2使用的新的分类模型。</p>
+</li>
+<li><p>最终模型叫做darknet-19，有着19个卷积层和5个maxpooling层。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fck21bicicj308j0byabg.jpg" alt=""></p>
+</li>
+<li><p>Darknet-19处理每张图片只需要5.58 billion的操作。</p>
 </li>
 </ul>
-<h2 id="Faster"><a href="#Faster" class="headerlink" title="Faster"></a>Faster</h2>]]></content>
+<h3 id="Training-for-classification"><a href="#Training-for-classification" class="headerlink" title="Training for classification"></a>Training for classification</h3><ul>
+<li>在标准的ImageNet 1000类的数据集上利用随机梯度下降训练160 epochs。开始学习率为0.1，polynomial rate decay 是4，weight decay是0.0005，动量是0.9。</li>
+<li>在训练期间，我们使用标准的数据增加技巧，包括随机裁剪，旋转，以及色调，饱和度和曝光偏移。</li>
+<li>在224x224分辨率的图像上进行预训练，然后在448x448分辨率的图像上进行微调。</li>
+</ul>
+<h3 id="Training-for-detection"><a href="#Training-for-detection" class="headerlink" title="Training for detection"></a>Training for detection</h3><ul>
+<li>我们通过去除最后的卷积层来修改这个网络，并且替代地增加具有1024个滤波器的三个3×3卷积层，每个跟随着具有我们需要检测所需的输出数量的最后的1×1卷积层。</li>
+<li><strong>passthrough层</strong>的添加：使网络能够使用fine grain feature。</li>
+</ul>
+<h2 id="Stronger"><a href="#Stronger" class="headerlink" title="Stronger"></a>Stronger</h2><ul>
+<li>​</li>
+</ul>
+]]></content>
     
     <summary type="html">
     

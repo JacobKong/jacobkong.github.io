@@ -426,8 +426,17 @@
         
           <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。</li>
+<li>YOLOv2：<ul>
+<li>是对YOLO改进后的提升模型。</li>
 <li>利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。</li>
-<li>提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测。</strong></li>
+</ul>
+</li>
+<li>YOLO9000：<ul>
+<li>是提出的一种联合在检测和分类数据集上训练的模型，<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测</strong>。</li>
+<li>可以检测超过9000个类。</li>
+</ul>
+</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">

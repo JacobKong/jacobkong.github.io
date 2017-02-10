@@ -88,27 +88,44 @@
 
 <meta name="description" content="Abstract
 YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
 利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
-提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。这种联合">
+
+
+YOLO9000：
+是提出的一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：YOLO9000">
 <meta property="og:url" content="http://yoursite.com/posts/2102833929/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
 <meta property="og:description" content="Abstract
 YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
 利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
-提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。这种联合">
+
+
+YOLO9000：
+是提出的一">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg">
-<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fck21bicicj308j0byabg.jpg">
-<meta property="og:updated_time" content="2017-02-09T03:48:55.000Z">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgy1fckj905lbrj30bm0co75r.jpg">
+<meta property="og:updated_time" content="2017-02-10T03:12:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：YOLO9000">
 <meta name="twitter:description" content="Abstract
 YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
 利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
-提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。这种联合">
+
+
+YOLO9000：
+是提出的一">
 <meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg">
 
 
@@ -435,8 +452,17 @@ YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超�
       
         <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。</li>
+<li>YOLOv2：<ul>
+<li>是对YOLO改进后的提升模型。</li>
 <li>利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。</li>
-<li>提出一个在目标检测和分类上联合训练的方法，利用这个方法，我们在COCO数据集和ImageNet数据集上同时训练YOLO9000。<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测。</strong></li>
+</ul>
+</li>
+<li>YOLO9000：<ul>
+<li>是提出的一种联合在检测和分类数据集上训练的模型，<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测</strong>。</li>
+<li>可以检测超过9000个类。</li>
+</ul>
+</li>
 </ul>
 <a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
@@ -464,7 +490,8 @@ YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超�
 <li>对于YOLOv2，我们首先在ImageNet对全部448×448分辨率图像上进行10epochs的微调来调整分类网络。  然后我们在检测时调整resulting network。 这种高分辨率分类网络使我们增加了近4％的mAP。</li>
 </ul>
 <h3 id="Convolutional-With-Anchor-Boxes"><a href="#Convolutional-With-Anchor-Boxes" class="headerlink" title="Convolutional With Anchor Boxes"></a><strong>Convolutional With Anchor Boxes</strong></h3><ul>
-<li>预测BB的偏移而不是坐标可以简化了问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</li>
+<li>YOLO利用卷积特征提取器最顶端的全连接层来直接预测BB的坐标。而Faster R-CNN是利用首选的priors来预测BB。</li>
+<li>预测BB的偏移而不是坐标可以简化问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</li>
 <li>我们移去了pooling层，使得网络的卷积层的输出有更高的像素。</li>
 <li>同时将网络缩减到在416*416像素的图片上操作。 我们这样做是因为我们想要特征图中具有奇数个位置，因此存在单个中心单元。</li>
 <li>当我们移动到anchor boxes时，我们也将class prediction机制与空间位置解耦，而是为每个anchor box预测的类和对象。 同YOLO一样，objectness prediction仍然预测ground truth和所提出的框的IOU，并且class predictions预测该类的条件概率，假定存在对象。(没太懂)</li>
@@ -488,8 +515,8 @@ d(box, centroid) = 1-IOU(box,centroid)</script></li>
 <li><p>并非预测偏移，我们遵循YOLO的方法并预测相对于网格单元的位置的位置坐标。 这将ground truth限制在0和1之间。我们使用<strong>逻辑激活</strong>来约束网络的预测落在该范围内。</p>
 </li>
 <li><p>网络为每一个BB预测5个坐标：$t_x, t_y, t_w, t_h, t_o$.</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg" alt="">  <img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg" alt=""></p>
-</li>
+<pre><code>  ![](https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg)  ![](https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg)
+</code></pre></li>
 <li><p>结合Dimension Clusters和Direct location prediction，YOLO提升5%的mAP。</p>
 </li>
 </ul>
@@ -524,7 +551,56 @@ d(box, centroid) = 1-IOU(box,centroid)</script></li>
 <li><strong>passthrough层</strong>的添加：使网络能够使用fine grain feature。</li>
 </ul>
 <h2 id="Stronger"><a href="#Stronger" class="headerlink" title="Stronger"></a>Stronger</h2><ul>
-<li>​</li>
+<li>本论文提出一种机制，用来将分类和检测数据结合起来再一起训练。<ul>
+<li>在训练过程中，当看到用于检测的被标注的图片，我们会使用基于YOLOv2的代价函数进行反向传播。</li>
+<li>在训练过程中，当看到分类图片，我们只从框架中用来分类部分来传递损失。</li>
+</ul>
+</li>
+<li>这种方法的challenge：<ul>
+<li>检测数据集中的标签是大分类，而分类数据集的标签是小分类，<strong>所以我们需要找一个方法来融合这些标签</strong>。</li>
+<li>用来分类的许多方法都是使用softmax层来计算最后的概率分布，<strong>使用softmax层会假设类之间是互斥的</strong>，但是如何用本方法融合数据集，类之间本身不是互斥的。</li>
+</ul>
+</li>
+<li>我们所以使用multi-label模型来结合数据集，不假设类之间互斥。<strong>这种方法忽略了我们已知的数据的结构。</strong></li>
+</ul>
+<h3 id="Hierarchical-classification"><a href="#Hierarchical-classification" class="headerlink" title="Hierarchical classification"></a>Hierarchical classification</h3><ul>
+<li>ImageNet标签是从<strong>WordNet</strong>中得来，<strong>一种结构化概念和标签之间如何联系的语言数据库</strong>。</li>
+<li>WordNet是<strong>连接图结构</strong>，而非树。我们相反并不实用整个图结构，我们将问题简化成从ImageNet的概念中构建有结构的树。</li>
+<li>WordTree</li>
+</ul>
+<h3 id="Dataset-combination-with-WordTree"><a href="#Dataset-combination-with-WordTree" class="headerlink" title="Dataset combination with WordTree"></a>Dataset combination with WordTree</h3><ul>
+<li><p>我们可以使用WordTree来介个数据集。</p>
+</li>
+<li><p>将数据集中分类映射成树中的下义词。</p>
+</li>
+<li><p>举例：将ImageNet和COCO数据集结合：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1fckj905lbrj30bm0co75r.jpg" alt=""></p>
+</li>
+<li><p>WordNet十分多样化，所以我们可以利用这种技术到大多数数据集。</p>
+</li>
+</ul>
+<h3 id="Joint-classiﬁcation-and-detection"><a href="#Joint-classiﬁcation-and-detection" class="headerlink" title="Joint classiﬁcation and detection"></a>Joint classiﬁcation and detection</h3><ul>
+<li>将COCO数据集和ImageNet数据集结合，训练处一个特别大规模的检测器。</li>
+<li>对应的WordTree有9418个类。</li>
+<li>ImageNet是一个更大的数据集，因此我们通过对COCO进行过采样来平衡数据集，使ImageNet只以4：1的倍数来增大。</li>
+<li>当我们的网络看见一张用来检测的图片，我们正常反向传播loss。对于分类loss，我们只在该label对应层次之上反向传播loss。<strong>比如：如果标签是“dog”，我们会在树中的“German Shepherd”和“Golden Retriever”中进一步预测错误，因为我们没有这些信息。</strong></li>
+<li>当我们的网络看见一张用来分来的照片，我们只反向传递分类loss。</li>
+<li>使用这种联合训练，YOLO 9000使用COCO中的检测数据学习找到图像中的对象，并使用ImageNet中的数据学习分类各种各样的对象。</li>
+<li>在ImageNet上利用YOLO9000来做detection，从而进行评估。ImageNet和COCO只有44个相同的类分类，意味着YOLO9000在利用部分监督来进行检测。</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。<ul>
+<li>YOLOv2：是对YOLO改进后的提升模型。更快更先进。此外，它可以以各种图像大小运行，以提供速度和精度之间的权衡。</li>
+<li>YOLO9000：是提出的一种联合在检测和分类数据集上训练的模型，可以为没有任何标注检测标签的数据进行检测。可以检测超过9000个类。使用WordTree技术来组合不同来源的数据。</li>
+</ul>
+</li>
+<li>我们创造出许多目标检测之外的技术：<ul>
+<li>WordTree representation.</li>
+<li>Dataset combination.</li>
+<li>Multi-scale training.</li>
+</ul>
+</li>
+<li>下一步工作：我们希望利用相似的技术来进行weakly supervised image segmentation.</li>
 </ul>
 
       
@@ -766,7 +842,7 @@ d(box, centroid) = 1-IOU(box,centroid)</script></li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Better"><span class="nav-number">3.</span> <span class="nav-text">Better</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">3.1.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Resolution-Classiﬁer"><span class="nav-number">3.2.</span> <span class="nav-text">High Resolution Classiﬁer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-With-Anchor-Boxes"><span class="nav-number">3.3.</span> <span class="nav-text">Convolutional With Anchor Boxes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dimension-Clusters"><span class="nav-number">3.4.</span> <span class="nav-text">Dimension Clusters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-location-prediction"><span class="nav-number">3.5.</span> <span class="nav-text">Direct location prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fine-Grained-Features"><span class="nav-number">3.6.</span> <span class="nav-text">Fine-Grained Features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Scale-Training"><span class="nav-number">3.7.</span> <span class="nav-text">Multi-Scale Training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster"><span class="nav-number">4.</span> <span class="nav-text">Faster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Darknet-19"><span class="nav-number">4.1.</span> <span class="nav-text">Darknet-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-for-classification"><span class="nav-number">4.2.</span> <span class="nav-text">Training for classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-for-detection"><span class="nav-number">4.3.</span> <span class="nav-text">Training for detection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stronger"><span class="nav-number">5.</span> <span class="nav-text">Stronger</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Better"><span class="nav-number">3.</span> <span class="nav-text">Better</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">3.1.</span> <span class="nav-text">Batch Normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Resolution-Classiﬁer"><span class="nav-number">3.2.</span> <span class="nav-text">High Resolution Classiﬁer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-With-Anchor-Boxes"><span class="nav-number">3.3.</span> <span class="nav-text">Convolutional With Anchor Boxes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dimension-Clusters"><span class="nav-number">3.4.</span> <span class="nav-text">Dimension Clusters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-location-prediction"><span class="nav-number">3.5.</span> <span class="nav-text">Direct location prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fine-Grained-Features"><span class="nav-number">3.6.</span> <span class="nav-text">Fine-Grained Features</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Scale-Training"><span class="nav-number">3.7.</span> <span class="nav-text">Multi-Scale Training</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster"><span class="nav-number">4.</span> <span class="nav-text">Faster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Darknet-19"><span class="nav-number">4.1.</span> <span class="nav-text">Darknet-19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-for-classification"><span class="nav-number">4.2.</span> <span class="nav-text">Training for classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-for-detection"><span class="nav-number">4.3.</span> <span class="nav-text">Training for detection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stronger"><span class="nav-number">5.</span> <span class="nav-text">Stronger</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hierarchical-classification"><span class="nav-number">5.1.</span> <span class="nav-text">Hierarchical classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dataset-combination-with-WordTree"><span class="nav-number">5.2.</span> <span class="nav-text">Dataset combination with WordTree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joint-classiﬁcation-and-detection"><span class="nav-number">5.3.</span> <span class="nav-text">Joint classiﬁcation and detection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">6.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>

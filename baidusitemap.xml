@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/3118967289/</loc>
+    <lastmod>2017-02-13T09:54:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习论文笔记：SSD</title>
+        <pubTime>2017-02-13T09:53:54.000Z</pubTime>
+        
+        <tag>Object Detection</tag>
+         
+        <tag>目标检测</tag>
+         
+        <tag>Deep Learning</tag>
+         
+        <tag>深度学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/2102833929/</loc>
     <lastmod>2017-02-10T03:12:39.000Z</lastmod>
     <data>

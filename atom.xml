@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-13T09:54:51.000Z</updated>
+  <updated>2017-02-14T09:21:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,56 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-13T09:54:51.000Z</updated>
+    <updated>2017-02-14T09:21:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。</li>
+<li>在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。</li>
+<li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
+<li>相比于基于object proposal的方法，SSD是简单地，因为它能够<strong>完全消除</strong>proposal generation和后续的<strong>像素或者特征重冲采样阶段</strong>，所有的计算都封装在单独的网络中。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>目前的目标检测系统是以下方法的变体：假设边界框（bounding box），对每个框进行像素或特征重取样，采用高质量分类器。</li>
+<li>评估速度方法：<strong>SPF (seconds per frame)</strong>.</li>
+<li>提出第一个基于深度网络的不需要为BB进行resample pixels or features的目标检测器，并能够同样达到高准确率。</li>
+<li>本论文的贡献（具体看论文）：<ul>
+<li>引入了SSD。</li>
+<li>SSD的核心。</li>
+<li>为了实现高检测准确率，引入了在不同尺度和横纵比的feature maps上进行预测。</li>
+<li>End-to-end training 以及高准确率，机试在低分辨率图片。</li>
+<li>在PASCAL VOC、COCO和ILSVRC上进行试验，具有很强的竞争力。</li>
+</ul>
+</li>
+</ul>
+<h2 id="The-Single-Shot-Detector-SSD"><a href="#The-Single-Shot-Detector-SSD" class="headerlink" title="The Single Shot Detector (SSD)"></a>The Single Shot Detector (SSD)</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><ul>
+<li>基于前向卷积神经网络，产生固定尺寸的BB集，以及这些BB中存在物体的分数，之后跟随者一个非极大值抑制步骤来产生最终检测。</li>
+<li><p>网络前面的几层是基于标准的用于产生高质量图像分类的架构，我们成为<strong>基础网络</strong>。我们给网络然后添加了<strong>辅助的结构</strong>来产生检测结构。辅助网络具备以下关键特征：</p>
+<ul>
+<li><p>用于检测的多尺寸特征图。在基础网络后面<strong>添加额外几个卷积层</strong>，在尺寸上逐层递减，从而能够在不同尺寸上检测。（Overfeat和YOLO都只是在单独尺寸的feature map上进行操作。）</p>
+</li>
+<li><p>用来预测的卷积预测器（Convolutional predictors）。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg" alt=""></p>
+</li>
+<li><p>默认的boxes和aspect ratios。我们将一组默认边界框与每个feature map单元关联，用于网络顶部的多个特征映射。在每个feature map单元格中，我们预测相对于单元格中的默认框形状的偏移，以及指示每个框中存在类实例的每类分数。（本论文中的default boxes类似于Faster R-CNN中的anchor boxes，然而我们将他用于不同分辨率的几个feature maps中）</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li>​</li>
+</ul>
+]]></content>
     
     <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。&lt;/li&gt;
+&lt;li&gt;在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在多尺度图像处理方面&lt;/strong&gt;，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。&lt;/li&gt;
+&lt;li&gt;相比于基于object proposal的方法，SSD是简单地，因为它能够&lt;strong&gt;完全消除&lt;/strong&gt;proposal generation和后续的&lt;strong&gt;像素或者特征重冲采样阶段&lt;/strong&gt;，所有的计算都封装在单独的网络中。&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

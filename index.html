@@ -424,9 +424,19 @@
 
       
         
-          
-            
-          
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。</li>
+<li>在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。</li>
+<li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
+<li>相比于基于object proposal的方法，SSD是简单地，因为它能够<strong>完全消除</strong>proposal generation和后续的<strong>像素或者特征重冲采样阶段</strong>，所有的计算都封装在单独的网络中。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/3118967289/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

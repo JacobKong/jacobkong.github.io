@@ -86,30 +86,49 @@
 
 
 
-<meta name="description" content="Abstract
-SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。
-在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。
-在多尺度图像处理方面，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。
-相比于基于obje">
+<meta name="description" content="知识点
+Jaccard overlap, Jaccard similarity:
+Jaccard coefficient:
+
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
+所以Jaccard overlap其实就是IoU。
+
+
+Abstract
+SSD: 利用单个深度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：SSD">
 <meta property="og:url" content="http://yoursite.com/posts/3118967289/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="Abstract
-SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。
-在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。
-在多尺度图像处理方面，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。
-相比于基于obje">
+<meta property="og:description" content="知识点
+Jaccard overlap, Jaccard similarity:
+Jaccard coefficient:
+
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
+所以Jaccard overlap其实就是IoU。
+
+
+Abstract
+SSD: 利用单个深度">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg">
-<meta property="og:updated_time" content="2017-02-14T09:21:31.000Z">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcqyi2ogdnj30bj03l3yr.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcqyjitcw7j30eh01kjrg.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcjw1fcr0sa2183j308k0190sn.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcr148r96xj30e70563zd.jpg">
+<meta property="og:updated_time" content="2017-02-15T05:47:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：SSD">
-<meta name="twitter:description" content="Abstract
-SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。
-在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。
-在多尺度图像处理方面，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。
-相比于基于obje">
+<meta name="twitter:description" content="知识点
+Jaccard overlap, Jaccard similarity:
+Jaccard coefficient:
+
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
+所以Jaccard overlap其实就是IoU。
+
+
+Abstract
+SSD: 利用单个深度">
 <meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
 
 
@@ -434,7 +453,15 @@ SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出
       
 
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+        <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li><p>Jaccard overlap, Jaccard similarity:</p>
+<p>Jaccard coefficient:</p>
+<script type="math/tex; mode=display">
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script><p>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。</p>
+<p><strong>所以Jaccard overlap其实就是IoU。</strong></p>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。</li>
 <li>在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。</li>
 <li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
@@ -458,20 +485,66 @@ SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出
 <li>基于前向卷积神经网络，产生固定尺寸的BB集，以及这些BB中存在物体的分数，之后跟随者一个非极大值抑制步骤来产生最终检测。</li>
 <li><p>网络前面的几层是基于标准的用于产生高质量图像分类的架构，我们成为<strong>基础网络</strong>。我们给网络然后添加了<strong>辅助的结构</strong>来产生检测结构。辅助网络具备以下关键特征：</p>
 <ul>
-<li><p>用于检测的多尺寸特征图。在基础网络后面<strong>添加额外几个卷积层</strong>，在尺寸上逐层递减，从而能够在不同尺寸上检测。（Overfeat和YOLO都只是在单独尺寸的feature map上进行操作。）</p>
+<li><p><strong>用于检测的多尺寸特征图。</strong>在基础网络后面<strong>添加额外几个卷积层</strong>，在尺寸上逐层递减，从而能够在不同尺寸上检测。（Overfeat和YOLO都只是在单独尺寸的feature map上进行操作。）</p>
 </li>
-<li><p>用来预测的卷积预测器（Convolutional predictors）。</p>
+<li><p><strong>用来预测的卷积预测器</strong>（Convolutional predictors）。</p>
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg" alt=""></p>
 </li>
-<li><p>默认的boxes和aspect ratios。我们将一组默认边界框与每个feature map单元关联，用于网络顶部的多个特征映射。在每个feature map单元格中，我们预测相对于单元格中的默认框形状的偏移，以及指示每个框中存在类实例的每类分数。（本论文中的default boxes类似于Faster R-CNN中的anchor boxes，然而我们将他用于不同分辨率的几个feature maps中）</p>
+<li><p><strong>默认的boxes和aspect ratios。</strong>我们将一组默认边界框与每个feature map单元关联，用于网络顶部的多个特征映射。在每个feature map单元格中，我们预测相对于单元格中的默认框形状的偏移，以及指示每个框中存在类实例的每类分数。（本论文中的default boxes类似于Faster R-CNN中的anchor boxes，然而我们将他用于不同分辨率的几个feature maps中）</p>
 <p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg" alt=""></p>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
-<li>​</li>
+<li><p>训练SSD和训练使用region proposals的典型检测器之间的<strong>关键区别是</strong>：ground truth信息需要分配给固定的检测器输出集合中的特定输出。</p>
+</li>
+<li><p>训练涉及到：</p>
+<ul>
+<li>choosing the set of default boxes and scales for detection。</li>
+<li>hard negative mining。</li>
+<li>data augmentation strategies（数据增加策略）。</li>
 </ul>
+</li>
+</ul>
+<h4 id="Matching-strategy"><a href="#Matching-strategy" class="headerlink" title="Matching strategy"></a><strong>Matching strategy</strong></h4><p>在训练过程中，对于每一个ground truth，我们都从默认框中选择每个不同的位置、aspect ratio、scale的bounding boxes。首先匹配最好的jaccard overlap的default box（类似于MultiBox），但与MultiBox不同的是，我们然后匹配default box与任何ground truth，只要jaccard overlap高于阈值（0.5）。<strong>这样简化了学习问题。</strong></p>
+<h4 id="Training-objective"><a href="#Training-objective" class="headerlink" title="Training objective"></a><strong>Training objective</strong></h4><p>整体的代价函数是localization loss和confidence loss之和：</p>
+<script type="math/tex; mode=display">
+L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
+<li><p>N是匹配的default boxes的数量，N=0时，loss=0。</p>
+</li>
+<li><p>localization loss是predicted box和ground truth box之间的<strong>Smooth L1 loss</strong>（类似于Faster R-CNN）。我们预测default box的中心$(cx,cy)$，以及宽度$(w)$和长度$(h)$。</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcqyi2ogdnj30bj03l3yr.jpg" alt=""></p>
+</li>
+<li><p>confidence loss是多个类confidence$(c)$之间的<strong>softmax loss</strong>。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fcqyjitcw7j30eh01kjrg.jpg" alt=""></p>
+</li>
+<li><p>权值$\alpha$通过交叉验证设为1。</p>
+</li>
+</ul>
+<h4 id="Choosing-scales-and-aspect-ratios-for-default-boxes"><a href="#Choosing-scales-and-aspect-ratios-for-default-boxes" class="headerlink" title="Choosing scales and aspect ratios for default boxes"></a>Choosing scales and aspect ratios for default boxes</h4><ul>
+<li><p>不同于将照片处理为不同尺寸再结合结果的方法，本论文通过利用单个神经网络中不同层的feature maps，可以达到同样的效果，同时可以在所有尺寸中共享权值。</p>
+</li>
+<li><p><strong>利用较低层的feature maps可以提高semantic segmentation质量，应为较低层往往可以捕捉到更精细的细节。</strong></p>
+</li>
+<li><p>我们同时使用较低和较高层的feature maps来进行检测。</p>
+</li>
+<li><p>网络中不同层的feature maps有着不同的接受域的尺寸。</p>
+</li>
+<li><p>假设我们想要使用m个feature maps用来检测，则每个feature map的default boxes的scale可以这样计算：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcjw1fcr0sa2183j308k0190sn.jpg" alt=""></p>
+</li>
+<li><p>通过结合在许多feature maps上所有位置上的所有的有着不同scale和aspect ratio的default boxes，我们可以产生对不同物体大小和形状的各种预测。</p>
+</li>
+<li><p>如下图中，狗在8x8的feature map中没有匹配的default box，因此在训练中会被作为负样本，但是在4x4的feature map中有着匹配的feature map。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcr148r96xj30e70563zd.jpg" alt=""></p>
+</li>
+</ul>
+<h4 id="Hard-negative-mining"><a href="#Hard-negative-mining" class="headerlink" title="Hard negative mining"></a>Hard negative mining</h4><ul>
+<li>通过匹配阶段后，default boxes中会产生大量的negatives，尤其是当可能的default boxes数量非常大时。<strong>这导致positive和negative时间严重的不平衡。</strong></li>
+<li>我们将negative examples的default boxes通过其最高的confidence loss进行排序，然后选择较高的几个，使negative examples和positive examples之间的比例保持在3:1之间。<strong>这样会更快的优化和更稳定的训练。</strong></li>
+</ul>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p>​</p>
 
       
     </div>
@@ -712,7 +785,7 @@ SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Single-Shot-Detector-SSD"><span class="nav-number">3.</span> <span class="nav-text">The Single Shot Detector (SSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">3.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">3.2.</span> <span class="nav-text">Training</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Single-Shot-Detector-SSD"><span class="nav-number">4.</span> <span class="nav-text">The Single Shot Detector (SSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">4.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">4.2.</span> <span class="nav-text">Training</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Matching-strategy"><span class="nav-number">4.2.1.</span> <span class="nav-text">Matching strategy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-objective"><span class="nav-number">4.2.2.</span> <span class="nav-text">Training objective</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Choosing-scales-and-aspect-ratios-for-default-boxes"><span class="nav-number">4.2.3.</span> <span class="nav-text">Choosing scales and aspect ratios for default boxes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hard-negative-mining"><span class="nav-number">4.2.4.</span> <span class="nav-text">Hard negative mining</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a></li></ol></div>
             
 
           </div>

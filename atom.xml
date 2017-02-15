@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-15T05:47:47.000Z</updated>
+  <updated>2017-02-15T09:53:11.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-15T05:47:47.000Z</updated>
+    <updated>2017-02-15T09:53:11.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li><p>Jaccard overlap, Jaccard similarity:</p>
@@ -113,7 +113,16 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 <li>通过匹配阶段后，default boxes中会产生大量的negatives，尤其是当可能的default boxes数量非常大时。<strong>这导致positive和negative时间严重的不平衡。</strong></li>
 <li>我们将negative examples的default boxes通过其最高的confidence loss进行排序，然后选择较高的几个，使negative examples和positive examples之间的比例保持在3:1之间。<strong>这样会更快的优化和更稳定的训练。</strong></li>
 </ul>
-<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><p>​</p>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><ul>
+<li>所有的实验都是基于VGG16。</li>
+<li>将fc6和fc7转化为卷积层。</li>
+<li>将pool5从2x2-s2转化为3x3-s1。</li>
+<li>使用a trous algorithm来填补“holes”。</li>
+<li>移去了所有的dropout层和fc8层。</li>
+<li>用SGD进行微调。</li>
+<li>学习率$10^{-3}$，动量0.9，weight decay是0.0005，batch size是32.</li>
+</ul>
+<p>​</p>
 ]]></content>
     
     <summary type="html">

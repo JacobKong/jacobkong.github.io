@@ -87,48 +87,27 @@
 
 
 <meta name="description" content="知识点
-Jaccard overlap, Jaccard similarity:
-Jaccard coefficient:
-
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
-所以Jaccard overlap其实就是IoU。
-
-
-Abstract
-SSD: 利用单个深度">
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：SSD">
 <meta property="og:url" content="http://yoursite.com/posts/3118967289/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
 <meta property="og:description" content="知识点
-Jaccard overlap, Jaccard similarity:
-Jaccard coefficient:
-
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
-所以Jaccard overlap其实就是IoU。
-
-
-Abstract
-SSD: 利用单个深度">
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcqyi2ogdnj30bj03l3yr.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcqyjitcw7j30eh01kjrg.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcjw1fcr0sa2183j308k0190sn.jpg">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcr148r96xj30e70563zd.jpg">
-<meta property="og:updated_time" content="2017-02-15T09:53:11.000Z">
+<meta property="og:updated_time" content="2017-02-15T10:10:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：SSD">
 <meta name="twitter:description" content="知识点
-Jaccard overlap, Jaccard similarity:
-Jaccard coefficient:
-
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。
-所以Jaccard overlap其实就是IoU。
-
-
-Abstract
-SSD: 利用单个深度">
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
 <meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
 
 
@@ -454,11 +433,8 @@ SSD: 利用单个深度">
 
       
         <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li><p>Jaccard overlap, Jaccard similarity:</p>
-<p>Jaccard coefficient:</p>
-<script type="math/tex; mode=display">
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script><p>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。</p>
-<p><strong>所以Jaccard overlap其实就是IoU。</strong></p>
+<li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。<br><strong>所以Jaccard overlap其实就是IoU。</strong><a id="more"></a>
 </li>
 </ul>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
@@ -467,7 +443,6 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script><p>A,B分别代表符合某种条件�
 <li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
 <li>相比于基于object proposal的方法，SSD是简单地，因为它能够<strong>完全消除</strong>proposal generation和后续的<strong>像素或者特征重冲采样阶段</strong>，所有的计算都封装在单独的网络中。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>目前的目标检测系统是以下方法的变体：假设边界框（bounding box），对每个框进行像素或特征重取样，采用高质量分类器。</li>
 <li>评估速度方法：<strong>SPF (seconds per frame)</strong>.</li>
@@ -553,7 +528,11 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 <li>用SGD进行微调。</li>
 <li>学习率$10^{-3}$，动量0.9，weight decay是0.0005，batch size是32.</li>
 </ul>
-<p>​</p>
+<h3 id="PASCAL-VOC2007"><a href="#PASCAL-VOC2007" class="headerlink" title="PASCAL VOC2007"></a>PASCAL VOC2007</h3><ul>
+<li><strong>“xavier” method</strong>来初始化新加入的层的参数。</li>
+<li>通过detection analysis tool分析后，显示SSD有着<strong>更少的localization错误</strong>，因为其能够直接去学习regress物体的形状，并分类，而非使用两个互相解耦的步骤。</li>
+<li>然而，SSD对于相似的物体会有更多的混淆，特别是animals，一部分原因</li>
+</ul>
 
       
     </div>
@@ -794,7 +773,7 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Single-Shot-Detector-SSD"><span class="nav-number">4.</span> <span class="nav-text">The Single Shot Detector (SSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">4.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">4.2.</span> <span class="nav-text">Training</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Matching-strategy"><span class="nav-number">4.2.1.</span> <span class="nav-text">Matching strategy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-objective"><span class="nav-number">4.2.2.</span> <span class="nav-text">Training objective</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Choosing-scales-and-aspect-ratios-for-default-boxes"><span class="nav-number">4.2.3.</span> <span class="nav-text">Choosing scales and aspect ratios for default boxes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hard-negative-mining"><span class="nav-number">4.2.4.</span> <span class="nav-text">Hard negative mining</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Single-Shot-Detector-SSD"><span class="nav-number">4.</span> <span class="nav-text">The Single Shot Detector (SSD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">4.1.</span> <span class="nav-text">Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">4.2.</span> <span class="nav-text">Training</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Matching-strategy"><span class="nav-number">4.2.1.</span> <span class="nav-text">Matching strategy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-objective"><span class="nav-number">4.2.2.</span> <span class="nav-text">Training objective</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Choosing-scales-and-aspect-ratios-for-default-boxes"><span class="nav-number">4.2.3.</span> <span class="nav-text">Choosing scales and aspect ratios for default boxes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hard-negative-mining"><span class="nav-number">4.2.4.</span> <span class="nav-text">Hard negative mining</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experimental-Results"><span class="nav-number">5.</span> <span class="nav-text">Experimental Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PASCAL-VOC2007"><span class="nav-number">5.1.</span> <span class="nav-text">PASCAL VOC2007</span></a></li></ol></li></ol></div>
             
 
           </div>

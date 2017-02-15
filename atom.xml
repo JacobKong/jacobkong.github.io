@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-15T09:53:11.000Z</updated>
+  <updated>2017-02-15T10:10:10.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,14 +20,11 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-15T09:53:11.000Z</updated>
+    <updated>2017-02-15T10:10:10.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li><p>Jaccard overlap, Jaccard similarity:</p>
-<p>Jaccard coefficient:</p>
-<script type="math/tex; mode=display">
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script><p>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。</p>
-<p><strong>所以Jaccard overlap其实就是IoU。</strong></p>
+<li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。<br><strong>所以Jaccard overlap其实就是IoU。</strong><a id="more"></a>
 </li>
 </ul>
 <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
@@ -36,7 +33,6 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script><p>A,B分别代表符合某种条件�
 <li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
 <li>相比于基于object proposal的方法，SSD是简单地，因为它能够<strong>完全消除</strong>proposal generation和后续的<strong>像素或者特征重冲采样阶段</strong>，所有的计算都封装在单独的网络中。</li>
 </ul>
-<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
 <li>目前的目标检测系统是以下方法的变体：假设边界框（bounding box），对每个框进行像素或特征重取样，采用高质量分类器。</li>
 <li>评估速度方法：<strong>SPF (seconds per frame)</strong>.</li>
@@ -122,25 +118,18 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 <li>用SGD进行微调。</li>
 <li>学习率$10^{-3}$，动量0.9，weight decay是0.0005，batch size是32.</li>
 </ul>
-<p>​</p>
+<h3 id="PASCAL-VOC2007"><a href="#PASCAL-VOC2007" class="headerlink" title="PASCAL VOC2007"></a>PASCAL VOC2007</h3><ul>
+<li><strong>“xavier” method</strong>来初始化新加入的层的参数。</li>
+<li>通过detection analysis tool分析后，显示SSD有着<strong>更少的localization错误</strong>，因为其能够直接去学习regress物体的形状，并分类，而非使用两个互相解耦的步骤。</li>
+<li>然而，SSD对于相似的物体会有更多的混淆，特别是animals，一部分原因</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
       &lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot; class=&quot;headerlink&quot; title=&quot;知识点&quot;&gt;&lt;/a&gt;知识点&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Jaccard overlap, Jaccard similarity:&lt;/p&gt;
-&lt;p&gt;Jaccard coefficient:&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-J(A,B)=\frac{|A\cap B|}{|A\cup B|}&lt;/script&gt;&lt;p&gt;A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;所以Jaccard overlap其实就是IoU。&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。&lt;/li&gt;
-&lt;li&gt;在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;在多尺度图像处理方面&lt;/strong&gt;，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。&lt;/li&gt;
-&lt;li&gt;相比于基于object proposal的方法，SSD是简单地，因为它能够&lt;strong&gt;完全消除&lt;/strong&gt;proposal generation和后续的&lt;strong&gt;像素或者特征重冲采样阶段&lt;/strong&gt;，所有的计算都封装在单独的网络中。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;Jaccard overlap, Jaccard similarity:&lt;br&gt;Jaccard coefficient:&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}&lt;/script&gt;A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。&lt;br&gt;&lt;strong&gt;所以Jaccard overlap其实就是IoU。&lt;/strong&gt;
     
     </summary>
     

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-15T11:15:40.000Z</updated>
+  <updated>2017-02-15T11:32:34.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-15T11:15:40.000Z</updated>
+    <updated>2017-02-15T11:32:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
@@ -144,6 +144,14 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 </ul>
 <h3 id="Inference-time"><a href="#Inference-time" class="headerlink" title="Inference time"></a>Inference time</h3><ul>
 <li>考虑到从我们的方法生成的大量框，有必要在推理期间有效地执行非最大抑制（nms）。</li>
+<li>通过使用0.01的限制阈值，我们可以过滤大多数bounding boxes。 然后我们应用nms，每个类别的jaccard重叠0.45，并保持每个图像前200个检测。</li>
+<li>80%的前向传递时间被花费在了base network，所以使用一个更快的base network可以提高速度。</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>有两种已建立的用于图像中的对象检测的方法类别，<strong>一种基于滑动窗口，另一种基于region proposal classification。</strong></li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>我们模型的一个<strong>关键特性</strong>是使用多尺度卷积边界框输出附加到网络顶部的多个特征图。</li>
 </ul>
 ]]></content>
     

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-15T10:10:10.000Z</updated>
+  <updated>2017-02-15T11:15:40.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-15T10:10:10.000Z</updated>
+    <updated>2017-02-15T11:15:40.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
@@ -111,7 +111,7 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 </ul>
 <h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><ul>
 <li>所有的实验都是基于VGG16。</li>
-<li>将fc6和fc7转化为卷积层。</li>
+<li>将fc6和fc7转化为卷积层，从fc6和fc7中取样子参数。</li>
 <li>将pool5从2x2-s2转化为3x3-s1。</li>
 <li>使用a trous algorithm来填补“holes”。</li>
 <li>移去了所有的dropout层和fc8层。</li>
@@ -121,7 +121,29 @@ L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
 <h3 id="PASCAL-VOC2007"><a href="#PASCAL-VOC2007" class="headerlink" title="PASCAL VOC2007"></a>PASCAL VOC2007</h3><ul>
 <li><strong>“xavier” method</strong>来初始化新加入的层的参数。</li>
 <li>通过detection analysis tool分析后，显示SSD有着<strong>更少的localization错误</strong>，因为其能够直接去学习regress物体的形状，并分类，而非使用两个互相解耦的步骤。</li>
-<li>然而，SSD对于相似的物体会有更多的混淆，特别是animals，一部分原因</li>
+<li>然而，SSD对于相似的物体会有更多的混淆，特别是animals，一部分原因。</li>
+<li>SSD对bounding boxes尺寸是十分敏感的。提升输入尺寸可能会提升小物体检测，但依旧有许多空间提升。</li>
+</ul>
+<h3 id="Model-analysis"><a href="#Model-analysis" class="headerlink" title="Model analysis"></a>Model analysis</h3><ul>
+<li>Data augmentation很重要。</li>
+<li>更多的default boxes的形状可能会更好。</li>
+<li>Atrous is faster：如果不使用更改后的VGG-16，虽然结果一样，但是速度回降低20%。</li>
+<li>不同分辨率中多个输出层会更好。<strong>SSD的主要贡献</strong>是在不同输出层上使用不同尺度的默认框。</li>
+</ul>
+<h3 id="PASCAL-VOC2012"><a href="#PASCAL-VOC2012" class="headerlink" title="PASCAL VOC2012"></a>PASCAL VOC2012</h3><ul>
+<li>和PASCAL VOC2007一样的实验设置。</li>
+<li>在2012 trainval+2007 trainval+2007 test上进行训练，在2012 test上进行测试。</li>
+</ul>
+<h3 id="COCO"><a href="#COCO" class="headerlink" title="COCO"></a>COCO</h3><ul>
+<li>COCO中的物体比PASCAL VOC中的物体小，所以我们在所有层上使用更小的default boxes</li>
+</ul>
+<h3 id="Data-Augmentation-for-Small-Object-Accuracy"><a href="#Data-Augmentation-for-Small-Object-Accuracy" class="headerlink" title="Data Augmentation for Small Object Accuracy"></a>Data Augmentation for Small Object Accuracy</h3><ul>
+<li>对SSD来说，对小物体分类的任务相对Faster R-CNN来说会更难。</li>
+<li>Data augmentation对于特高性能是十分显著的，尤其是小数据及。</li>
+<li>改进SSD的另一种方法是设计更好的平铺默认框（tiling of default boxes），使其位置和尺度更好地与特征图上每个位置的接收场对准。</li>
+</ul>
+<h3 id="Inference-time"><a href="#Inference-time" class="headerlink" title="Inference time"></a>Inference time</h3><ul>
+<li>考虑到从我们的方法生成的大量框，有必要在推理期间有效地执行非最大抑制（nms）。</li>
 </ul>
 ]]></content>
     

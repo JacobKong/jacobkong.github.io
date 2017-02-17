@@ -527,7 +527,7 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     <link href="http://yoursite.com/posts/2093106769/"/>
     <id>http://yoursite.com/posts/2093106769/</id>
     <published>2017-01-15T22:32:24.000Z</published>
-    <updated>2017-02-17T11:29:59.000Z</updated>
+    <updated>2017-02-17T12:37:24.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
@@ -605,7 +605,7 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
 <p>我建议将Caltech文件创建一个symlinks链接到VOCdevkit文件夹之下，因为这样会方便之后训练代码的修改。</p>
 <ul>
 <li>至于<a href="https://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/" target="_blank" rel="external">Caltech数据集</a>如何从.seq文件转化为一张张.jpg图片，这里可以<a href="https://github.com/mitmul/caltech-pedestrian-dataset-converter" target="_blank" rel="external">参考这里</a>。</li>
-<li>至于Annotations中一个个.xml标记文件是实验室师兄给我的，<a href="https://github.com/mitmul/caltech-pedestrian-dataset-converter也可以转化，但是并符合要求。" target="_blank" rel="external">https://github.com/mitmul/caltech-pedestrian-dataset-converter也可以转化，但是并符合要求。</a></li>
+<li>至于Annotations中一个个.xml标记文件是实验室师兄给我的，<a href="https://github.com/mitmul/caltech-pedestrian-dataset-converter" target="_blank" rel="external">上面提到的方法</a>也可以转化，但是并符合要求。</li>
 <li>至于ImageSets中的train.txt是根据.xml文件得来的，test.txt是每个seq中每隔30帧取一帧图片得来的。</li>
 </ul>
 <p>以上所有和<a href="https://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/" target="_blank" rel="external">Caltech数据集</a>有关的文件，都可以直接邮件与我联系，我直接发给你，可以省下不少制作数据集的时间。</p>

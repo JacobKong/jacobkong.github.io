@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -86,15 +86,18 @@
 
 
 
-<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JacobKong's Blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta name="description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作">
+<meta property="og:url" content="http://yoursite.com/posts/2093106769/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta property="og:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg">
+<meta property="og:updated_time" content="2017-02-17T07:37:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JacobKong's Blog">
-<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="twitter:title" content="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作">
+<meta name="twitter:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta name="twitter:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+  <link rel="canonical" href="http://yoursite.com/posts/2093106769/"/>
 
 
 
 
 
-  <title> JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作 | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,9 +171,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,9 +292,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -302,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2735857030/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2093106769/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jacob Kong">
@@ -326,10 +327,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/posts/2735857030/" itemprop="url">
-                  行人检测论文笔记：Fast Feature Pyramids for Object Detection?
-                </a>
+                深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作
               
             
           </h1>
@@ -344,569 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-24T06:32:24+08:00">
-                2016-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/2735857030/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2735857030/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/posts/2735857030/" class="leancloud_visitors" data-flag-title="行人检测论文笔记：Fast Feature Pyramids for Object Detection?">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
-<li><p>Overcomplete Representations:</p>
-<ul>
-<li>Overcomplete：Such a complete system is overcomplete if removal of a \phi <em>{j} from the system results in a system (i.e., {\phi </em>{i}}_((i\in J\backslash {j))}) that is still complete.</li>
-<li>In different research, such as signal processing and function approximation, overcompleteness can help researchers to achieve a more stable, more robust, or more compact decomposition than using a basis.[2]</li>
-</ul>
-</li>
-<li><p>Image pyramid：影响金字塔</p>
-<ul>
-<li>影像金字塔由原始影像按一定规则生成的由细到粗不同分辨率的影像集。</li>
-<li>指在同一的空间参照下，根据用户需要以不同分辨率进行存储与显示，形成分辨率由粗到细、数据量由小到大的金字塔结构。</li>
-<li>图像编码和渐进式图像传输</li>
-<li>从图中可以看出, 从金字塔的底层开始每四个相邻的像素经过重采样生成一个新的像素, 依此重复进行, 直到金字塔的顶层。重采样的方法一般有以下三种: 双线性插值、最临近像元法、三次卷积法。</li>
-<li>金字塔是一种能对栅格影像按逐级降低分辨率的拷贝方式存储的方法。通过选择一个与显示区域相似的分辨率，只需进行少量的查询和少量的计算，从而减少显示时间。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg" alt=""></p>
-<ul>
-<li>Gradient Histograms:</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/2735857030/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3091185356/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jacob Kong">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/posts/3091185356/" itemprop="url">
-                  行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-23T06:32:24+08:00">
-                2016-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/3091185356/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3091185356/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/posts/3091185356/" class="leancloud_visitors" data-flag-title="行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li>对数正态分布（lognormally distributed）：对数为正态分布的任意随机变量的概率分布。<ul>
-<li>如果 X 是正态分布的随机变量，则 exp(X)为对数正态分布.</li>
-<li>如果 Y 是对数正态分布，则 ln(Y) 为正态分布。</li>
-<li>如果一个变量可以看作是许多很小独立因子的乘积，则这个变量可以看作是对数正态分布。</li>
-<li>对数正态分布的概率密度函数为：</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fbfr6mn9ccj308q01ldfr.jpg" alt=""></p>
-<ul>
-<li>对数平均：对数平均与几何平均相等，并且比算数平均，对于对数正态分布数据的典型值更具代表性<ul>
-<li>二个数字的对数平均小于其算术平均，大于几何平均，若二个数字相等，对数平均会等于算数平均及几何平均。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fbfr6kv30dj30f701mmx5.jpg" alt=""></p>
-<ul>
-<li>Histogram of Oriented Gradients for Objection Detection.(HOG)步骤：<ul>
-<li>Sampling positive images</li>
-<li>Sampling negative images</li>
-<li>Training a Linear SVM</li>
-<li>Performing hard-negative mining</li>
-<li>Re-training your Linear SVM using the hard-negative samples</li>
-<li>Evaluating your classifier on your test dataset, utilizing non-maximum suppression to ignore redundant, overlapping bounding boxes</li>
-</ul>
-</li>
-<li>NMS:Non-maximum Suppression(非极大值抑制):可看成一种局部极大值搜索，这里的局部极大值要比他的邻域值都要大。这里的邻域表示有两个参数：维度和n-邻域。</li>
-<li>LBP: Local Binary Patterns</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/3091185356/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/4124170924/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jacob Kong">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/posts/4124170924/" itemprop="url">
-                  行人检测论文笔记：Pedestrian Detection - A Benchmark
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-19T11:48:55+08:00">
-                2016-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/4124170924/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/4124170924/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/posts/4124170924/" class="leancloud_visitors" data-flag-title="行人检测论文笔记：Pedestrian Detection - A Benchmark">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li>k折交叉验证</li>
-<li>Non-Maximum Suppression：非极大值抑制算法，非极大值抑制（NMS）可以看做是抑制不是极大值的元素，搜索局部的极大值的搜索问题，NMS是许多计算机视觉算法的部分。<ul>
-<li>这个局部代表的是一个邻域，邻域有两个参数可变，一是邻域的维数，二是邻域的大小。</li>
-<li>在行人检测中，滑动窗口经提取特征，经分类器分类识别后，每个窗口都会得到一个分数。但是滑动窗口会导致很多窗口与其他窗口存在包含或者大部分交叉的情况。这时就需要用到NMS来选取那些邻域里分数最高（是行人的概率最大），并且抑制那些分数低的窗口。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>引进了一个新的数据集——Caltech。</li>
-<li>提出了了个更高的评估标准。</li>
-<li>证明了平常用的逐个窗口检测的方法是有瑕疵的，在完整的图片上会预测失败。</li>
-<li>衡量了现有的检测系统。</li>
-<li>分析了一般的常见失败情况。</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/4124170924/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3356325341/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jacob Kong">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/posts/3356325341/" itemprop="url">
-                  南清北复交北航哈工大中科院华科保研记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-22T10:26:55+08:00">
-                2016-08-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-17T06:32:24+08:00">
+                2016-12-17
               </time>
             
 
@@ -946,8 +383,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/3356325341/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3356325341/" itemprop="commentCount"></span>
+                <a href="/posts/2093106769/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2093106769/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -957,7 +394,7 @@
 
           
           
-             <span id="/posts/3356325341/" class="leancloud_visitors" data-flag-title="南清北复交北航哈工大中科院华科保研记">
+             <span id="/posts/2093106769/" class="leancloud_visitors" data-flag-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -984,58 +421,148 @@
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>7月23号从中科院软件所参加完夏令营回来，我的漫长的保研路也算是告一段落。</p>
-<p>8月12号东软实训结束，8月13号坐上回家的火车，8月14号到家，然后就一直吃喝睡到今天，拿回来的几本书也没看几眼，本来打算着回来继续充实一下，去备战9，10月份的推免，现在看来时间又都荒废了……开学还是乖乖到学校吧，再这样下去一直待在家感觉要成废人一个了，我还是喜欢忙碌充实的感觉。</p>
-<p>一直想着要把这次宝贵的保研经历记录一下，好给学弟学妹一个参考。学弟学妹们可以结合自身情况，大概了解一下保研流程，部分学校保研考核要求，从而少走一些弯路，去到自己理想中的学校。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/3356325341/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
+<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
+<p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="external">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
+<p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
+<h2 id="准备工作1——py-faster-rcnn的编译安装测试"><a href="#准备工作1——py-faster-rcnn的编译安装测试" class="headerlink" title="准备工作1——py-faster-rcnn的编译安装测试"></a>准备工作1——py-faster-rcnn的编译安装测试</h2><h3 id="py-faster-rcnn的编译安装"><a href="#py-faster-rcnn的编译安装" class="headerlink" title="py-faster-rcnn的编译安装"></a>py-faster-rcnn的编译安装</h3><ol>
+<li><p>克隆Faster R-CNN仓库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git</div></pre></td></tr></table></figure>
+<p>一定要加上<code>--recursive</code>标志，假设克隆后的文件夹名字叫<code>py-faster-rcnn</code></p>
+</li>
+<li><p>编译Cython模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn/lib</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译里面的Caffe和pycaffe：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn/caffe-fast-rcnn</div><div class="line"># 按照编译Caffe的方法，进行编译</div><div class="line"># 注意Makefile.config的修改，这里不再赘述Caffe的安装</div><div class="line"># 编译</div><div class="line">make -j8 &amp;&amp; make pycaffe</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里贴上我的<code>Makefile.config</code>文件代码，根据你的情况进行相应修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">## Refer to http://caffe.berkeleyvision.org/installation.html</div><div class="line"># Contributions simplifying and improving our build system are welcome!</div><div class="line"></div><div class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</div><div class="line">USE_CUDNN := 1</div><div class="line"></div><div class="line"># CPU-only switch (uncomment to build without GPU support).</div><div class="line"># CPU_ONLY := 1</div><div class="line"></div><div class="line"># uncomment to disable IO dependencies and corresponding data layers</div><div class="line"># USE_OPENCV := 0</div><div class="line"># USE_LEVELDB := 0</div><div class="line"># USE_LMDB := 0</div><div class="line"></div><div class="line"># uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</div><div class="line"># You should not set this flag if you will be reading LMDBs with any</div><div class="line"># possibility of simultaneous read and write</div><div class="line"># ALLOW_LMDB_NOLOCK := 1</div><div class="line"></div><div class="line"># Uncomment if you&apos;re using OpenCV 3</div><div class="line">OPENCV_VERSION := 3</div><div class="line"></div><div class="line"># To customize your choice of compiler, uncomment and set the following.</div><div class="line"># N.B. the default for Linux is g++ and the default for OSX is clang++</div><div class="line"># CUSTOM_CXX := g++</div><div class="line"></div><div class="line"># CUDA directory contains bin/ and lib/ directories that we need.</div><div class="line">CUDA_DIR := /usr/local/cuda</div><div class="line"># On Ubuntu 14.04, if cuda tools are installed via</div><div class="line"># &quot;sudo apt-get install nvidia-cuda-toolkit&quot; then use this instead:</div><div class="line"># CUDA_DIR := /usr</div><div class="line"></div><div class="line"># CUDA architecture setting: going with all of them.</div><div class="line"># For CUDA &lt; 6.0, comment the *_50 lines for compatibility.</div><div class="line">CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</div><div class="line">-gencode arch=compute_20,code=sm_21 \</div><div class="line">-gencode arch=compute_30,code=sm_30 \</div><div class="line">-gencode arch=compute_35,code=sm_35 \</div><div class="line">-gencode arch=compute_50,code=sm_50 \</div><div class="line">-gencode arch=compute_50,code=compute_50</div><div class="line"></div><div class="line"># BLAS choice:</div><div class="line"># atlas for ATLAS (default)</div><div class="line"># mkl for MKL</div><div class="line"># open for OpenBlas</div><div class="line">BLAS :=mkl</div><div class="line"># Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</div><div class="line"># Leave commented to accept the defaults for your choice of BLAS</div><div class="line"># (which should work)!</div><div class="line"># BLAS_INCLUDE := /path/to/your/blas</div><div class="line"># BLAS_LIB := /path/to/your/blas</div><div class="line"></div><div class="line"># Homebrew puts openblas in a directory that is not on the standard search path</div><div class="line"># BLAS_INCLUDE := $(shell brew --prefix openblas)/include</div><div class="line"># BLAS_LIB := $(shell brew --prefix openblas)/lib</div><div class="line"></div><div class="line"># This is required only if you will compile the matlab interface.</div><div class="line"># MATLAB directory should contain the mex binary in /bin.</div><div class="line">MATLAB_DIR := /usr/local/MATLAB/R2016b</div><div class="line"># MATLAB_DIR := /Applications/MATLAB_R2012b.app</div><div class="line"></div><div class="line"># NOTE: this is required only if you will compile the python interface.</div><div class="line"># We need to be able to find Python.h and numpy/arrayobject.h.</div><div class="line"># PYTHON_INCLUDE := /usr/include/python2.7 \</div><div class="line">/usr/lib/python2.7/dist-packages/numpy/core/include</div><div class="line"># Anaconda Python distribution is quite popular. Include path:</div><div class="line"># Verify anaconda location, sometimes it&apos;s in root.</div><div class="line">ANACONDA_HOME := $(HOME)/anaconda</div><div class="line">PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</div><div class="line">$(ANACONDA_HOME)/include/python2.7 \</div><div class="line">$(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \</div><div class="line">$ /usr/include/python2.7</div><div class="line"># Uncomment to use Python 3 (default is Python 2)</div><div class="line"># PYTHON_LIBRARIES := boost_python3 python3.5m</div><div class="line"># PYTHON_INCLUDE := /usr/include/python3.5m \</div><div class="line"># /usr/lib/python3.5/dist-packages/numpy/core/include</div><div class="line"></div><div class="line"># We need to be able to find libpythonX.X.so or .dylib.</div><div class="line"># PYTHON_LIB := /usr/lib</div><div class="line">PYTHON_LIB := $(ANACONDA_HOME)/lib</div><div class="line"></div><div class="line"># Homebrew installs numpy in a non standard path (keg only)</div><div class="line"># PYTHON_INCLUDE += $(dir $(shell python -c &apos;import numpy.core; print(numpy.core.__file__)&apos;))/include</div><div class="line"># PYTHON_LIB += $(shell brew --prefix numpy)/lib</div><div class="line"></div><div class="line"># Uncomment to support layers written in Python (will link against Python libs)</div><div class="line">WITH_PYTHON_LAYER := 1</div><div class="line"></div><div class="line"># Whatever else you find you need goes here.</div><div class="line"># INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line"># LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial </div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</div><div class="line"></div><div class="line"># If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</div><div class="line"># INCLUDE_DIRS += $(shell brew --prefix)/include</div><div class="line"># LIBRARY_DIRS += $(shell brew --prefix)/lib</div><div class="line"></div><div class="line"># Uncomment to use `pkg-config` to specify OpenCV library paths.</div><div class="line"># (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</div><div class="line"># USE_PKG_CONFIG := 1</div><div class="line"></div><div class="line"># N.B. both build and distribute dirs are cleared on `make clean`</div><div class="line">BUILD_DIR := build</div><div class="line">DISTRIBUTE_DIR := distribute</div><div class="line"></div><div class="line"># Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171</div><div class="line"># DEBUG := 1</div><div class="line"></div><div class="line"># The ID of the GPU that &apos;make runtest&apos; will use to run unit tests.</div><div class="line">TEST_GPUID := 0</div><div class="line"></div><div class="line"># enable pretty build (comment to see full commands)</div><div class="line">Q ?= @</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Demo运行"><a href="#Demo运行" class="headerlink" title="Demo运行"></a>Demo运行</h3><p>为了检验你的py-faster-rcnn是否成功安装，作者给出了一个demo，可以利用在PASCAL VOC2007数据集上体现训练好的模型，来进行demo的运行，步骤如下：</p>
+<ol>
+<li><p>下载预训练好的Faster R-CNN检测器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn</div><div class="line">./data/scripts/fetch_faster_rcnn_models.sh</div></pre></td></tr></table></figure>
+<p>这条命令会自动下载名为<code>faster_rcnn_models.tgz</code>的文件，解压后会创建<code>data/faster_rcnn_models</code>文件夹，里面会有两个模型：</p>
+<ul>
+<li>ZF_faster_rcnn_final.caffemodel：在ZF网络模型下训练所得</li>
+<li>VGG16_faster_rcnn_final.caffemodel：在VGG16网络模型下训练所得。</li>
+</ul>
+</li>
+<li><p>运行demo：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn</div><div class="line">./tools/demo.py</div></pre></td></tr></table></figure>
+</li>
+<li><p>demo会检测5张图片，这5张图片放在<code>data/demo/</code>文件夹下，其中一张的检测结果如下：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg" alt=""></p>
+</li>
+<li><p>至此如果上述过程没有出错，那么py-faster-rcnn算是成功编译安装。</p>
+</li>
+</ol>
+<h2 id="准备工作2——Caltech数据集"><a href="#准备工作2——Caltech数据集" class="headerlink" title="准备工作2——Caltech数据集"></a>准备工作2——Caltech数据集</h2>
       
     </div>
 
     <div>
       
+        
+
+      
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3802700508/" rel="next" title="深度学习论文笔记：Faster R-CNN">
+                <i class="fa fa-chevron-left"></i> 深度学习论文笔记：Faster R-CNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/2094641206/" rel="prev" title="深度学习论文笔记：YOLO">
+                深度学习论文笔记：YOLO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="posts/2093106769/"
+     data-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作"
+     data-content=""
+     data-url="http://yoursite.com/posts/2093106769/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
 
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
           
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/2093106769/"
+           data-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作" data-url="http://yoursite.com/posts/2093106769/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1055,8 +582,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -1157,6 +693,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作1——py-faster-rcnn的编译安装测试"><span class="nav-number">2.</span> <span class="nav-text">准备工作1——py-faster-rcnn的编译安装测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#py-faster-rcnn的编译安装"><span class="nav-number">2.1.</span> <span class="nav-text">py-faster-rcnn的编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo运行"><span class="nav-number">2.2.</span> <span class="nav-text">Demo运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作2——Caltech数据集"><span class="nav-number">3.</span> <span class="nav-text">准备工作2——Caltech数据集</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -1263,6 +815,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-15T11:32:34.000Z</updated>
+  <updated>2017-02-16T02:30:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/3118967289/"/>
     <id>http://yoursite.com/posts/3118967289/</id>
     <published>2017-02-13T09:53:54.000Z</published>
-    <updated>2017-02-15T11:32:34.000Z</updated>
+    <updated>2017-02-16T02:30:35.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
 <li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
@@ -510,6 +510,72 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     </summary>
     
       <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
+    
+      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作</title>
+    <link href="http://yoursite.com/posts/2093106769/"/>
+    <id>http://yoursite.com/posts/2093106769/</id>
+    <published>2016-12-16T22:32:24.000Z</published>
+    <updated>2017-02-17T07:37:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
+<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
+<p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="external">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
+<p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
+<h2 id="准备工作1——py-faster-rcnn的编译安装测试"><a href="#准备工作1——py-faster-rcnn的编译安装测试" class="headerlink" title="准备工作1——py-faster-rcnn的编译安装测试"></a>准备工作1——py-faster-rcnn的编译安装测试</h2><h3 id="py-faster-rcnn的编译安装"><a href="#py-faster-rcnn的编译安装" class="headerlink" title="py-faster-rcnn的编译安装"></a>py-faster-rcnn的编译安装</h3><ol>
+<li><p>克隆Faster R-CNN仓库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git</div></pre></td></tr></table></figure>
+<p>一定要加上<code>--recursive</code>标志，假设克隆后的文件夹名字叫<code>py-faster-rcnn</code></p>
+</li>
+<li><p>编译Cython模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn/lib</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译里面的Caffe和pycaffe：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn/caffe-fast-rcnn</div><div class="line"># 按照编译Caffe的方法，进行编译</div><div class="line"># 注意Makefile.config的修改，这里不再赘述Caffe的安装</div><div class="line"># 编译</div><div class="line">make -j8 &amp;&amp; make pycaffe</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里贴上我的<code>Makefile.config</code>文件代码，根据你的情况进行相应修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line">## Refer to http://caffe.berkeleyvision.org/installation.html</div><div class="line"># Contributions simplifying and improving our build system are welcome!</div><div class="line"></div><div class="line"># cuDNN acceleration switch (uncomment to build with cuDNN).</div><div class="line">USE_CUDNN := 1</div><div class="line"></div><div class="line"># CPU-only switch (uncomment to build without GPU support).</div><div class="line"># CPU_ONLY := 1</div><div class="line"></div><div class="line"># uncomment to disable IO dependencies and corresponding data layers</div><div class="line"># USE_OPENCV := 0</div><div class="line"># USE_LEVELDB := 0</div><div class="line"># USE_LMDB := 0</div><div class="line"></div><div class="line"># uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</div><div class="line"># You should not set this flag if you will be reading LMDBs with any</div><div class="line"># possibility of simultaneous read and write</div><div class="line"># ALLOW_LMDB_NOLOCK := 1</div><div class="line"></div><div class="line"># Uncomment if you&apos;re using OpenCV 3</div><div class="line">OPENCV_VERSION := 3</div><div class="line"></div><div class="line"># To customize your choice of compiler, uncomment and set the following.</div><div class="line"># N.B. the default for Linux is g++ and the default for OSX is clang++</div><div class="line"># CUSTOM_CXX := g++</div><div class="line"></div><div class="line"># CUDA directory contains bin/ and lib/ directories that we need.</div><div class="line">CUDA_DIR := /usr/local/cuda</div><div class="line"># On Ubuntu 14.04, if cuda tools are installed via</div><div class="line"># &quot;sudo apt-get install nvidia-cuda-toolkit&quot; then use this instead:</div><div class="line"># CUDA_DIR := /usr</div><div class="line"></div><div class="line"># CUDA architecture setting: going with all of them.</div><div class="line"># For CUDA &lt; 6.0, comment the *_50 lines for compatibility.</div><div class="line">CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</div><div class="line">-gencode arch=compute_20,code=sm_21 \</div><div class="line">-gencode arch=compute_30,code=sm_30 \</div><div class="line">-gencode arch=compute_35,code=sm_35 \</div><div class="line">-gencode arch=compute_50,code=sm_50 \</div><div class="line">-gencode arch=compute_50,code=compute_50</div><div class="line"></div><div class="line"># BLAS choice:</div><div class="line"># atlas for ATLAS (default)</div><div class="line"># mkl for MKL</div><div class="line"># open for OpenBlas</div><div class="line">BLAS :=mkl</div><div class="line"># Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</div><div class="line"># Leave commented to accept the defaults for your choice of BLAS</div><div class="line"># (which should work)!</div><div class="line"># BLAS_INCLUDE := /path/to/your/blas</div><div class="line"># BLAS_LIB := /path/to/your/blas</div><div class="line"></div><div class="line"># Homebrew puts openblas in a directory that is not on the standard search path</div><div class="line"># BLAS_INCLUDE := $(shell brew --prefix openblas)/include</div><div class="line"># BLAS_LIB := $(shell brew --prefix openblas)/lib</div><div class="line"></div><div class="line"># This is required only if you will compile the matlab interface.</div><div class="line"># MATLAB directory should contain the mex binary in /bin.</div><div class="line">MATLAB_DIR := /usr/local/MATLAB/R2016b</div><div class="line"># MATLAB_DIR := /Applications/MATLAB_R2012b.app</div><div class="line"></div><div class="line"># NOTE: this is required only if you will compile the python interface.</div><div class="line"># We need to be able to find Python.h and numpy/arrayobject.h.</div><div class="line"># PYTHON_INCLUDE := /usr/include/python2.7 \</div><div class="line">/usr/lib/python2.7/dist-packages/numpy/core/include</div><div class="line"># Anaconda Python distribution is quite popular. Include path:</div><div class="line"># Verify anaconda location, sometimes it&apos;s in root.</div><div class="line">ANACONDA_HOME := $(HOME)/anaconda</div><div class="line">PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</div><div class="line">$(ANACONDA_HOME)/include/python2.7 \</div><div class="line">$(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \</div><div class="line">$ /usr/include/python2.7</div><div class="line"># Uncomment to use Python 3 (default is Python 2)</div><div class="line"># PYTHON_LIBRARIES := boost_python3 python3.5m</div><div class="line"># PYTHON_INCLUDE := /usr/include/python3.5m \</div><div class="line"># /usr/lib/python3.5/dist-packages/numpy/core/include</div><div class="line"></div><div class="line"># We need to be able to find libpythonX.X.so or .dylib.</div><div class="line"># PYTHON_LIB := /usr/lib</div><div class="line">PYTHON_LIB := $(ANACONDA_HOME)/lib</div><div class="line"></div><div class="line"># Homebrew installs numpy in a non standard path (keg only)</div><div class="line"># PYTHON_INCLUDE += $(dir $(shell python -c &apos;import numpy.core; print(numpy.core.__file__)&apos;))/include</div><div class="line"># PYTHON_LIB += $(shell brew --prefix numpy)/lib</div><div class="line"></div><div class="line"># Uncomment to support layers written in Python (will link against Python libs)</div><div class="line">WITH_PYTHON_LAYER := 1</div><div class="line"></div><div class="line"># Whatever else you find you need goes here.</div><div class="line"># INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</div><div class="line"># LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</div><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial </div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</div><div class="line"></div><div class="line"># If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</div><div class="line"># INCLUDE_DIRS += $(shell brew --prefix)/include</div><div class="line"># LIBRARY_DIRS += $(shell brew --prefix)/lib</div><div class="line"></div><div class="line"># Uncomment to use `pkg-config` to specify OpenCV library paths.</div><div class="line"># (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</div><div class="line"># USE_PKG_CONFIG := 1</div><div class="line"></div><div class="line"># N.B. both build and distribute dirs are cleared on `make clean`</div><div class="line">BUILD_DIR := build</div><div class="line">DISTRIBUTE_DIR := distribute</div><div class="line"></div><div class="line"># Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171</div><div class="line"># DEBUG := 1</div><div class="line"></div><div class="line"># The ID of the GPU that &apos;make runtest&apos; will use to run unit tests.</div><div class="line">TEST_GPUID := 0</div><div class="line"></div><div class="line"># enable pretty build (comment to see full commands)</div><div class="line">Q ?= @</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Demo运行"><a href="#Demo运行" class="headerlink" title="Demo运行"></a>Demo运行</h3><p>为了检验你的py-faster-rcnn是否成功安装，作者给出了一个demo，可以利用在PASCAL VOC2007数据集上体现训练好的模型，来进行demo的运行，步骤如下：</p>
+<ol>
+<li><p>下载预训练好的Faster R-CNN检测器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn</div><div class="line">./data/scripts/fetch_faster_rcnn_models.sh</div></pre></td></tr></table></figure>
+<p>这条命令会自动下载名为<code>faster_rcnn_models.tgz</code>的文件，解压后会创建<code>data/faster_rcnn_models</code>文件夹，里面会有两个模型：</p>
+<ul>
+<li>ZF_faster_rcnn_final.caffemodel：在ZF网络模型下训练所得</li>
+<li>VGG16_faster_rcnn_final.caffemodel：在VGG16网络模型下训练所得。</li>
+</ul>
+</li>
+<li><p>运行demo：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd py-faster-rcnn</div><div class="line">./tools/demo.py</div></pre></td></tr></table></figure>
+</li>
+<li><p>demo会检测5张图片，这5张图片放在<code>data/demo/</code>文件夹下，其中一张的检测结果如下：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg" alt=""></p>
+</li>
+<li><p>至此如果上述过程没有出错，那么py-faster-rcnn算是成功编译安装。</p>
+</li>
+</ol>
+<h2 id="准备工作2——Caltech数据集"><a href="#准备工作2——Caltech数据集" class="headerlink" title="准备工作2——Caltech数据集"></a>准备工作2——Caltech数据集</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习
+    
+    </summary>
+    
+      <category term="经验" scheme="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
     
     
       <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
@@ -1177,257 +1243,6 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
   </entry>
   
   <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:13:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
-</ul>
-<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
-&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
-&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
-&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
-&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
-&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
-&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
-&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
-&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
-&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
-    <link href="http://yoursite.com/posts/2397281138/"/>
-    <id>http://yoursite.com/posts/2397281138/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T09:00:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
-<li>Human Baseline 的标准是如何确定的?</li>
-<li><p>Ground-truth是什么意思？</p>
-<ul>
-<li>Groun-truth 指的是正确的标注（真实值）</li>
-<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
-</ul>
-</li>
-<li><p>Intersection over Union（IoU）是什么？</p>
-<ul>
-<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
-</li>
-<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
-</li>
-<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
-</li>
-<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>FPPI: False Positive Per Image</li>
-<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
-</ul>
-<a id="more"></a>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
-<li>基于Caltech数据集创建了一个人工的基准。</li>
-<li>手工聚合了顶级检测器经常出现的错误。</li>
-<li><p>刻画了定位，前景 vs 背景两方面的错误</p>
-<ul>
-<li>针对定位错误：研究了训练集标记噪声对检测器性能的影响</li>
-<li>前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能</li>
-</ul>
-</li>
-<li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
-</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
-<li><p>最流行的数据集：Caltech-USA、KITTI</p>
-<ul>
-<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
-<li>一共350000个标注、覆盖2300各单一的行人</li>
-<li>测试集：4024帧</li>
-</ul>
-</li>
-<li><p>MR: miss rate</p>
-</li>
-</ul>
-<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
-<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
-<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
-<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
-<li>环境和光流可以提高检测（额外的提示）</li>
-</ul>
-<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
-<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
-<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
-<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
-<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
-<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
-</ul>
-<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
-<li><p>一个检测器可以有两类错误：</p>
-<ul>
-<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
-<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
-</ul>
-</li>
-<li><p>FP聚类成11个分类</p>
-</li>
-<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
-<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
-</ul>
-<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
-<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
-</ul>
-<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
-<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
-<li><p>我们的目标是两方面：</p>
-<ul>
-<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
-<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
-</ul>
-</li>
-<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
-</li>
-</ul>
-<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
-<li><p>Pruning benefits:</p>
-<ul>
-<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
-<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
-</ul>
-</li>
-<li><p>Alignment benefits:</p>
-<ul>
-<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
-<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
-</li>
-<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
-</li>
-<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
-<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
-</li>
-<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
-</li>
-<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
-</li>
-<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
-</li>
-</ul>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
-<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
-</li>
-<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
-</li>
-<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;文章疑问点&quot;&gt;&lt;a href=&quot;#文章疑问点&quot; class=&quot;headerlink&quot; title=&quot;文章疑问点&quot;&gt;&lt;/a&gt;文章疑问点&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Human Baseline 的标准是如何确定的?&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Ground-truth是什么意思？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Groun-truth 指的是正确的标注（真实值）&lt;/li&gt;
-&lt;li&gt;在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Intersection over Union（IoU）是什么？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;As long as we have these two sets of bounding boxes we can apply Intersection over Union.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An Intersection over Union score &amp;gt; 0.5 is normally considered a “good” prediction.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
-&lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Review" scheme="http://yoursite.com/tags/Review/"/>
-    
-      <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
     <link href="http://yoursite.com/posts/2903903730/"/>
     <id>http://yoursite.com/posts/2903903730/</id>
@@ -1678,6 +1493,257 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
     
       <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
+    <link href="http://yoursite.com/posts/2397281138/"/>
+    <id>http://yoursite.com/posts/2397281138/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-28T09:00:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+<li>Human Baseline 的标准是如何确定的?</li>
+<li><p>Ground-truth是什么意思？</p>
+<ul>
+<li>Groun-truth 指的是正确的标注（真实值）</li>
+<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+</ul>
+</li>
+<li><p>Intersection over Union（IoU）是什么？</p>
+<ul>
+<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
+</li>
+<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
+</li>
+<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+</li>
+<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
+<li>基于Caltech数据集创建了一个人工的基准。</li>
+<li>手工聚合了顶级检测器经常出现的错误。</li>
+<li><p>刻画了定位，前景 vs 背景两方面的错误</p>
+<ul>
+<li>针对定位错误：研究了训练集标记噪声对检测器性能的影响</li>
+<li>前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能</li>
+</ul>
+</li>
+<li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
+</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
+<li><p>最流行的数据集：Caltech-USA、KITTI</p>
+<ul>
+<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
+<li>一共350000个标注、覆盖2300各单一的行人</li>
+<li>测试集：4024帧</li>
+</ul>
+</li>
+<li><p>MR: miss rate</p>
+</li>
+</ul>
+<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
+<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
+<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
+<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
+<li>环境和光流可以提高检测（额外的提示）</li>
+</ul>
+<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
+<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
+<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
+<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
+<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
+<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
+</ul>
+<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
+<li><p>一个检测器可以有两类错误：</p>
+<ul>
+<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
+<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
+</ul>
+</li>
+<li><p>FP聚类成11个分类</p>
+</li>
+<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
+<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
+</ul>
+<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
+<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
+</ul>
+<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
+<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
+<li><p>我们的目标是两方面：</p>
+<ul>
+<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
+<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
+</ul>
+</li>
+<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
+</li>
+</ul>
+<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
+<li><p>Pruning benefits:</p>
+<ul>
+<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
+<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
+</ul>
+</li>
+<li><p>Alignment benefits:</p>
+<ul>
+<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
+<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
+</li>
+<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
+</li>
+<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
+<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
+</li>
+<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
+</li>
+<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
+</li>
+<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
+</li>
+</ul>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
+</li>
+<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
+</li>
+<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;文章疑问点&quot;&gt;&lt;a href=&quot;#文章疑问点&quot; class=&quot;headerlink&quot; title=&quot;文章疑问点&quot;&gt;&lt;/a&gt;文章疑问点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Human Baseline 的标准是如何确定的?&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Ground-truth是什么意思？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Groun-truth 指的是正确的标注（真实值）&lt;/li&gt;
+&lt;li&gt;在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Intersection over Union（IoU）是什么？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;As long as we have these two sets of bounding boxes we can apply Intersection over Union.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;An Intersection over Union score &amp;gt; 0.5 is normally considered a “good” prediction.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
+&lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Review" scheme="http://yoursite.com/tags/Review/"/>
+    
+      <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-01-28T08:13:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
+<ul>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
+</ul>
+<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
+&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
+&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
+&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
+&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
+&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
+&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
+&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
+&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

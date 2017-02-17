@@ -526,8 +526,8 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作</title>
     <link href="http://yoursite.com/posts/2093106769/"/>
     <id>http://yoursite.com/posts/2093106769/</id>
-    <published>2016-12-16T22:32:24.000Z</published>
-    <updated>2017-02-17T07:37:32.000Z</updated>
+    <published>2017-01-15T22:32:24.000Z</published>
+    <updated>2017-02-17T07:39:12.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>

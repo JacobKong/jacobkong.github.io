@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="JacobKong's Blog">
 <meta property="og:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg">
-<meta property="og:updated_time" content="2017-02-17T07:39:12.000Z">
+<meta property="og:updated_time" content="2017-02-17T07:42:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作">
 <meta name="twitter:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
@@ -425,6 +425,7 @@
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
 <p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="external">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
 <p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
+<a id="more"></a>
 <h2 id="准备工作1——py-faster-rcnn的编译安装测试"><a href="#准备工作1——py-faster-rcnn的编译安装测试" class="headerlink" title="准备工作1——py-faster-rcnn的编译安装测试"></a>准备工作1——py-faster-rcnn的编译安装测试</h2><h3 id="py-faster-rcnn的编译安装"><a href="#py-faster-rcnn的编译安装" class="headerlink" title="py-faster-rcnn的编译安装"></a>py-faster-rcnn的编译安装</h3><ol>
 <li><p>克隆Faster R-CNN仓库：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone --recursive https://github.com/rbgirshick/py-faster-rcnn.git</div></pre></td></tr></table></figure>

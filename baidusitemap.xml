@@ -4,11 +4,11 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/4113466123/</loc>
-    <lastmod>2017-02-18T08:55:12.000Z</lastmod>
+    <loc>http://yoursite.com/posts/464905881/</loc>
+    <lastmod>2017-02-18T11:31:57.000Z</lastmod>
     <data>
         <display>
-        <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口</title>
+        <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</title>
         <pubTime>2017-01-16T22:32:24.000Z</pubTime>
         
         <tag>Object Detection</tag>
@@ -30,11 +30,11 @@
 
     
   <url>
-    <loc>http://yoursite.com/posts/464905881/</loc>
-    <lastmod>2017-02-18T08:54:58.000Z</lastmod>
+    <loc>http://yoursite.com/posts/4113466123/</loc>
+    <lastmod>2017-02-18T11:17:14.000Z</lastmod>
     <data>
         <display>
-        <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</title>
+        <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口</title>
         <pubTime>2017-01-16T22:32:24.000Z</pubTime>
         
         <tag>Object Detection</tag>

@@ -831,7 +831,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2093106769/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/464905881/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jacob Kong">
@@ -856,8 +856,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
             
               
                 
-                <a class="post-title-link" href="/posts/2093106769/" itemprop="url">
-                  深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作
+                <a class="post-title-link" href="/posts/464905881/" itemprop="url">
+                  深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测
                 </a>
               
             
@@ -873,8 +873,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-16T06:32:24+08:00">
-                2017-01-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T06:32:24+08:00">
+                2017-01-17
               </time>
             
 
@@ -914,8 +914,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/2093106769/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2093106769/" itemprop="commentCount"></span>
+                <a href="/posts/464905881/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/464905881/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -925,7 +925,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
           
           
-             <span id="/posts/2093106769/" class="leancloud_visitors" data-flag-title="深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作">
+             <span id="/posts/464905881/" class="leancloud_visitors" data-flag-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -953,13 +953,10 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
-<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/">上一篇博客</a>。</p>
-<p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
-<p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已经介绍了如何准备数据集，以及如何修改数据集读写接口来操作数据集，接下来我来说明一下怎么来训练网络和之后的检测过程。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/2093106769/#more" rel="contents">
+            <a class="btn" href="/posts/464905881/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1000,7 +997,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3802700508/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/4113466123/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jacob Kong">
@@ -1025,8 +1022,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
             
               
                 
-                <a class="post-title-link" href="/posts/3802700508/" itemprop="url">
-                  深度学习论文笔记：Faster R-CNN
+                <a class="post-title-link" href="/posts/4113466123/" itemprop="url">
+                  深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口
                 </a>
               
             
@@ -1042,8 +1039,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-17T06:32:24+08:00">
-                2016-12-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T06:32:24+08:00">
+                2017-01-17
               </time>
             
 
@@ -1065,8 +1062,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
+                  <a href="/categories/经验/" itemprop="url" rel="index">
+                    <span itemprop="name">经验</span>
                   </a>
                 </span>
 
@@ -1083,8 +1080,8 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/3802700508/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3802700508/" itemprop="commentCount"></span>
+                <a href="/posts/4113466123/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/4113466123/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1094,7 +1091,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
           
           
-             <span id="/posts/3802700508/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：Faster R-CNN">
+             <span id="/posts/4113466123/" class="leancloud_visitors" data-flag-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1122,16 +1119,10 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
       
         
-          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
-<li>Faster R-CNN引入了<strong>Region Proposal Network（RPN）</strong>来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是<strong>cost free</strong>的。</li>
-<li>RPN-&gt;预测物体边界（object bounds）和在每一位置的分数（objectness score）</li>
-<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——使用“attention”机制。</li>
-<li>300 proposals pre image.</li>
-</ul>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我<a href="http://jacobkong.github.io/posts/2093106769/">上一篇文章</a>。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/3802700508/#more" rel="contents">
+            <a class="btn" href="/posts/4113466123/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1167,7 +1158,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1210,7 +1201,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

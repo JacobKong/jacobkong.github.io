@@ -1,0 +1,1193 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="JacobKong's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我上一篇文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口">
+<meta property="og:url" content="http://yoursite.com/posts/4113466123/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="前言这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我上一篇文章。">
+<meta property="og:updated_time" content="2017-02-18T08:55:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口">
+<meta name="twitter:description" content="前言这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我上一篇文章。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6269586705494312000',
+      author: 'JacobKong_Dev'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/posts/4113466123/"/>
+
+
+
+
+
+  <title> 深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口 | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-89889116-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?62f2b754cef72ea357bef905cd2ce0b4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">JacobKong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">路漫漫其修远兮......</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'qwpH936HXK5KmdfNnB1U','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/4113466123/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T06:32:24+08:00">
+                2017-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/经验/" itemprop="url" rel="index">
+                    <span itemprop="name">经验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/4113466123/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/4113466123/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/4113466123/" class="leancloud_visitors" data-flag-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我<a href="http://jacobkong.github.io/posts/2093106769/" target="_blank" rel="external">上一篇文章</a>。</p>
+<a id="more"></a>
+<h2 id="py-faster-rcnn文件结构"><a href="#py-faster-rcnn文件结构" class="headerlink" title="py-faster-rcnn文件结构"></a>py-faster-rcnn文件结构</h2><ul>
+<li>caffe-fast-rcnn<br>这里是caffe框架目录，用来进行caffe编译安装</li>
+<li>data<br>用来存放pre trained模型，比如ImageNet上的，要训练的数据集以及读取文件的cache缓存。</li>
+<li>experiments<br>存放配置文件，运行的log文件，另外这个目录下有scripts 用来获取imagenet的模型，以及作者训练好的fast rcnn模型，以及相应的pascal-voc数据集</li>
+<li>lib<br>用来存放一些python接口文件，如其下的datasets主要负责数据库读取，config负责cnn一些训练的配置选项</li>
+<li>matlab<br>放置matlab与python的接口，用matlab来调用实现detection</li>
+<li>models<br>里面存放了三个模型文件，小型网络的ZF，大型网络VGG16，中型网络VGG_CNN_M_1024</li>
+<li>output<br>这里存放的是训练完成后的输出目录，默认会在default文件夹下</li>
+<li>tools<br>里面存放的是训练和测试的Python文件</li>
+</ul>
+<h2 id="修改训练代码"><a href="#修改训练代码" class="headerlink" title="修改训练代码"></a>修改训练代码</h2><h3 id="所要操作文件结构介绍"><a href="#所要操作文件结构介绍" class="headerlink" title="所要操作文件结构介绍"></a>所要操作文件结构介绍</h3><p>所有需要修改的训练代码都放到了<code>py-faster-rcnn/lib</code>文件夹下，我们进入文件夹，里面主要用到的文件夹有：</p>
+<ul>
+<li>datasets：该目录下主要存放读写数据接口。</li>
+<li>fast-rcnn：该目录下主要存放的是python的训练和测试脚本，以及训练的配置文件。</li>
+<li>roi_data_layer：该目录下主要存放一些ROI处理操作文件。</li>
+<li>utils：该目录下主要存放一些通用操作比如非极大值nms，以及计算bounding box的重叠率等常用功能。</li>
+</ul>
+<p>读写数据接口都放在<code>datasets/</code>文件夹下，我们进入文件夹，里面主要文件有：</p>
+<ul>
+<li>factory.py：这是个工厂类，用类生成imdb类并且返回数据库共网络训练和测试使用。</li>
+<li>imdb.py：这是数据库读写类的基类，分装了许多db的操作，但是具体的一些文件读写需要继承继续读写</li>
+<li>pascal_voc.py：这是imdb的子类，里面定义许多函数用来进行所有的数据读写操作。</li>
+</ul>
+<p>从上面可以看出，我们主要对<code>pascal_voc.py</code>文件进行修改。</p>
+<h3 id="pascal-voc-py文件代码分析"><a href="#pascal-voc-py文件代码分析" class="headerlink" title="pascal_voc.py文件代码分析"></a>pascal_voc.py文件代码分析</h3><p>我们主要是基于<code>pasca_voc.py</code>这个文件进行修改，里面有几个重要的函数需要介绍：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span> <span class="comment"># 这个是初始化函数，它对应着的是pascal_voc的数据集访问格式。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_at</span><span class="params">(self, i)</span>:</span> <span class="comment"># 根据第i个图像样本返回其对应的path，其调用image_path_from_index(self, index):作为其具体实现。</span></div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_from_index</span><span class="params">(self, index)</span>:</span> <span class="comment"># 实现了 image_path的具体功能</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span> <span class="comment"># 加载了样本的list文件，根据ImageSet/Main/文件夹下的文件进行image_index的加载。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_default_path</span><span class="params">(self)</span>:</span> <span class="comment"># 获得数据集地址</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gt_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 读取并返回ground_truth的db</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rpn_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 加载rpn产生的roi，调用_load_rpn_roidb(self, gt_roidb):函数作为其具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_rpn_roidb</span><span class="params">(self, gt_roidb)</span>:</span> <span class="comment"># 加载rpn_file</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span> <span class="comment"># 这个函数是读取gt的具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_write_voc_results_file</span><span class="params">(self, all_boxes)</span>:</span> <span class="comment"># 将voc的检测结果写入到文件</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_do_python_eval</span><span class="params">(self, output_dir = <span class="string">'output'</span>)</span>:</span> <span class="comment"># 根据python的evluation接口来做结果的分析</span></div></pre></td></tr></table></figure>
+<h3 id="修改pascal-voc-py文件"><a href="#修改pascal-voc-py文件" class="headerlink" title="修改pascal_voc.py文件"></a>修改pascal_voc.py文件</h3><p>要想对自己的数据集进行读取，我们主要是进行<code>pascal_voc.py</code>文件的修改，但是为了不破坏源文件，我们可以将<code>pascal_voc.py</code>进行拷贝复制，从而进行修改。这里我将<code>pascal_voc.py</code>文件拷贝成<code>caltech.py</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp pascal_voc.py caltech.py</div></pre></td></tr></table></figure>
+<p>下面我们对<code>caltech.py</code>文件进行修改，在这里我会一一列举每个我修改过的函数。这里按照文件中的顺序排列。。</p>
+<h4 id="init函数修改"><a href="#init函数修改" class="headerlink" title="init函数修改"></a><strong>init</strong>函数修改</h4><p>这里是原始的pascal_voc的init函数，在这里，由于我们自己的数据集往往比voc的数据集要更简单的一些，在作者额代码里面用了很多的路径拼接，我们不用去迎合他的格式，将这些操作简单化即可。</p>
+<h5 id="原始的函数"><a href="#原始的函数" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, year, devkit_path=None)</span>:</span></div><div class="line">        imdb.__init__(self, <span class="string">'voc_'</span> + year + <span class="string">'_'</span> + image_set)</div><div class="line">        self._year = year</div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = self._get_default_path() <span class="keyword">if</span> devkit_path <span class="keyword">is</span> <span class="keyword">None</span> \</div><div class="line">                            <span class="keyword">else</span> devkit_path</div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'VOC'</span> + self._year)</div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'aeroplane'</span>, <span class="string">'bicycle'</span>, <span class="string">'bird'</span>, <span class="string">'boat'</span>,</div><div class="line">                         <span class="string">'bottle'</span>, <span class="string">'bus'</span>, <span class="string">'car'</span>, <span class="string">'cat'</span>, <span class="string">'chair'</span>,</div><div class="line">                         <span class="string">'cow'</span>, <span class="string">'diningtable'</span>, <span class="string">'dog'</span>, <span class="string">'horse'</span>,</div><div class="line">                         <span class="string">'motorbike'</span>, <span class="string">'person'</span>, <span class="string">'pottedplant'</span>,</div><div class="line">                         <span class="string">'sheep'</span>, <span class="string">'sofa'</span>, <span class="string">'train'</span>, <span class="string">'tvmonitor'</span>)</div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数"><a href="#修改后的函数" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span><span class="comment"># initial function，把year删除</span></div><div class="line">        imdb.__init__(self, image_set) <span class="comment"># imageset is train.txt or test.txt</span></div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = devkit_path <span class="comment"># devkit_path = '~/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'Caltech'</span>) <span class="comment"># _data_path = '~/py-faster-rcnn/data/VOCdevkit/Caltech'</span></div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'person'</span>) <span class="comment"># 我只有‘background’和‘person’两类</span></div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">True</span>, <span class="comment"># 我把use_diff改为true了，因为我的数据集xml文件中没有&lt;difficult&gt;标签，否则之后训练会报错</span></div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
+<h4 id="load-image-set-index函数修改"><a href="#load-image-set-index函数修改" class="headerlink" title="_load_image_set_index函数修改"></a>_load_image_set_index函数修改</h4><h5 id="原始的函数-1"><a href="#原始的函数-1" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">      <span class="string">"""</span></div><div class="line">          Load the indexes listed in this dataset's image set file.</div><div class="line">          """</div><div class="line">      <span class="comment"># Example path to image set file:</span></div><div class="line">      <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">      image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                    self._image_set + <span class="string">'.txt'</span>)</div><div class="line">      <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">      <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">      <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">          image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">          <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数-1"><a href="#修改后的函数-1" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load the indexes listed in this dataset's image set file.</div><div class="line">        """</div><div class="line">        <span class="comment"># Example path to image set file:</span></div><div class="line">        <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">        <span class="comment"># /home/jk/py-faster-rcnn/data/VOCdevkit/Caltech/ImageSets/Main/train.txt</span></div><div class="line">        image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                      self._image_set + <span class="string">'.txt'</span>)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">        <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">            image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">        <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
+<p>其实没改，只是加了一行注释，从而更好理解路径问题。</p>
+<h4 id="get-default-path函数修改"><a href="#get-default-path函数修改" class="headerlink" title="_get_default_path函数修改"></a>_get_default_path函数修改</h4><p>直接注释即可</p>
+<h4 id="load-pascal-annotation函数修改"><a href="#load-pascal-annotation函数修改" class="headerlink" title="_load_pascal_annotation函数修改"></a>_load_pascal_annotation函数修改</h4><h5 id="原始的函数-2"><a href="#原始的函数-2" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text) - <span class="number">1</span></div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text) - <span class="number">1</span></div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text) - <span class="number">1</span></div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text) - <span class="number">1</span></div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数-2"><a href="#修改后的函数-2" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            <span class="comment"># 这里我把‘-1’全部删除掉了，防止有的数据是0开始，然后‘-1’导致变为负数，产生AssertError错误</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text)</div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text)</div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text)</div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text)</div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
+<h4 id="main函数修改"><a href="#main函数修改" class="headerlink" title="main函数修改"></a>main函数修改</h4><p>原始的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line">    d = pascal_voc(<span class="string">'trainval'</span>, <span class="string">'2007'</span>)</div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
+<p>修改后的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line">    d = caltech(<span class="string">'train'</span>, <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span>)<span class="comment">#调用构造函数，传入imageset和路径</span></div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
+<p>至此读取接口修改完毕，该文件中的其他函数并未修改。</p>
+<h3 id="修改factory-py文件"><a href="#修改factory-py文件" class="headerlink" title="修改factory.py文件"></a>修改factory.py文件</h3><p>当网络训练时会调用factory里面的get方法获得相应的imdb，首先在文件头import 把pascal_voc改成caltech</p>
+<p>在这个文件作者生成了多个数据库的路径，我们自己数据库只要给定根路径即可，修改主要有以下4个</p>
+<ul>
+<li>因此将里面的def _selective_search_IJCV_top_k函数整个注释掉</li>
+<li>函数之后有两个多级的for循环，也将其注释</li>
+<li>直接定义imageset和devkit</li>
+<li>修改get_imdb函数</li>
+</ul>
+<h4 id="原始的代码"><a href="#原始的代码" class="headerlink" title="原始的代码"></a>原始的代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line"><span class="keyword">from</span> datasets.coco <span class="keyword">import</span> coco</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2007'</span>, <span class="string">'2012'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'trainval'</span>, <span class="string">'test'</span>]:</div><div class="line">        name = <span class="string">'voc_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: pascal_voc(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2014'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'minival'</span>, <span class="string">'valminusminival'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2015'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'test'</span>, <span class="string">'test-dev'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
+<h4 id="修改后的文件"><a href="#修改后的文件" class="headerlink" title="修改后的文件"></a>修改后的文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line"><span class="comment">#from datasets.coco import coco</span></div><div class="line"><span class="comment">#import numpy as np</span></div><div class="line"></div><div class="line">imageset = <span class="string">'train'</span> <span class="comment">#imageset为train.txt文件</span></div><div class="line">devkit = <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="comment">#for year in ['2007', '2012']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'trainval', 'test']:</span></div><div class="line"><span class="comment">#        name = 'voc_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: pascal_voc(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2014']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'minival', 'valminusminival']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2015']:</span></div><div class="line"><span class="comment">#    for split in ['test', 'test-dev']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    __sets[name] = (<span class="keyword">lambda</span> imageset=imageset, devkit = devkit: caltech(imageset, devkit))</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
+<h3 id="修改init-py文件"><a href="#修改init-py文件" class="headerlink" title="修改init.py文件"></a>修改<strong>init</strong>.py文件</h3><p>在行首添加上 <code>from .caltech import caltech</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>坐标的顺序我再说一次，要左上右下，并且x1必须要小于x2，这个是基本，反了会在坐标水平变换的时候会出错，坐标从0开始，如果已经是0，则不需要再-1。</li>
+<li>训练图像的大小不要太大，否则生成的OP也会太多，速度太慢，图像样本大小最好调整到500，600左右，然后再提取OP</li>
+<li>如果读取并生成pkl文件之后，实际数据内容或者顺序还有问题，记得要把data/cache/下面的pkl文件给删掉。</li>
+</ul>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
+<li><a href="http://www.cnblogs.com/louyihang-loves-baiyan/p/4903231.html" target="_blank" rel="external"><strong>Fast RCNN训练自己的数据集 （2修改读写接口）</strong></a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/2093106769/" rel="next" title="深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作">
+                <i class="fa fa-chevron-left"></i> 深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/464905881/" rel="prev" title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测">
+                深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="posts/4113466123/"
+     data-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口"
+     data-content=""
+     data-url="http://yoursite.com/posts/4113466123/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/4113466123/"
+           data-title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口" data-url="http://yoursite.com/posts/4113466123/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jacob Kong" />
+          <p class="site-author-name" itemprop="name">Jacob Kong</p>
+          <p class="site-description motion-element" itemprop="description">欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="mailto:kongweijiejacob@gmail.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JacobKong" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/JacobKong_Dev" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2232756824" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/81a8d024af56" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-heartbeat"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#py-faster-rcnn文件结构"><span class="nav-number">2.</span> <span class="nav-text">py-faster-rcnn文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改训练代码"><span class="nav-number">3.</span> <span class="nav-text">修改训练代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#所要操作文件结构介绍"><span class="nav-number">3.1.</span> <span class="nav-text">所要操作文件结构介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pascal-voc-py文件代码分析"><span class="nav-number">3.2.</span> <span class="nav-text">pascal_voc.py文件代码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改pascal-voc-py文件"><span class="nav-number">3.3.</span> <span class="nav-text">修改pascal_voc.py文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init函数修改"><span class="nav-number">3.3.1.</span> <span class="nav-text">init函数修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原始的函数"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">原始的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改后的函数"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">修改后的函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#load-image-set-index函数修改"><span class="nav-number">3.3.2.</span> <span class="nav-text">_load_image_set_index函数修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原始的函数-1"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">原始的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改后的函数-1"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">修改后的函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-default-path函数修改"><span class="nav-number">3.3.3.</span> <span class="nav-text">_get_default_path函数修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#load-pascal-annotation函数修改"><span class="nav-number">3.3.4.</span> <span class="nav-text">_load_pascal_annotation函数修改</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原始的函数-2"><span class="nav-number">3.3.4.1.</span> <span class="nav-text">原始的函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改后的函数-2"><span class="nav-number">3.3.4.2.</span> <span class="nav-text">修改后的函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#main函数修改"><span class="nav-number">3.3.5.</span> <span class="nav-text">main函数修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改factory-py文件"><span class="nav-number">3.4.</span> <span class="nav-text">修改factory.py文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原始的代码"><span class="nav-number">3.4.1.</span> <span class="nav-text">原始的代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改后的文件"><span class="nav-number">3.4.2.</span> <span class="nav-text">修改后的文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改init-py文件"><span class="nav-number">3.5.</span> <span class="nav-text">修改init.py文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考博客"><span class="nav-number">5.</span> <span class="nav-text">参考博客</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jacob Kong</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jacobkong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("YzdOPGD6UVitIPREYUH017Yt-gzGzoHsz", "W0g9MHOvC23K6PV4r2loD7d0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://yoursite.com/posts/464905881/</loc>
-    <lastmod>2017-02-18T11:31:57.000Z</lastmod>
+    <lastmod>2017-02-25T16:22:18.000Z</lastmod>
     <data>
         <display>
         <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</title>
@@ -23,6 +23,32 @@
            
              
               <breadCrumb title="经验" url="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/posts/2735857030/</loc>
+    <lastmod>2017-02-18T12:55:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>行人检测论文笔记：Fast Feature Pyramids for Object Detection?</title>
+        <pubTime>2016-11-23T22:32:24.000Z</pubTime>
+        
+        <tag>Pedestrian Detection</tag>
+         
+        <tag>行人检测</tag>
+         
+        <tag>Object Detection</tag>
+         
+        <tag>目标检测</tag>
+         
+         
+           
+             
+              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
           
         </display>
     </data>
@@ -365,32 +391,6 @@
         <display>
         <title>行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</title>
         <pubTime>2016-11-28T22:32:24.000Z</pubTime>
-        
-        <tag>Pedestrian Detection</tag>
-         
-        <tag>行人检测</tag>
-         
-        <tag>Object Detection</tag>
-         
-        <tag>目标检测</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/2735857030/</loc>
-    <lastmod>2017-01-28T08:59:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Fast Feature Pyramids for Object Detection?</title>
-        <pubTime>2016-11-23T22:32:24.000Z</pubTime>
         
         <tag>Pedestrian Detection</tag>
          

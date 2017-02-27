@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-27T11:18:49.000Z</updated>
+  <updated>2017-02-27T13:44:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深度学习论文笔记：R-FCN.md</title>
+    <title>深度学习论文笔记：R-FCN</title>
     <link href="http://yoursite.com/posts/3678248031/"/>
     <id>http://yoursite.com/posts/3678248031/</id>
     <published>2017-02-27T07:51:24.000Z</published>
-    <updated>2017-02-27T11:18:49.000Z</updated>
+    <updated>2017-02-27T13:44:31.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。</li>
@@ -53,7 +53,50 @@
 <p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fd58i0j1icj30ql0dcmzl.jpg" alt=""></p>
 <p>用RPN来提出candidate RoIs，然后这些RoIs被应用到score maps，在RPN和R-FCN之间共享特征。</p>
 <p>最后卷积层为每个类别产生一组$k^2$个position-sensitive score maps，因此具有带有C个对象类别（背景为+1）的$k^2(C + 1)$通道的输出层。</p>
+<p><strong>每一个category有一个$k^2$的score map</strong></p>
 </li>
+<li><p>RPN以一个position-sensitive RoI pooling layer结束，该层聚合最后卷积层的输出并产生每个RoI的分数。我们的position-sensitive RoI pooling layer进行选择性合并，each of the k × k bin aggregates responses from only one score map out of the bank of k × k score maps。利用端到端训练，这个RoI层管理最后的卷积层以学习专门的position-sensitive score maps。 </p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcly1fd597p3an8j30vs0en40p.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="Backbone-architecture"><a href="#Backbone-architecture" class="headerlink" title="Backbone architecture"></a>Backbone architecture</h3><ul>
+<li>本论文R-FCN基于ResNet-101。</li>
+<li>ResNet-101具有100个卷积层，后面是global average pooling和一个1000-class的fc层。我们移去了average pooling layer and the fc layer，仅使用convolutional layer来计算feature maps。</li>
+<li>我们使用ResNet-101，在ImageNet上进行预训练，ResNet-101中的最后一个卷积块是2048-d，并且我们附加随机初始化的1024-d 1×1卷积层以减小尺寸。然后，我们应用$k^2(C + 1)$通道卷积层来生成分数图，如下所述。</li>
+</ul>
+<h3 id="Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling"><a href="#Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling" class="headerlink" title="Position-sensitive score maps &amp; Position-sensitive RoI pooling."></a>Position-sensitive score maps &amp; Position-sensitive RoI pooling.</h3><ul>
+<li>为了将位置信息显式编码到每个RoI中，我们将RoI矩形划分为k x k个bins。</li>
+<li>构造最后的卷积层为每个类别产生的$k^2$个分数图。</li>
+<li>利用average pooling。</li>
+<li>bounding boxes regression。</li>
+</ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li><p>OHEM: online hard example mining</p>
+</li>
+<li><p>loss function:</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcly1fd5b12qx4vj30hp00zt8t.jpg" alt=""></p>
+</li>
+<li><p>在前向传播中：每张图片N个proposals。我们计算所有N个proposal的loss，排序，选择最高的B个RoIs。然后在选中的proposal上进行反向传播。</p>
+</li>
+<li><p>decay：0.0005</p>
+</li>
+<li><p>momentum：0.9</p>
+</li>
+<li><p>single-scale training。</p>
+</li>
+<li><p>B=128</p>
+</li>
+<li><p>lr = 0.001 ~20k, 0.0001 ~ 10k</p>
+</li>
+<li><p>同Faster R-CNN一趟，使用4步alternating training，在训练RPN和训练R-FCN之间。</p>
+</li>
+</ul>
+<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><ul>
+<li>为公平期间，在300个RoIs上进行评估，结果之后用NMS进行处理，IoU阈值0.3</li>
+</ul>
+<h3 id="A-trous-and-stride"><a href="#A-trous-and-stride" class="headerlink" title="À trous and stride"></a>À trous and stride</h3><ul>
+<li>将ResNet-10的有效stride从32减为16像素，提高了score map的分辨率。</li>
+<li>Algorithme à trous</li>
 </ul>
 ]]></content>
     

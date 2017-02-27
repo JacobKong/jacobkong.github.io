@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
 
 
 
@@ -86,15 +86,27 @@
 
 
 
-<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JacobKong's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Object-Detection/page/2/index.html">
+<meta name="description" content="Abstract
+提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。
+不同于Faster R-CNN，本论文的region-based detector是完全卷积化的，几乎一张图像上所有的计算都是共享的。
+为了实现这一目标，我们提出position-sensitive score maps，以解决在图像分类的平移不变性（translatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习论文笔记：R-FCN.md">
+<meta property="og:url" content="http://yoursite.com/posts/3678248031/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta property="og:description" content="Abstract
+提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。
+不同于Faster R-CNN，本论文的region-based detector是完全卷积化的，几乎一张图像上所有的计算都是共享的。
+为了实现这一目标，我们提出position-sensitive score maps，以解决在图像分类的平移不变性（translatio">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fd58i0j1icj30ql0dcmzl.jpg">
+<meta property="og:updated_time" content="2017-02-27T11:18:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JacobKong's Blog">
-<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta name="twitter:title" content="深度学习论文笔记：R-FCN.md">
+<meta name="twitter:description" content="Abstract
+提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。
+不同于Faster R-CNN，本论文的region-based detector是完全卷积化的，几乎一张图像上所有的计算都是共享的。
+为了实现这一目标，我们提出position-sensitive score maps，以解决在图像分类的平移不变性（translatio">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fd58i0j1icj30ql0dcmzl.jpg">
 
 
 
@@ -122,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Object-Detection/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/posts/3678248031/"/>
 
 
 
 
 
-  <title> 标签: Object Detection | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 深度学习论文笔记：R-FCN.md | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +180,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -300,169 +312,267 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Object Detection
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/4241353321/" itemprop="url">
-              
-                <span itemprop="name">深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-06T06:32:24+08:00"
-              content="2016-12-06" >
-          12-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2553947436/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-05T06:32:24+08:00"
-              content="2016-12-05" >
-          12-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2903903730/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Robust Real-Time Face Detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-04T06:32:24+08:00"
-              content="2016-12-04" >
-          12-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/3084343215/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-29T06:32:24+08:00"
-              content="2016-11-29" >
-          11-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/2735857030/" itemprop="url">
-              
-                <span itemprop="name">行人检测论文笔记：Fast Feature Pyramids for Object Detection?</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-24T06:32:24+08:00"
-              content="2016-11-24" >
-          11-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/tags/Object-Detection/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/tags/Object-Detection/">1</a><span class="page-number current">2</span>
-  </nav>
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3678248031/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度学习论文笔记：R-FCN.md
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T15:51:24+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/3678248031/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/3678248031/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/3678248031/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：R-FCN.md">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。</li>
+<li>不同于Faster R-CNN，本论文的region-based detector是完全卷积化的，几乎一张图像上所有的计算都是共享的。</li>
+<li>为了实现这一目标，我们提出position-sensitive score maps，以解决在图像分类的平移不变性（translation-invariance）和物体检测中的平移可变性（translation-variance）之间的困境。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>最近流行的用于目标检测的深度学习框架依据RoI层的不同可以分为两大subnetworks：<ul>
+<li>一类是共享的、fully convolutional的subnetwork。</li>
+<li>另一类是RoI-wise的subnetwork，不共享计算。</li>
+</ul>
+</li>
+<li>在图像分类网络中，一个convolutional subnetwork会以一个sptial pooling layer更随着几个fully-connected  layer最为结尾，所以图像分类中的sptial pooling layer自然转化为目标检测中的RoI pooling layer。</li>
+<li>ResNet和GoogleLeNets都被设计成fully convolutional的。</li>
+<li>在ResNet论文中，Faster R-CNN中的RoI pooling layer被不自然的插入到两个卷积层集之间，带来了准确率的提升，但是速度由于unshared per-RoI计算降低。</li>
+<li>假设图像分类网络中更深层的卷积层对translation不敏感。</li>
+<li>为了将translation variance结合到FCN中，我们通过使用一组专用卷积层作为FCN输出来构造一组位置敏感得分图（position-sensitive score maps）。每一个得分图将相对于相对空间位置（例如，“在对象的左边”）的位置信息进行编码。在这个FCN之上，我们附加一个位置敏感的RoI池层（position-sensitive RoI pooling layer），从这些得分图中获取信息，没有跟随的重量（卷积/ fc）层。</li>
+</ul>
+<h2 id="Our-approach"><a href="#Our-approach" class="headerlink" title="Our approach"></a>Our approach</h2><ul>
+<li><p>本论文的方法参考与R-CNN，也是使用two-stage的目标检测策略。</p>
+<ul>
+<li>region proposal</li>
+<li>region classification</li>
+</ul>
+</li>
+<li><p>虽然不依赖于region proposal的目标检测方法确实存在，但是region-based system依旧在几个基准上保持领先的准确性。</p>
+</li>
+<li><p>Overall architecture of R-FCN:</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fd58i0j1icj30ql0dcmzl.jpg" alt=""></p>
+<p>用RPN来提出candidate RoIs，然后这些RoIs被应用到score maps，在RPN和R-FCN之间共享特征。</p>
+<p>最后卷积层为每个类别产生一组$k^2$个position-sensitive score maps，因此具有带有C个对象类别（背景为+1）的$k^2(C + 1)$通道的输出层。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3118967289/" rel="next" title="深度学习论文笔记：SSD">
+                <i class="fa fa-chevron-left"></i> 深度学习论文笔记：SSD
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="posts/3678248031/"
+     data-title="深度学习论文笔记：R-FCN.md"
+     data-content=""
+     data-url="http://yoursite.com/posts/3678248031/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
           
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="posts/3678248031/"
+           data-title="深度学习论文笔记：R-FCN.md" data-url="http://yoursite.com/posts/3678248031/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -482,8 +592,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -594,6 +713,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Our-approach"><span class="nav-number">3.</span> <span class="nav-text">Our approach</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
     </div>
   </aside>
@@ -699,6 +834,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

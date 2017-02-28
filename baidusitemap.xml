@@ -4,6 +4,32 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/2093106769/</loc>
+    <lastmod>2017-02-28T02:22:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作</title>
+        <pubTime>2017-01-15T22:32:24.000Z</pubTime>
+        
+        <tag>Object Detection</tag>
+         
+        <tag>目标检测</tag>
+         
+        <tag>Deep Learning</tag>
+         
+        <tag>深度学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="经验" url="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/3678248031/</loc>
     <lastmod>2017-02-27T13:44:31.000Z</lastmod>
     <data>
@@ -88,32 +114,6 @@
         <display>
         <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口</title>
         <pubTime>2017-01-16T22:32:24.000Z</pubTime>
-        
-        <tag>Object Detection</tag>
-         
-        <tag>目标检测</tag>
-         
-        <tag>Deep Learning</tag>
-         
-        <tag>深度学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="经验" url="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/posts/2093106769/</loc>
-    <lastmod>2017-02-17T12:51:31.000Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作</title>
-        <pubTime>2017-01-15T22:32:24.000Z</pubTime>
         
         <tag>Object Detection</tag>
          

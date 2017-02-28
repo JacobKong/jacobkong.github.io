@@ -853,7 +853,7 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     <link href="http://yoursite.com/posts/2093106769/"/>
     <id>http://yoursite.com/posts/2093106769/</id>
     <published>2017-01-15T22:32:24.000Z</published>
-    <updated>2017-02-17T12:51:31.000Z</updated>
+    <updated>2017-02-28T02:22:50.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
@@ -892,6 +892,10 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
 <p><img src="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg" alt=""></p>
 </li>
 <li><p>至此如果上述过程没有出错，那么py-faster-rcnn算是成功编译安装。</p>
+</li>
+<li><p>若出现报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ImportError: /xx/xx/xx/py-faster-rcnn/tools/../lib/nms/cpu_nms.so: undefined symbol: PyFPE_jbuf</div></pre></td></tr></table></figure>
+<p>需要将<code>lib/fast_rcnn/nms_wrapper.py</code>文件中的<code>from nms.cpu_nms import cpu_nms</code>注释掉即可。</p>
 </li>
 </ol>
 <h2 id="准备工作2——Caltech数据集"><a href="#准备工作2——Caltech数据集" class="headerlink" title="准备工作2——Caltech数据集"></a>准备工作2——Caltech数据集</h2><p>由于Faster R-CNN的一部分实验是在PASCAL VOC2007数据集上进行的，所以要想用Faster R-CNN训练我们自己的数据集，首先应该搞清楚PASCAL VOC2007数据集中的目录、图片、标注格式，这样我们才能用自己的数据集制作出类似于PASCAL VOC2007类似的数据集，供Faster R-CNN来进行训练及测试。</p>

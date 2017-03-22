@@ -108,7 +108,7 @@ Abstract
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfo7oia0ij30bg05n74f.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfo7owdcpj306q01mwee.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfoo7cuv7j30qf0ardgq.jpg">
-<meta property="og:updated_time" content="2017-01-28T09:01:06.000Z">
+<meta property="og:updated_time" content="2017-03-09T04:27:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Fast R-CNN">
 <meta name="twitter:description" content="知识点
@@ -500,7 +500,7 @@ Abstract
 <h2 id="Fast-R-CNN-architecture-and-training"><a href="#Fast-R-CNN-architecture-and-training" class="headerlink" title="Fast R-CNN architecture and training"></a>Fast R-CNN architecture and training</h2><ul>
 <li><p>整体框架<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfo7na6fij30jk0efdju.jpg" alt=""></p>
 </li>
-<li><p>快速R-CNN网络将整个图像和一组对象位置作为输入。</p>
+<li><p>快速R-CNN网络将<strong>整个图像</strong>和<strong>一组object proposals</strong>作为输入。</p>
 <ul>
 <li>网络首先使用几个卷积（conv）和最大池层来处理整个图像，以产生conv feature map。</li>
 <li>然后，对于每个对象proposal， <strong>感兴趣区域（RoI）池层</strong> 从特征图中抽取固定长度的特征向量。</li>
@@ -518,10 +518,10 @@ Abstract
 <li>另一个是用一个单层的SPP layer将这个feature map patch下采样为大小固定的feature再传入全连接层。</li>
 </ul>
 </li>
-<li>RoI池层使用最大池化将任何有效的RoI区域内的特征转换成具有H×W（例如，7×7）的固定空间范围的小feature map，其中H和W是层超参数 它们独立于任何特定的RoI。</li>
+<li>RoI池层使用最大池化将任何有效的RoI区域内的特征转换成具有H×W（例如，7×7）的固定空间范围的小feature map，其中H和W是层<strong>超参数</strong> 它们独立于任何特定的RoI。</li>
 <li>在本文中，RoI是conv feature map中的一个矩形窗口。</li>
 <li>每个RoI由定义其左上角（r，c）及其高度和宽度（h，w）的四元组（r，c，h，w）定义。</li>
-<li>RoI层仅仅是Sppnets中的spatial pyramid pooling layer的特殊形式，其中只有一个金字塔层</li>
+<li>RoI层仅仅是Sppnets中的spatial pyramid pooling layer的特殊形式，其中<strong>只有一个金字塔层</strong>.</li>
 </ul>
 <h3 id="Initializing-from-pre-trained-networks"><a href="#Initializing-from-pre-trained-networks" class="headerlink" title="Initializing from pre-trained networks"></a>Initializing from pre-trained networks</h3><ul>
 <li>用了3个预训练的ImageNet网络（CaffeNet/ VGG_CNN_M_1024 /VGG16）。预训练的网络初始化Fast RCNN要经过三次变形：</li>
@@ -532,12 +532,25 @@ Abstract
 <li>输入修改为两种数据：一组N个图形，R个RoI，batch size和ROI数、图像分辨率都是可变的。</li>
 </ol>
 <h3 id="Fine-tuning-for-detection"><a href="#Fine-tuning-for-detection" class="headerlink" title="Fine-tuning for detection"></a>Fine-tuning for detection</h3><ul>
-<li>利用反向传播算法进行训练所有网络的权重是Fast R-CNN很重要的一个能力。</li>
-<li>我们提出了一种更有效的训练方法，利用在训练期间的特征共享（feature sharing during training）。</li>
-<li>在Fast R-CNN训练中， <strong>随机梯度下降（SGD）小批量分层采样</strong> ，首先通过采样N个图像，然后通过从每个图像采样 <strong>R/N个</strong> RoIs。</li>
-<li>关键的是，来自同一图像的RoI在向前和向后传递中 <strong>共享计算</strong> 和存储。</li>
-<li>此外为了分层采样，Fast R-CNN使用了一个流水线训练过程，利用一个fine-tuning阶段来联合优化一个softmax分类器和bounding box回归，而非训练一个softmax分类器，SVMs，和regression在三个独立的阶段。</li>
+<li><p>利用反向传播算法进行训练所有网络的权重是Fast R-CNN很重要的一个能力。</p>
+</li>
+<li><p>我们提出了一种更有效的训练方法，利用在训练期间的特征共享（feature sharing during training）。</p>
+</li>
+<li><p>在Fast R-CNN训练中， <strong>随机梯度下降（SGD）小批量分层采样</strong> ，首先通过采样N个图像，然后通过从每个图像采样 <strong>R/N个</strong> RoIs。</p>
+</li>
+<li><p><strong>关键的是，来自同一图像的RoI在向前和向后传递中 共享计算 和存储。</strong></p>
+</li>
+<li><p>此外为了分层采样，Fast R-CNN使用了一个<strong>流水线训练过程</strong>，利用一个fine-tuning阶段来联合优化一个softmax分类器和bounding box回归，而非训练一个softmax分类器，SVMs，和regression在三个独立的阶段。</p>
+</li>
 <li><p>Multi-task loss：</p>
+<ul>
+<li>两个sibling输出层：<ul>
+<li>第一层：输出离散概率分布（针对每个RoIs），$p=(p_0,…,p_K)$，分别对应$K+1$个类。p是在一个全连接层的$K+1$个输出上的softmax。</li>
+<li>第二层：输出bounding-box的回归偏移(bounding-box regression offsets)，针对K object classes中的每一个类，计算$t^k=(t^k_x,t^k_y,t^k_w,t^k_h)$，<strong>具体见R-CNN得补充材料，里面有很详细的介绍bounding box regression</strong>。</li>
+</ul>
+</li>
+<li>每一个训练RoIs被标注一个ground truth类$u$，和一个ground truth bounding box 回归目标$v$。</li>
+</ul>
 <ul>
 <li>两个loss，以下分别介绍：<ul>
 <li>对于分类loss，是一个N+1路的softmax输出，其中的N是类别个数，1是背景。</li>
@@ -549,7 +562,8 @@ Abstract
 </li>
 <li><p>我们利用一个multi-task loss L 在每个被标注的RoI上来联合训练分类器和bounding box regression</p>
 </li>
-<li>Mini-batch sampling：在微调时，每个SGD的mini-batch是随机找两个图片，R为128，因此每个图上取样64个RoI。从object proposal中选25%的RoI，就是和ground-truth交叠至少为0.5的。剩下的作为背景。</li>
+<li><p>Mini-batch sampling：在微调时，每个SGD的mini-batch是随机找两个图片，R为128，因此每个图上取样64个RoI。从object proposal中选25%的RoI，就是和ground-truth交叠至少为0.5的。剩下的作为背景。</p>
+</li>
 <li><p>Back-propagation through RoI pooling layers：</p>
 <ul>
 <li><p>RoI pooling层计算损失函数对每个输入变量x的偏导数，如下：</p>

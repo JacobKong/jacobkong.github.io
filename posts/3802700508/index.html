@@ -99,10 +99,11 @@ Region Proposal的计算是基于Region Proposal算法来假设物体位置的�
 Faster R-CNN引入了Region Proposal Network（RPN）来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是cost free的。
 RPN-&amp;gt;预测物体">
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcb3fr2k40j30cq07tt9a.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1fdgik44luaj30pf0di40j.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcjw1fcbwo1ut3hj309q02hjrj.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcbyiywha8j308k0300sy.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcjw1fccbdrnzhij30bd0b1gml.jpg">
-<meta property="og:updated_time" content="2017-02-02T11:50:44.000Z">
+<meta property="og:updated_time" content="2017-03-09T06:32:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Faster R-CNN">
 <meta name="twitter:description" content="Abstract
@@ -447,7 +448,7 @@ RPN-&amp;gt;预测物体">
 <li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
 <li>Faster R-CNN引入了<strong>Region Proposal Network（RPN）</strong>来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是<strong>cost free</strong>的。</li>
 <li>RPN-&gt;预测物体边界（object bounds）和在每一位置的分数（objectness score）</li>
-<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——使用“attention”机制。</li>
+<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——<strong>使用“attention”机制。</strong></li>
 <li>300 proposals pre image.</li>
 </ul>
 <a id="more"></a>
@@ -467,27 +468,35 @@ RPN-&amp;gt;预测物体">
 </ul>
 <h2 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h2><ul>
 <li>由两个模块组成：<ul>
-<li>第一个模块：A deep fuuly convolutional network that proposes regions.</li>
-<li>第二个模块：Fast R-CNN检测器</li>
+<li>第一个模块：A deep fuuly convolutional network that proposes regions，<strong>用来proposes regions</strong>.</li>
+<li>第二个模块：Fast R-CNN检测器，使用第一模块提出的regions。</li>
 </ul>
 </li>
 <li><strong>Attention mechanisms</strong>：RPN module告诉Fast R-CNN module 往哪里看（where to look）</li>
 </ul>
 <h3 id="Region-Proposal-Networks"><a href="#Region-Proposal-Networks" class="headerlink" title="Region Proposal Networks"></a>Region Proposal Networks</h3><ul>
-<li><p>输入：一张任意尺寸的图片</p>
+<li><p>输入：一张<strong>任意尺寸</strong>的图片。</p>
 </li>
-<li><p>输出：一组矩形object proposal</p>
+<li><p>输出：一组矩形object proposal，每个proposal都有一个score。</p>
 </li>
-<li><p>A fully convolutional network</p>
+<li><p>是一个fully convolutional network（<strong>FCN</strong>），由于我们需要在RPN和Fast RCNN之间共享权值，所以我们假设两个网络<strong>共享一组共同的卷积层</strong>。</p>
+</li>
+<li><p>为了生成region proposals，我们在<strong>最后一层共享卷积层</strong>输出的feature map上滑动一个微型网络。这个微型网络将输入的feature map上的nxn的空间窗口作为输入。每一个滑动窗口被映射为一个低维特征(ZF: 256-d, VGG: 512-d, 之后跟着ReLU层)。这些特征然后被送到两个sibling全连接层中——<strong>一个box-regression(reg)层</strong>和<strong>一个box-classification(cls)层。</strong></p>
+</li>
+<li><p>注意：因为微型网络以滑动窗口方式操作，<strong>所以完全连接层在所有空间位置上共享。</strong> 这种结构自然地通过一个n×n卷积层，后面是两个同级<strong>1×1</strong>卷积层（分别用于rpn_reg和rpn_cls）来实现。</p>
 </li>
 <li><p>生成region proposal的思路：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcb3fr2k40j30cq07tt9a.jpg" alt=""></p>
-<p>each sliding window被映射成low-dimensional feature(ZF: 256-d, VGG: 512-d, 之后跟着ReLU层)</p>
+</li>
+<li><p>rpn网络结构定义如下：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fdgik44luaj30pf0di40j.jpg" alt=""></p>
+<p>​</p>
+<p>​</p>
 </li>
 </ul>
 <h4 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h4><ul>
-<li>在每个sliding-window位置，同时预测几个RP，设k为每个位置最大可能的proposal：<ul>
+<li>假设每个位置最大可能的proposal的数量为k，在每个sliding-window位置，同时预测几个RP：<ul>
 <li><em>reg layer</em>：有4k个输出</li>
-<li><em>cls layer</em>：有k个输出</li>
+<li><em>cls layer</em>：有2k个输出，指出该每一个proposal是否是object，<strong>estimate probability of object or not object for each proposal</strong>。</li>
 </ul>
 </li>
 <li>k个proposal相对于k个参考框（reference boxes）而参数化，我们将参考框称为<strong>anchor</strong>。</li>
@@ -507,12 +516,13 @@ RPN-&amp;gt;预测物体">
 <li>The design of multiscale anchors is a <strong>key </strong>component for <strong>sharing features</strong> without extra cost for addressing scales.</li>
 </ul>
 <h4 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h4><ul>
-<li><p>每个anchor有一个二元标签（是物体或者不是）</p>
+<li><p>为了训练RPN，我们给每个anchor设置了一个二元标签（是物体或者不是物体）</p>
 </li>
-<li><p>两类anchor是有<strong>正标签</strong>的：</p>
+<li><p>两类anchor是有<strong>正标签</strong>（is object）的：</p>
 <ul>
-<li>anchor/anchors with highest IoU overlap with a ground-truth box</li>
+<li>anchor/anchors with highest IoU overlap with a ground-truth box。</li>
 <li>an anchor that has IoU overlap higher than 0.7 with any ground-truth box.</li>
+<li>第二种方法更好检测正样本，在第二种情况下如果找不到正样本，那么使用第一种。</li>
 </ul>
 </li>
 <li><p>如果一个anchor和任何ground-truth boxes的IoU值小于0.3，那么该anchor为<strong>负标签</strong></p>
@@ -520,11 +530,19 @@ RPN-&amp;gt;预测物体">
 <li><p>非正非负样本对training objective没有用。</p>
 </li>
 <li><p>Loss Function：</p>
+<p>​</p>
 <p><img src="https://ww3.sinaimg.cn/large/006tKfTcjw1fcbwo1ut3hj309q02hjrj.jpg" alt=""></p>
+<p>$N<em>{cls}=256,N</em>{reg}=256*9=2304,\lambda=10$，这样两个loss就可以权重基本相当了。</p>
 </li>
 <li><p>Bounding box regression</p>
 <p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcbyiywha8j308k0300sy.jpg" alt=""></p>
 <p>这个可以考虑为从anchor box回归到附近的ground truth box。</p>
+</li>
+<li><p>和R-CNN和Fast R-CNN的bounding box regression方法不同的是：</p>
+<ul>
+<li>前两种的回归是在从任意大小RoI中提取的特征进行回归的，所以regression weights在<strong>所有尺寸中共享</strong>。</li>
+<li>在我们的方法中，用于回归的特征都是同一个3x3的空间特征。考虑到变化的尺寸，有k个不同的bounding boxe回归器去学习，每一个回归器负责去学习一个尺寸一个衡重比的anchor。所以k个回归器是<strong>不共享权值的</strong>。所以<strong>得益于anchor的设计，即使特征规定，我们依旧可以去预测不同尺寸的box。</strong></li>
+</ul>
 </li>
 </ul>
 <h4 id="Training-RPNs"><a href="#Training-RPNs" class="headerlink" title="Training RPNs"></a>Training RPNs</h4><ul>
@@ -545,7 +563,12 @@ RPN-&amp;gt;预测物体">
 </li>
 <li><p>Approximate joint training：</p>
 <p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fccbdrnzhij30bd0b1gml.jpg" alt=""></p>
-<p>RPN和Fast R-CNN融合到一个网络中进行训练。不考虑Bounding Boxes。</p>
+<p>RPN和Fast R-CNN融合到一个网络中进行训练。在每次SGD迭代过程中：</p>
+<ul>
+<li>前向传递：RPN产生region proposals，这些proposals被当做固定的、提前计算好的proposal来训练Fast R-CNN检测器。</li>
+<li>反向传递：对于共享层来说，来自RPN的loss和Fast R-CNN的loss结合.</li>
+<li>但是这种方法不考虑Bounding Boxes，忽略了proposal boxes的坐标也是网络的输出。所以这种方法叫做approximate</li>
+</ul>
 </li>
 <li><p>Non-approximate joint training: 考虑Bounding Boxes。</p>
 </li>
@@ -553,7 +576,7 @@ RPN-&amp;gt;预测物体">
 </li>
 <li><p>4-step Alternating Training:</p>
 <ul>
-<li>Step 1: train the RPN, initialized with an ImageNet-pre-trained model and ﬁne-tuned end-to-end for the region proposal task.</li>
+<li>Step 1: train the RPN, initialized with an ImageNet-pre-trained model and <strong>ﬁne-tuned</strong> end-to-end for the region proposal task.</li>
 <li>Step 2: train a separate detection network by Fast R-CNN using the proposals generated by the step-1 RPN. 同样使用ImageNet-pre-trained model来初始化。<strong>此时两个网络并没有共享卷积层。</strong></li>
 <li>Step 3: use the detector network to initialize RPN training but we ﬁx the shared convolutional layers and only ﬁne-tune the layers unique to RPN. <strong>现在两个网络共享卷积层</strong></li>
 <li>Step 4: keeping the shared convolutional layers ﬁxed, we ﬁne-tune the unique layers of Fast R-CNN.</li>

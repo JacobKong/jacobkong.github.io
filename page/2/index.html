@@ -773,7 +773,7 @@
 <li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
 <li>Faster R-CNN引入了<strong>Region Proposal Network（RPN）</strong>来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是<strong>cost free</strong>的。</li>
 <li>RPN-&gt;预测物体边界（object bounds）和在每一位置的分数（objectness score）</li>
-<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——使用“attention”机制。</li>
+<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——<strong>使用“attention”机制。</strong></li>
 <li>300 proposals pre image.</li>
 </ul>
           <!--noindex-->

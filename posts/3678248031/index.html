@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdvwup92g7j302p06e0sp.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcly1fd597p3an8j30vs0en40p.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcly1fd5b12qx4vj30hp00zt8t.jpg">
-<meta property="og:updated_time" content="2017-03-22T12:56:28.000Z">
+<meta property="og:updated_time" content="2017-03-23T04:11:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：R-FCN">
 <meta name="twitter:description" content="Abstract
@@ -476,7 +476,7 @@
 <p>用RPN来提出candidate RoIs，然后这些RoIs被应用到score maps，在RPN和R-FCN之间共享特征。</p>
 <p>给定一个RoI，R-FCN架构对RoI进行分类（分为物体类别或者背景）。所有可学习权值的层都是卷积层，并且是在整张图片上计算得到的权重。<strong>最后卷积层为每个类别产生一个$k^2$个position-sensitive score maps</strong>，因此具有带有C个对象类别（背景为+1）的$k^2(C + 1)$通道的输出层。</p>
 <p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fdvwup92g7j302p06e0sp.jpg" alt=""></p>
-<p><strong>每一个category有一个$k^2$的score map</strong>，对于这里k=3，所以最后RoI pooling层产生$3<em>3</em>(C+1)$维的feature map。</p>
+<p><strong>每一个category有一个$k^2$的score map</strong>，对于这里来说k=3，所以最后RoI pooling层产生3x3x(C+1)维的feature map。</p>
 </li>
 <li><p>RPN以一个position-sensitive RoI pooling layer结束，该层聚合最后卷积层的输出并产生每个RoI的分数。我们的位置敏感的RoI pooling layer进行选择性合并，each of the k × k bin aggregates responses from only one score map out of the bank of k × k score maps。利用端到端训练，这个RoI层管理最后的卷积层以学习专门的position-sensitive score maps。 </p>
 <p><img src="https://ww3.sinaimg.cn/large/006tKfTcly1fd597p3an8j30vs0en40p.jpg" alt=""></p>
@@ -488,18 +488,37 @@
 <li>我们使用ResNet-101，在ImageNet上进行预训练，ResNet-101中的最后一个卷积块是2048-d，并且我们附加随机初始化的1024-d 1×1卷积层以减小尺寸。然后，我们应用$k^2(C + 1)$通道卷积层来生成分数图，如下所述。</li>
 </ul>
 <h3 id="Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling"><a href="#Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling" class="headerlink" title="Position-sensitive score maps &amp; Position-sensitive RoI pooling."></a>Position-sensitive score maps &amp; Position-sensitive RoI pooling.</h3><ul>
-<li>为了将位置信息显式编码到每个RoI中，我们将RoI矩形划分为k x k个bins。</li>
-<li>构造最后的卷积层为每个类别产生的$k^2$个分数图。</li>
-<li>利用average pooling。</li>
-<li>bounding boxes regression。</li>
+<li><p>为了将位置信息显式编码到每个RoI中，我们将RoI矩形划分为k x k个bins。</p>
+</li>
+<li><p>最后的卷积层为每个类别产生的$k^2$个分数图。在第(i, j)个bin内，我们定义了一个位置敏感的RoI池化操作，从而只在第(i, j)个score map上进行池化：</p>
+<script type="math/tex; mode=display">
+r_c(i, j|\theta)=\sum_{(x,y)\in bin(i,j)}{z_{i,j,c}(x+x_0,y+y_0|\theta)/n}</script><ul>
+<li>其中$r_c(i, j)$表示从c-th类别中得到的(i,j)-th bin的池化响应。</li>
+<li>$z_{i,j,c}$是$k^2(C+1)$个score maps中的一个score map。</li>
+<li>$(x_0,y_0)$表示一个RoI的左上角。</li>
+<li>$n$表示这个bin中的像素的数量。</li>
+<li>$\theta$表示这个网络中所有的可学习权重。</li>
+<li>该pooling属于AVE，也可以用MAX。</li>
+</ul>
+</li>
+<li><p>对每个类别k*k的score map进行平均，最后每个RoI得到一个C+1维的向量。然后求loss，它们用于评估训练期间的交叉熵损失和推理期间的RoIs排名。</p>
+</li>
+<li><p>bounding boxes regression。对每个RoI产生一个$4k^2$维的向量。然后通过average voting将其聚合成4维向量。</p>
+</li>
+<li><p>在RoI层之后没有可学习的层次，实现了几乎无成本地区的计算、加速训练和推理。</p>
+</li>
 </ul>
 <h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
-<li><p>OHEM: online hard example mining</p>
+<li><p>利用提前计算好的region proposal，很容易来端到端的R-FCN架构训练。</p>
 </li>
 <li><p>loss function:</p>
 <p><img src="https://ww1.sinaimg.cn/large/006tKfTcly1fd5b12qx4vj30hp00zt8t.jpg" alt=""></p>
 </li>
-<li><p>在前向传播中：每张图片N个proposals。我们计算所有N个proposal的loss，排序，选择最高的B个RoIs。然后在选中的proposal上进行反向传播。</p>
+<li><p>本框架很容易在训练的时候使用online hard example mining (OHEM)。</p>
+<ul>
+<li>我们的per-RoI计算可以进行几乎cost-free的example mining。</li>
+<li>在前向传播中：假设每张图片N个proposals。我们计算所有N个proposal的loss，排序，选择最高的B个RoIs。然后在选中的proposal上进行反向传播。</li>
+</ul>
 </li>
 <li><p>decay：0.0005</p>
 </li>
@@ -519,8 +538,13 @@
 </ul>
 <h3 id="A-trous-and-stride"><a href="#A-trous-and-stride" class="headerlink" title="À trous and stride"></a>À trous and stride</h3><ul>
 <li>将ResNet-10的有效stride从32减为16像素，提高了score map的分辨率。</li>
-<li>Algorithme à trous</li>
+<li>conv4阶段之前（stride=16）的所有层都没有改变。</li>
+<li>第一个conv5块儿的stride从2改为1，并且conv5阶段的卷积核都被改为hole algorithm，（Algorithme à trous）以补偿减少的步幅。</li>
+<li>为了公平比较，RPN在conv4之上进行计算。从而RPN不被à trous影响。</li>
 </ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>R-CNN已经说明了带深度网络的区域候选的有效性。R-CNN计算那些关于裁剪不正常的覆盖区域的卷积网络，并且计算在区域直接是不共享的。SPPnet，Fast R-CNN和Faster R-CNN是半卷积的（semi-convolutional），在卷积子网络中是计算共享的，在另一个子网络是各自计算独立的区域。</p>
+<p>物体检测器可以被认为是全卷积模型。OverFeat 检测物体通过在convolutional feature maps上进行多尺度的窗口滑动。 在某些情况下，可以将单精度的滑动窗口改造成一个单层的卷积层。在Faster R-CNN中的RPN组件是一个全卷积检测器，用来预测是一个关于多尺寸的参考边框的实际边框。原始的RPN是class-agnostic（class无关的）。但是对应的class-specific是可应用的。</p>
+<p>另一个用于物体检测的是fc layer（fully-connected）用来基于整幅图片的完整物体检测。</p>
 
       
     </div>
@@ -770,7 +794,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Our-approach"><span class="nav-number">3.</span> <span class="nav-text">Our approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backbone-architecture"><span class="nav-number">3.1.</span> <span class="nav-text">Backbone architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling"><span class="nav-number">3.2.</span> <span class="nav-text">Position-sensitive score maps & Position-sensitive RoI pooling.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">3.3.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inference"><span class="nav-number">3.4.</span> <span class="nav-text">Inference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-trous-and-stride"><span class="nav-number">3.5.</span> <span class="nav-text">À trous and stride</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Our-approach"><span class="nav-number">3.</span> <span class="nav-text">Our approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Backbone-architecture"><span class="nav-number">3.1.</span> <span class="nav-text">Backbone architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Position-sensitive-score-maps-amp-Position-sensitive-RoI-pooling"><span class="nav-number">3.2.</span> <span class="nav-text">Position-sensitive score maps & Position-sensitive RoI pooling.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">3.3.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inference"><span class="nav-number">3.4.</span> <span class="nav-text">Inference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-trous-and-stride"><span class="nav-number">3.5.</span> <span class="nav-text">À trous and stride</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a></li></ol></div>
             
 
           </div>

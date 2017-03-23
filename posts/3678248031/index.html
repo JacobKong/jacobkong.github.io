@@ -101,8 +101,7 @@
 <meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fd58i0j1icj30ql0dcmzl.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdvwup92g7j302p06e0sp.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcly1fd597p3an8j30vs0en40p.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcly1fd5b12qx4vj30hp00zt8t.jpg">
-<meta property="og:updated_time" content="2017-03-23T04:11:41.000Z">
+<meta property="og:updated_time" content="2017-03-23T04:16:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：R-FCN">
 <meta name="twitter:description" content="Abstract
@@ -512,8 +511,8 @@ r_c(i, j|\theta)=\sum_{(x,y)\in bin(i,j)}{z_{i,j,c}(x+x_0,y+y_0|\theta)/n}</scri
 <li><p>利用提前计算好的region proposal，很容易来端到端的R-FCN架构训练。</p>
 </li>
 <li><p>loss function:</p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcly1fd5b12qx4vj30hp00zt8t.jpg" alt=""></p>
-</li>
+<script type="math/tex; mode=display">
+L(s,t_{x,y,w,h})=L_{cls}(s_{c^*})+\lambda[c^*>0]L_{reg}(t,t^*)</script></li>
 <li><p>本框架很容易在训练的时候使用online hard example mining (OHEM)。</p>
 <ul>
 <li>我们的per-RoI计算可以进行几乎cost-free的example mining。</li>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-24T15:51:12.000Z</updated>
+  <updated>2017-03-24T15:52:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深度学习论文笔记：Deep Residual Learning for Image Recognition.md</title>
+    <title>深度学习论文笔记：Deep Residual Learning for Image Recognition</title>
     <link href="http://yoursite.com/posts/3085218970/"/>
     <id>http://yoursite.com/posts/3085218970/</id>
     <published>2017-03-23T07:51:24.000Z</published>
-    <updated>2017-03-24T15:51:12.000Z</updated>
+    <updated>2017-03-24T15:52:05.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>本文是何凯明大神的有一篇CVPR最佳论文。</li>

@@ -87,27 +87,30 @@
 
 
 <meta name="description" content="Abstract
-本文是何凯明大神的有一篇CVPR最佳论文。
+本文是何凯明大神的又一篇CVPR最佳论文。
 网络越深越难训练，所以我们提出一个residual learning framework从而减轻网络的训练，该网络比以前使用的网络要深得多。
-我们明确地将层参考层的输入来作为学习残差函数，而不是学习未引用的函数。(原话：We explicitly reformulate the layers as learn- ing residual">
+我们明确地将参考层的输入来作为学习残差函数，而不是学习无参考的函数（unreferenced functions）。
+我们提供全面的经验证据，表明这些残留网络更容易优化，并可以从显着增加的深度中获">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习论文笔记：Deep Residual Learning for Image Recognition">
 <meta property="og:url" content="http://yoursite.com/posts/3085218970/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
 <meta property="og:description" content="Abstract
-本文是何凯明大神的有一篇CVPR最佳论文。
+本文是何凯明大神的又一篇CVPR最佳论文。
 网络越深越难训练，所以我们提出一个residual learning framework从而减轻网络的训练，该网络比以前使用的网络要深得多。
-我们明确地将层参考层的输入来作为学习残差函数，而不是学习未引用的函数。(原话：We explicitly reformulate the layers as learn- ing residual">
+我们明确地将参考层的输入来作为学习残差函数，而不是学习无参考的函数（unreferenced functions）。
+我们提供全面的经验证据，表明这些残留网络更容易优化，并可以从显着增加的深度中获">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdyd28cydnj30k706wt99.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdyd3gt5c5j30ki076dgr.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdyd6l6pwhj30kl074my2.jpg">
-<meta property="og:updated_time" content="2017-03-24T15:52:05.000Z">
+<meta property="og:updated_time" content="2017-03-28T08:02:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：Deep Residual Learning for Image Recognition">
 <meta name="twitter:description" content="Abstract
-本文是何凯明大神的有一篇CVPR最佳论文。
+本文是何凯明大神的又一篇CVPR最佳论文。
 网络越深越难训练，所以我们提出一个residual learning framework从而减轻网络的训练，该网络比以前使用的网络要深得多。
-我们明确地将层参考层的输入来作为学习残差函数，而不是学习未引用的函数。(原话：We explicitly reformulate the layers as learn- ing residual">
+我们明确地将参考层的输入来作为学习残差函数，而不是学习无参考的函数（unreferenced functions）。
+我们提供全面的经验证据，表明这些残留网络更容易优化，并可以从显着增加的深度中获">
 <meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fdyd28cydnj30k706wt99.jpg">
 
 
@@ -443,9 +446,9 @@
 
       
         <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文是何凯明大神的有一篇CVPR最佳论文。</li>
+<li>本文是何凯明大神的又一篇CVPR最佳论文。</li>
 <li>网络越深越难训练，所以我们提出一个residual learning framework从而减轻网络的训练，该网络比以前使用的网络要深得多。</li>
-<li>我们明确地将层参考层的输入来作为学习残差函数，而不是学习未引用的函数。(原话：We explicitly reformulate the layers as learn- ing residual functions with reference to the layer inputs, in- stead of learning unreferenced functions.)</li>
+<li>我们明确地将参考层的输入来作为学习残差函数，而不是学习无参考的函数（unreferenced functions）。</li>
 <li>我们提供全面的经验证据，表明这些残留网络更容易优化，并可以从显着增加的深度中获得准确性。</li>
 <li>这些残留网络的集合在ImageNet测试集上达到3.57％的误差。 该结果在ILSVRC 2015分类任务中荣获第一名。</li>
 <li><strong>深度对于许多CV领域的任务都十分重要的。</strong>由于我们网络很深，我们在COCO对象检测数据集上获得了28％的相对改进。我们还荣获了ImageNet检测，ImageNet定位，COCO检测和COCO分割任务的第一名。</li>
@@ -485,6 +488,8 @@
 <li>如果理想化映射更接近于恒等映射，便更容易发现微小波动。</li>
 </ul>
 <p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fdyd6l6pwhj30kl074my2.jpg" alt=""></p>
+</li>
+<li><p>我们假设优化残差映射比优化原始的，无参考映射(unreferenced mapping)更容易。在极端情况下，如果一个identity mapping是最佳的，那么将残差推到零比通过一堆非线性层的identity mapping更容易。</p>
 </li>
 </ul>
 
@@ -530,6 +535,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/2938514597/" rel="prev" title="深度学习论文笔记：DSSD">
+                深度学习论文笔记：DSSD <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -625,7 +634,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

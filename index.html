@@ -436,7 +436,7 @@
         
           <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。</li>
-<li>为实现这一目的：我们通过将<strong>ResNet-101</strong>与<strong>SSD</strong>结合。然后，我们用<strong>deconvolution layers</strong>来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，特别是对于小物体，从而称之为<strong>DSSD</strong>。</li>
+<li>为实现这一目的：我们通过将<strong>ResNet-101</strong>与<strong>SSD</strong>结合。然后，我们用<strong>deconvolution layers</strong>来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，<strong>特别是对于小物体</strong>，从而称之为<strong>DSSD</strong>。</li>
 <li>我们通过仔细的加入额外的<strong>learned transformations阶段</strong>，具体来说是一个用于在deconvolution中前向传递连接的模块，以及一个新的输出模型，使得这个新的方法变得可行，并为之后的研究提供一个潜在的道路。</li>
 <li>我们的DSSD具有513×513的输入，在VOC2007测试中达到81.5％de的mAP，VOC2012测试为80.0％de的mAP，COCO为33.2％的mAP，<strong>在每个数据集上优于最先进的R-FCN</strong> 。</li>
 </ul>

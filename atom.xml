@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-31T14:12:23.000Z</updated>
+  <updated>2017-04-01T02:16:57.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/2938514597/"/>
     <id>http://yoursite.com/posts/2938514597/</id>
     <published>2017-03-31T07:51:24.000Z</published>
-    <updated>2017-03-31T14:12:23.000Z</updated>
+    <updated>2017-04-01T02:16:57.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。</li>
@@ -91,6 +91,22 @@
 <li>我们遵循与SSD相同的训练政策。</li>
 <li>在原始SSD模型中，长宽比为2和3的boxes从实验中证明是有用的。为了了解训练数据（PASCAL VOC 2007和2012年 trainval）中边界框的纵横比，我们以training box运行K-means聚类，以方格平方根为特征。我们从两个集群开始，如果错误可以提高20％以上，就会增加集群的数量。经过试验因此，我们决定在每个预测层添加一个宽高比1.6，并使用（1.6, 2.0, 3.0）。</li>
 </ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li>PASCAL VOC2007 test detection results.</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe6ykpyluhj30s30bgwlo.jpg" alt=""></p>
+<ul>
+<li>PASCAL 2012 test detection results.</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6yl98p6tj30rp080dka.jpg" alt=""></p>
+<ul>
+<li>COCO test-dev2015 detection results.</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6ylysfswj30s809ldjq.jpg" alt=""></p>
+<ul>
+<li>Comparison of Speed &amp; Accuracy on PASCAL VOC2007 test.</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fe6ymnt5vsj30rp0cnn1k.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">

@@ -102,7 +102,11 @@
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cpqgt1rj311z0gxtbt.jpg">
 <meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe6cyu3qi7j311j0f9aca.jpg">
 <meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6d85jld2j30ht0g9wfq.jpg">
-<meta property="og:updated_time" content="2017-03-31T14:12:23.000Z">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe6ykpyluhj30s30bgwlo.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6yl98p6tj30rp080dka.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6ylysfswj30s809ldjq.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6ymnt5vsj30rp0cnn1k.jpg">
+<meta property="og:updated_time" content="2017-04-01T02:16:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习论文笔记：DSSD">
 <meta name="twitter:description" content="Abstract
@@ -512,6 +516,22 @@
 <li>我们遵循与SSD相同的训练政策。</li>
 <li>在原始SSD模型中，长宽比为2和3的boxes从实验中证明是有用的。为了了解训练数据（PASCAL VOC 2007和2012年 trainval）中边界框的纵横比，我们以training box运行K-means聚类，以方格平方根为特征。我们从两个集群开始，如果错误可以提高20％以上，就会增加集群的数量。经过试验因此，我们决定在每个预测层添加一个宽高比1.6，并使用（1.6, 2.0, 3.0）。</li>
 </ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li>PASCAL VOC2007 test detection results.</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe6ykpyluhj30s30bgwlo.jpg" alt=""></p>
+<ul>
+<li>PASCAL 2012 test detection results.</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6yl98p6tj30rp080dka.jpg" alt=""></p>
+<ul>
+<li>COCO test-dev2015 detection results.</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6ylysfswj30s809ldjq.jpg" alt=""></p>
+<ul>
+<li>Comparison of Speed &amp; Accuracy on PASCAL VOC2007 test.</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fe6ymnt5vsj30rp0cnn1k.jpg" alt=""></p>
 
       
     </div>
@@ -761,7 +781,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-DSSD-model-Single-Shot-Detection"><span class="nav-number">3.1.</span> <span class="nav-text">Deconvolutional (DSSD) model Single Shot Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">3.2.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Residual-101-in-place-of-VGG"><span class="nav-number">3.3.</span> <span class="nav-text">Using Residual-101 in place of VGG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prediction-module"><span class="nav-number">3.4.</span> <span class="nav-text">prediction module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-SSD"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolutional SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution-Module"><span class="nav-number">3.6.</span> <span class="nav-text">Deconvolution Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traning"><span class="nav-number">3.7.</span> <span class="nav-text">Traning</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-DSSD-model-Single-Shot-Detection"><span class="nav-number">3.1.</span> <span class="nav-text">Deconvolutional (DSSD) model Single Shot Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">3.2.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Residual-101-in-place-of-VGG"><span class="nav-number">3.3.</span> <span class="nav-text">Using Residual-101 in place of VGG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prediction-module"><span class="nav-number">3.4.</span> <span class="nav-text">prediction module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-SSD"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolutional SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution-Module"><span class="nav-number">3.6.</span> <span class="nav-text">Deconvolution Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traning"><span class="nav-number">3.7.</span> <span class="nav-text">Traning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">4.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
             
 
           </div>

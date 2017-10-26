@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-26T13:44:03.132Z</updated>
+  <updated>2017-10-26T14:08:41.657Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,18 +20,31 @@
     <link href="http://yoursite.com/posts/2938514597/"/>
     <id>http://yoursite.com/posts/2938514597/</id>
     <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-10-26T13:44:03.132Z</updated>
+    <updated>2017-10-26T14:08:41.657Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li><a id="more"></a>
+<li>本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过<strong>有限的训练样本来</strong>学习这些模型。</li>
+<li>贡献<ul>
+<li>第一个贡献：TSN网络，一个新的基于视频的动作识别框架，其基于远程时间结构建模的思想，结合了<strong>稀疏的时间采样策略</strong>和<strong>视频级别（Video-level）监督</strong>，以使用整个动作视频实现有效地学习。</li>
+<li>第二个贡献：在时间段网络的帮助下，研究一系列的视频数据ConvNets的良好实践。本文的方法在HMDB51（69.4％）和UCF101（94.2％）的数据集上获得了最先进的表现。</li>
+<li>本文观察学习到的ConvNet模型，从而定性地展示了时间段网络的有效性并提出了良好实践。</li>
+</ul>
 </li>
 </ul>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>]]></content>
     
     <summary type="html">
     
       &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;
+&lt;li&gt;本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过&lt;strong&gt;有限的训练样本来&lt;/strong&gt;学习这些模型。&lt;/li&gt;
+&lt;li&gt;贡献&lt;ul&gt;
+&lt;li&gt;第一个贡献：TSN网络，一个新的基于视频的动作识别框架，其基于远程时间结构建模的思想，结合了&lt;strong&gt;稀疏的时间采样策略&lt;/strong&gt;和&lt;strong&gt;视频级别（Video-level）监督&lt;/strong&gt;，以使用整个动作视频实现有效地学习。&lt;/li&gt;
+&lt;li&gt;第二个贡献：在时间段网络的帮助下，研究一系列的视频数据ConvNets的良好实践。本文的方法在HMDB51（69.4％）和UCF101（94.2％）的数据集上获得了最先进的表现。&lt;/li&gt;
+&lt;li&gt;本文观察学习到的ConvNet模型，从而定性地展示了时间段网络的有效性并提出了良好实践。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
+  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
 
 
 
@@ -86,36 +86,15 @@
 
 
 
-<meta name="description" content="Abstract
-之前的物体检测的方法是使用分类器来进行检测。
-相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
-本论文的YOLO模型能达到45fps的实时图像处理效果。
-Fast YOLO：小型的网络版本，可达到155fps。
-与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深度学习论文笔记：YOLO">
-<meta property="og:url" content="http://yoursite.com/posts/2094641206/index.html">
+<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JacobKong's Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="Abstract
-之前的物体检测的方法是使用分类器来进行检测。
-相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
-本论文的YOLO模型能达到45fps的实时图像处理效果。
-Fast YOLO：小型的网络版本，可达到155fps。
-与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg">
-<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg">
-<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcgkv58b9lj30oc0aota4.jpg">
-<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgy1fch1eth6atj30do08hdgg.jpg">
-<meta property="og:updated_time" content="2017-02-08T03:57:58.000Z">
+<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习论文笔记：YOLO">
-<meta name="twitter:description" content="Abstract
-之前的物体检测的方法是使用分类器来进行检测。
-相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。
-本论文的YOLO模型能达到45fps的实时图像处理效果。
-Fast YOLO：小型的网络版本，可达到155fps。
-与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。">
-<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg">
+<meta name="twitter:title" content="JacobKong's Blog">
+<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|深度学习|行人检测。 欢迎大家一块儿交流！">
 
 
 
@@ -143,13 +122,13 @@ Fast YOLO：小型的网络版本，可达到155fps。
 
 
 
-  <link rel="canonical" href="http://yoursite.com/posts/2094641206/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2017/10/"/>
 
 
 
 
 
-  <title> 深度学习论文笔记：YOLO | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 归档 | JacobKong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -189,7 +168,7 @@ Fast YOLO：小型的网络版本，可达到155fps。
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -321,357 +300,73 @@ Fast YOLO：小型的网络版本，可达到155fps。
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2094641206/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jacob Kong">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 25 篇日志。 继续努力。
     </span>
-  </span>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                深度学习论文笔记：YOLO
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-02T19:49:53+08:00">
-                2017-02-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/2094641206/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/2094641206/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/posts/2094641206/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：YOLO">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
 
       
       
-
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>之前的物体检测的方法是使用分类器来进行检测。</li>
-<li>相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。</li>
-<li>本论文的YOLO模型能达到45fps的实时图像处理效果。</li>
-<li>Fast YOLO：小型的网络版本，可达到155fps。</li>
-<li>与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。</li>
-</ul>
-<a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li><p>DPM: use a sliding window approach where the classiﬁer is run at evenly spaced locations over the entire image.</p>
-</li>
-<li><p>R-CNN: use region proposal methods to ﬁrst generate potential bounding boxes in an image and then run a classiﬁer on these proposed boxes. 具有<strong>slow</strong>和<strong>hard to optimize</strong>的缺点。</p>
-</li>
-<li><p>本论文将目标检测问题重新组织成<strong>single regression problem</strong>. 从图像像素转为<strong>bounding box coordinates</strong>和<strong>class probabilities</strong>.</p>
-</li>
-<li><p>YOLO框架：</p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1fcfslf8g7bj30bs06b756.jpg" alt=""></p>
-<ul>
-<li>A <strong>single convolutional network</strong> simultaneously predicts multiple bounding boxes and class probabilities for those boxes.</li>
-<li>YOLO trains on full images and directly optimizes detection performance.</li>
-</ul>
-</li>
-<li><p>YOLO模型的优势：</p>
-<ul>
-<li>First, YOLO is extremely <strong>fast</strong>.<ul>
-<li>regression problem.</li>
-<li>no batch processing on a Titan X.</li>
-</ul>
-</li>
-<li>Second, YOLO reasons globally about the image when making predictions.<ul>
-<li>YOLO makes <strong>less than half</strong> the number of background errors compared to Fast R-CNN.</li>
-</ul>
-</li>
-<li>Third, YOLO learns <strong>generalizable representations</strong> of objects.</li>
-</ul>
-</li>
-<li><p>YOLO在准确性方面依旧落后与其他先进的检测系统，但是可以快速的标注图片中的物体，特别是小物体。</p>
-</li>
-</ul>
-<h2 id="Unified-Detection"><a href="#Unified-Detection" class="headerlink" title="Unified Detection"></a>Unified Detection</h2><ul>
-<li><p>本论文将物体检测中单独的组件统一到一个单一的神经网络中。网络利用整个图像的各个特征来预测每一个BB。而且同时为一张图片中所有的类预测所用的BB。</p>
-</li>
-<li><p>YOLO可以<strong>end-to-end</strong>来训练，而且能在保持高平均准确率的同时达到<strong>实时要求</strong>。</p>
-</li>
-<li><p>系统将输入图片分为$S*S$的网格单元。如果物体的中心落入某个格子，那么这个格子将会用来检测这个物体。</p>
-</li>
-<li><p>每个网格单元会预测<strong>B</strong>个bounding box以及这些框的置信值。</p>
-</li>
-<li><p>每个bounding box会有5个预测值：$x,y,w,h$和置信值confidence，$confidence = Pr(Object)*IOU^{truth}_{pred}$.</p>
-</li>
-<li><p>每个网格单元也预测<strong>C</strong>个条件类概率，$Pr(Class_i|Object)$，<strong>在一个网格单元包含一个物体的前提下，它属于某个类的概率</strong>。我们只为每个网格单元预测一组类概率，而不考虑框B的数量。</p>
-</li>
-<li><p>在测试的时候，通过如下公式来给出对某一个box来说某一类的confidence score：</p>
-<script type="math/tex; mode=display">
-Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pred}</script></li>
-<li><p>Model示例：</p>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcgkqg2fdyj309608lgmg.jpg" alt=""></p>
-<p>每个grid cell预测B个bounding boxes，每个框的confidence和C个类概率。</p>
-</li>
-</ul>
-<h3 id="Network-Design"><a href="#Network-Design" class="headerlink" title="Network Design"></a>Network Design</h3><ul>
-<li><p>YOLO网络结构图：</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fcgkv58b9lj30oc0aota4.jpg" alt=""></p>
-</li>
-<li><p>起初的<strong>卷积层</strong>用来从图像中提取特征。</p>
-</li>
-<li><p>全连接层用来预测输出的概率和坐标。</p>
-</li>
-<li><p>24个卷积层，之后跟着2个全连接层</p>
-</li>
-<li><p>最终输出是7 x 7 x 30的张量。</p>
-</li>
-<li><p>Fast YOLO和YOLO之间所有的训练和测试参数一样。</p>
-</li>
-<li><p>在ImageNet上进行卷积层的预训练。</p>
-</li>
-</ul>
-<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
-<li><p>在ImageNet上预训练卷积层。预训练前20层卷积层，之后跟随者一个average-pooling layer和一个fully connected layer.</p>
-</li>
-<li><p>将预训练的模型用来检测，<strong>论文Ren et al.显示给与训练好的模型添加卷积和连接层能够提高性能。</strong>所以添加了<strong>额外的4个卷积层和2个全连接层</strong>，其权值随机初始化。</p>
-</li>
-<li><p>将像素从224x224提升到448x448。</p>
-</li>
-<li><p>最后一层同时预测class probabilities和bounding box coordinates. 其中涉及到BB的长宽规范化。</p>
-</li>
-<li><p>由于sum-squared error的缺点，增加边界框坐标预测的损失，并减少对不包含对象的框的置信度预测的损失。</p>
-</li>
-<li><p>large boxes中的偏差matter less than 与small boxes中的偏差。</p>
-</li>
-<li><p>YOLO为每一个网格单元预测多个BB，但是在测试期间，我们只想每一个物体有一个BB预测框来做响应，我们选择具有最高IOU的BB来作为响应框。</p>
-</li>
-<li><p>总的<strong>loss function</strong>:</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1fch1eth6atj30do08hdgg.jpg" alt=""></p>
-</li>
-<li><p>135 epochs</p>
-</li>
-<li><p>batch size：64</p>
-</li>
-<li><p>动量：0.9</p>
-</li>
-<li><p>decay：0.0005</p>
-</li>
-<li><p>为防止过拟合，我们使用dropout和extensive data augmentation技术。</p>
-</li>
-</ul>
-<h3 id="Inference"><a href="#Inference" class="headerlink" title="Inference"></a>Inference</h3><ul>
-<li>在测试图像中预测检测只需要一个网络评估，与一般的classifier-based methods不同。</li>
-<li>Non-maximal suppression可以用来修复multiple detections。</li>
-</ul>
-<h2 id="Comparison-to-Other-Detection-Systems"><a href="#Comparison-to-Other-Detection-Systems" class="headerlink" title="Comparison to Other Detection Systems"></a>Comparison to Other Detection Systems</h2><ul>
-<li>检测流水线往往开始于提取健壮特征集（Haar, SIFT, HOG, convolutional features）,然后分类器或者定位器用来识别特征空间的物体，这些分类器或者定位器往往在整个图像上或者在图像的子区域中滑动窗口。</li>
-<li>与DPM的比较。</li>
-<li>与R-CNN的比较。每个图片值预测98个bounding boxes。</li>
-<li>与其他快速检测器的比较。相比于单类检测器，YOLO可以同时检测多种物体。</li>
-<li>与Deep MultiBox的比较。YOLO是一个完整的检测系统。</li>
-<li>与OverFeat的比较。OverFeat是一个disjoint的系统，OverFeat优化定位，而非检测性能。需要大量的后处理。</li>
-<li>与MultiGrasp的比较。执行比目标检测更简单的任务。</li>
-</ul>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
-      
-    </div>
 
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
-          
-            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
-          
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-          
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
         </div>
       
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/posts/4113466123/" rel="next" title="深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口">
-                <i class="fa fa-chevron-left"></i> 深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/2102833929/" rel="prev" title="深度学习论文笔记：YOLO9000">
-                深度学习论文笔记：YOLO9000 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/posts/2938514597/" itemprop="url">
+              
+                <span itemprop="name">Temporal Segment Networks</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-10-24T15:51:24+08:00"
+              content="2017-10-24" >
+          10-24
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="posts/2094641206/"
-     data-title="深度学习论文笔记：YOLO"
-     data-content=""
-     data-url="http://yoursite.com/posts/2094641206/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
+    
 
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+  </section>
 
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
-    </div>
-  </div>
+  
+
 
           
           </div>
           
 
-  <p>热评文章</p>
-  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
-
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="posts/2094641206/"
-           data-title="深度学习论文笔记：YOLO" data-url="http://yoursite.com/posts/2094641206/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -691,17 +386,8 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -812,22 +498,6 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unified-Detection"><span class="nav-number">3.</span> <span class="nav-text">Unified Detection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-Design"><span class="nav-number">3.1.</span> <span class="nav-text">Network Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training"><span class="nav-number">3.2.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inference"><span class="nav-number">3.3.</span> <span class="nav-text">Inference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparison-to-Other-Detection-Systems"><span class="nav-number">4.</span> <span class="nav-text">Comparison to Other Detection Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
     </div>
   </aside>
@@ -933,9 +603,11 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   

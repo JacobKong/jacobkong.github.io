@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-29T08:31:51.131Z</updated>
+  <updated>2017-11-29T08:35:28.103Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/posts/679115823/"/>
     <id>http://yoursite.com/posts/679115823/</id>
     <published>2017-11-25T07:51:24.000Z</published>
-    <updated>2017-11-29T08:31:51.131Z</updated>
+    <updated>2017-11-29T08:35:28.103Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
@@ -34,6 +34,9 @@
 <li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
 </ul>
 </li>
+</ul>
+<a id="more"></a>
+<ul>
 <li><h4 id="Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies"><a href="#Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies" class="headerlink" title="Tracking The Untrackable: Learning to Track Multiple Cues with Long-Term Dependencies"></a>Tracking The Untrackable: Learning to Track Multiple Cues with <strong>Long-Term Dependencies</strong></h4><ul>
 <li>Combine cues in a coherent end-to-end fashion over a <strong>long period of time.</strong></li>
 <li>Present a structure of Recurrent Neural Networks (RNN) that jointly reasons on multiple cues over a temporal window.</li>
@@ -256,7 +259,19 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Visual-object-tracking&quot;&gt;&lt;a href=&quot;#Visual-object-tracking&quot; class=&quot;headerlink&quot; title=&quot;Visual object tracking&quot;&gt;&lt;/a&gt;Visual object tracki
+      &lt;h2 id=&quot;Visual-object-tracking&quot;&gt;&lt;a href=&quot;#Visual-object-tracking&quot; class=&quot;headerlink&quot; title=&quot;Visual object tracking&quot;&gt;&lt;/a&gt;Visual object tracking&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;h4 id=&quot;Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades&quot;&gt;&lt;a href=&quot;#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades&quot; class=&quot;headerlink&quot; title=&quot;Learning Policies for Adaptive Tracking with Deep Feature Cascades&quot;&gt;&lt;/a&gt;Learning Policies for Adaptive Tracking with Deep Feature Cascades&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.&lt;/li&gt;
+&lt;li&gt;Formulate the adaptive tracking problem as a decision-making process.&lt;/li&gt;
+&lt;li&gt;Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.&lt;/li&gt;
+&lt;li&gt;Signiﬁcantly reduces the feedforward cost.&lt;/li&gt;
+&lt;li&gt;Train the agent ofﬂine in a reinforcement learning fashion.&lt;/li&gt;
+&lt;li&gt;Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.&lt;/li&gt;
+&lt;li&gt;However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.&lt;/li&gt;
+&lt;li&gt;The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -276,9 +291,10 @@
     <link href="http://yoursite.com/posts/679115822/"/>
     <id>http://yoursite.com/posts/679115822/</id>
     <published>2017-11-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:31:51.129Z</updated>
+    <updated>2017-11-29T08:35:37.075Z</updated>
     
     <content type="html"><![CDATA[<p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
+<a id="more"></a>
 <p>虽然近年来图像表示体系结构的发展已经迅速成熟，但视频的前端运行架构仍然不够清晰。当前视频体系结构中的一些主要差异在于convolutional and layers operators是使用2D（基于图像的）还是3D（基于视频的）kernels; 无论网络输入是RGB视频或者还是包含预先计算的光流，在2D ConvNets的情况下，对于信息如何跨帧传播，这可以通过使用诸如LSTM之类的temporally-recurrent layers或者随着时间的推移进行特征聚合来完成。</p>
 <p>图1显示了我们评估的五种体系结构的图形概述。<br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg" alt="图 1. 各种视频架构。其中K表示一个视频中全部的帧数，N表示一段视频相邻帧子集"></p>
 <h3 id="模型1：ConvNet-LSTM"><a href="#模型1：ConvNet-LSTM" class="headerlink" title="模型1：ConvNet+LSTM"></a>模型1：ConvNet+LSTM</h3><p>图像分类网络的高性能使得我们尝试只需很少的改变就能将其重用于视频中。 通过使用它们针对每个独立帧提取特征，然后集中在整个视频中来提取预测结果来实现这一目标。 这是bag of words图像建模方法的精神; 但是在实践中使用方便的同时，还存在完全忽略时间结构的问题（例如，模型不能很好的区分开门和关门）。</p>
@@ -295,7 +311,6 @@
     <summary type="html">
     
       &lt;p&gt;本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。&lt;/p&gt;
-&lt;
     
     </summary>
     
@@ -305,45 +320,6 @@
       <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
     
       <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-    <link href="http://yoursite.com/posts/1774603577/"/>
-    <id>http://yoursite.com/posts/1774603577/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:31:51.126Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。</li>
-<li><a id="more"></a>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。&lt;/li&gt;
-&lt;li&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://yoursite.com/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
     
       <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
     
@@ -356,7 +332,7 @@
     <link href="http://yoursite.com/posts/3872446965/"/>
     <id>http://yoursite.com/posts/3872446965/</id>
     <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:32:29.116Z</updated>
+    <updated>2017-11-29T08:32:44.769Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过<strong>有限的训练样本来</strong>学习这些模型。</li>
@@ -389,6 +365,43 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Detection" scheme="http://yoursite.com/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
+    <link href="http://yoursite.com/posts/1774603577/"/>
+    <id>http://yoursite.com/posts/1774603577/</id>
+    <published>2017-10-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:35:16.762Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
     
     </summary>
     
@@ -1469,7 +1482,7 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     <link href="http://yoursite.com/posts/2093106769/"/>
     <id>http://yoursite.com/posts/2093106769/</id>
     <published>2017-01-15T22:32:24.000Z</published>
-    <updated>2017-02-28T02:22:50.000Z</updated>
+    <updated>2017-02-28T06:55:04.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
@@ -2459,56 +2472,245 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
   </entry>
   
   <entry>
-    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-    <link href="http://yoursite.com/posts/285415955/"/>
-    <id>http://yoursite.com/posts/285415955/</id>
+    <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
+    <link href="http://yoursite.com/posts/2903903730/"/>
+    <id>http://yoursite.com/posts/2903903730/</id>
     <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T08:13:25.000Z</updated>
+    <updated>2017-01-28T07:37:22.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
-<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
-<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
-<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
-<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
-<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
-<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
-<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
-<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
-<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
-<ul>
-<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
-<li>MultiSDP uses HOG+CSS features as input.</li>
-<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
+    <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>傅里叶变换的一个推论：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg" alt=""></li>
 </ul>
+<p>一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。</p>
+<ul>
+<li><p>卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg" alt=""><br>整个过程的核心就是“（反转），移动，乘积，求和”</p>
 </li>
 </ul>
 <a id="more"></a>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
-<li>Caltech</li>
-<li>Caltech validation set</li>
-<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
-<li>KITTI</li>
-<li>ImageNet, Places</li>
+<ul>
+<li><p>二维卷积</p>
+<ul>
+<li><p>数学定义<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru5ml16j30f901kdfv.jpg" alt=""></p>
+<p>二维卷积在图像处理中会经常遇到，图像处理中用到的大多是二维卷积的离散形式：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfrum5q4ej30cv01o74a.jpg" alt=""></p>
+</li>
+<li>图像处理中的二维卷积，二维卷积就是一维卷积的扩展，原理差不多。核心还是（反转），移动，乘积，求和。这里二维的反转就是将卷积核沿反对角线翻转，比如：<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru4uj25j307m02wjrd.jpg" alt=""><br>之后，卷积核在二维平面上平移，并且卷积核的每个元素与被卷积图像对应位置相乘，再求和。通过卷积核的不断移动，我们就有了一个新的图像， <strong>这个图像完全由卷积核在各个位置时的乘积求和的结果组成。</strong></li>
 </ul>
-<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
+</li>
+<li><p>巴拿赫空间：更精确地说，巴拿赫空间是一个具有范数并对此范数完备的向量空间。</p>
+</li>
+<li><p>许多在数学分析中学到的无限维函数空间都是巴拿赫空间。</p>
+</li>
+<li><p>巴拿赫空间有两种常见的类型：“实巴拿赫空间”及“复巴拿赫空间”，分别是指将巴拿赫空间的向量空间定义于由实数或复数组成的域之上。</p>
+</li>
+<li><p>Overcomplete：</p>
+<ul>
+<li>对于Banach space X中的一个子集，如果X中的每一个元素都可以利用子集中的元素在范数内进行有限线性组合来良好近似，则该系统X是完备Complete的。</li>
+<li>该完备系统是过完备（Overcomplete）的，如果从子集中移去一个元素，该系统依旧是完备的，则该系统称为过完备的。</li>
+<li>在不同的研究中，比如信号处理和功能近似，过完备可以帮助研究人员达到一个更稳定、更健壮，或者相比于使用基向量更紧凑的分解。</li>
+<li>如果 # (basis vector基向量)&gt;输入的维度，则我们有一个overcomplete representation.</li>
+</ul>
+</li>
+<li><p>ROC曲线：在信号检测理论中，接收者操作特征曲线（receiver operating characteristic curve，或者叫ROC曲线）是一种坐标图式的分析工具，用于</p>
+<ul>
+<li>(1) 选择最佳的信号侦测模型、舍弃次佳的模型。</li>
+<li>(2) 在同一模型中设定最佳阈值。</li>
+<li>从 (0, 0) 到 (1,1) 的对角线将ROC空间划分为左上／右下两个区域，在这条线的 <strong>以上的点</strong> 代表了一个 <strong>好</strong> 的分类结果（胜过随机分类），而在这条线 <strong>以下的点</strong> 代表了 <strong>差</strong> 的分类结果（劣于随机分类）。</li>
+<li>完美的预测是一个在左上角的点.</li>
+<li>曲线下面积（AUC）：ROC曲线下方的面积，若随机抽取一个阳性样本和一个阴性样本，分类器正确判断阳性样本的值高于阴性样本之机率=AUC。简单说：AUC值越大的分类器，正确率越高。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>介绍一个脸部检测框架。</li>
+<li>三个贡献：</li>
+<li>引入新图像表示——称为“积分图像”，其允许我们的检测器非常快速地计算所使用的特征。</li>
+<li>提出一个利用AdaBost学习算法构建的简单有效的分类器，来从极大潜在特征集中选出很少的关键视觉特征。</li>
+<li>在级联中组合分类器，从而快速丢弃图像的背景区域，同时在有可能的面部区域上花费更多的计算。</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><p>Haar Basis 函数：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfru9jaxij308q05st8t.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrucbw2pj30fn07kaaj.jpg" alt=""></p>
+</li>
+<li><p>Integral image: 类似于计算机图形学中利用求和区域表来进行纹理映射。</p>
+</li>
+<li><p>Haar-like features：就是mount两个或多个区域的像素值之和的差值。</p>
+</li>
+<li>AdaBoost：自适应增强， 具体说来，整个Adaboost 迭代算法就3步：</li>
+<li>初始化训练数据的权值分布。如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：1/N。</li>
+<li>训练弱分类器。具体训练过程中，如果某个样本点已经被准确地分类，那么在构造下一个训练集中，它的权值就被降低；相反，如果某个样本点没有被准确地分类，那么它的权值就得到提高。然后，权值更新过的样本集被用于训练下一个分类器，整个训练过程如此迭代地进行下去。</li>
+<li>将各个训练得到的弱分类器组合成强分类器。各个弱分类器的训练过程结束后，加大分类误差率小的弱分类器的权重，使其在最终的分类函数中起着较大的决定作用，而降低分类误差率大的弱分类器的权重，使其在最终的分类函数中起着较小的决定作用。换言之，误差率低的弱分类器在最终分类器中占的权重较大，否则较小。</li>
+<li>级联检测过程的结构基本上是简并决策树的结构</li>
+</ul>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>基于特征的系统操作肯定比一个基于像素的系统更更快</li>
+<li>（Two-rectangle feature）两矩形特征的值是两个矩形区域内的像素之和的差</li>
+<li>(Three-rectangle feature)三矩形特征计算从中心矩形中的和减去的两个外部矩形的和。</li>
+<li>(Four-rectangle feature)四矩形特征计算矩形对角线对之间的差异。<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrul9r26j30aw09ydg6.jpg" alt=""></li>
+</ul>
+<p>矩阵特征=从灰色矩形中的像素的和中减去位于白色矩形内的像素的和。</p>
+<h3 id="Integral-Image"><a href="#Integral-Image" class="headerlink" title="Integral Image"></a>Integral Image</h3><ul>
+<li><p>矩阵特征可以通过图像的中间表示来快速计算，从而成为Integral Image.</p>
+</li>
+<li><p>积分图的每一点（x, y）的值是原图中对应位置的左上角区域的所有值得和。</p>
+</li>
+<li><p>积分图每一点的（x, y）值是：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrujq2ygj30f601g749.jpg" alt=""></p>
+</li>
+<li><p>位置x，y处的积分图像包含x，y（包括端点）上方和左侧的像素的和:<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruhirv4j309d021t8p.jpg" alt=""></p>
+</li>
+</ul>
+<p>ii(x, y) is the integral image</p>
+<p>i(x, y) is the original image<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfru76drdj30au02gwem.jpg" alt=""></p>
+<p>s（x，y）是累积行和</p>
+<p>s(x, −1) = 0, ii(−1, y) = 0)</p>
+<p>积分图可以只遍历一次图像即可有效的计算出来</p>
+<ul>
+<li><p>使用积分图像，可以在四个阵列参考中计算任何矩形和。<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru8nyo9j30c8096jrh.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruav2urj30d602jwej.jpg" alt=""></p>
+</li>
+<li><p>Two-rectangle feature：需要6个阵列参考<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrughx0aj30ga0gr408.jpg" alt=""></p>
+</li>
+<li><p>Three-rectangle feature：需要8个阵列参考</p>
+</li>
+<li><p>Four-rectangle feature：需要9个阵列参考</p>
+</li>
+<li><p>在线性运算（例如f.g）的情况下，如果其逆被应用于结果，则任何可逆线性算子可以应用于f或g。</p>
+</li>
+<li><p>例如在卷积的情况下，如果导数运算符被应用于图像和卷积核，则结果必须被双重积分.<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru56d7dj307g01ra9z.jpg" alt=""></p>
+</li>
+<li><p>如果f和g的导数稀疏（或可以这样做），卷积可以显着加速。</p>
+</li>
+<li><p>类似的一个认识是：如果其逆被应用于g，则一个可逆线性算子可以应用于f。<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru68n1lj307x01tdfs.jpg" alt=""></p>
+</li>
+<li><p>在该框架中观察，矩形和的计算可以表示为点积i·r，其中i是图像，r是box car图像（在感兴趣的矩形内的值为1，外面是0）。 此操作可以重写：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfrufk96vj306c02gwee.jpg" alt=""></p>
+</li>
+</ul>
+<p>积分图像实际上是图像的二重积分（首先沿行，然后沿列）。</p>
+<ul>
+<li>矩形的二阶导数（第一行在行中，然后在列中）在矩形的角处产生四个delta函数。 第二点积的评估通过四个阵列访问来完成。</li>
+</ul>
+<h3 id="Feature-Discussion"><a href="#Feature-Discussion" class="headerlink" title="Feature Discussion"></a>Feature Discussion</h3><ul>
+<li>与可操纵滤波器（Steerable filters）等替代方案相比，矩形特性有点原始。</li>
+<li>可控滤波器对边界的详细分析，图像压缩和纹理分析的非常有用。</li>
+<li>由于正交性不是这个特征集的中心，我们选择生成一个非常大而且各种各样的矩形特征集。</li>
+<li>从经验上看，似乎矩形特征集提供了丰富的图像表示，能支持有效的学习。</li>
+<li>为了利用积分图像技术的计算有事，考虑用更常规的方法去计算图像金字塔。</li>
+<li>像大多数面部检测系统一样，我们的检测器在许多尺度扫描输入; 从以尺寸为24×24像素检测面部的基本刻度开始，在12个刻度以大于上一个的1.25倍的因子扫描384×288像素的图像。</li>
+</ul>
+<h2 id="Learning-Classification-Functions"><a href="#Learning-Classification-Functions" class="headerlink" title="Learning Classification Functions"></a>Learning Classification Functions</h2><ul>
+<li>给定检测器的基本分辨率是24×24，矩形特征的穷尽集是相当大的，160000.</li>
+<li>我们的假设是，由实验证明，非常少数的矩形特征可以组合形成一个有效的分类器。 <strong>主要的挑战是找到这些功能。</strong></li>
+<li>Adaboost：将多个弱分类器组合成一个强分类器。（一个简单学习算法叫做weak learner）。</li>
+<li>传统的的AdaBoost过程可以容易地解释为贪心特征选择过程。</li>
+<li>一个 <strong>挑战</strong> 是将大的权重与每个良好的分类函数相关联，并将较小的权重与较差的函数相关联。</li>
+<li>AdaBoost是一个用于搜索少数具有显着品种的良好“特征”的有效程序。</li>
+<li>将一个weak learn限制到分类函数几何中，每一个函数都只依赖于一个单一的特征。</li>
+<li>若学习宣发选择单一的能够最好分开正和负样本的矩形特征。</li>
+<li>对于每一个特征，weak learner决定最优分类函数阈值，从而可以使得最少数目的样本被错分。</li>
+<li>一个弱分类器h(x, f, p, θ)因此包含一个特征f，一个阈值θ，一个显示不等式方向的极性p：<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruf310ij30ai01odfv.jpg" alt=""></li>
+</ul>
+<p>这里x是一个图片24*24像素的子窗口。</p>
+<ul>
+<li>我们使用的弱分类器（阈值单一特征）可以被视为单节点决策树。</li>
+<li><strong>Boosting 算法</strong> ：T是利用每个单个特征构造的假设，最终假设是T个假设的加权线性组合，其中权重与训练误差成反比。</li>
+</ul>
+<ol>
+<li>给定样本图片(x1, y1), (x2, y2), …, (xn, yn)。其中yi=0, 1分别为负样本和正样本。</li>
+<li>初始化权值w1, i=1/(2m), 1/(2l)分别当yi=0, 1。其中m和l分别是负样本和正样本的数量。</li>
+<li><p>For t=1, …, T:</p>
+</li>
+<li><p>归一化权重,<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrucsnrpj305e01bgli.jpg" alt=""></p>
+</li>
+<li><p>根据加权错误选择最佳弱分类器：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruidyr6j30cx01zgln.jpg" alt=""></p>
+</li>
+<li><p>定义 ht(x) = h(x, ft, pt,θt) 其中ft, pt, 和 θt 是εt的最小值.</p>
+</li>
+<li><p>更新权值：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruadstnj306101c0sm.jpg" alt=""><br>其中ei=0当样例xi被正确的分类，否则ei=1，并且<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruklba8j303c017mx0.jpg" alt=""></p>
+</li>
+<li><p>最后的强分类器是：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru83b9xj30c104xjrk.jpg" alt=""><br>其中<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru6hdsij303t0160sl.jpg" alt=""></p>
+<h3 id="Learning-Discussion"><a href="#Learning-Discussion" class="headerlink" title="Learning Discussion"></a>Learning Discussion</h3></li>
+</ol>
+<ul>
+<li><p>弱分类器选择算法过程如下：</p>
+<ul>
+<li>对于每个特征，根据特征值对样例进行排序。</li>
+<li>该特征的AdaBoost最佳阈值可以在该排序列表上的单次通过中计算。</li>
+<li>对于排序列表中的每个元素，四个和被维护和评估：</li>
+<li>正实例权重T+的总和。</li>
+<li>负实例权重T-的总和。</li>
+<li>当前示例S+之下的正权重的和。</li>
+<li>当前示例S-之下的负权重的和。</li>
+</ul>
+</li>
+<li><p>在排序一个划分当前和上一示例之间的范围的阈值的错误是：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrud40xsj30dk01gjrd.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="Learning-Results"><a href="#Learning-Results" class="headerlink" title="Learning Results"></a>Learning Results</h3><ul>
+<li>在现实应用中，假正例率必须接近1/1000000。</li>
+<li>所选择的 <strong>第一特征</strong> 似乎集中于属性即眼睛的区域通常比鼻子和脸颊的区域更暗。</li>
+<li>所选择的 <strong>第二特征</strong> 依赖于眼睛比鼻梁更暗的特性。</li>
+<li>提高性能最直接技术是添加更多的特征，但这样直接导致计算时间的增加。</li>
+<li>Receiver operating characteristic (ROC)曲线：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruhvzrpj30e30ao3yq.jpg" alt=""></li>
+</ul>
+<h2 id="The-Attentional-Cascade"><a href="#The-Attentional-Cascade" class="headerlink" title="The Attentional Cascade"></a>The Attentional Cascade</h2><ul>
+<li>本节描述了用于构造级联的分类器的算法，其实现了提高的检测性能，同时从根本上减少了计算时间。</li>
+<li>阈值越低，检测率越高，假正例率越高。</li>
+<li>从双特征强分类器开始，可以通过 <strong>调整强分类器阈值</strong> 以最小化假阴性来获得有效的面部滤波器。</li>
+<li>可以调整双特征分类器以50％的假阳性率来检测100％的面部。</li>
+<li>整体的检测过程形式是简并决策树的形式，我们称之为“级联”。</li>
+<li>在任何点上的否定结果立即导致对该子窗口的拒绝。</li>
+<li>更深的分类器面临的更困难的例子,将整个ROC曲线向下推。 在给定的检测率下，较深的分类器具有相应较高的假阳性率。</li>
+</ul>
+<h3 id="Training-a-Cascade-of-Classifiers"><a href="#Training-a-Cascade-of-Classifiers" class="headerlink" title="Training a Cascade of Classifiers"></a>Training a Cascade of Classifiers</h3><ul>
+<li><p>Given a trained cascade of classifiers, the false positive rate of the cascade is：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru7u7f1j303g02bjr9.jpg" alt=""></p>
+</li>
+<li><p>The detection rate is:</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrumlwqej303p02idfp.jpg" alt=""></p>
+</li>
+<li><p>The expected number of features which are evaluated is:</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrubq3n2j307s02c0sq.jpg" alt=""></p>
+</li>
+<li><p>用于训练后续层的负样例集合是通过运行检测器收集通过在不包含任何面部实例的一组图像上而找到的所有错误检测来获得。</p>
+</li>
+<li><p>构建一个练级检测器的训练算法：</p>
+</li>
+</ul>
+<h3 id="Simple-Experiment"><a href="#Simple-Experiment" class="headerlink" title="Simple Experiment"></a>Simple Experiment</h3><h3 id="Detector-Cascade-Discussion"><a href="#Detector-Cascade-Discussion" class="headerlink" title="Detector Cascade Discussion"></a>Detector Cascade Discussion</h3><ul>
+<li>将检测器训练为分类器序列的隐藏好处是:最终检测器看到的有效数目的负样例数目可能非常大。</li>
+<li>在实践中，由于我们的检测器的形式和它使用的特性是非常高效的，所以在每个尺度和位置评估我们的检测器的 <strong>摊销成本</strong> 比在整个图像中找到并分组边缘更快。</li>
+</ul>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Training-Dataset"><a href="#Training-Dataset" class="headerlink" title="Training Dataset"></a>Training Dataset</h3><ul>
+<li>事实上，包含在较大子窗口中的附加信息可以用于在检测级联中较早地拒绝non-face。</li>
+</ul>
+<h3 id="Structure-of-the-Detector-Cascade"><a href="#Structure-of-the-Detector-Cascade" class="headerlink" title="Structure of the Detector Cascade"></a>Structure of the Detector Cascade</h3><ul>
+<li>最终的检测器是38层分级器，包括总共6060个特征。</li>
+<li>级联中的第一个分类器是使用两个特征构造的，在检测100%的面部时可以拒绝50%的non-faces.</li>
+<li>下一个分类器具有十个特征，并且在检测几乎100％的面部时拒绝80％的非面部。</li>
+<li>接下来的两层是25个特征分类器，其后是三个50特征分类器，再之后是具有根据表2中的算法选择的各种不同数目的特征的分类器。</li>
+<li>添加更多层，直到验证集上的假阳性率接近零，同时仍保持高的正确检测率。</li>
+</ul>
+<h3 id="Speed-of-the-Final-Detector"><a href="#Speed-of-the-Final-Detector" class="headerlink" title="Speed of the Final Detector"></a>Speed of the Final Detector</h3><ul>
+<li>级联检测器的速度直接与每个被扫描的子窗口的特征数量相关。</li>
+</ul>
+<h3 id="Image-Processing"><a href="#Image-Processing" class="headerlink" title="Image Processing"></a>Image Processing</h3><ul>
+<li>用于训练的所有示例子窗口被 <strong>方差归一</strong> 化以使不同照明条件的影响最小化。</li>
+<li>可以使用 <strong>一对积分图像</strong> 来快速计算图像子窗口的方差。</li>
+<li>在扫描期间，可以通过对特征值进行后乘，而不是对像素进行操作来实现图像归一化的效果。</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
-&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
-&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
-&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
-&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
-&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
-&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
-&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
-&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
-&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
+      &lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot; class=&quot;headerlink&quot; title=&quot;知识点&quot;&gt;&lt;/a&gt;知识点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;傅里叶变换的一个推论：&lt;br&gt;&lt;img src=&quot;https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积&lt;br&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;整个过程的核心就是“（反转），移动，乘积，求和”&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
     
@@ -2517,13 +2719,9 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
+      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
     
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   

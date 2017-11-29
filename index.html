@@ -434,8 +434,7 @@
 
       
         
-          
-            <h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
+          <h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
 <li>Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.</li>
 <li>Formulate the adaptive tracking problem as a decision-making process.</li>
@@ -447,226 +446,14 @@
 <li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
 </ul>
 </li>
-<li><h4 id="Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies"><a href="#Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies" class="headerlink" title="Tracking The Untrackable: Learning to Track Multiple Cues with Long-Term Dependencies"></a>Tracking The Untrackable: Learning to Track Multiple Cues with <strong>Long-Term Dependencies</strong></h4><ul>
-<li>Combine cues in a coherent end-to-end fashion over a <strong>long period of time.</strong></li>
-<li>Present a structure of Recurrent Neural Networks (RNN) that jointly reasons on multiple cues over a temporal window.</li>
-<li>We are able to <strong>correct many data association errors</strong> and recover observations from an occluded state.</li>
 </ul>
-</li>
-<li><h4 id="Tracking-as-Online-Decision-Making-Learning-a-Policy-from-Streaming-Videos-with-Reinforcement-Learning"><a href="#Tracking-as-Online-Decision-Making-Learning-a-Policy-from-Streaming-Videos-with-Reinforcement-Learning" class="headerlink" title="Tracking as Online Decision-Making: Learning a Policy from Streaming Videos with Reinforcement Learning"></a>Tracking as Online Decision-Making: Learning a Policy from Streaming Videos with Reinforcement Learning</h4><ul>
-<li>A tracking agent must follow an object despite ambiguous image frames and a limited computational budget.</li>
-<li>The agent must decide<ul>
-<li>where to look in the upcoming frames</li>
-<li>when to reinitialize because it believes the target has been lost</li>
-<li>when to update its appearance model for the tracked object</li>
-</ul>
-</li>
-<li>Formulating tracking as a partially observable decision-making process (POMDP).</li>
-<li><strong>Sparse rewards</strong> allow us to quickly train on massive datasets.</li>
-<li>Challenges:<ul>
-<li>First, the limited quantity of annotated video data impedes both training and evaluation.</li>
-<li>Second, as vision (re)integrates with robotics, video processing must be done in an online, streaming fashion.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Face-detection"><a href="#Face-detection" class="headerlink" title="Face detection"></a>Face detection</h3><ul>
-<li><h4 id="S3FD-Single-Shot-Scale-invariant-Face-Detector"><a href="#S3FD-Single-Shot-Scale-invariant-Face-Detector" class="headerlink" title="S3FD - Single Shot Scale-invariant Face Detector."></a>S3FD - Single Shot Scale-invariant Face Detector.</h4><ul>
-<li>Use a single deep neural network, especially for small faces.</li>
-<li>Contribution<ul>
-<li>提出一个尺度公平的人脸检测框架来处理不同尺度的人脸。我们在各种各样的图层上拼贴anchor，以确保所有人脸的比例尺都具有足够的特征用于检测。基于有效接收域<strong>（effective receptive ﬁeld）</strong>和等比例区间原则<strong>（equal proportion interval principle）</strong>设计anchor</li>
-<li>用尺度补偿anchor匹配策略<strong>（ a scale compensation anchor matching strategy）</strong>提高小脸的召回率; </li>
-<li>通过最大化背景标签<strong>（ max-out background label）</strong>减少小脸的误报率。</li>
-<li>effective receptive ﬁeld: Understanding the effective receptive ﬁeld in deep convolutional neural networks.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Salient-Object-Detection"><a href="#Salient-Object-Detection" class="headerlink" title="Salient Object Detection"></a>Salient Object Detection</h3><ul>
-<li><h4 id="Amulet-Aggregating-Multi-level-Convolutional-Features-for-Salient-Object-Detection"><a href="#Amulet-Aggregating-Multi-level-Convolutional-Features-for-Salient-Object-Detection" class="headerlink" title="Amulet: Aggregating Multi-level Convolutional Features for Salient Object Detection"></a>Amulet: Aggregating Multi-level Convolutional Features for Salient Object Detection</h4><ul>
-<li>How to better aggregate multi-level convolutional feature maps for salient object detection is <strong>underexplored</strong>.</li>
-<li>Our framework:<ul>
-<li>First integrates multi-level feature maps into multiple resolutions, which simultaneously incorporate coarse semantics and ﬁne details. </li>
-<li>Then it adaptively learns to combine these feature maps at each resolution and <strong>predict saliency maps with the combined features.</strong> </li>
-<li>Finally, the predicted results are efﬁciently fused to generate the <strong>ﬁnal saliency map</strong>.</li>
-</ul>
-</li>
-<li>In addition, edge-aware maps and high-level predictions are embedded into the framework.</li>
-</ul>
-</li>
-<li><h4 id="Learning-Uncertain-Convolutional-Features-for-Accurate-Saliency-Detection"><a href="#Learning-Uncertain-Convolutional-Features-for-Accurate-Saliency-Detection" class="headerlink" title="Learning Uncertain Convolutional Features for Accurate Saliency Detection"></a><a href="http://openaccess.thecvf.com/content_iccv_2017/html/Zhang_Learning_Uncertain_Convolutional_ICCV_2017_paper.html" target="_blank" rel="external">Learning Uncertain Convolutional Features for Accurate Saliency Detection</a></h4><ul>
-<li>The key contribution of this work is to learn deep uncertain convolutional features (UCF), which encourage the robustness and accuracy of saliency detection.</li>
-<li>我们提出了一种有效的混合上采样方法来减少我们的解码器网络中去卷积算子的棋盘伪影。</li>
-<li>We ﬁnd that the actual cause of these artifacts is the upsampling mechanism, which generally utilizes the deconvolution operation.</li>
-</ul>
-</li>
-</ul>
-<h3 id="Action-Related"><a href="#Action-Related" class="headerlink" title="Action Related"></a>Action Related</h3><ul>
-<li><h4 id="Encouraging-LSTMs-to-Anticipate-Actions-Very-Early"><a href="#Encouraging-LSTMs-to-Anticipate-Actions-Very-Early" class="headerlink" title="Encouraging LSTMs to Anticipate Actions Very Early"></a>Encouraging LSTMs to Anticipate Actions Very Early</h4><ul>
-<li>Action anticipation - identify the action from only partially available videos.</li>
-<li>To this end, we develop a <strong>multi-stage LSTM architecture</strong> that leverages <strong>context-aware</strong> and <strong>action-aware</strong> features, and introduce <strong>a novel loss function</strong> that encourages the model to predict the correct class as early as possible.</li>
-<li>Intuitive: our loss models the intuition that some actions, such as running and high jump, are highly ambiguous after seeing only the ﬁrst few frames, and <strong>false positives</strong> should therefore not be penalized too strongly in the early stages.</li>
-<li>We would like to predict a high probability for the correct class <strong>as early as possible</strong>, and thus penalize <strong>false negatives</strong> from the beginning of the sequence.</li>
-<li>Contribute a novel multi-stage Long Short Term Memory (LSTM) architecture for action anticipation. This model effectively extracts and jointly exploits context- and action-aware features.</li>
-<li>Existing method drawbacks:<ul>
-<li>This is in contrast to existing methods that typically extract either <strong>global representations</strong> for the entire image or video sequence thus <strong>not focusing on the action itself, or localize the feature extraction process to the action itself</strong> via dense trajectories  optical ﬂow or actionness, thus <strong>failing to exploit contextual information.</strong></li>
-<li>利用光流不允许这些方法在localization过程中明确地利用外观。</li>
-<li>Computing optical ﬂow is typically expensive.</li>
-</ul>
-</li>
-<li>In the future, we intend to study new ways to incorporate additional sources of information, such as <strong>dense trajectories</strong> and <strong>human skeletons</strong> in our framework.</li>
-</ul>
-</li>
-<li><h4 id="Unsupervised-Action-Discovery-and-Localization-in-Videos"><a href="#Unsupervised-Action-Discovery-and-Localization-in-Videos" class="headerlink" title="Unsupervised Action Discovery and Localization in Videos"></a>Unsupervised Action Discovery and Localization in Videos</h4><ul>
-<li>创新：无监督的action localization。</li>
-<li>First to address the problem of unsupervised action localization in videos.</li>
-<li><p>We propose a novel approach that:</p>
-<ul>
-<li>Discovers action class labels</li>
-<li>Spatio-temporally localizes actions in videos.</li>
-</ul>
-</li>
-<li><p>Method:</p>
-<ul>
-<li>It begins by computing local video features to apply <strong>spectral clustering</strong> on a set of unlabeled training videos.<ul>
-<li>For each cluster of videos, an <strong>undirected graph</strong> is constructed to extract a dominant set, which are known for <strong>high internal homogeneity</strong> and <strong>in-homogeneity</strong> between vertices outside it.</li>
-</ul>
-</li>
-<li>Next, a <strong>discriminative clustering approach</strong> is applied, by training a classiﬁer for each cluster, to iteratively select videos from the non-dominant set and obtain complete video action classes.<ul>
-<li>Once classes are discovered, training videos within each cluster are selected to perform <strong>automatic spatio-temporal annotations</strong>, by ﬁrst over-segmenting videos in each discovered class into <strong>supervoxels</strong>（超体素） and constructing a <strong>directed graph</strong> （有向图）to apply a variant of knapsack problem with temporal constraints. （并构建有向图以应用具有时间约束的背包问题的变体。）</li>
-</ul>
-</li>
-<li>背包优化联合收集超体素的一个子集，通过强制注释的动作进行时空连接，其体积是一个actor的大小。These annotations are used to train SVM action classiﬁers.</li>
-</ul>
-</li>
-<li>在测试过程中，操作使用类似的背包方法来进行localize，在这种方法中将超体素分组在一起，并且使用来自发现的动作类的视频学习的SVM被用于识别这些动作。</li>
-<li>However, supervised algorithms have some disadvantages compared to unsupervised approaches, due to the difﬁculty of video annotation.</li>
-<li>Contributions：<ul>
-<li>Automatic discovery of action class labels using <strong>a new discriminative clustering approach</strong> with dominant sets (Sec. 3).</li>
-<li>We propose a novel <strong>Knapsack approach</strong> with <strong>graph-based temporal constraints</strong> to <strong>annotate actions</strong> in training videos</li>
-<li>The annotations within each cluster of videos are jointly selected by <strong>Binary Integer Quadratic Programming (BIQP)</strong> optimization to train action classiﬁers.</li>
-<li><strong>Structural SVM</strong> is used to learn the pairwise relations of supervoxels within foreground action and foreground-background, which enforces that the supervoxels belonging to the action to be simultaneously selected.</li>
-<li>Lastly, we address a new problem of <strong>Unsupervised Action Localization</strong> (Sec. 5.2).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="Dense-Captioning-Events-in-Videos"><a href="#Dense-Captioning-Events-in-Videos" class="headerlink" title="Dense-Captioning Events in Videos"></a>Dense-Captioning Events in Videos</h4><ul>
-<li>We introduce the task of dense-captioning events, which involves both detecting and describing events in a video.</li>
-<li>Our model introduces a variant of an existing proposal module that is designed to capture both short as well as long events that span minutes.</li>
-<li>To <strong>capture the dependencies between the events in a video</strong>, our model introduces a <strong>new captioning module</strong> that uses <strong>contextual information</strong> from past and future events to jointly describe all events.</li>
-<li>While the success of these methods is encouraging, they all share one key limitation: <strong>detail.</strong></li>
-<li>We introduce the task of <strong>dense-captioning events</strong>, which requires a model to generate a set of descriptions for multiple events occurring in the video and localize them in time.</li>
-<li>However, we observe that densecaptioning events comes with its own set of challenges distinct from the image case.<ul>
-<li>One observation is that events in videos can range across multiple time scales and can even overlap.<ul>
-<li>Past captioning works have circumvented this problem by encoding the entire video sequence by <strong>mean-pooling</strong> [50] or by using a <strong>recurrent neural network (RNN)</strong> [49].</li>
-<li>To overcome this limitation, we extend recent work on generating action proposals [10] to <strong>multi-scale detection of events.</strong></li>
-</ul>
-</li>
-<li>Another key observation is that the events in a given video <strong>are usually related to one another.</strong> <ul>
-<li>We introduce a <strong>captioning module</strong> that utilizes the context from all the events from our proposal module to generate each sentence.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="Learning-long-term-dependencies-for-action-recognition-with-a-biologically-inspired-deep-network"><a href="#Learning-long-term-dependencies-for-action-recognition-with-a-biologically-inspired-deep-network" class="headerlink" title="Learning long-term dependencies for action recognition with a biologically-inspired deep network"></a>Learning long-term dependencies for action recognition with a biologically-inspired deep network</h4><ul>
-<li>How to efﬁciently learn long-term dependencies from sequences still remains a pretty challenging task.</li>
-<li>As one of the key models for sequence learning, <strong>recurrent neural network (RNN)</strong> and its variants such as <strong>long short term memory (LSTM)</strong> and <strong>gated recurrent unit (GRU)</strong> are still not powerful enough in practice.<ul>
-<li>One possible reason is that they have only feedforward connections, which is different from the biological neural system that is typically composed of <strong>both feedforward and feedback connections.</strong>(既有前传，也有反馈)</li>
-</ul>
-</li>
-<li>Propose <strong>shuttleNet technologically.</strong></li>
-<li>The shuttleNet <strong>consists of several processors</strong>, each of which is a GRU while <strong>associated with multiple groups of cells and states.</strong></li>
-<li><strong>Attention mechanism</strong> is then employed to select the best information ﬂow pathway.</li>
-</ul>
-</li>
-<li><h4 id="Adaptive-RNN-Tree-for-Large-Scale-Human-Action-Recognition"><a href="#Adaptive-RNN-Tree-for-Large-Scale-Human-Action-Recognition" class="headerlink" title="Adaptive RNN Tree for Large-Scale Human Action Recognition"></a>Adaptive RNN Tree for Large-Scale Human Action Recognition</h4><ul>
-<li>We present the RNN Tree (RNN-T), an adaptive learning framework for <strong>skeleton based human action recognition.</strong></li>
-<li>Our method categorizes action classes and <strong>uses multiple Recurrent Neural Networks (RNNs)</strong> in a <strong>treelike hierarchy.</strong></li>
-<li>在骨架表示中的行为是通过<strong>分层推理</strong>过程来识别的，在这个过程中，单独的RNN将细化的行为类别与增加的置信度</li>
-<li>RNN-T effectively addresses two main challenges of large-scale action recognition:<ul>
-<li>able to distinguish ﬁne-grained action classes that are intractable using a single network</li>
-<li>adaptive to new action classes by augmenting an existing model.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="Ensemble-Deep-Learning-for-Skeleton-based-Action-Recognition-using-Temporal-Sliding-LSTM-networks"><a href="#Ensemble-Deep-Learning-for-Skeleton-based-Action-Recognition-using-Temporal-Sliding-LSTM-networks" class="headerlink" title="Ensemble Deep Learning for Skeleton-based Action Recognition using Temporal Sliding LSTM networks"></a>Ensemble Deep Learning for Skeleton-based Action Recognition using Temporal Sliding LSTM networks</h4><ul>
-<li>Traditional methods generally use relative coordinate systems dependent on some joints, and model <strong>only the long-term dependency</strong>, while excluding <strong>short-term and medium term dependencies.</strong></li>
-<li>We transform the skeletons into <strong>another coordinate system</strong> to obtain the robustness to scale, rotation and translation and then extract salient motion features from them.</li>
-<li>We propose novel ensemble <strong>Temporal Sliding LSTM (TS-LSTM) networks</strong> for skeleton-based action recognition. The proposed network is composed of multiple parts containing <strong>short-term, medium-term and long-term TS-LSTM networks</strong>.</li>
-<li>With a rapid development of 3D data acquisition over the past few decades, lots of researches on <strong>human activity recognition from 3D data</strong> can have been actively performed.</li>
-</ul>
-</li>
-</ul>
-<h3 id="Pedestrian-Related"><a href="#Pedestrian-Related" class="headerlink" title="Pedestrian Related"></a>Pedestrian Related</h3><ul>
-<li><h4 id="HydraPlus-Net-Attentive-Deep-Features-for-Pedestrian-Analysis"><a href="#HydraPlus-Net-Attentive-Deep-Features-for-Pedestrian-Analysis" class="headerlink" title="HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis"></a>HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis</h4><ul>
-<li>Learning of comprehensive features of pedestrians for ﬁne-grained tasks remains an open problem.</li>
-<li>HydraPlus-Net: multi-directionally feeds the multi-level attention maps to different feature layers.</li>
-<li>Advantages: <ul>
-<li>(1) the model is capable of capturing <strong>multiple attentions</strong> from low-level to semantic-level</li>
-<li>(2) it explores the <strong>multi-scale selectiveness of attentive features</strong> to enrich the ﬁnal feature representations for a pedestrian image.</li>
-</ul>
-</li>
-<li>We demonstrate the effectiveness and generality of the proposed HP-net for pedestrian analysis on two tasks, i.e. <strong>pedestrian attribute recognition</strong> and <strong>person reidentiﬁcation.</strong></li>
-<li>However, the learning of feature representation for pedestrian images, as the backbone for all those applications, still confronts critical challenges and needs profound studies.</li>
-<li>However, existing arts merely extract global features [13, 24, 30] and are hardly effective to location-aware semantic pattern extraction.</li>
-<li><strong>Multidirectional attention (MDA) modules</strong></li>
-<li>Reliable 3D <strong>skeleton-based action recognition (SAR)</strong> is now feasible [1].</li>
-<li>Although much progress has been achieved, these methods are still facing two challenges.<ul>
-<li>We term the ﬁrst one as the <strong>discriminative challenge.</strong></li>
-<li>We term the second challenge as <strong>adaptability</strong>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Pose-Estimation"><a href="#Pose-Estimation" class="headerlink" title="Pose Estimation"></a>Pose Estimation</h3><ul>
-<li><h4 id="Towards-3D-Human-Pose-Estimation-in-the-Wild-A-Weakly-Supervised-Approach"><a href="#Towards-3D-Human-Pose-Estimation-in-the-Wild-A-Weakly-Supervised-Approach" class="headerlink" title="Towards 3D Human Pose Estimation in the Wild: A Weakly-Supervised Approach"></a><a href="http://openaccess.thecvf.com/content_iccv_2017/html/Zhou_Towards_3D_Human_ICCV_2017_paper.html" target="_blank" rel="external">Towards 3D Human Pose Estimation in the Wild: A Weakly-Supervised Approach</a></h4><ul>
-<li>We propose a <strong>weakly-supervised transfer learning</strong> method that uses mixed 2D and 3D labels in a uniﬁed deep neutral network that presents two-stage cascaded structure.</li>
-</ul>
-</li>
-</ul>
-<h3 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h3><ul>
-<li><h4 id="Flow-Guided-Feature-Aggregation-for-Video-Object-Detection"><a href="#Flow-Guided-Feature-Aggregation-for-Video-Object-Detection" class="headerlink" title="Flow-Guided Feature Aggregation for Video Object Detection"></a>Flow-Guided Feature Aggregation for Video Object Detection</h4><ul>
-<li>Video object detection</li>
-<li>The accuracy of detection suffers from degenerated object appearances in videos, e.g., motion blur, video defocus, rare poses, etc.</li>
-<li>We present ﬂow-guided feature aggregation, an accurate and <strong>end-to-end</strong> learning framework for <strong>video object detection.</strong></li>
-<li>It leverages <strong>temporal coherence</strong> on feature level instead.</li>
-<li>它通过沿着运动路径聚集附近的特征来改进每帧特征，从而提高了视频识别的准确性。</li>
-<li>Fast moving objects.</li>
-</ul>
-</li>
-<li><h4 id="DeNet-Scalable-Real-time-Object-Detection-with-Directed-Sparse-Sampling"><a href="#DeNet-Scalable-Real-time-Object-Detection-with-Directed-Sparse-Sampling" class="headerlink" title="DeNet: Scalable Real-time Object Detection with Directed Sparse Sampling"></a>DeNet: Scalable Real-time Object Detection with Directed Sparse Sampling</h4><ul>
-<li>We deﬁne the object detection from imagery problem as estimating a very large but <strong>extremely sparse bounding box</strong> dependent probability distribution. （我们将图像问题中的目标检测定义为估计非常大但极其稀疏的边界框相关概率分布。）</li>
-<li>Two novelties:<ul>
-<li>a <strong>corner based</strong> region-of-interest estimator</li>
-<li>a <strong>deconvolution based</strong> CNN model</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Image-Recognition"><a href="#Image-Recognition" class="headerlink" title="Image Recognition"></a>Image Recognition</h3><ul>
-<li><h4 id="Multi-label-Image-Recognition-by-Recurrently-Discovering-Attentional-Regions"><a href="#Multi-label-Image-Recognition-by-Recurrently-Discovering-Attentional-Regions" class="headerlink" title="Multi-label Image Recognition by Recurrently Discovering Attentional Regions"></a>Multi-label Image Recognition by Recurrently Discovering Attentional Regions</h4><ul>
-<li>Current solutions for this task usually rely on an extra step of extracting hypothesis regions (i.e., region proposals), resulting in <strong>redundant computation</strong> and <strong>sub-optimal performance.</strong></li>
-<li>Developing a recurrent memorized-attention module.</li>
-<li>This module consists of two alternately performed components:<ul>
-<li>a spatial transformer layer to locate attentional regions from the convolutional feature maps in a region-proposal-free way</li>
-<li>an LSTM (Long-Short Term Memory) sub-network to sequentially predict semantic labeling scores on the located regions while capturing the global dependencies of these regions.</li>
-</ul>
-</li>
-<li>Despite acknowledged successes, these methods take the redundant computational cost of extracting region proposals and usually over-simplify the contextual dependencies among foreground objects, leading to a sub-optimal performance in complex scenarios.</li>
-</ul>
-</li>
-</ul>
-<p>  ​<br>  ​<br>  ​<br>  ​    </p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/679115823/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -825,185 +612,10 @@
 
       
         
-          
-            <p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
-<p>虽然近年来图像表示体系结构的发展已经迅速成熟，但视频的前端运行架构仍然不够清晰。当前视频体系结构中的一些主要差异在于convolutional and layers operators是使用2D（基于图像的）还是3D（基于视频的）kernels; 无论网络输入是RGB视频或者还是包含预先计算的光流，在2D ConvNets的情况下，对于信息如何跨帧传播，这可以通过使用诸如LSTM之类的temporally-recurrent layers或者随着时间的推移进行特征聚合来完成。</p>
-<p>图1显示了我们评估的五种体系结构的图形概述。<br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg" alt="图 1. 各种视频架构。其中K表示一个视频中全部的帧数，N表示一段视频相邻帧子集"></p>
-<h3 id="模型1：ConvNet-LSTM"><a href="#模型1：ConvNet-LSTM" class="headerlink" title="模型1：ConvNet+LSTM"></a>模型1：ConvNet+LSTM</h3><p>图像分类网络的高性能使得我们尝试只需很少的改变就能将其重用于视频中。 通过使用它们针对每个独立帧提取特征，然后集中在整个视频中来提取预测结果来实现这一目标。 这是bag of words图像建模方法的精神; 但是在实践中使用方便的同时，还存在完全忽略时间结构的问题（例如，模型不能很好的区分开门和关门）。</p>
-<p>理论上，更令人满意的方法是向模型添加一个recurrent layer，例如可以对状态进行编码的LSTM，并捕获<strong>时间顺序</strong>和<strong>长程依赖性</strong>。 本文在有512个隐藏单元的Inception-V1的最后的平均池化层之后防止了一个有着BN的LSTM层， 一个全连接层被添加到分类器的顶部。</p>
-<p>该模型对所有时间步骤的输出上使用交叉熵损失进行训练。 在测试过程中，我们只考虑最后一帧的输出。</p>
-<h3 id="模型2：3D-ConvNets"><a href="#模型2：3D-ConvNets" class="headerlink" title="模型2：3D ConvNets"></a>模型2：3D ConvNets</h3><p>3D ConvNets似乎是一种更自然的视频建模方法，其就像标准的卷积网络一样，但是具有时空卷积核。<strong>它们有一个非常重要的特征</strong>：它们直接创建时空数据的分层表示。这些模型的一个问题是，由于附加的内核维度，它们比2D ConvNets<strong>有更多的参数</strong>，这使得它们<strong>更难以训练</strong>。另外，它们似乎排除了ImageNet预训练的好处，因此以前的工作定义了相对较浅的架构，并且都是train from scratch。基准测试的结果具有提升的前景，但是与最新的技术水平相比还不具有竞争性，使得这种类型的模型成为评估我们大型数据集的好选择。</p>
-<p>在本文中，我们实现了一个C3D模型的小变体，它在顶部有8个卷积层，5个池化层和2个完全连接的层。模型的输入与原始实现相同，使用112×112像素共16帧。与原始C3D不同的是，我们在所有卷积和全连接层之后使用了batch normalization。另一个区别在于对于第一个池化层，我们使用stride=2而不是stride=1，这减少了内存占用，并允许更大批量 - 这对于批量标准化非常重要。使用这一步，我们能够使用标准的K40 GPU在每个GPU上每批处理15个视频。</p>
-<h3 id="模型3：Two-Stream-Networks"><a href="#模型3：Two-Stream-Networks" class="headerlink" title="模型3：Two-Stream Networks"></a>模型3：Two-Stream Networks</h3><p>来自ConvNets最后层的特征，LSTM可以模拟高层次的变化，但是可能无法捕获在许多情况下非常关键的精细的low-level动作。训练也是昂贵的，因为它需要通过多帧来展开网络以便反向传播。</p>
-<p>Simonyan和Zisserman介绍了一种不同的非常实用的方法，在通过两个副本ImageNet预先训练的ConvNet后，通过对来自单个RGB帧的预测和10个外部计算的光流帧的预测进行平均，来对视频的短时间快照进行建模。光流 stream有一个自适应的输入卷积层，输入通道的数量是光流帧的两倍（因为流量有两个通道，水平和垂直），在测试时，多个快照从视频中采样，并对动作预测进行平均。这被证明在现有的基准测试中得到了非常高的性能，同时非常有效地进行训练和测试。</p>
-<p>最近的一个扩展[8]将最后一个网络卷积层之后的空间流和光流融合起来，显示出对HMDB的一些改进，同时需要较少的测试时间增量（快照采样）。我们的实现大致使用了Inception-V1。网络的输入是5个连续的RGB帧，相隔10帧，以及相应的光流片段。 Inception-V1（5×7×7特征网格，对应于时间x和y维度）的最后一个平均汇聚层之前的空间和运动特征通过具有512个输出通道的3×3×3的3D卷积层，然后是3×3×3的3D最大池层，并通过最终的完全连接层。这些新层的权重用高斯噪声初始化。</p>
-<p>两种模型（原始双流和3D融合版本）都是端对端训练（包括原始模型中的双流平均流程）。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1774603577/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jacob Kong">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/uploads/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="JacobKong's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/posts/1774603577/" itemprop="url">
-                  行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-24T15:51:24+08:00">
-                2017-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">论文笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/1774603577/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/1774603577/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/posts/1774603577/" class="leancloud_visitors" data-flag-title="行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。</li>
-<li>
+          <p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/1774603577/#more" rel="contents">
+            <a class="btn" href="/posts/679115822/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1178,6 +790,173 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/3872446965/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1774603577/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/posts/1774603577/" itemprop="url">
+                  行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-24T15:51:24+08:00">
+                2017-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/1774603577/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="posts/1774603577/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/1774603577/" class="leancloud_visitors" data-flag-title="行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/1774603577/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

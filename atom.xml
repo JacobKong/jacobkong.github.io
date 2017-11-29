@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-26T14:10:03.141Z</updated>
+  <updated>2017-11-29T08:31:51.131Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,347 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>行为检测论文笔记：Temporal Segment Networks</title>
-    <link href="http://yoursite.com/posts/2938514597/"/>
-    <id>http://yoursite.com/posts/2938514597/</id>
+    <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
+    <link href="http://yoursite.com/posts/679115823/"/>
+    <id>http://yoursite.com/posts/679115823/</id>
+    <published>2017-11-25T07:51:24.000Z</published>
+    <updated>2017-11-29T08:31:51.131Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
+<li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
+<li>Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.</li>
+<li>Formulate the adaptive tracking problem as a decision-making process.</li>
+<li>Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.</li>
+<li>Signiﬁcantly reduces the feedforward cost.</li>
+<li>Train the agent ofﬂine in a reinforcement learning fashion.</li>
+<li>Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.</li>
+<li>However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.</li>
+<li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
+</ul>
+</li>
+<li><h4 id="Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies"><a href="#Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies" class="headerlink" title="Tracking The Untrackable: Learning to Track Multiple Cues with Long-Term Dependencies"></a>Tracking The Untrackable: Learning to Track Multiple Cues with <strong>Long-Term Dependencies</strong></h4><ul>
+<li>Combine cues in a coherent end-to-end fashion over a <strong>long period of time.</strong></li>
+<li>Present a structure of Recurrent Neural Networks (RNN) that jointly reasons on multiple cues over a temporal window.</li>
+<li>We are able to <strong>correct many data association errors</strong> and recover observations from an occluded state.</li>
+</ul>
+</li>
+<li><h4 id="Tracking-as-Online-Decision-Making-Learning-a-Policy-from-Streaming-Videos-with-Reinforcement-Learning"><a href="#Tracking-as-Online-Decision-Making-Learning-a-Policy-from-Streaming-Videos-with-Reinforcement-Learning" class="headerlink" title="Tracking as Online Decision-Making: Learning a Policy from Streaming Videos with Reinforcement Learning"></a>Tracking as Online Decision-Making: Learning a Policy from Streaming Videos with Reinforcement Learning</h4><ul>
+<li>A tracking agent must follow an object despite ambiguous image frames and a limited computational budget.</li>
+<li>The agent must decide<ul>
+<li>where to look in the upcoming frames</li>
+<li>when to reinitialize because it believes the target has been lost</li>
+<li>when to update its appearance model for the tracked object</li>
+</ul>
+</li>
+<li>Formulating tracking as a partially observable decision-making process (POMDP).</li>
+<li><strong>Sparse rewards</strong> allow us to quickly train on massive datasets.</li>
+<li>Challenges:<ul>
+<li>First, the limited quantity of annotated video data impedes both training and evaluation.</li>
+<li>Second, as vision (re)integrates with robotics, video processing must be done in an online, streaming fashion.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Face-detection"><a href="#Face-detection" class="headerlink" title="Face detection"></a>Face detection</h3><ul>
+<li><h4 id="S3FD-Single-Shot-Scale-invariant-Face-Detector"><a href="#S3FD-Single-Shot-Scale-invariant-Face-Detector" class="headerlink" title="S3FD - Single Shot Scale-invariant Face Detector."></a>S3FD - Single Shot Scale-invariant Face Detector.</h4><ul>
+<li>Use a single deep neural network, especially for small faces.</li>
+<li>Contribution<ul>
+<li>提出一个尺度公平的人脸检测框架来处理不同尺度的人脸。我们在各种各样的图层上拼贴anchor，以确保所有人脸的比例尺都具有足够的特征用于检测。基于有效接收域<strong>（effective receptive ﬁeld）</strong>和等比例区间原则<strong>（equal proportion interval principle）</strong>设计anchor</li>
+<li>用尺度补偿anchor匹配策略<strong>（ a scale compensation anchor matching strategy）</strong>提高小脸的召回率; </li>
+<li>通过最大化背景标签<strong>（ max-out background label）</strong>减少小脸的误报率。</li>
+<li>effective receptive ﬁeld: Understanding the effective receptive ﬁeld in deep convolutional neural networks.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Salient-Object-Detection"><a href="#Salient-Object-Detection" class="headerlink" title="Salient Object Detection"></a>Salient Object Detection</h3><ul>
+<li><h4 id="Amulet-Aggregating-Multi-level-Convolutional-Features-for-Salient-Object-Detection"><a href="#Amulet-Aggregating-Multi-level-Convolutional-Features-for-Salient-Object-Detection" class="headerlink" title="Amulet: Aggregating Multi-level Convolutional Features for Salient Object Detection"></a>Amulet: Aggregating Multi-level Convolutional Features for Salient Object Detection</h4><ul>
+<li>How to better aggregate multi-level convolutional feature maps for salient object detection is <strong>underexplored</strong>.</li>
+<li>Our framework:<ul>
+<li>First integrates multi-level feature maps into multiple resolutions, which simultaneously incorporate coarse semantics and ﬁne details. </li>
+<li>Then it adaptively learns to combine these feature maps at each resolution and <strong>predict saliency maps with the combined features.</strong> </li>
+<li>Finally, the predicted results are efﬁciently fused to generate the <strong>ﬁnal saliency map</strong>.</li>
+</ul>
+</li>
+<li>In addition, edge-aware maps and high-level predictions are embedded into the framework.</li>
+</ul>
+</li>
+<li><h4 id="Learning-Uncertain-Convolutional-Features-for-Accurate-Saliency-Detection"><a href="#Learning-Uncertain-Convolutional-Features-for-Accurate-Saliency-Detection" class="headerlink" title="Learning Uncertain Convolutional Features for Accurate Saliency Detection"></a><a href="http://openaccess.thecvf.com/content_iccv_2017/html/Zhang_Learning_Uncertain_Convolutional_ICCV_2017_paper.html" target="_blank" rel="external">Learning Uncertain Convolutional Features for Accurate Saliency Detection</a></h4><ul>
+<li>The key contribution of this work is to learn deep uncertain convolutional features (UCF), which encourage the robustness and accuracy of saliency detection.</li>
+<li>我们提出了一种有效的混合上采样方法来减少我们的解码器网络中去卷积算子的棋盘伪影。</li>
+<li>We ﬁnd that the actual cause of these artifacts is the upsampling mechanism, which generally utilizes the deconvolution operation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Action-Related"><a href="#Action-Related" class="headerlink" title="Action Related"></a>Action Related</h3><ul>
+<li><h4 id="Encouraging-LSTMs-to-Anticipate-Actions-Very-Early"><a href="#Encouraging-LSTMs-to-Anticipate-Actions-Very-Early" class="headerlink" title="Encouraging LSTMs to Anticipate Actions Very Early"></a>Encouraging LSTMs to Anticipate Actions Very Early</h4><ul>
+<li>Action anticipation - identify the action from only partially available videos.</li>
+<li>To this end, we develop a <strong>multi-stage LSTM architecture</strong> that leverages <strong>context-aware</strong> and <strong>action-aware</strong> features, and introduce <strong>a novel loss function</strong> that encourages the model to predict the correct class as early as possible.</li>
+<li>Intuitive: our loss models the intuition that some actions, such as running and high jump, are highly ambiguous after seeing only the ﬁrst few frames, and <strong>false positives</strong> should therefore not be penalized too strongly in the early stages.</li>
+<li>We would like to predict a high probability for the correct class <strong>as early as possible</strong>, and thus penalize <strong>false negatives</strong> from the beginning of the sequence.</li>
+<li>Contribute a novel multi-stage Long Short Term Memory (LSTM) architecture for action anticipation. This model effectively extracts and jointly exploits context- and action-aware features.</li>
+<li>Existing method drawbacks:<ul>
+<li>This is in contrast to existing methods that typically extract either <strong>global representations</strong> for the entire image or video sequence thus <strong>not focusing on the action itself, or localize the feature extraction process to the action itself</strong> via dense trajectories  optical ﬂow or actionness, thus <strong>failing to exploit contextual information.</strong></li>
+<li>利用光流不允许这些方法在localization过程中明确地利用外观。</li>
+<li>Computing optical ﬂow is typically expensive.</li>
+</ul>
+</li>
+<li>In the future, we intend to study new ways to incorporate additional sources of information, such as <strong>dense trajectories</strong> and <strong>human skeletons</strong> in our framework.</li>
+</ul>
+</li>
+<li><h4 id="Unsupervised-Action-Discovery-and-Localization-in-Videos"><a href="#Unsupervised-Action-Discovery-and-Localization-in-Videos" class="headerlink" title="Unsupervised Action Discovery and Localization in Videos"></a>Unsupervised Action Discovery and Localization in Videos</h4><ul>
+<li>创新：无监督的action localization。</li>
+<li>First to address the problem of unsupervised action localization in videos.</li>
+<li><p>We propose a novel approach that:</p>
+<ul>
+<li>Discovers action class labels</li>
+<li>Spatio-temporally localizes actions in videos.</li>
+</ul>
+</li>
+<li><p>Method:</p>
+<ul>
+<li>It begins by computing local video features to apply <strong>spectral clustering</strong> on a set of unlabeled training videos.<ul>
+<li>For each cluster of videos, an <strong>undirected graph</strong> is constructed to extract a dominant set, which are known for <strong>high internal homogeneity</strong> and <strong>in-homogeneity</strong> between vertices outside it.</li>
+</ul>
+</li>
+<li>Next, a <strong>discriminative clustering approach</strong> is applied, by training a classiﬁer for each cluster, to iteratively select videos from the non-dominant set and obtain complete video action classes.<ul>
+<li>Once classes are discovered, training videos within each cluster are selected to perform <strong>automatic spatio-temporal annotations</strong>, by ﬁrst over-segmenting videos in each discovered class into <strong>supervoxels</strong>（超体素） and constructing a <strong>directed graph</strong> （有向图）to apply a variant of knapsack problem with temporal constraints. （并构建有向图以应用具有时间约束的背包问题的变体。）</li>
+</ul>
+</li>
+<li>背包优化联合收集超体素的一个子集，通过强制注释的动作进行时空连接，其体积是一个actor的大小。These annotations are used to train SVM action classiﬁers.</li>
+</ul>
+</li>
+<li>在测试过程中，操作使用类似的背包方法来进行localize，在这种方法中将超体素分组在一起，并且使用来自发现的动作类的视频学习的SVM被用于识别这些动作。</li>
+<li>However, supervised algorithms have some disadvantages compared to unsupervised approaches, due to the difﬁculty of video annotation.</li>
+<li>Contributions：<ul>
+<li>Automatic discovery of action class labels using <strong>a new discriminative clustering approach</strong> with dominant sets (Sec. 3).</li>
+<li>We propose a novel <strong>Knapsack approach</strong> with <strong>graph-based temporal constraints</strong> to <strong>annotate actions</strong> in training videos</li>
+<li>The annotations within each cluster of videos are jointly selected by <strong>Binary Integer Quadratic Programming (BIQP)</strong> optimization to train action classiﬁers.</li>
+<li><strong>Structural SVM</strong> is used to learn the pairwise relations of supervoxels within foreground action and foreground-background, which enforces that the supervoxels belonging to the action to be simultaneously selected.</li>
+<li>Lastly, we address a new problem of <strong>Unsupervised Action Localization</strong> (Sec. 5.2).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="Dense-Captioning-Events-in-Videos"><a href="#Dense-Captioning-Events-in-Videos" class="headerlink" title="Dense-Captioning Events in Videos"></a>Dense-Captioning Events in Videos</h4><ul>
+<li>We introduce the task of dense-captioning events, which involves both detecting and describing events in a video.</li>
+<li>Our model introduces a variant of an existing proposal module that is designed to capture both short as well as long events that span minutes.</li>
+<li>To <strong>capture the dependencies between the events in a video</strong>, our model introduces a <strong>new captioning module</strong> that uses <strong>contextual information</strong> from past and future events to jointly describe all events.</li>
+<li>While the success of these methods is encouraging, they all share one key limitation: <strong>detail.</strong></li>
+<li>We introduce the task of <strong>dense-captioning events</strong>, which requires a model to generate a set of descriptions for multiple events occurring in the video and localize them in time.</li>
+<li>However, we observe that densecaptioning events comes with its own set of challenges distinct from the image case.<ul>
+<li>One observation is that events in videos can range across multiple time scales and can even overlap.<ul>
+<li>Past captioning works have circumvented this problem by encoding the entire video sequence by <strong>mean-pooling</strong> [50] or by using a <strong>recurrent neural network (RNN)</strong> [49].</li>
+<li>To overcome this limitation, we extend recent work on generating action proposals [10] to <strong>multi-scale detection of events.</strong></li>
+</ul>
+</li>
+<li>Another key observation is that the events in a given video <strong>are usually related to one another.</strong> <ul>
+<li>We introduce a <strong>captioning module</strong> that utilizes the context from all the events from our proposal module to generate each sentence.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="Learning-long-term-dependencies-for-action-recognition-with-a-biologically-inspired-deep-network"><a href="#Learning-long-term-dependencies-for-action-recognition-with-a-biologically-inspired-deep-network" class="headerlink" title="Learning long-term dependencies for action recognition with a biologically-inspired deep network"></a>Learning long-term dependencies for action recognition with a biologically-inspired deep network</h4><ul>
+<li>How to efﬁciently learn long-term dependencies from sequences still remains a pretty challenging task.</li>
+<li>As one of the key models for sequence learning, <strong>recurrent neural network (RNN)</strong> and its variants such as <strong>long short term memory (LSTM)</strong> and <strong>gated recurrent unit (GRU)</strong> are still not powerful enough in practice.<ul>
+<li>One possible reason is that they have only feedforward connections, which is different from the biological neural system that is typically composed of <strong>both feedforward and feedback connections.</strong>(既有前传，也有反馈)</li>
+</ul>
+</li>
+<li>Propose <strong>shuttleNet technologically.</strong></li>
+<li>The shuttleNet <strong>consists of several processors</strong>, each of which is a GRU while <strong>associated with multiple groups of cells and states.</strong></li>
+<li><strong>Attention mechanism</strong> is then employed to select the best information ﬂow pathway.</li>
+</ul>
+</li>
+<li><h4 id="Adaptive-RNN-Tree-for-Large-Scale-Human-Action-Recognition"><a href="#Adaptive-RNN-Tree-for-Large-Scale-Human-Action-Recognition" class="headerlink" title="Adaptive RNN Tree for Large-Scale Human Action Recognition"></a>Adaptive RNN Tree for Large-Scale Human Action Recognition</h4><ul>
+<li>We present the RNN Tree (RNN-T), an adaptive learning framework for <strong>skeleton based human action recognition.</strong></li>
+<li>Our method categorizes action classes and <strong>uses multiple Recurrent Neural Networks (RNNs)</strong> in a <strong>treelike hierarchy.</strong></li>
+<li>在骨架表示中的行为是通过<strong>分层推理</strong>过程来识别的，在这个过程中，单独的RNN将细化的行为类别与增加的置信度</li>
+<li>RNN-T effectively addresses two main challenges of large-scale action recognition:<ul>
+<li>able to distinguish ﬁne-grained action classes that are intractable using a single network</li>
+<li>adaptive to new action classes by augmenting an existing model.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="Ensemble-Deep-Learning-for-Skeleton-based-Action-Recognition-using-Temporal-Sliding-LSTM-networks"><a href="#Ensemble-Deep-Learning-for-Skeleton-based-Action-Recognition-using-Temporal-Sliding-LSTM-networks" class="headerlink" title="Ensemble Deep Learning for Skeleton-based Action Recognition using Temporal Sliding LSTM networks"></a>Ensemble Deep Learning for Skeleton-based Action Recognition using Temporal Sliding LSTM networks</h4><ul>
+<li>Traditional methods generally use relative coordinate systems dependent on some joints, and model <strong>only the long-term dependency</strong>, while excluding <strong>short-term and medium term dependencies.</strong></li>
+<li>We transform the skeletons into <strong>another coordinate system</strong> to obtain the robustness to scale, rotation and translation and then extract salient motion features from them.</li>
+<li>We propose novel ensemble <strong>Temporal Sliding LSTM (TS-LSTM) networks</strong> for skeleton-based action recognition. The proposed network is composed of multiple parts containing <strong>short-term, medium-term and long-term TS-LSTM networks</strong>.</li>
+<li>With a rapid development of 3D data acquisition over the past few decades, lots of researches on <strong>human activity recognition from 3D data</strong> can have been actively performed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Pedestrian-Related"><a href="#Pedestrian-Related" class="headerlink" title="Pedestrian Related"></a>Pedestrian Related</h3><ul>
+<li><h4 id="HydraPlus-Net-Attentive-Deep-Features-for-Pedestrian-Analysis"><a href="#HydraPlus-Net-Attentive-Deep-Features-for-Pedestrian-Analysis" class="headerlink" title="HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis"></a>HydraPlus-Net: Attentive Deep Features for Pedestrian Analysis</h4><ul>
+<li>Learning of comprehensive features of pedestrians for ﬁne-grained tasks remains an open problem.</li>
+<li>HydraPlus-Net: multi-directionally feeds the multi-level attention maps to different feature layers.</li>
+<li>Advantages: <ul>
+<li>(1) the model is capable of capturing <strong>multiple attentions</strong> from low-level to semantic-level</li>
+<li>(2) it explores the <strong>multi-scale selectiveness of attentive features</strong> to enrich the ﬁnal feature representations for a pedestrian image.</li>
+</ul>
+</li>
+<li>We demonstrate the effectiveness and generality of the proposed HP-net for pedestrian analysis on two tasks, i.e. <strong>pedestrian attribute recognition</strong> and <strong>person reidentiﬁcation.</strong></li>
+<li>However, the learning of feature representation for pedestrian images, as the backbone for all those applications, still confronts critical challenges and needs profound studies.</li>
+<li>However, existing arts merely extract global features [13, 24, 30] and are hardly effective to location-aware semantic pattern extraction.</li>
+<li><strong>Multidirectional attention (MDA) modules</strong></li>
+<li>Reliable 3D <strong>skeleton-based action recognition (SAR)</strong> is now feasible [1].</li>
+<li>Although much progress has been achieved, these methods are still facing two challenges.<ul>
+<li>We term the ﬁrst one as the <strong>discriminative challenge.</strong></li>
+<li>We term the second challenge as <strong>adaptability</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Pose-Estimation"><a href="#Pose-Estimation" class="headerlink" title="Pose Estimation"></a>Pose Estimation</h3><ul>
+<li><h4 id="Towards-3D-Human-Pose-Estimation-in-the-Wild-A-Weakly-Supervised-Approach"><a href="#Towards-3D-Human-Pose-Estimation-in-the-Wild-A-Weakly-Supervised-Approach" class="headerlink" title="Towards 3D Human Pose Estimation in the Wild: A Weakly-Supervised Approach"></a><a href="http://openaccess.thecvf.com/content_iccv_2017/html/Zhou_Towards_3D_Human_ICCV_2017_paper.html" target="_blank" rel="external">Towards 3D Human Pose Estimation in the Wild: A Weakly-Supervised Approach</a></h4><ul>
+<li>We propose a <strong>weakly-supervised transfer learning</strong> method that uses mixed 2D and 3D labels in a uniﬁed deep neutral network that presents two-stage cascaded structure.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h3><ul>
+<li><h4 id="Flow-Guided-Feature-Aggregation-for-Video-Object-Detection"><a href="#Flow-Guided-Feature-Aggregation-for-Video-Object-Detection" class="headerlink" title="Flow-Guided Feature Aggregation for Video Object Detection"></a>Flow-Guided Feature Aggregation for Video Object Detection</h4><ul>
+<li>Video object detection</li>
+<li>The accuracy of detection suffers from degenerated object appearances in videos, e.g., motion blur, video defocus, rare poses, etc.</li>
+<li>We present ﬂow-guided feature aggregation, an accurate and <strong>end-to-end</strong> learning framework for <strong>video object detection.</strong></li>
+<li>It leverages <strong>temporal coherence</strong> on feature level instead.</li>
+<li>它通过沿着运动路径聚集附近的特征来改进每帧特征，从而提高了视频识别的准确性。</li>
+<li>Fast moving objects.</li>
+</ul>
+</li>
+<li><h4 id="DeNet-Scalable-Real-time-Object-Detection-with-Directed-Sparse-Sampling"><a href="#DeNet-Scalable-Real-time-Object-Detection-with-Directed-Sparse-Sampling" class="headerlink" title="DeNet: Scalable Real-time Object Detection with Directed Sparse Sampling"></a>DeNet: Scalable Real-time Object Detection with Directed Sparse Sampling</h4><ul>
+<li>We deﬁne the object detection from imagery problem as estimating a very large but <strong>extremely sparse bounding box</strong> dependent probability distribution. （我们将图像问题中的目标检测定义为估计非常大但极其稀疏的边界框相关概率分布。）</li>
+<li>Two novelties:<ul>
+<li>a <strong>corner based</strong> region-of-interest estimator</li>
+<li>a <strong>deconvolution based</strong> CNN model</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Image-Recognition"><a href="#Image-Recognition" class="headerlink" title="Image Recognition"></a>Image Recognition</h3><ul>
+<li><h4 id="Multi-label-Image-Recognition-by-Recurrently-Discovering-Attentional-Regions"><a href="#Multi-label-Image-Recognition-by-Recurrently-Discovering-Attentional-Regions" class="headerlink" title="Multi-label Image Recognition by Recurrently Discovering Attentional Regions"></a>Multi-label Image Recognition by Recurrently Discovering Attentional Regions</h4><ul>
+<li>Current solutions for this task usually rely on an extra step of extracting hypothesis regions (i.e., region proposals), resulting in <strong>redundant computation</strong> and <strong>sub-optimal performance.</strong></li>
+<li>Developing a recurrent memorized-attention module.</li>
+<li>This module consists of two alternately performed components:<ul>
+<li>a spatial transformer layer to locate attentional regions from the convolutional feature maps in a region-proposal-free way</li>
+<li>an LSTM (Long-Short Term Memory) sub-network to sequentially predict semantic labeling scores on the located regions while capturing the global dependencies of these regions.</li>
+</ul>
+</li>
+<li>Despite acknowledged successes, these methods take the redundant computational cost of extracting region proposals and usually over-simplify the contextual dependencies among foreground objects, leading to a sub-optimal performance in complex scenarios.</li>
+</ul>
+</li>
+</ul>
+<p>  ​<br>  ​<br>  ​<br>  ​    </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Visual-object-tracking&quot;&gt;&lt;a href=&quot;#Visual-object-tracking&quot; class=&quot;headerlink&quot; title=&quot;Visual object tracking&quot;&gt;&lt;/a&gt;Visual object tracki
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="论文调研" scheme="http://yoursite.com/tags/%E8%AE%BA%E6%96%87%E8%B0%83%E7%A0%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
+    <link href="http://yoursite.com/posts/679115822/"/>
+    <id>http://yoursite.com/posts/679115822/</id>
+    <published>2017-11-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:31:51.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
+<p>虽然近年来图像表示体系结构的发展已经迅速成熟，但视频的前端运行架构仍然不够清晰。当前视频体系结构中的一些主要差异在于convolutional and layers operators是使用2D（基于图像的）还是3D（基于视频的）kernels; 无论网络输入是RGB视频或者还是包含预先计算的光流，在2D ConvNets的情况下，对于信息如何跨帧传播，这可以通过使用诸如LSTM之类的temporally-recurrent layers或者随着时间的推移进行特征聚合来完成。</p>
+<p>图1显示了我们评估的五种体系结构的图形概述。<br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg" alt="图 1. 各种视频架构。其中K表示一个视频中全部的帧数，N表示一段视频相邻帧子集"></p>
+<h3 id="模型1：ConvNet-LSTM"><a href="#模型1：ConvNet-LSTM" class="headerlink" title="模型1：ConvNet+LSTM"></a>模型1：ConvNet+LSTM</h3><p>图像分类网络的高性能使得我们尝试只需很少的改变就能将其重用于视频中。 通过使用它们针对每个独立帧提取特征，然后集中在整个视频中来提取预测结果来实现这一目标。 这是bag of words图像建模方法的精神; 但是在实践中使用方便的同时，还存在完全忽略时间结构的问题（例如，模型不能很好的区分开门和关门）。</p>
+<p>理论上，更令人满意的方法是向模型添加一个recurrent layer，例如可以对状态进行编码的LSTM，并捕获<strong>时间顺序</strong>和<strong>长程依赖性</strong>。 本文在有512个隐藏单元的Inception-V1的最后的平均池化层之后防止了一个有着BN的LSTM层， 一个全连接层被添加到分类器的顶部。</p>
+<p>该模型对所有时间步骤的输出上使用交叉熵损失进行训练。 在测试过程中，我们只考虑最后一帧的输出。</p>
+<h3 id="模型2：3D-ConvNets"><a href="#模型2：3D-ConvNets" class="headerlink" title="模型2：3D ConvNets"></a>模型2：3D ConvNets</h3><p>3D ConvNets似乎是一种更自然的视频建模方法，其就像标准的卷积网络一样，但是具有时空卷积核。<strong>它们有一个非常重要的特征</strong>：它们直接创建时空数据的分层表示。这些模型的一个问题是，由于附加的内核维度，它们比2D ConvNets<strong>有更多的参数</strong>，这使得它们<strong>更难以训练</strong>。另外，它们似乎排除了ImageNet预训练的好处，因此以前的工作定义了相对较浅的架构，并且都是train from scratch。基准测试的结果具有提升的前景，但是与最新的技术水平相比还不具有竞争性，使得这种类型的模型成为评估我们大型数据集的好选择。</p>
+<p>在本文中，我们实现了一个C3D模型的小变体，它在顶部有8个卷积层，5个池化层和2个完全连接的层。模型的输入与原始实现相同，使用112×112像素共16帧。与原始C3D不同的是，我们在所有卷积和全连接层之后使用了batch normalization。另一个区别在于对于第一个池化层，我们使用stride=2而不是stride=1，这减少了内存占用，并允许更大批量 - 这对于批量标准化非常重要。使用这一步，我们能够使用标准的K40 GPU在每个GPU上每批处理15个视频。</p>
+<h3 id="模型3：Two-Stream-Networks"><a href="#模型3：Two-Stream-Networks" class="headerlink" title="模型3：Two-Stream Networks"></a>模型3：Two-Stream Networks</h3><p>来自ConvNets最后层的特征，LSTM可以模拟高层次的变化，但是可能无法捕获在许多情况下非常关键的精细的low-level动作。训练也是昂贵的，因为它需要通过多帧来展开网络以便反向传播。</p>
+<p>Simonyan和Zisserman介绍了一种不同的非常实用的方法，在通过两个副本ImageNet预先训练的ConvNet后，通过对来自单个RGB帧的预测和10个外部计算的光流帧的预测进行平均，来对视频的短时间快照进行建模。光流 stream有一个自适应的输入卷积层，输入通道的数量是光流帧的两倍（因为流量有两个通道，水平和垂直），在测试时，多个快照从视频中采样，并对动作预测进行平均。这被证明在现有的基准测试中得到了非常高的性能，同时非常有效地进行训练和测试。</p>
+<p>最近的一个扩展[8]将最后一个网络卷积层之后的空间流和光流融合起来，显示出对HMDB的一些改进，同时需要较少的测试时间增量（快照采样）。我们的实现大致使用了Inception-V1。网络的输入是5个连续的RGB帧，相隔10帧，以及相应的光流片段。 Inception-V1（5×7×7特征网格，对应于时间x和y维度）的最后一个平均汇聚层之前的空间和运动特征通过具有512个输出通道的3×3×3的3D卷积层，然后是3×3×3的3D最大池层，并通过最终的完全连接层。这些新层的权重用高斯噪声初始化。</p>
+<p>两种模型（原始双流和3D融合版本）都是端对端训练（包括原始模型中的双流平均流程）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
+    <link href="http://yoursite.com/posts/1774603577/"/>
+    <id>http://yoursite.com/posts/1774603577/</id>
     <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-10-26T14:10:03.141Z</updated>
+    <updated>2017-11-29T08:31:51.126Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。</li>
+<li><a id="more"></a>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Detection" scheme="http://yoursite.com/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为检测论文笔记：Temporal Segment Networks</title>
+    <link href="http://yoursite.com/posts/3872446965/"/>
+    <id>http://yoursite.com/posts/3872446965/</id>
+    <published>2017-10-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:32:29.116Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过<strong>有限的训练样本来</strong>学习这些模型。</li>
@@ -32,7 +368,15 @@
 </li>
 </ul>
 <a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2>]]></content>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Video-based行为检测应用：安全（security）、行为分析（behavior analysis）</li>
+<li>在行动识别方面，有两个关键和互补的方面：appearance和dynamics。</li>
+<li>ConvNets在视频动作识别中的应用受到两大障碍的阻碍<ul>
+<li>​</li>
+</ul>
+</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
@@ -903,98 +1247,6 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
   </entry>
   
   <entry>
-    <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口</title>
-    <link href="http://yoursite.com/posts/4113466123/"/>
-    <id>http://yoursite.com/posts/4113466123/</id>
-    <published>2017-01-16T22:32:24.000Z</published>
-    <updated>2017-02-18T11:17:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我<a href="http://jacobkong.github.io/posts/2093106769/" target="_blank" rel="external">上一篇文章</a>。</p>
-<a id="more"></a>
-<h2 id="py-faster-rcnn文件结构"><a href="#py-faster-rcnn文件结构" class="headerlink" title="py-faster-rcnn文件结构"></a>py-faster-rcnn文件结构</h2><ul>
-<li>caffe-fast-rcnn<br>这里是caffe框架目录，用来进行caffe编译安装</li>
-<li>data<br>用来存放pre trained模型，比如ImageNet上的，要训练的数据集以及读取文件的cache缓存。</li>
-<li>experiments<br>存放配置文件，运行的log文件，另外这个目录下有scripts 用来获取imagenet的模型，以及作者训练好的fast rcnn模型，以及相应的pascal-voc数据集</li>
-<li>lib<br>用来存放一些python接口文件，如其下的datasets主要负责数据库读取，config负责cnn一些训练的配置选项</li>
-<li>matlab<br>放置matlab与python的接口，用matlab来调用实现detection</li>
-<li>models<br>里面存放了三个模型文件，小型网络的ZF，大型网络VGG16，中型网络VGG_CNN_M_1024</li>
-<li>output<br>这里存放的是训练完成后的输出目录，默认会在default文件夹下</li>
-<li>tools<br>里面存放的是训练和测试的Python文件</li>
-</ul>
-<h2 id="修改训练代码"><a href="#修改训练代码" class="headerlink" title="修改训练代码"></a>修改训练代码</h2><h3 id="所要操作文件结构介绍"><a href="#所要操作文件结构介绍" class="headerlink" title="所要操作文件结构介绍"></a>所要操作文件结构介绍</h3><p>所有需要修改的训练代码都放到了<code>py-faster-rcnn/lib</code>文件夹下，我们进入文件夹，里面主要用到的文件夹有：</p>
-<ul>
-<li>datasets：该目录下主要存放读写数据接口。</li>
-<li>fast-rcnn：该目录下主要存放的是python的训练和测试脚本，以及训练的配置文件。</li>
-<li>roi_data_layer：该目录下主要存放一些ROI处理操作文件。</li>
-<li>utils：该目录下主要存放一些通用操作比如非极大值nms，以及计算bounding box的重叠率等常用功能。</li>
-</ul>
-<p>读写数据接口都放在<code>datasets/</code>文件夹下，我们进入文件夹，里面主要文件有：</p>
-<ul>
-<li>factory.py：这是个工厂类，用类生成imdb类并且返回数据库共网络训练和测试使用。</li>
-<li>imdb.py：这是数据库读写类的基类，分装了许多db的操作，但是具体的一些文件读写需要继承继续读写</li>
-<li>pascal_voc.py：这是imdb的子类，里面定义许多函数用来进行所有的数据读写操作。</li>
-</ul>
-<p>从上面可以看出，我们主要对<code>pascal_voc.py</code>文件进行修改。</p>
-<h3 id="pascal-voc-py文件代码分析"><a href="#pascal-voc-py文件代码分析" class="headerlink" title="pascal_voc.py文件代码分析"></a>pascal_voc.py文件代码分析</h3><p>我们主要是基于<code>pasca_voc.py</code>这个文件进行修改，里面有几个重要的函数需要介绍：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span> <span class="comment"># 这个是初始化函数，它对应着的是pascal_voc的数据集访问格式。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_at</span><span class="params">(self, i)</span>:</span> <span class="comment"># 根据第i个图像样本返回其对应的path，其调用image_path_from_index(self, index):作为其具体实现。</span></div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_from_index</span><span class="params">(self, index)</span>:</span> <span class="comment"># 实现了 image_path的具体功能</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span> <span class="comment"># 加载了样本的list文件，根据ImageSet/Main/文件夹下的文件进行image_index的加载。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_default_path</span><span class="params">(self)</span>:</span> <span class="comment"># 获得数据集地址</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gt_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 读取并返回ground_truth的db</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rpn_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 加载rpn产生的roi，调用_load_rpn_roidb(self, gt_roidb):函数作为其具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_rpn_roidb</span><span class="params">(self, gt_roidb)</span>:</span> <span class="comment"># 加载rpn_file</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span> <span class="comment"># 这个函数是读取gt的具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_write_voc_results_file</span><span class="params">(self, all_boxes)</span>:</span> <span class="comment"># 将voc的检测结果写入到文件</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_do_python_eval</span><span class="params">(self, output_dir = <span class="string">'output'</span>)</span>:</span> <span class="comment"># 根据python的evluation接口来做结果的分析</span></div></pre></td></tr></table></figure>
-<h3 id="修改pascal-voc-py文件"><a href="#修改pascal-voc-py文件" class="headerlink" title="修改pascal_voc.py文件"></a>修改pascal_voc.py文件</h3><p>要想对自己的数据集进行读取，我们主要是进行<code>pascal_voc.py</code>文件的修改，但是为了不破坏源文件，我们可以将<code>pascal_voc.py</code>进行拷贝复制，从而进行修改。这里我将<code>pascal_voc.py</code>文件拷贝成<code>caltech.py</code>文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp pascal_voc.py caltech.py</div></pre></td></tr></table></figure>
-<p>下面我们对<code>caltech.py</code>文件进行修改，在这里我会一一列举每个我修改过的函数。这里按照文件中的顺序排列。。</p>
-<h4 id="init函数修改"><a href="#init函数修改" class="headerlink" title="init函数修改"></a><strong>init</strong>函数修改</h4><p>这里是原始的pascal_voc的init函数，在这里，由于我们自己的数据集往往比voc的数据集要更简单的一些，在作者额代码里面用了很多的路径拼接，我们不用去迎合他的格式，将这些操作简单化即可。</p>
-<h5 id="原始的函数"><a href="#原始的函数" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, year, devkit_path=None)</span>:</span></div><div class="line">        imdb.__init__(self, <span class="string">'voc_'</span> + year + <span class="string">'_'</span> + image_set)</div><div class="line">        self._year = year</div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = self._get_default_path() <span class="keyword">if</span> devkit_path <span class="keyword">is</span> <span class="keyword">None</span> \</div><div class="line">                            <span class="keyword">else</span> devkit_path</div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'VOC'</span> + self._year)</div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'aeroplane'</span>, <span class="string">'bicycle'</span>, <span class="string">'bird'</span>, <span class="string">'boat'</span>,</div><div class="line">                         <span class="string">'bottle'</span>, <span class="string">'bus'</span>, <span class="string">'car'</span>, <span class="string">'cat'</span>, <span class="string">'chair'</span>,</div><div class="line">                         <span class="string">'cow'</span>, <span class="string">'diningtable'</span>, <span class="string">'dog'</span>, <span class="string">'horse'</span>,</div><div class="line">                         <span class="string">'motorbike'</span>, <span class="string">'person'</span>, <span class="string">'pottedplant'</span>,</div><div class="line">                         <span class="string">'sheep'</span>, <span class="string">'sofa'</span>, <span class="string">'train'</span>, <span class="string">'tvmonitor'</span>)</div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
-<h5 id="修改后的函数"><a href="#修改后的函数" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span><span class="comment"># initial function，把year删除</span></div><div class="line">        imdb.__init__(self, image_set) <span class="comment"># imageset is train.txt or test.txt</span></div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = devkit_path <span class="comment"># devkit_path = '~/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'Caltech'</span>) <span class="comment"># _data_path = '~/py-faster-rcnn/data/VOCdevkit/Caltech'</span></div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'person'</span>) <span class="comment"># 我只有‘background’和‘person’两类</span></div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">True</span>, <span class="comment"># 我把use_diff改为true了，因为我的数据集xml文件中没有&lt;difficult&gt;标签，否则之后训练会报错</span></div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
-<h4 id="load-image-set-index函数修改"><a href="#load-image-set-index函数修改" class="headerlink" title="_load_image_set_index函数修改"></a>_load_image_set_index函数修改</h4><h5 id="原始的函数-1"><a href="#原始的函数-1" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">      <span class="string">"""</span></div><div class="line">          Load the indexes listed in this dataset's image set file.</div><div class="line">          """</div><div class="line">      <span class="comment"># Example path to image set file:</span></div><div class="line">      <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">      image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                    self._image_set + <span class="string">'.txt'</span>)</div><div class="line">      <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">      <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">      <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">          image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">          <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
-<h5 id="修改后的函数-1"><a href="#修改后的函数-1" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load the indexes listed in this dataset's image set file.</div><div class="line">        """</div><div class="line">        <span class="comment"># Example path to image set file:</span></div><div class="line">        <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">        <span class="comment"># /home/jk/py-faster-rcnn/data/VOCdevkit/Caltech/ImageSets/Main/train.txt</span></div><div class="line">        image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                      self._image_set + <span class="string">'.txt'</span>)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">        <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">            image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">        <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
-<p>其实没改，只是加了一行注释，从而更好理解路径问题。</p>
-<h4 id="get-default-path函数修改"><a href="#get-default-path函数修改" class="headerlink" title="_get_default_path函数修改"></a>_get_default_path函数修改</h4><p>直接注释即可</p>
-<h4 id="load-pascal-annotation函数修改"><a href="#load-pascal-annotation函数修改" class="headerlink" title="_load_pascal_annotation函数修改"></a>_load_pascal_annotation函数修改</h4><h5 id="原始的函数-2"><a href="#原始的函数-2" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text) - <span class="number">1</span></div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text) - <span class="number">1</span></div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text) - <span class="number">1</span></div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text) - <span class="number">1</span></div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
-<h5 id="修改后的函数-2"><a href="#修改后的函数-2" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            <span class="comment"># 这里我把‘-1’全部删除掉了，防止有的数据是0开始，然后‘-1’导致变为负数，产生AssertError错误</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text)</div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text)</div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text)</div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text)</div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
-<h4 id="main函数修改"><a href="#main函数修改" class="headerlink" title="main函数修改"></a>main函数修改</h4><p>原始的函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line">    d = pascal_voc(<span class="string">'trainval'</span>, <span class="string">'2007'</span>)</div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
-<p>修改后的函数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line">    d = caltech(<span class="string">'train'</span>, <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span>)<span class="comment">#调用构造函数，传入imageset和路径</span></div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
-<p>至此读取接口修改完毕，该文件中的其他函数并未修改。</p>
-<h3 id="修改factory-py文件"><a href="#修改factory-py文件" class="headerlink" title="修改factory.py文件"></a>修改factory.py文件</h3><p>当网络训练时会调用factory里面的get方法获得相应的imdb，首先在文件头import 把pascal_voc改成caltech</p>
-<p>在这个文件作者生成了多个数据库的路径，我们自己数据库只要给定根路径即可，修改主要有以下4个</p>
-<ul>
-<li>函数之后有两个多级的for循环，也将其注释</li>
-<li>直接定义<code>devkit</code>。</li>
-<li>利用创建自己的训练和测试的imdb set，这里的name的格式为<code>caltech_{}</code>。</li>
-</ul>
-<h4 id="原始的代码"><a href="#原始的代码" class="headerlink" title="原始的代码"></a>原始的代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line"><span class="keyword">from</span> datasets.coco <span class="keyword">import</span> coco</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2007'</span>, <span class="string">'2012'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'trainval'</span>, <span class="string">'test'</span>]:</div><div class="line">        name = <span class="string">'voc_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: pascal_voc(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2014'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'minival'</span>, <span class="string">'valminusminival'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2015'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'test'</span>, <span class="string">'test-dev'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
-<h4 id="修改后的文件"><a href="#修改后的文件" class="headerlink" title="修改后的文件"></a>修改后的文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line"><span class="comment">#from datasets.coco import coco</span></div><div class="line"><span class="comment">#import numpy as np</span></div><div class="line"></div><div class="line">devkit = <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="comment">#for year in ['2007', '2012']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'trainval', 'test']:</span></div><div class="line"><span class="comment">#        name = 'voc_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: pascal_voc(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2014']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'minival', 'valminusminival']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2015']:</span></div><div class="line"><span class="comment">#    for split in ['test', 'test-dev']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up caltech_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'test'</span>]:</div><div class="line">    name = <span class="string">'caltech_&#123;&#125;'</span>.format(split)</div><div class="line">    __sets[name] = (<span class="keyword">lambda</span> imageset=split, devkit=devkit: caltech(imageset, devkit))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
-<h3 id="修改init-py文件"><a href="#修改init-py文件" class="headerlink" title="修改init.py文件"></a>修改<strong>init</strong>.py文件</h3><p>在行首添加上 <code>from .caltech import caltech</code></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>坐标的顺序我再说一次，要左上右下，并且x1必须要小于x2，这个是基本，反了会在坐标水平变换的时候会出错，坐标从0开始，如果已经是0，则不需要再-1。</li>
-<li>训练图像的大小不要太大，否则生成的OP也会太多，速度太慢，图像样本大小最好调整到500，600左右，然后再提取OP</li>
-<li>如果读取并生成pkl文件之后，实际数据内容或者顺序还有问题，记得要把data/cache/下面的pkl文件给删掉。</li>
-</ul>
-<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
-<li><a href="http://www.cnblogs.com/louyihang-loves-baiyan/p/4903231.html" target="_blank" rel="external"><strong>Fast RCNN训练自己的数据集 （2修改读写接口）</strong></a></li>
-<li><a href="http://www.cnblogs.com/CarryPotMan/p/5390336.html" target="_blank" rel="external"><strong>Faster R-CNN教程</strong></a></li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我&lt;a href=&quot;http://jacobkong.github.io/posts/2093106769/&quot;&gt;上一篇文章&lt;/a&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="经验" scheme="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
-    
-    
-      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
-    
-      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</title>
     <link href="http://yoursite.com/posts/464905881/"/>
     <id>http://yoursite.com/posts/464905881/</id>
@@ -1104,6 +1356,98 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     <summary type="html">
     
       &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;前面已经介绍了如何准备数据集，以及如何修改数据集读写接口来操作数据集，接下来我来说明一下怎么来训练网络和之后的检测过程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="经验" scheme="http://yoursite.com/categories/%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
+    
+      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口</title>
+    <link href="http://yoursite.com/posts/4113466123/"/>
+    <id>http://yoursite.com/posts/4113466123/</id>
+    <published>2017-01-16T22:32:24.000Z</published>
+    <updated>2017-02-18T11:17:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我<a href="http://jacobkong.github.io/posts/2093106769/" target="_blank" rel="external">上一篇文章</a>。</p>
+<a id="more"></a>
+<h2 id="py-faster-rcnn文件结构"><a href="#py-faster-rcnn文件结构" class="headerlink" title="py-faster-rcnn文件结构"></a>py-faster-rcnn文件结构</h2><ul>
+<li>caffe-fast-rcnn<br>这里是caffe框架目录，用来进行caffe编译安装</li>
+<li>data<br>用来存放pre trained模型，比如ImageNet上的，要训练的数据集以及读取文件的cache缓存。</li>
+<li>experiments<br>存放配置文件，运行的log文件，另外这个目录下有scripts 用来获取imagenet的模型，以及作者训练好的fast rcnn模型，以及相应的pascal-voc数据集</li>
+<li>lib<br>用来存放一些python接口文件，如其下的datasets主要负责数据库读取，config负责cnn一些训练的配置选项</li>
+<li>matlab<br>放置matlab与python的接口，用matlab来调用实现detection</li>
+<li>models<br>里面存放了三个模型文件，小型网络的ZF，大型网络VGG16，中型网络VGG_CNN_M_1024</li>
+<li>output<br>这里存放的是训练完成后的输出目录，默认会在default文件夹下</li>
+<li>tools<br>里面存放的是训练和测试的Python文件</li>
+</ul>
+<h2 id="修改训练代码"><a href="#修改训练代码" class="headerlink" title="修改训练代码"></a>修改训练代码</h2><h3 id="所要操作文件结构介绍"><a href="#所要操作文件结构介绍" class="headerlink" title="所要操作文件结构介绍"></a>所要操作文件结构介绍</h3><p>所有需要修改的训练代码都放到了<code>py-faster-rcnn/lib</code>文件夹下，我们进入文件夹，里面主要用到的文件夹有：</p>
+<ul>
+<li>datasets：该目录下主要存放读写数据接口。</li>
+<li>fast-rcnn：该目录下主要存放的是python的训练和测试脚本，以及训练的配置文件。</li>
+<li>roi_data_layer：该目录下主要存放一些ROI处理操作文件。</li>
+<li>utils：该目录下主要存放一些通用操作比如非极大值nms，以及计算bounding box的重叠率等常用功能。</li>
+</ul>
+<p>读写数据接口都放在<code>datasets/</code>文件夹下，我们进入文件夹，里面主要文件有：</p>
+<ul>
+<li>factory.py：这是个工厂类，用类生成imdb类并且返回数据库共网络训练和测试使用。</li>
+<li>imdb.py：这是数据库读写类的基类，分装了许多db的操作，但是具体的一些文件读写需要继承继续读写</li>
+<li>pascal_voc.py：这是imdb的子类，里面定义许多函数用来进行所有的数据读写操作。</li>
+</ul>
+<p>从上面可以看出，我们主要对<code>pascal_voc.py</code>文件进行修改。</p>
+<h3 id="pascal-voc-py文件代码分析"><a href="#pascal-voc-py文件代码分析" class="headerlink" title="pascal_voc.py文件代码分析"></a>pascal_voc.py文件代码分析</h3><p>我们主要是基于<code>pasca_voc.py</code>这个文件进行修改，里面有几个重要的函数需要介绍：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span> <span class="comment"># 这个是初始化函数，它对应着的是pascal_voc的数据集访问格式。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_at</span><span class="params">(self, i)</span>:</span> <span class="comment"># 根据第i个图像样本返回其对应的path，其调用image_path_from_index(self, index):作为其具体实现。</span></div><div class="line">        </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">image_path_from_index</span><span class="params">(self, index)</span>:</span> <span class="comment"># 实现了 image_path的具体功能</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span> <span class="comment"># 加载了样本的list文件，根据ImageSet/Main/文件夹下的文件进行image_index的加载。</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_default_path</span><span class="params">(self)</span>:</span> <span class="comment"># 获得数据集地址</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gt_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 读取并返回ground_truth的db</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rpn_roidb</span><span class="params">(self)</span>:</span> <span class="comment"># 加载rpn产生的roi，调用_load_rpn_roidb(self, gt_roidb):函数作为其具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_rpn_roidb</span><span class="params">(self, gt_roidb)</span>:</span> <span class="comment"># 加载rpn_file</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span> <span class="comment"># 这个函数是读取gt的具体实现</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_write_voc_results_file</span><span class="params">(self, all_boxes)</span>:</span> <span class="comment"># 将voc的检测结果写入到文件</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_do_python_eval</span><span class="params">(self, output_dir = <span class="string">'output'</span>)</span>:</span> <span class="comment"># 根据python的evluation接口来做结果的分析</span></div></pre></td></tr></table></figure>
+<h3 id="修改pascal-voc-py文件"><a href="#修改pascal-voc-py文件" class="headerlink" title="修改pascal_voc.py文件"></a>修改pascal_voc.py文件</h3><p>要想对自己的数据集进行读取，我们主要是进行<code>pascal_voc.py</code>文件的修改，但是为了不破坏源文件，我们可以将<code>pascal_voc.py</code>进行拷贝复制，从而进行修改。这里我将<code>pascal_voc.py</code>文件拷贝成<code>caltech.py</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp pascal_voc.py caltech.py</div></pre></td></tr></table></figure>
+<p>下面我们对<code>caltech.py</code>文件进行修改，在这里我会一一列举每个我修改过的函数。这里按照文件中的顺序排列。。</p>
+<h4 id="init函数修改"><a href="#init函数修改" class="headerlink" title="init函数修改"></a><strong>init</strong>函数修改</h4><p>这里是原始的pascal_voc的init函数，在这里，由于我们自己的数据集往往比voc的数据集要更简单的一些，在作者额代码里面用了很多的路径拼接，我们不用去迎合他的格式，将这些操作简单化即可。</p>
+<h5 id="原始的函数"><a href="#原始的函数" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, year, devkit_path=None)</span>:</span></div><div class="line">        imdb.__init__(self, <span class="string">'voc_'</span> + year + <span class="string">'_'</span> + image_set)</div><div class="line">        self._year = year</div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = self._get_default_path() <span class="keyword">if</span> devkit_path <span class="keyword">is</span> <span class="keyword">None</span> \</div><div class="line">                            <span class="keyword">else</span> devkit_path</div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'VOC'</span> + self._year)</div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'aeroplane'</span>, <span class="string">'bicycle'</span>, <span class="string">'bird'</span>, <span class="string">'boat'</span>,</div><div class="line">                         <span class="string">'bottle'</span>, <span class="string">'bus'</span>, <span class="string">'car'</span>, <span class="string">'cat'</span>, <span class="string">'chair'</span>,</div><div class="line">                         <span class="string">'cow'</span>, <span class="string">'diningtable'</span>, <span class="string">'dog'</span>, <span class="string">'horse'</span>,</div><div class="line">                         <span class="string">'motorbike'</span>, <span class="string">'person'</span>, <span class="string">'pottedplant'</span>,</div><div class="line">                         <span class="string">'sheep'</span>, <span class="string">'sofa'</span>, <span class="string">'train'</span>, <span class="string">'tvmonitor'</span>)</div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数"><a href="#修改后的函数" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, image_set, devkit_path=None)</span>:</span><span class="comment"># initial function，把year删除</span></div><div class="line">        imdb.__init__(self, image_set) <span class="comment"># imageset is train.txt or test.txt</span></div><div class="line">        self._image_set = image_set</div><div class="line">        self._devkit_path = devkit_path <span class="comment"># devkit_path = '~/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line">        self._data_path = os.path.join(self._devkit_path, <span class="string">'Caltech'</span>) <span class="comment"># _data_path = '~/py-faster-rcnn/data/VOCdevkit/Caltech'</span></div><div class="line">        self._classes = (<span class="string">'__background__'</span>, <span class="comment"># always index 0</span></div><div class="line">                         <span class="string">'person'</span>) <span class="comment"># 我只有‘background’和‘person’两类</span></div><div class="line">        self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))</div><div class="line">        self._image_ext = <span class="string">'.jpg'</span></div><div class="line">        self._image_index = self._load_image_set_index()</div><div class="line">        <span class="comment"># Default to roidb handler</span></div><div class="line">        self._roidb_handler = self.selective_search_roidb</div><div class="line">        self._salt = str(uuid.uuid4())</div><div class="line">        self._comp_id = <span class="string">'comp4'</span></div><div class="line"></div><div class="line">        <span class="comment"># PASCAL specific config options</span></div><div class="line">        self.config = &#123;<span class="string">'cleanup'</span>     : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_salt'</span>    : <span class="keyword">True</span>,</div><div class="line">                       <span class="string">'use_diff'</span>    : <span class="keyword">True</span>, <span class="comment"># 我把use_diff改为true了，因为我的数据集xml文件中没有&lt;difficult&gt;标签，否则之后训练会报错</span></div><div class="line">                       <span class="string">'matlab_eval'</span> : <span class="keyword">False</span>,</div><div class="line">                       <span class="string">'rpn_file'</span>    : <span class="keyword">None</span>,</div><div class="line">                       <span class="string">'min_size'</span>    : <span class="number">2</span>&#125;</div><div class="line"></div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._devkit_path), \</div><div class="line">                <span class="string">'VOCdevkit path does not exist: &#123;&#125;'</span>.format(self._devkit_path)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(self._data_path), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(self._data_path)</div></pre></td></tr></table></figure>
+<h4 id="load-image-set-index函数修改"><a href="#load-image-set-index函数修改" class="headerlink" title="_load_image_set_index函数修改"></a>_load_image_set_index函数修改</h4><h5 id="原始的函数-1"><a href="#原始的函数-1" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">      <span class="string">"""</span></div><div class="line">          Load the indexes listed in this dataset's image set file.</div><div class="line">          """</div><div class="line">      <span class="comment"># Example path to image set file:</span></div><div class="line">      <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">      image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                    self._image_set + <span class="string">'.txt'</span>)</div><div class="line">      <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">      <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">      <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">          image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">          <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数-1"><a href="#修改后的函数-1" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_image_set_index</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load the indexes listed in this dataset's image set file.</div><div class="line">        """</div><div class="line">        <span class="comment"># Example path to image set file:</span></div><div class="line">        <span class="comment"># self._devkit_path + /VOCdevkit2007/VOC2007/ImageSets/Main/val.txt</span></div><div class="line">        <span class="comment"># /home/jk/py-faster-rcnn/data/VOCdevkit/Caltech/ImageSets/Main/train.txt</span></div><div class="line">        image_set_file = os.path.join(self._data_path, <span class="string">'ImageSets'</span>, <span class="string">'Main'</span>,</div><div class="line">                                      self._image_set + <span class="string">'.txt'</span>)</div><div class="line">        <span class="keyword">assert</span> os.path.exists(image_set_file), \</div><div class="line">                <span class="string">'Path does not exist: &#123;&#125;'</span>.format(image_set_file)</div><div class="line">        <span class="keyword">with</span> open(image_set_file) <span class="keyword">as</span> f:</div><div class="line">            image_index = [x.strip() <span class="keyword">for</span> x <span class="keyword">in</span> f.readlines()]</div><div class="line">        <span class="keyword">return</span> image_index</div></pre></td></tr></table></figure>
+<p>其实没改，只是加了一行注释，从而更好理解路径问题。</p>
+<h4 id="get-default-path函数修改"><a href="#get-default-path函数修改" class="headerlink" title="_get_default_path函数修改"></a>_get_default_path函数修改</h4><p>直接注释即可</p>
+<h4 id="load-pascal-annotation函数修改"><a href="#load-pascal-annotation函数修改" class="headerlink" title="_load_pascal_annotation函数修改"></a>_load_pascal_annotation函数修改</h4><h5 id="原始的函数-2"><a href="#原始的函数-2" class="headerlink" title="原始的函数"></a>原始的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text) - <span class="number">1</span></div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text) - <span class="number">1</span></div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text) - <span class="number">1</span></div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text) - <span class="number">1</span></div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
+<h5 id="修改后的函数-2"><a href="#修改后的函数-2" class="headerlink" title="修改后的函数"></a>修改后的函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_load_pascal_annotation</span><span class="params">(self, index)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Load image and bounding boxes info from XML file in the PASCAL VOC</div><div class="line">        format.</div><div class="line">        """</div><div class="line">        filename = os.path.join(self._data_path, <span class="string">'Annotations'</span>, index + <span class="string">'.xml'</span>)</div><div class="line">        tree = ET.parse(filename)</div><div class="line">        objs = tree.findall(<span class="string">'object'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.config[<span class="string">'use_diff'</span>]:</div><div class="line">            <span class="comment"># Exclude the samples labeled as difficult</span></div><div class="line">            non_diff_objs = [</div><div class="line">                obj <span class="keyword">for</span> obj <span class="keyword">in</span> objs <span class="keyword">if</span> int(obj.find(<span class="string">'difficult'</span>).text) == <span class="number">0</span>]</div><div class="line">            <span class="comment"># if len(non_diff_objs) != len(objs):</span></div><div class="line">            <span class="comment">#     print 'Removed &#123;&#125; difficult objects'.format(</span></div><div class="line">            <span class="comment">#         len(objs) - len(non_diff_objs))</span></div><div class="line">            objs = non_diff_objs</div><div class="line">        num_objs = len(objs)</div><div class="line"></div><div class="line">        boxes = np.zeros((num_objs, <span class="number">4</span>), dtype=np.uint16)</div><div class="line">        gt_classes = np.zeros((num_objs), dtype=np.int32)</div><div class="line">        overlaps = np.zeros((num_objs, self.num_classes), dtype=np.float32)</div><div class="line">        <span class="comment"># "Seg" area for pascal is just the box area</span></div><div class="line">        seg_areas = np.zeros((num_objs), dtype=np.float32)</div><div class="line"></div><div class="line">        <span class="comment"># Load object bounding boxes into a data frame.</span></div><div class="line">        <span class="keyword">for</span> ix, obj <span class="keyword">in</span> enumerate(objs):</div><div class="line">            bbox = obj.find(<span class="string">'bndbox'</span>)</div><div class="line">            <span class="comment"># Make pixel indexes 0-based</span></div><div class="line">            <span class="comment"># 这里我把‘-1’全部删除掉了，防止有的数据是0开始，然后‘-1’导致变为负数，产生AssertError错误</span></div><div class="line">            x1 = float(bbox.find(<span class="string">'xmin'</span>).text)</div><div class="line">            y1 = float(bbox.find(<span class="string">'ymin'</span>).text)</div><div class="line">            x2 = float(bbox.find(<span class="string">'xmax'</span>).text)</div><div class="line">            y2 = float(bbox.find(<span class="string">'ymax'</span>).text)</div><div class="line">            cls = self._class_to_ind[obj.find(<span class="string">'name'</span>).text.lower().strip()]</div><div class="line">            boxes[ix, :] = [x1, y1, x2, y2]</div><div class="line">            gt_classes[ix] = cls</div><div class="line">            overlaps[ix, cls] = <span class="number">1.0</span></div><div class="line">            seg_areas[ix] = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</div><div class="line"></div><div class="line">        overlaps = scipy.sparse.csr_matrix(overlaps)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> &#123;<span class="string">'boxes'</span> : boxes,</div><div class="line">                <span class="string">'gt_classes'</span>: gt_classes,</div><div class="line">                <span class="string">'gt_overlaps'</span> : overlaps,</div><div class="line">                <span class="string">'flipped'</span> : <span class="keyword">False</span>,</div><div class="line">                <span class="string">'seg_areas'</span> : seg_areas&#125;</div></pre></td></tr></table></figure>
+<h4 id="main函数修改"><a href="#main函数修改" class="headerlink" title="main函数修改"></a>main函数修改</h4><p>原始的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line">    d = pascal_voc(<span class="string">'trainval'</span>, <span class="string">'2007'</span>)</div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
+<p>修改后的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line">    d = caltech(<span class="string">'train'</span>, <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span>)<span class="comment">#调用构造函数，传入imageset和路径</span></div><div class="line">    res = d.roidb</div><div class="line">    <span class="keyword">from</span> IPython <span class="keyword">import</span> embed; embed()</div></pre></td></tr></table></figure>
+<p>至此读取接口修改完毕，该文件中的其他函数并未修改。</p>
+<h3 id="修改factory-py文件"><a href="#修改factory-py文件" class="headerlink" title="修改factory.py文件"></a>修改factory.py文件</h3><p>当网络训练时会调用factory里面的get方法获得相应的imdb，首先在文件头import 把pascal_voc改成caltech</p>
+<p>在这个文件作者生成了多个数据库的路径，我们自己数据库只要给定根路径即可，修改主要有以下4个</p>
+<ul>
+<li>函数之后有两个多级的for循环，也将其注释</li>
+<li>直接定义<code>devkit</code>。</li>
+<li>利用创建自己的训练和测试的imdb set，这里的name的格式为<code>caltech_{}</code>。</li>
+</ul>
+<h4 id="原始的代码"><a href="#原始的代码" class="headerlink" title="原始的代码"></a>原始的代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.pascal_voc <span class="keyword">import</span> pascal_voc</div><div class="line"><span class="keyword">from</span> datasets.coco <span class="keyword">import</span> coco</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2007'</span>, <span class="string">'2012'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'trainval'</span>, <span class="string">'test'</span>]:</div><div class="line">        name = <span class="string">'voc_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: pascal_voc(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2014'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'val'</span>, <span class="string">'minival'</span>, <span class="string">'valminusminival'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> year <span class="keyword">in</span> [<span class="string">'2015'</span>]:</div><div class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'test'</span>, <span class="string">'test-dev'</span>]:</div><div class="line">        name = <span class="string">'coco_&#123;&#125;_&#123;&#125;'</span>.format(year, split)</div><div class="line">        __sets[name] = (<span class="keyword">lambda</span> split=split, year=year: coco(split, year))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
+<h4 id="修改后的文件"><a href="#修改后的文件" class="headerlink" title="修改后的文件"></a>修改后的文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"><span class="comment"># Fast R-CNN</span></div><div class="line"><span class="comment"># Copyright (c) 2015 Microsoft</span></div><div class="line"><span class="comment"># Licensed under The MIT License [see LICENSE for details]</span></div><div class="line"><span class="comment"># Written by Ross Girshick</span></div><div class="line"><span class="comment"># --------------------------------------------------------</span></div><div class="line"></div><div class="line"><span class="string">"""Factory method for easily getting imdbs by name."""</span></div><div class="line"></div><div class="line">__sets = &#123;&#125;</div><div class="line"></div><div class="line"><span class="keyword">from</span> datasets.caltech <span class="keyword">import</span> caltech <span class="comment"># 导入caltech包</span></div><div class="line"><span class="comment">#from datasets.coco import coco</span></div><div class="line"><span class="comment">#import numpy as np</span></div><div class="line"></div><div class="line">devkit = <span class="string">'/home/jk/py-faster-rcnn/data/VOCdevkit'</span></div><div class="line"><span class="comment"># Set up voc_&lt;year&gt;_&lt;split&gt; using selective search "fast" mode</span></div><div class="line"><span class="comment">#for year in ['2007', '2012']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'trainval', 'test']:</span></div><div class="line"><span class="comment">#        name = 'voc_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: pascal_voc(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2014_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2014']:</span></div><div class="line"><span class="comment">#    for split in ['train', 'val', 'minival', 'valminusminival']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up coco_2015_&lt;split&gt;</span></div><div class="line"><span class="comment">#for year in ['2015']:</span></div><div class="line"><span class="comment">#    for split in ['test', 'test-dev']:</span></div><div class="line"><span class="comment">#        name = 'coco_&#123;&#125;_&#123;&#125;'.format(year, split)</span></div><div class="line"><span class="comment">#        __sets[name] = (lambda split=split, year=year: coco(split, year))</span></div><div class="line"></div><div class="line"><span class="comment"># Set up caltech_&lt;split&gt;</span></div><div class="line"><span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">'train'</span>, <span class="string">'test'</span>]:</div><div class="line">    name = <span class="string">'caltech_&#123;&#125;'</span>.format(split)</div><div class="line">    __sets[name] = (<span class="keyword">lambda</span> imageset=split, devkit=devkit: caltech(imageset, devkit))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_imdb</span><span class="params">(name)</span>:</span></div><div class="line">    <span class="string">"""Get an imdb (image database) by name."""</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> __sets.has_key(name):</div><div class="line">        <span class="keyword">raise</span> KeyError(<span class="string">'Unknown dataset: &#123;&#125;'</span>.format(name))</div><div class="line">    <span class="keyword">return</span> __sets[name]()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_imdbs</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""List all registered imdbs."""</span></div><div class="line">    <span class="keyword">return</span> __sets.keys()</div></pre></td></tr></table></figure>
+<h3 id="修改init-py文件"><a href="#修改init-py文件" class="headerlink" title="修改init.py文件"></a>修改<strong>init</strong>.py文件</h3><p>在行首添加上 <code>from .caltech import caltech</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>坐标的顺序我再说一次，要左上右下，并且x1必须要小于x2，这个是基本，反了会在坐标水平变换的时候会出错，坐标从0开始，如果已经是0，则不需要再-1。</li>
+<li>训练图像的大小不要太大，否则生成的OP也会太多，速度太慢，图像样本大小最好调整到500，600左右，然后再提取OP</li>
+<li>如果读取并生成pkl文件之后，实际数据内容或者顺序还有问题，记得要把data/cache/下面的pkl文件给删掉。</li>
+</ul>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
+<li><a href="http://www.cnblogs.com/louyihang-loves-baiyan/p/4903231.html" target="_blank" rel="external"><strong>Fast RCNN训练自己的数据集 （2修改读写接口）</strong></a></li>
+<li><a href="http://www.cnblogs.com/CarryPotMan/p/5390336.html" target="_blank" rel="external"><strong>Faster R-CNN教程</strong></a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我&lt;a href=&quot;http://jacobkong.github.io/posts/2093106769/&quot;&gt;上一篇文章&lt;/a&gt;。&lt;/p&gt;
     
     </summary>
     
@@ -2176,625 +2520,6 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
     
       <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：Robust Real-Time Face Detection</title>
-    <link href="http://yoursite.com/posts/2903903730/"/>
-    <id>http://yoursite.com/posts/2903903730/</id>
-    <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-01-28T07:37:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li>傅里叶变换的一个推论：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg" alt=""></li>
-</ul>
-<p>一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。</p>
-<ul>
-<li><p>卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg" alt=""><br>整个过程的核心就是“（反转），移动，乘积，求和”</p>
-</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li><p>二维卷积</p>
-<ul>
-<li><p>数学定义<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru5ml16j30f901kdfv.jpg" alt=""></p>
-<p>二维卷积在图像处理中会经常遇到，图像处理中用到的大多是二维卷积的离散形式：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfrum5q4ej30cv01o74a.jpg" alt=""></p>
-</li>
-<li>图像处理中的二维卷积，二维卷积就是一维卷积的扩展，原理差不多。核心还是（反转），移动，乘积，求和。这里二维的反转就是将卷积核沿反对角线翻转，比如：<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru4uj25j307m02wjrd.jpg" alt=""><br>之后，卷积核在二维平面上平移，并且卷积核的每个元素与被卷积图像对应位置相乘，再求和。通过卷积核的不断移动，我们就有了一个新的图像， <strong>这个图像完全由卷积核在各个位置时的乘积求和的结果组成。</strong></li>
-</ul>
-</li>
-<li><p>巴拿赫空间：更精确地说，巴拿赫空间是一个具有范数并对此范数完备的向量空间。</p>
-</li>
-<li><p>许多在数学分析中学到的无限维函数空间都是巴拿赫空间。</p>
-</li>
-<li><p>巴拿赫空间有两种常见的类型：“实巴拿赫空间”及“复巴拿赫空间”，分别是指将巴拿赫空间的向量空间定义于由实数或复数组成的域之上。</p>
-</li>
-<li><p>Overcomplete：</p>
-<ul>
-<li>对于Banach space X中的一个子集，如果X中的每一个元素都可以利用子集中的元素在范数内进行有限线性组合来良好近似，则该系统X是完备Complete的。</li>
-<li>该完备系统是过完备（Overcomplete）的，如果从子集中移去一个元素，该系统依旧是完备的，则该系统称为过完备的。</li>
-<li>在不同的研究中，比如信号处理和功能近似，过完备可以帮助研究人员达到一个更稳定、更健壮，或者相比于使用基向量更紧凑的分解。</li>
-<li>如果 # (basis vector基向量)&gt;输入的维度，则我们有一个overcomplete representation.</li>
-</ul>
-</li>
-<li><p>ROC曲线：在信号检测理论中，接收者操作特征曲线（receiver operating characteristic curve，或者叫ROC曲线）是一种坐标图式的分析工具，用于</p>
-<ul>
-<li>(1) 选择最佳的信号侦测模型、舍弃次佳的模型。</li>
-<li>(2) 在同一模型中设定最佳阈值。</li>
-<li>从 (0, 0) 到 (1,1) 的对角线将ROC空间划分为左上／右下两个区域，在这条线的 <strong>以上的点</strong> 代表了一个 <strong>好</strong> 的分类结果（胜过随机分类），而在这条线 <strong>以下的点</strong> 代表了 <strong>差</strong> 的分类结果（劣于随机分类）。</li>
-<li>完美的预测是一个在左上角的点.</li>
-<li>曲线下面积（AUC）：ROC曲线下方的面积，若随机抽取一个阳性样本和一个阴性样本，分类器正确判断阳性样本的值高于阴性样本之机率=AUC。简单说：AUC值越大的分类器，正确率越高。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>介绍一个脸部检测框架。</li>
-<li>三个贡献：</li>
-<li>引入新图像表示——称为“积分图像”，其允许我们的检测器非常快速地计算所使用的特征。</li>
-<li>提出一个利用AdaBost学习算法构建的简单有效的分类器，来从极大潜在特征集中选出很少的关键视觉特征。</li>
-<li>在级联中组合分类器，从而快速丢弃图像的背景区域，同时在有可能的面部区域上花费更多的计算。</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li><p>Haar Basis 函数：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfru9jaxij308q05st8t.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrucbw2pj30fn07kaaj.jpg" alt=""></p>
-</li>
-<li><p>Integral image: 类似于计算机图形学中利用求和区域表来进行纹理映射。</p>
-</li>
-<li><p>Haar-like features：就是mount两个或多个区域的像素值之和的差值。</p>
-</li>
-<li>AdaBoost：自适应增强， 具体说来，整个Adaboost 迭代算法就3步：</li>
-<li>初始化训练数据的权值分布。如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：1/N。</li>
-<li>训练弱分类器。具体训练过程中，如果某个样本点已经被准确地分类，那么在构造下一个训练集中，它的权值就被降低；相反，如果某个样本点没有被准确地分类，那么它的权值就得到提高。然后，权值更新过的样本集被用于训练下一个分类器，整个训练过程如此迭代地进行下去。</li>
-<li>将各个训练得到的弱分类器组合成强分类器。各个弱分类器的训练过程结束后，加大分类误差率小的弱分类器的权重，使其在最终的分类函数中起着较大的决定作用，而降低分类误差率大的弱分类器的权重，使其在最终的分类函数中起着较小的决定作用。换言之，误差率低的弱分类器在最终分类器中占的权重较大，否则较小。</li>
-<li>级联检测过程的结构基本上是简并决策树的结构</li>
-</ul>
-<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
-<li>基于特征的系统操作肯定比一个基于像素的系统更更快</li>
-<li>（Two-rectangle feature）两矩形特征的值是两个矩形区域内的像素之和的差</li>
-<li>(Three-rectangle feature)三矩形特征计算从中心矩形中的和减去的两个外部矩形的和。</li>
-<li>(Four-rectangle feature)四矩形特征计算矩形对角线对之间的差异。<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrul9r26j30aw09ydg6.jpg" alt=""></li>
-</ul>
-<p>矩阵特征=从灰色矩形中的像素的和中减去位于白色矩形内的像素的和。</p>
-<h3 id="Integral-Image"><a href="#Integral-Image" class="headerlink" title="Integral Image"></a>Integral Image</h3><ul>
-<li><p>矩阵特征可以通过图像的中间表示来快速计算，从而成为Integral Image.</p>
-</li>
-<li><p>积分图的每一点（x, y）的值是原图中对应位置的左上角区域的所有值得和。</p>
-</li>
-<li><p>积分图每一点的（x, y）值是：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrujq2ygj30f601g749.jpg" alt=""></p>
-</li>
-<li><p>位置x，y处的积分图像包含x，y（包括端点）上方和左侧的像素的和:<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruhirv4j309d021t8p.jpg" alt=""></p>
-</li>
-</ul>
-<p>ii(x, y) is the integral image</p>
-<p>i(x, y) is the original image<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfru76drdj30au02gwem.jpg" alt=""></p>
-<p>s（x，y）是累积行和</p>
-<p>s(x, −1) = 0, ii(−1, y) = 0)</p>
-<p>积分图可以只遍历一次图像即可有效的计算出来</p>
-<ul>
-<li><p>使用积分图像，可以在四个阵列参考中计算任何矩形和。<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru8nyo9j30c8096jrh.jpg" alt=""></p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruav2urj30d602jwej.jpg" alt=""></p>
-</li>
-<li><p>Two-rectangle feature：需要6个阵列参考<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrughx0aj30ga0gr408.jpg" alt=""></p>
-</li>
-<li><p>Three-rectangle feature：需要8个阵列参考</p>
-</li>
-<li><p>Four-rectangle feature：需要9个阵列参考</p>
-</li>
-<li><p>在线性运算（例如f.g）的情况下，如果其逆被应用于结果，则任何可逆线性算子可以应用于f或g。</p>
-</li>
-<li><p>例如在卷积的情况下，如果导数运算符被应用于图像和卷积核，则结果必须被双重积分.<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfru56d7dj307g01ra9z.jpg" alt=""></p>
-</li>
-<li><p>如果f和g的导数稀疏（或可以这样做），卷积可以显着加速。</p>
-</li>
-<li><p>类似的一个认识是：如果其逆被应用于g，则一个可逆线性算子可以应用于f。<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru68n1lj307x01tdfs.jpg" alt=""></p>
-</li>
-<li><p>在该框架中观察，矩形和的计算可以表示为点积i·r，其中i是图像，r是box car图像（在感兴趣的矩形内的值为1，外面是0）。 此操作可以重写：<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfrufk96vj306c02gwee.jpg" alt=""></p>
-</li>
-</ul>
-<p>积分图像实际上是图像的二重积分（首先沿行，然后沿列）。</p>
-<ul>
-<li>矩形的二阶导数（第一行在行中，然后在列中）在矩形的角处产生四个delta函数。 第二点积的评估通过四个阵列访问来完成。</li>
-</ul>
-<h3 id="Feature-Discussion"><a href="#Feature-Discussion" class="headerlink" title="Feature Discussion"></a>Feature Discussion</h3><ul>
-<li>与可操纵滤波器（Steerable filters）等替代方案相比，矩形特性有点原始。</li>
-<li>可控滤波器对边界的详细分析，图像压缩和纹理分析的非常有用。</li>
-<li>由于正交性不是这个特征集的中心，我们选择生成一个非常大而且各种各样的矩形特征集。</li>
-<li>从经验上看，似乎矩形特征集提供了丰富的图像表示，能支持有效的学习。</li>
-<li>为了利用积分图像技术的计算有事，考虑用更常规的方法去计算图像金字塔。</li>
-<li>像大多数面部检测系统一样，我们的检测器在许多尺度扫描输入; 从以尺寸为24×24像素检测面部的基本刻度开始，在12个刻度以大于上一个的1.25倍的因子扫描384×288像素的图像。</li>
-</ul>
-<h2 id="Learning-Classification-Functions"><a href="#Learning-Classification-Functions" class="headerlink" title="Learning Classification Functions"></a>Learning Classification Functions</h2><ul>
-<li>给定检测器的基本分辨率是24×24，矩形特征的穷尽集是相当大的，160000.</li>
-<li>我们的假设是，由实验证明，非常少数的矩形特征可以组合形成一个有效的分类器。 <strong>主要的挑战是找到这些功能。</strong></li>
-<li>Adaboost：将多个弱分类器组合成一个强分类器。（一个简单学习算法叫做weak learner）。</li>
-<li>传统的的AdaBoost过程可以容易地解释为贪心特征选择过程。</li>
-<li>一个 <strong>挑战</strong> 是将大的权重与每个良好的分类函数相关联，并将较小的权重与较差的函数相关联。</li>
-<li>AdaBoost是一个用于搜索少数具有显着品种的良好“特征”的有效程序。</li>
-<li>将一个weak learn限制到分类函数几何中，每一个函数都只依赖于一个单一的特征。</li>
-<li>若学习宣发选择单一的能够最好分开正和负样本的矩形特征。</li>
-<li>对于每一个特征，weak learner决定最优分类函数阈值，从而可以使得最少数目的样本被错分。</li>
-<li>一个弱分类器h(x, f, p, θ)因此包含一个特征f，一个阈值θ，一个显示不等式方向的极性p：<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruf310ij30ai01odfv.jpg" alt=""></li>
-</ul>
-<p>这里x是一个图片24*24像素的子窗口。</p>
-<ul>
-<li>我们使用的弱分类器（阈值单一特征）可以被视为单节点决策树。</li>
-<li><strong>Boosting 算法</strong> ：T是利用每个单个特征构造的假设，最终假设是T个假设的加权线性组合，其中权重与训练误差成反比。</li>
-</ul>
-<ol>
-<li>给定样本图片(x1, y1), (x2, y2), …, (xn, yn)。其中yi=0, 1分别为负样本和正样本。</li>
-<li>初始化权值w1, i=1/(2m), 1/(2l)分别当yi=0, 1。其中m和l分别是负样本和正样本的数量。</li>
-<li><p>For t=1, …, T:</p>
-</li>
-<li><p>归一化权重,<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrucsnrpj305e01bgli.jpg" alt=""></p>
-</li>
-<li><p>根据加权错误选择最佳弱分类器：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruidyr6j30cx01zgln.jpg" alt=""></p>
-</li>
-<li><p>定义 ht(x) = h(x, ft, pt,θt) 其中ft, pt, 和 θt 是εt的最小值.</p>
-</li>
-<li><p>更新权值：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruadstnj306101c0sm.jpg" alt=""><br>其中ei=0当样例xi被正确的分类，否则ei=1，并且<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfruklba8j303c017mx0.jpg" alt=""></p>
-</li>
-<li><p>最后的强分类器是：</p>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru83b9xj30c104xjrk.jpg" alt=""><br>其中<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru6hdsij303t0160sl.jpg" alt=""></p>
-<h3 id="Learning-Discussion"><a href="#Learning-Discussion" class="headerlink" title="Learning Discussion"></a>Learning Discussion</h3></li>
-</ol>
-<ul>
-<li><p>弱分类器选择算法过程如下：</p>
-<ul>
-<li>对于每个特征，根据特征值对样例进行排序。</li>
-<li>该特征的AdaBoost最佳阈值可以在该排序列表上的单次通过中计算。</li>
-<li>对于排序列表中的每个元素，四个和被维护和评估：</li>
-<li>正实例权重T+的总和。</li>
-<li>负实例权重T-的总和。</li>
-<li>当前示例S+之下的正权重的和。</li>
-<li>当前示例S-之下的负权重的和。</li>
-</ul>
-</li>
-<li><p>在排序一个划分当前和上一示例之间的范围的阈值的错误是：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrud40xsj30dk01gjrd.jpg" alt=""></p>
-</li>
-</ul>
-<h3 id="Learning-Results"><a href="#Learning-Results" class="headerlink" title="Learning Results"></a>Learning Results</h3><ul>
-<li>在现实应用中，假正例率必须接近1/1000000。</li>
-<li>所选择的 <strong>第一特征</strong> 似乎集中于属性即眼睛的区域通常比鼻子和脸颊的区域更暗。</li>
-<li>所选择的 <strong>第二特征</strong> 依赖于眼睛比鼻梁更暗的特性。</li>
-<li>提高性能最直接技术是添加更多的特征，但这样直接导致计算时间的增加。</li>
-<li>Receiver operating characteristic (ROC)曲线：<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfruhvzrpj30e30ao3yq.jpg" alt=""></li>
-</ul>
-<h2 id="The-Attentional-Cascade"><a href="#The-Attentional-Cascade" class="headerlink" title="The Attentional Cascade"></a>The Attentional Cascade</h2><ul>
-<li>本节描述了用于构造级联的分类器的算法，其实现了提高的检测性能，同时从根本上减少了计算时间。</li>
-<li>阈值越低，检测率越高，假正例率越高。</li>
-<li>从双特征强分类器开始，可以通过 <strong>调整强分类器阈值</strong> 以最小化假阴性来获得有效的面部滤波器。</li>
-<li>可以调整双特征分类器以50％的假阳性率来检测100％的面部。</li>
-<li>整体的检测过程形式是简并决策树的形式，我们称之为“级联”。</li>
-<li>在任何点上的否定结果立即导致对该子窗口的拒绝。</li>
-<li>更深的分类器面临的更困难的例子,将整个ROC曲线向下推。 在给定的检测率下，较深的分类器具有相应较高的假阳性率。</li>
-</ul>
-<h3 id="Training-a-Cascade-of-Classifiers"><a href="#Training-a-Cascade-of-Classifiers" class="headerlink" title="Training a Cascade of Classifiers"></a>Training a Cascade of Classifiers</h3><ul>
-<li><p>Given a trained cascade of classifiers, the false positive rate of the cascade is：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfru7u7f1j303g02bjr9.jpg" alt=""></p>
-</li>
-<li><p>The detection rate is:</p>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrumlwqej303p02idfp.jpg" alt=""></p>
-</li>
-<li><p>The expected number of features which are evaluated is:</p>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrubq3n2j307s02c0sq.jpg" alt=""></p>
-</li>
-<li><p>用于训练后续层的负样例集合是通过运行检测器收集通过在不包含任何面部实例的一组图像上而找到的所有错误检测来获得。</p>
-</li>
-<li><p>构建一个练级检测器的训练算法：</p>
-</li>
-</ul>
-<h3 id="Simple-Experiment"><a href="#Simple-Experiment" class="headerlink" title="Simple Experiment"></a>Simple Experiment</h3><h3 id="Detector-Cascade-Discussion"><a href="#Detector-Cascade-Discussion" class="headerlink" title="Detector Cascade Discussion"></a>Detector Cascade Discussion</h3><ul>
-<li>将检测器训练为分类器序列的隐藏好处是:最终检测器看到的有效数目的负样例数目可能非常大。</li>
-<li>在实践中，由于我们的检测器的形式和它使用的特性是非常高效的，所以在每个尺度和位置评估我们的检测器的 <strong>摊销成本</strong> 比在整个图像中找到并分组边缘更快。</li>
-</ul>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="Training-Dataset"><a href="#Training-Dataset" class="headerlink" title="Training Dataset"></a>Training Dataset</h3><ul>
-<li>事实上，包含在较大子窗口中的附加信息可以用于在检测级联中较早地拒绝non-face。</li>
-</ul>
-<h3 id="Structure-of-the-Detector-Cascade"><a href="#Structure-of-the-Detector-Cascade" class="headerlink" title="Structure of the Detector Cascade"></a>Structure of the Detector Cascade</h3><ul>
-<li>最终的检测器是38层分级器，包括总共6060个特征。</li>
-<li>级联中的第一个分类器是使用两个特征构造的，在检测100%的面部时可以拒绝50%的non-faces.</li>
-<li>下一个分类器具有十个特征，并且在检测几乎100％的面部时拒绝80％的非面部。</li>
-<li>接下来的两层是25个特征分类器，其后是三个50特征分类器，再之后是具有根据表2中的算法选择的各种不同数目的特征的分类器。</li>
-<li>添加更多层，直到验证集上的假阳性率接近零，同时仍保持高的正确检测率。</li>
-</ul>
-<h3 id="Speed-of-the-Final-Detector"><a href="#Speed-of-the-Final-Detector" class="headerlink" title="Speed of the Final Detector"></a>Speed of the Final Detector</h3><ul>
-<li>级联检测器的速度直接与每个被扫描的子窗口的特征数量相关。</li>
-</ul>
-<h3 id="Image-Processing"><a href="#Image-Processing" class="headerlink" title="Image Processing"></a>Image Processing</h3><ul>
-<li>用于训练的所有示例子窗口被 <strong>方差归一</strong> 化以使不同照明条件的影响最小化。</li>
-<li>可以使用 <strong>一对积分图像</strong> 来快速计算图像子窗口的方差。</li>
-<li>在扫描期间，可以通过对特征值进行后乘，而不是对像素进行操作来实现图像归一化的效果。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;知识点&quot;&gt;&lt;a href=&quot;#知识点&quot; class=&quot;headerlink&quot; title=&quot;知识点&quot;&gt;&lt;/a&gt;知识点&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;傅里叶变换的一个推论：&lt;br&gt;&lt;img src=&quot;https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积&lt;br&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;整个过程的核心就是“（反转），移动，乘积，求和”&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
-    
-      <category term="目标检测" scheme="http://yoursite.com/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
-    <link href="http://yoursite.com/posts/287090227/"/>
-    <id>http://yoursite.com/posts/287090227/</id>
-    <published>2016-12-01T22:32:24.000Z</published>
-    <updated>2017-01-28T08:21:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
-<li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
-</ul>
-<a id="more"></a>
-<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><ul>
-<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
-<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
-<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
-<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
-<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
-<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
-</ul>
-<h2 id="Main-approaches-to-improve-pedestrian-detection"><a href="#Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="Main approaches to improve pedestrian detection"></a>Main approaches to improve pedestrian detection</h2><ul>
-<li><p>40+种行人检测的方法：</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
-</li>
-</ul>
-<ul>
-<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
-</ul>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><h3 id="Solution-families"><a href="#Solution-families" class="headerlink" title="Solution families"></a>Solution families</h3><ul>
-<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
-</ul>
-<ol>
-<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
-<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
-<li><p>决策林（ChnFtrs，Roerei等）。</p>
-</li>
-<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
-</li>
-</ol>
-<h3 id="Better-classiﬁers"><a href="#Better-classiﬁers" class="headerlink" title="Better classiﬁers"></a>Better classiﬁers</h3><ul>
-<li>特征和分类器之间的没有明确的界限</li>
-</ul>
-<h3 id="Additional-data"><a href="#Additional-data" class="headerlink" title="Additional data"></a>Additional data</h3><ul>
-<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
-<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
-</ul>
-<h3 id="Exploiting-context"><a href="#Exploiting-context" class="headerlink" title="Exploiting context"></a>Exploiting context</h3><ul>
-<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
-</ul>
-<h3 id="Deformable-parts"><a href="#Deformable-parts" class="headerlink" title="Deformable parts"></a>Deformable parts</h3><ul>
-<li>对于行人检测，结果是有竞争性的，但不显着。</li>
-<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
-</ul>
-<h3 id="Multi-scale-models"><a href="#Multi-scale-models" class="headerlink" title="Multi-scale models"></a>Multi-scale models</h3><ul>
-<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
-<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
-</ul>
-<h3 id="Deep-architectures"><a href="#Deep-architectures" class="headerlink" title="Deep architectures"></a>Deep architectures</h3><ul>
-<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
-<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
-</ul>
-<h3 id="Better-features"><a href="#Better-features" class="headerlink" title="Better features"></a>Better features</h3><ul>
-<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
-<li>越来越多样化的特性已经显示系统地提高性能。</li>
-<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
-<ul>
-<li>6个梯度方向，</li>
-<li>1个梯度幅度</li>
-<li><p>3个颜色通道</p>
-</li>
-<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
-</li>
-</ul>
-</li>
-<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
-</li>
-<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
-</li>
-</ul>
-<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><ul>
-<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
-<ul>
-<li>更好的特征（§3.9</li>
-<li>附加数据（§3.4）</li>
-<li>上下文信息（§3.5）</li>
-</ul>
-</li>
-</ul>
-<h3 id="Reviewing-the-eﬀect-of-features-特征的影响"><a href="#Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="Reviewing the eﬀect of features(特征的影响)"></a>Reviewing the eﬀect of features(特征的影响)</h3><ul>
-<li>DCT: (discrete cosine transform)离散余弦变换</li>
-<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
-</ul>
-<h3 id="Complementarity-of-approaches"><a href="#Complementarity-of-approaches" class="headerlink" title="Complementarity of approaches"></a>Complementarity of approaches</h3><ul>
-<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
-<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
-</ul>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
-<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
-<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
-<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。&lt;/li&gt;
-&lt;li&gt;用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://yoursite.com/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Review" scheme="http://yoursite.com/tags/Review/"/>
-    
-      <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks</title>
-    <link href="http://yoursite.com/posts/783616645/"/>
-    <id>http://yoursite.com/posts/783616645/</id>
-    <published>2016-11-30T22:32:24.000Z</published>
-    <updated>2017-02-17T12:50:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
-<li>卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。</li>
-</ul>
-<h3 id="The-Convolution-Operation"><a href="#The-Convolution-Operation" class="headerlink" title="The Convolution Operation"></a>The Convolution Operation</h3><ul>
-<li>The convolution operation is typically denoted with an asterisk:</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg" alt=""></p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg" alt=""></p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg" alt=""></p>
-<ul>
-<li>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</li>
-<li>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</li>
-<li>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</li>
-</ul>
-<a id="more"></a>
-<ul>
-<li>这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。</li>
-<li>二维卷积：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg" alt=""><br>two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 <strong>kernel-ﬂipping</strong><br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg" alt=""><br>后一种会更更容易用机器学习库来实现。</li>
-<li>许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg" alt=""></p>
-<ul>
-<li>卷积的一个例子：</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpf8xjmyj30oq0lqn0c.jpg" alt=""></p>
-<ul>
-<li>离散卷积可以被看作是乘以矩阵的乘法。</li>
-<li>Toeplitz矩阵：常对角矩阵（又称特普利茨矩阵）是指每条左上至右下的对角线均为常数的矩阵，不论是正方形或长方形的。</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg" alt=""></p>
-<ul>
-<li>在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。</li>
-<li>卷积通常对应于非常稀疏的矩阵。</li>
-<li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
-</ul>
-<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
-<li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
-<ul>
-<li>稀疏的连接（sparse interactions）</li>
-<li>参数共享（parameter sharing）</li>
-<li>等值表示（equivariant representations）</li>
-<li>此外卷积可以处理各种大小输入。</li>
-</ul>
-</li>
-<li><p>Sparse Interactions：这是通过使内核小于输入来实现的。</p>
-<ul>
-<li>我们需要存储更少的参数，这既减少了模型的内存需求，又提高了其统计效率。</li>
-<li>计算输出需要更少的操作。</li>
-<li>在深卷积网络中，较深层中的单元可以与输入的较大部分间接交互，This allows the network to eﬃciently describe complicated interactions between many variables by constructing such interactions from simple building blocks that each describe only sparse interactions.<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpduscrij30ee0eqdho.jpg" alt=""></li>
-<li>Sparse connectivity, viewed from below<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
-<li>Sparse connectivity, viewed from above<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
-<li>在卷积网络的较深层中的单元的接收场大于在浅层中的单元的接收场。这意味着即使卷积网络中的直接连接非常稀疏，更深层中的单元也可以间接地连接到所有或大部分输入图像。</li>
-</ul>
-</li>
-<li><p>Parameter sharing：参数共享是指对模型中的多个函数使用相同的参数。</p>
-<ul>
-<li>也可以叫 <strong>Tied Weights（捆绑权值），因为应用于一个输入的权重的值与在其他地方应用的权重的值有关。</strong></li>
-<li>在卷积神经网络中，卷积核中的每一个元素都会在input中的每一个位置使用。</li>
-<li>在存储器要求和统计效率方面，卷积比密集矩阵乘法显着更有效。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpjpefj30ee0bzgmu.jpg" alt=""></p>
-<ul>
-<li><p>黑色箭头表示在卷积模型中3元素核的中心元素的使用。</p>
-</li>
-<li><p>Equivariant：说一个函数是等变的意味着如果输入改变，输出以相同的方式改变。</p>
-<ul>
-<li>一个函数f(x)与函数g <strong>等变</strong> 如果f(g(x)) = g(f(x)).</li>
-<li>当处理时间序列数据时，这意味着卷积产生一种时间线，显示输入中不同特征的出现。</li>
-<li>This is useful for when we know that some function of a small number of neighboring pixels is useful when applied to multiple input locations.</li>
-<li>卷积不是自然地等同于一些其他变换，例如图像的尺度或旋转的变化。</li>
-</ul>
-</li>
-<li><p>卷积是描述在整个输入上应用小的局部区域的相同线性变换的变换的非常有效的方式。</p>
-</li>
-</ul>
-<h3 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h3><ul>
-<li><p>卷积网络的一个典型层由三个阶段组成:</p>
-<ul>
-<li>在第一阶段，该层并行执行几个卷积以产生一组线性激活（linear activation）。</li>
-<li>在第二阶段，每个线性激活通过非线性激活函数，例如整流线性激活函数。这一阶段成为 <strong>detector stage</strong>.</li>
-<li>在第三阶段，我们使用池化函数（pooing function）来进一步修改层的输出。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdnsj0rj30k00je76j.jpg" alt=""></p>
-<ul>
-<li><p>pooling function是用附近的汇总统计来替换特定位置的网络的输出。</p>
-</li>
-<li><p>在所有情况下，池化有助于使表示变得对于相对于 <strong>输入的小平移</strong> 几乎不变（invariant）。</p>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdmenf3j30vy0qlwk3.jpg" alt=""></p>
-<ul>
-<li><p><strong>如果我们更关心某些特征是否存在而不是完全在哪里，那么本地变换的不变性可以是非常有用的属性。</strong></p>
-</li>
-<li><p>池的使用可以被视为添加一个无限强的先验，层所学习的函数必须对小的变换是不变的。</p>
-</li>
-<li>如果我们在单独的参数化的卷积输出上进行赤化，则特征可以学习到对哪一种变换进行不变。</li>
-<li>利用卷积和pooling的卷积网络架构：</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdrfrclj30jn0orjya.jpg" alt=""></p>
-<h3 id="Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior"><a href="#Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior" class="headerlink" title="Convolution and Pooling as an Inﬁnitely Strong Prior"></a>Convolution and Pooling as an Inﬁnitely Strong Prior</h3><ul>
-<li>弱先验是具有高熵的先验分布，例如具有高方差的高斯分布。</li>
-<li>强先验具有非常低的熵，例如具有低方差的高斯分布。这样的先验在确定参数在哪里结束方面起更积极的作用。</li>
-<li>总的来说，我们可以认为卷积可以用来为一个层的参数引入一个无限强的先验概率分布。</li>
-<li>同样，池的使用是保证每个单位对小的变换保持不变性的无限强的先验。</li>
-<li><p>但是将卷积网视为具有无限强的先验的完全连接的网络可以给我们一些关于卷积网如何工作的见解。</p>
-<ul>
-<li>一个关键的见解是卷积和池化可能导致欠拟合。</li>
-<li>从这个观点的另一个关键的见解是，我们应该只比较卷积模型与统计学习性能基准中的其他卷积模型。对于许多图像数据集，对于排列不变的模型存在单独的基准，并且必须通过学习发现拓扑的概念，以及具有由他们的设计者硬编码到其中的空间关系的知识的模型。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Variants-of-the-Basic-Convolution-Function"><a href="#Variants-of-the-Basic-Convolution-Function" class="headerlink" title="Variants of the Basic Convolution Function"></a>Variants of the Basic Convolution Function</h3><ul>
-<li><p>首先，当我们在神经网络的上下文中提到卷积时，我们通常实际上意味着一种由许多卷积应用并行组成的操作。</p>
-<ul>
-<li>这是因为单个内核的卷积只能提取一种特征，虽然在许多空间位置。 通常我们希望我们网络的每一层都能在许多位置提取多种特征。</li>
-</ul>
-</li>
-<li><p>此外，输入通常不仅仅是是一个网格的真是数据，反而是矢量值的观测网格。</p>
-</li>
-<li><p>这些多通道操作可交换，仅当每个操作具有与输入通道相同数量的输出通道。</p>
-</li>
-<li>我们可能想跳过内核的一些位置，以减少计算成本，我们可以认为这是下采样全卷积函数的输出。</li>
-<li>如果我们只想对输出中每个方向的每s个像素进行采样，那么我们可以定义下采样卷积函数c：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg" alt=""><br>我们将s称为这个下采样卷积的步幅。 也可以为每个运动方向定义一个单独的步幅。</li>
-</ul>
-<ul>
-<li><p>零填充：</p>
-<ul>
-<li>任何卷积网络实现的一个基本特征是具备隐含地对输入V进行零填充以便使其更宽的能力。</li>
-<li>零填充输入允许我们独立地控制内核宽度和输出的大小。</li>
-<li>没有零填充，我们被迫选择快速缩小网络的空间范围并且使用小内核 - 这两个方案，显着地限制了网络的表达力。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg" alt=""></p>
-<ul>
-<li><p>三种zero-padding的情况：</p>
-<ul>
-<li>valid convolution</li>
-<li>same convolution</li>
-<li>full convolution</li>
-</ul>
-</li>
-<li><p>Unshared convolution</p>
-</li>
-<li>Tiled convolution：在卷积层和本地连接层之间提供了折中。我们不是在每个空间位置学习一组独立的权重，而是学习一组内核，从而我们在空间移动时旋转内核。</li>
-<li><p>这三个操作做够计算所有训练一个前向卷积网络需要的梯度，以及基于卷积的转置来训练具有重建函数的卷积网络。</p>
-<ul>
-<li>卷积</li>
-<li>从输出到权值反向传播</li>
-<li>从输出到输入反向传播</li>
-</ul>
-</li>
-</ul>
-<h3 id="Structured-Outputs"><a href="#Structured-Outputs" class="headerlink" title="Structured Outputs"></a>Structured Outputs</h3><ul>
-<li>卷积网络可以用于输出高维度的结构化对象，而不仅仅是预测分类任务的类标签或回归任务的实际值。</li>
-<li>Pixel labeling：像素标记</li>
-<li>循环周期卷积网络（recurrent convolutional network）：</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg" alt=""></p>
-<h3 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h3><ul>
-<li><p>与卷积网络一起使用的数据通常由几个通道组成，每个通道是在空间或时间的某个点观察不同的量。</p>
-<ul>
-<li>卷积网络的一个优点是它们还可以处理具有变化的空间范围的输入。</li>
-<li>有时，网络的输出允许具有 <strong>可变大小以及输入</strong> ，例如如果我们想要为输入的每个像素分配类标签。 <strong>在这种情况下，不需要额外的设计工作了</strong> 。</li>
-<li>在其他情况下，网络必须产生一些固定大小的输出，例如，如果我们要为整个图像分配单个类标签。 <strong>在这种情况下，我们必须进行一些额外的设计步骤</strong> ，例如插入一个池化层，其池区域的大小与输入的大小成比例，以 <strong>保持固定数量</strong> 的池化输出。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Eﬃcient-Convolution-Algorithms"><a href="#Eﬃcient-Convolution-Algorithms" class="headerlink" title="Eﬃcient Convolution Algorithms"></a>Eﬃcient Convolution Algorithms</h3><ul>
-<li>现代卷积网络应用通常涉及包含超过一百万个单元的网络。</li>
-<li><strong>卷积等效于使用傅立叶变换将输入和内核两者转换到频域，执行两个信号的逐点乘法，并使用逆傅里叶变换转换回到时域。</strong></li>
-<li>当内核是可分离的，原始的卷积是效率低下的。</li>
-<li>设计更快的执行卷积或近似卷积的方法，而不损害模型的准确性是一个活跃的研究领域。</li>
-</ul>
-<h3 id="Random-or-Unsupervised-Features"><a href="#Random-or-Unsupervised-Features" class="headerlink" title="Random or Unsupervised Features"></a>Random or Unsupervised Features</h3><ul>
-<li>通常，卷积网络训练中最昂贵的部分是学习特征。</li>
-<li>降低卷积网络训练成本的一种方式是使用未以受监督方式训练的特征。</li>
-<li><p>有三种不需要监督学习来获得卷积内核的策略：</p>
-<ul>
-<li>一个是简单地 <strong>随机初始化</strong> 它们。</li>
-<li>另一个是用手设计它们，例如通过设置每个内核以在特定方向或尺度检测边缘。</li>
-<li>最后，可以使用无监督标准来学习内核。</li>
-</ul>
-</li>
-<li><p>随机滤波器在卷积网络中通常工作得很好</p>
-</li>
-<li>一个折中的方法是学习特征，但使用： <strong>每个梯度步骤不需要完全正向和反向传播的</strong> 方法。 与多层感知器一样，我们使用 <strong>贪婪层式预训练</strong> ，独立地训练第一层，然后从第一层提取一次所有特征，然后利用这些特征隔离的训练第二层，等等。</li>
-<li>不是一次训练整个卷积层，我们可以训练一个小补丁的模型，如用k-means。 然后，我们可以使用来自这个patch-based的模型的参数来定义卷积层的内核。</li>
-<li>今天，大多数卷积网络以纯粹监督的方式训练，在每次训练迭代中使用通过整个网络的完全正向和反向传播。</li>
-</ul>
-<h3 id="The-Neuroscientiﬁc-Basis-for-Convolutional-Networks"><a href="#The-Neuroscientiﬁc-Basis-for-Convolutional-Networks" class="headerlink" title="The Neuroscientiﬁc Basis for Convolutional Networks"></a>The Neuroscientiﬁc Basis for Convolutional Networks</h3><h3 id="Convolutional-Networks-and-the-History-of-Deep-Learning"><a href="#Convolutional-Networks-and-the-History-of-Deep-Learning" class="headerlink" title="Convolutional Networks and the History of Deep Learning"></a>Convolutional Networks and the History of Deep Learning</h3><ul>
-<li>为了处理一维，顺序数据，我们接下来转向神经网络框架的另一个强大的专业化： <strong>循环神经网络（Recurrent neural networks）</strong> 。</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Chapter-9-Convolutional-Networks（卷积神经网络）&quot;&gt;&lt;a href=&quot;#Chapter-9-Convolutional-Networks（卷积神经网络）&quot; class=&quot;headerlink&quot; title=&quot;Chapter 9 Convolutional Networks（卷积神经网络）&quot;&gt;&lt;/a&gt;Chapter 9 Convolutional Networks（卷积神经网络）&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;The-Convolution-Operation&quot;&gt;&lt;a href=&quot;#The-Convolution-Operation&quot; class=&quot;headerlink&quot; title=&quot;The Convolution Operation&quot;&gt;&lt;/a&gt;The Convolution Operation&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;The convolution operation is typically denoted with an asterisk:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 &lt;strong&gt;输入&lt;/strong&gt; ，第二个参数（在本例中为函数w）作为 &lt;strong&gt;内核&lt;/strong&gt; 。 &lt;strong&gt;输出&lt;/strong&gt; 有时称为 &lt;strong&gt;特征映射(feature map)&lt;/strong&gt; 。&lt;/li&gt;
-&lt;li&gt;在机器学习应用中， &lt;strong&gt;输入&lt;/strong&gt; 通常是多维数据数组，并且 &lt;strong&gt;内核&lt;/strong&gt; 通常是由学习算法调整的多维参数数组。&lt;/li&gt;
-&lt;li&gt;我们将这些多维数组称为 &lt;strong&gt;张量（tensors）&lt;/strong&gt; 。&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
     
       <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
     

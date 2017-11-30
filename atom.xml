@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-29T08:35:28.103Z</updated>
+  <updated>2017-11-30T07:00:21.430Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,16 +17,19 @@
   
   <entry>
     <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
-    <link href="http://yoursite.com/posts/679115823/"/>
-    <id>http://yoursite.com/posts/679115823/</id>
+    <link href="http://yoursite.com/posts/679115822/"/>
+    <id>http://yoursite.com/posts/679115822/</id>
     <published>2017-11-25T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:28.103Z</updated>
+    <updated>2017-11-30T07:00:21.430Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
 <li>Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.</li>
 <li>Formulate the adaptive tracking problem as a decision-making process.</li>
 <li>Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.</li>
+</ul>
+<a id="more"></a>
+<ul>
 <li>Signiﬁcantly reduces the feedforward cost.</li>
 <li>Train the agent ofﬂine in a reinforcement learning fashion.</li>
 <li>Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.</li>
@@ -35,7 +38,6 @@
 </ul>
 </li>
 </ul>
-<a id="more"></a>
 <ul>
 <li><h4 id="Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies"><a href="#Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies" class="headerlink" title="Tracking The Untrackable: Learning to Track Multiple Cues with Long-Term Dependencies"></a>Tracking The Untrackable: Learning to Track Multiple Cues with <strong>Long-Term Dependencies</strong></h4><ul>
 <li>Combine cues in a coherent end-to-end fashion over a <strong>long period of time.</strong></li>
@@ -190,6 +192,67 @@
 <li>We transform the skeletons into <strong>another coordinate system</strong> to obtain the robustness to scale, rotation and translation and then extract salient motion features from them.</li>
 <li>We propose novel ensemble <strong>Temporal Sliding LSTM (TS-LSTM) networks</strong> for skeleton-based action recognition. The proposed network is composed of multiple parts containing <strong>short-term, medium-term and long-term TS-LSTM networks</strong>.</li>
 <li>With a rapid development of 3D data acquisition over the past few decades, lots of researches on <strong>human activity recognition from 3D data</strong> can have been actively performed.</li>
+<li>For the modeling of human actions, recent researches show tha<strong>t Long Short-Term Memory (LSTM) networks</strong> are <strong>superior to</strong> temporal pyramids and hidden markov models.</li>
+<li>Overall Method：<ul>
+<li>Firstly, we transform the coordinates of input skeleton sequences so that the data can be <strong>robust to scale, rotation and translation.</strong> </li>
+<li>Secondly, instead of using the simple joint positions, we employ the <strong>motion features</strong> in terms of temporal differences, which help our networks to be focused on the actual skeleton movements. </li>
+<li>Thirdly, the motion features are processed with <strong>multi-term LSTMs containing short-term, medium-term and long-term LSTMs</strong>, which allow robustness to variable temporal dynamics. </li>
+<li>Finally, the multi-term LSTMs <strong>capture a variety of action dynamics through ensemble.</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="What-Actions-are-Needed-for-Understanding-Human-Actions-in-Videos"><a href="#What-Actions-are-Needed-for-Understanding-Human-Actions-in-Videos" class="headerlink" title="What Actions are Needed for Understanding Human Actions in Videos?"></a>What Actions are Needed for Understanding Human Actions in Videos?</h4><ul>
+<li>We analyze the current state of human activity understanding in videos.</li>
+<li>The goal of this paper is to examine datasets, evaluation metrics, algorithms, and potential future directions.</li>
+<li>The results demonstrate that while there is inherent ambiguity in the temporal extent of activities, current datasets still permit effective benchmarking.</li>
+<li>我们发现，当与时间推理相结合时，对物体和姿态的细粒度理解很可能在算法精度上产生实质性的改善。</li>
+<li>Some questions:<ul>
+<li>What is an activity and how should we represent it? </li>
+<li>Do activities have well-deﬁned spatial and temporal extent? </li>
+<li>What role do goals and intentions play in deﬁning and understanding activities?</li>
+<li>What does the data show about the right categories for recognition in case of activities? </li>
+<li>Do existing approaches scale with increasing complexity of activities categories, video data, or temporal relationships between activities? </li>
+<li>Are the hypothesized new avenues of studying context, objects, or intentions worthwhile: Do these really help in understanding videos?</li>
+</ul>
+</li>
+<li>This paper provides an in-depth analysis of the <strong>new generation of video datasets</strong>, <strong>human annotators</strong>, <strong>activity categories</strong>, <strong>recognition approaches</strong>, and above all possible new cues for video understanding.</li>
+<li>We found that people considered verbs to be relatively more ambiguous.</li>
+<li>This suggests that despite boundary ambiguity, current datasets allow us to understand, learn from, and evaluate the temporal extents of activities.</li>
+<li>That is, a perfect classiﬁer would automatically do 5 times better than current state-of-the-art [30] on activity localization.</li>
+<li>This suggests that focusing our attention on gaining more insight into activity classiﬁcation would naturally yield signiﬁcant improvements in localization accuracy as well.</li>
+<li>Having concluded that:<ul>
+<li>(1) we should be reasoning about activities as (verb,object) pairs rather than just verb,</li>
+<li>(2) temporal boundaries of activities are ambiguous but nevertheless meaningful, and</li>
+<li>(3) classiﬁcation of short videos is a reasonable proxy for temporal localization</li>
+</ul>
+</li>
+<li>This suggests that moving forward ﬁne-grained discrimination between activities with similar objects and verbs is needed.</li>
+</ul>
+</li>
+<li><h4 id="Lattice-Long-Short-Term-Memory-for-Human-Action-Recognition"><a href="#Lattice-Long-Short-Term-Memory-for-Human-Action-Recognition" class="headerlink" title="Lattice Long Short-Term Memory for Human Action Recognition"></a>Lattice Long Short-Term Memory for Human Action Recognition</h4><ul>
+<li>However, naively applying RNNs to video sequences in a convolutional manner implicitly assumes that motions in videos are <strong>stationary</strong> across different spatial locations. <strong>This assumption is valid for short-term motions but invalid when the duration of the motion is long.</strong></li>
+<li>In this work, we propose Lattice-LSTM (L^2STM), which extends LSTM by learning <strong>independent hidden state transitions</strong> of memory cells for individual spatial locations.</li>
+<li>Additionally, we introduce a novel multi-modal training procedure for training our network.</li>
+<li>An accurate action recognition should:<ul>
+<li>(1) have a high capacity for learning and capturing as many motion dynamics as possible</li>
+<li>(2) when an action appears in sequential images, the neurons should properly decide what kind of spatio-temporal dynamics should be encoded into the memory for distinguishing actions.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="Common-Action-Discovery-and-Localization-in-Unconstrained-Videos"><a href="#Common-Action-Discovery-and-Localization-in-Unconstrained-Videos" class="headerlink" title="Common Action Discovery and Localization in Unconstrained Videos"></a>Common Action Discovery and Localization in Unconstrained Videos</h4><ul>
+<li>In this work, we tackle the problem of <strong>common action discovery</strong> and <strong>localization</strong> in unconstrained videos, where we do not assume to know the types, numbers or locations of the common actions in the videos.</li>
+<li>To perform automatic discovery and localization in such challenging scenarios, we ﬁrst generate action proposals using human prior.</li>
+<li>By building an afﬁnity graph among all action proposals, we formulate the common action discovery as <strong>a subgraph density maximization problem</strong> to select the proposals containing common actions.</li>
+<li>为了避免在指数级大的解空间中枚举，我们提出了一个有效的多项式时间优化算法。</li>
+<li>It solves the problem up to a user speciﬁed error bound with respect to the global optimal solution.</li>
+<li>Action discovery的困难：<ul>
+<li>首先，由于我们事先不知道在给定的数据集中常见的动作类型或位置，我们必须同时进行发现和定位。 给定一组未标记的视频，我们需要自动识别一组捕获常见操作的时空边界框。</li>
+<li>其次，类似的行为也可能由于视点变化，尺度变化或相机运动而出现不同。 自动关联这些常见操作并不是一项简单的任务。</li>
+<li>最后，除了常见的动作之外，视频还可能包含动态背景或不常见的动作，因此将这种“noisy motions”与常见动作区分开来是至关重要的。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -264,13 +327,6 @@
 &lt;li&gt;Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.&lt;/li&gt;
 &lt;li&gt;Formulate the adaptive tracking problem as a decision-making process.&lt;/li&gt;
 &lt;li&gt;Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.&lt;/li&gt;
-&lt;li&gt;Signiﬁcantly reduces the feedforward cost.&lt;/li&gt;
-&lt;li&gt;Train the agent ofﬂine in a reinforcement learning fashion.&lt;/li&gt;
-&lt;li&gt;Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.&lt;/li&gt;
-&lt;li&gt;However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.&lt;/li&gt;
-&lt;li&gt;The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>
@@ -291,7 +347,7 @@
     <link href="http://yoursite.com/posts/679115822/"/>
     <id>http://yoursite.com/posts/679115822/</id>
     <published>2017-11-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:37.075Z</updated>
+    <updated>2017-11-29T08:42:59.696Z</updated>
     
     <content type="html"><![CDATA[<p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
 <a id="more"></a>
@@ -320,6 +376,43 @@
       <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
     
       <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
+    <link href="http://yoursite.com/posts/1774603577/"/>
+    <id>http://yoursite.com/posts/1774603577/</id>
+    <published>2017-10-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:35:16.762Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Detection" scheme="http://yoursite.com/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
     
       <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
     
@@ -365,43 +458,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://yoursite.com/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Action Recognition" scheme="http://yoursite.com/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-    <link href="http://yoursite.com/posts/1774603577/"/>
-    <id>http://yoursite.com/posts/1774603577/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:16.762Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
     
     </summary>
     
@@ -2287,173 +2343,57 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
   </entry>
   
   <entry>
-    <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
-    <link href="http://yoursite.com/posts/2397281138/"/>
-    <id>http://yoursite.com/posts/2397281138/</id>
+    <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
+    <link href="http://yoursite.com/posts/285415955/"/>
+    <id>http://yoursite.com/posts/285415955/</id>
     <published>2016-12-03T22:32:24.000Z</published>
-    <updated>2017-03-06T06:52:51.000Z</updated>
+    <updated>2017-01-28T08:13:25.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
-<li>Human Baseline 的标准是如何确定的?</li>
-<li><p>Ground-truth是什么意思？</p>
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h3><ul>
+<li>第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.</li>
+<li>DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)</li>
+<li>DBN-Mut: extended to ac- count for person-to-person relations</li>
+<li>JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.</li>
+<li>MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。</li>
+<li>SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。</li>
+<li>DBN-Isol和DBN-Mut利用DPM作为检测方法。</li>
+<li>JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。</li>
+<li><p>重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。</p>
 <ul>
-<li>Groun-truth 指的是正确的标注（真实值）</li>
-<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+<li>DBN-Isol and DBN-Mut use HOG features as input.</li>
+<li>MultiSDP uses HOG+CSS features as input.</li>
+<li>JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).</li>
 </ul>
 </li>
-<li><p>Intersection over Union（IoU）是什么？</p>
-<ul>
-<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
-</li>
-<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
-</li>
-<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
-</li>
-<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>FPPI: False Positive Per Image</li>
-<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
 </ul>
 <a id="more"></a>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
-<li>基于Caltech数据集创建了一个人工的基准。</li>
-<li>手工聚合了顶级检测器经常出现的错误。</li>
-<li><p>刻画了定位，前景 vs 背景两方面的错误</p>
-<ul>
-<li>针对定位错误：研究了训练集标记噪声对检测器性能的影响</li>
-<li>前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能</li>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><ul>
+<li>Caltech</li>
+<li>Caltech validation set</li>
+<li>Caltech10x: we increase the training data tenfold by sampling one out of three frames</li>
+<li>KITTI</li>
+<li>ImageNet, Places</li>
 </ul>
-</li>
-<li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
-</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>我们的结果显示localization是高置信度false positives的重要来源</li>
-</ul>
-<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
-<li><p>最流行的数据集：Caltech-USA、KITTI</p>
-<ul>
-<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
-<li>一共350000个标注、覆盖2300各单一的行人</li>
-<li>测试集：4024帧</li>
-</ul>
-</li>
-<li><p>MR: miss rate</p>
-</li>
-</ul>
-<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
-<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
-<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
-<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
-<li>环境和光流可以提高检测（额外的提示）</li>
-</ul>
-<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
-<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
-<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
-<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
-<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
-<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
-</ul>
-<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
-<li><p>一个检测器可以有两类错误：</p>
-<ul>
-<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
-<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
-</ul>
-</li>
-<li><p>FP聚类成11个分类</p>
-</li>
-<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
-<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
-</ul>
-<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
-<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
-</ul>
-<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
-<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
-<li><p>我们的目标是两方面：</p>
-<ul>
-<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
-<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
-</ul>
-</li>
-<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
-</li>
-</ul>
-<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
-<li><p>Pruning benefits:</p>
-<ul>
-<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
-<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
-</ul>
-</li>
-<li><p>Alignment benefits:</p>
-<ul>
-<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
-<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
-</li>
-<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
-</li>
-<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
-<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
-</li>
-<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
-</li>
-<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
-</li>
-<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
-</li>
-</ul>
-<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
-<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
-</li>
-<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
-</li>
-<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
-</li>
-</ul>
-]]></content>
+<h3 id="From-decision-forests-to-neural-networks"><a href="#From-decision-forests-to-neural-networks" class="headerlink" title="From decision forests to neural networks"></a>From decision forests to neural networks</h3>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;文章疑问点&quot;&gt;&lt;a href=&quot;#文章疑问点&quot; class=&quot;headerlink&quot; title=&quot;文章疑问点&quot;&gt;&lt;/a&gt;文章疑问点&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Human Baseline 的标准是如何确定的?&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Ground-truth是什么意思？&lt;/p&gt;
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;h3 id=&quot;Related-work&quot;&gt;&lt;a href=&quot;#Related-work&quot; class=&quot;headerlink&quot; title=&quot;Related work&quot;&gt;&lt;/a&gt;Related work&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;第一篇使用convnet进行行人检测的文章：Pedestrian detection with unsupervised multi-stage feature learning.&lt;/li&gt;
+&lt;li&gt;DBN-Isol: A different line of work extends a deformable parts model (DPM) [15] with a stack of Restricted Boltzmann Ma- chines (RBMs) trained to reason about parts and occlu- sion (DBN-Isol)&lt;/li&gt;
+&lt;li&gt;DBN-Mut: extended to ac- count for person-to-person relations&lt;/li&gt;
+&lt;li&gt;JointDeep: jointly optimize all these aspects: optimizes features, parts deformations, occlusions, and person-to-person relations.&lt;/li&gt;
+&lt;li&gt;MultiSDP: 网络为每层提供在不同尺度计算的关于行人检测的上下文特征。&lt;/li&gt;
+&lt;li&gt;SDN: 使用附加的“可切换层”（RBM变体）来自动学习低级特征和高级部分（例如“头”，“腿”等）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol和DBN-Mut利用DPM作为检测方法。&lt;/li&gt;
+&lt;li&gt;JointDeep, MultiSDP, and SDN利用HOG+CSS+linear SVM detector作为检测。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重要的是要强调ConvNet [37]学习从YUV输入像素预测，而所有其他方法使用额外的手工制作的特征。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Groun-truth 指的是正确的标注（真实值）&lt;/li&gt;
-&lt;li&gt;在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。&lt;/li&gt;
+&lt;li&gt;DBN-Isol and DBN-Mut use HOG features as input.&lt;/li&gt;
+&lt;li&gt;MultiSDP uses HOG+CSS features as input.&lt;/li&gt;
+&lt;li&gt;JointDeep and SDN uses YUV+Gradients as input (and HOG+CSS for the detection proposals).&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Intersection over Union（IoU）是什么？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;As long as we have these two sets of bounding boxes we can apply Intersection over Union.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;An Intersection over Union score &amp;gt; 0.5 is normally considered a “good” prediction.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
-&lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>
@@ -2465,9 +2405,9 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
     
       <category term="行人检测" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
     
-      <category term="Review" scheme="http://yoursite.com/tags/Review/"/>
+      <category term="Deep Learning" scheme="http://yoursite.com/tags/Deep-Learning/"/>
     
-      <category term="综述" scheme="http://yoursite.com/tags/%E7%BB%BC%E8%BF%B0/"/>
+      <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

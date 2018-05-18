@@ -45,17 +45,35 @@
   
 
   
+    
+      
+    
 
-  
-
+    
   
 
   
 
   
     
+      
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -107,8 +125,8 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '6269586705494312000',
-      author: 'JacobKong_Dev'
+      userId: 'undefined',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -127,6 +145,7 @@
 
 
 
+<script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
   <title> JacobKong's Blog </title>
 </head>
@@ -282,7 +301,7 @@
     e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
   })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install', 'qwpH936HXK5KmdfNnB1U','2.0.0');
+  _st('install', 'NFszD9eySBJRbQZ_cJLt','2.0.0');
 </script>
 
 
@@ -433,6 +452,7 @@
       
 
       
+        
         
           <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>之前的物体检测的方法是使用分类器来进行检测。</li>
@@ -606,6 +626,7 @@
 
       
         
+        
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已经介绍了如何准备数据集，以及如何修改数据集读写接口来操作数据集，接下来我来说明一下怎么来训练网络和之后的检测过程。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -772,6 +793,7 @@
 
       
         
+        
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这部分主要讲如何修改Faster R-CNN的代码，来训练自己的数据集，首先确保你已经编译安装了py-faster-rcnn，并且准备好了数据集，具体可参考我<a href="http://jacobkong.github.io/posts/2093106769/">上一篇文章</a>。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -937,6 +959,7 @@
       
 
       
+        
         
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
 <p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/">上一篇博客</a>。</p>
@@ -1106,6 +1129,7 @@
       
 
       
+        
         
           <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
@@ -1339,6 +1363,8 @@
   
 
 
+  
+
 
 
   
@@ -1358,6 +1384,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   

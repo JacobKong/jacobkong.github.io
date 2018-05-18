@@ -4,8 +4,34 @@
 
     
   <url>
+    <loc>http://yoursite.com/posts/766618543/</loc>
+    <lastmod>2018-05-18T02:33:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>行为检测总结：时间轴行为检测总结.md</title>
+        <pubTime>2017-12-20T07:51:24.000Z</pubTime>
+        
+        <tag>Deep Learning</tag>
+         
+        <tag>深度学习</tag>
+         
+        <tag>Action Detection</tag>
+         
+        <tag>行为检测</tag>
+         
+         
+           
+             
+              <breadCrumb title="论文笔记" url="http://yoursite.com/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/posts/679115822/</loc>
-    <lastmod>2017-11-30T07:00:21.430Z</lastmod>
+    <lastmod>2017-11-30T07:00:21.000Z</lastmod>
     <data>
         <display>
         <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
@@ -29,7 +55,7 @@
     
   <url>
     <loc>http://yoursite.com/posts/679115822/</loc>
-    <lastmod>2017-11-29T08:42:59.696Z</lastmod>
+    <lastmod>2017-11-29T08:42:59.000Z</lastmod>
     <data>
         <display>
         <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
@@ -55,7 +81,7 @@
     
   <url>
     <loc>http://yoursite.com/posts/1774603577/</loc>
-    <lastmod>2017-11-29T08:35:16.762Z</lastmod>
+    <lastmod>2017-11-29T08:35:16.000Z</lastmod>
     <data>
         <display>
         <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
@@ -85,7 +111,7 @@
     
   <url>
     <loc>http://yoursite.com/posts/3872446965/</loc>
-    <lastmod>2017-11-29T08:32:44.769Z</lastmod>
+    <lastmod>2017-11-29T08:32:44.000Z</lastmod>
     <data>
         <display>
         <title>行为检测论文笔记：Temporal Segment Networks</title>

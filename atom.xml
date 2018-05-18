@@ -50,7 +50,7 @@
     <link href="http://jacobkong.github.io/posts/679115822/"/>
     <id>http://jacobkong.github.io/posts/679115822/</id>
     <published>2017-11-25T07:51:24.000Z</published>
-    <updated>2018-05-18T08:14:13.000Z</updated>
+    <updated>2018-05-18T08:59:07.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
@@ -58,7 +58,8 @@
 <li>Formulate the adaptive tracking problem as a decision-making process.</li>
 <li>Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.</li>
 </ul>
-<a id="more"></a>
+</li>
+</ul>
 <ul>
 <li>Signiﬁcantly reduces the feedforward cost.</li>
 <li>Train the agent ofﬂine in a reinforcement learning fashion.</li>
@@ -66,8 +67,7 @@
 <li>However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.</li>
 <li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
 </ul>
-</li>
-</ul>
+<a id="more"></a>
 <ul>
 <li><h4 id="Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies"><a href="#Tracking-The-Untrackable-Learning-to-Track-Multiple-Cues-with-Long-Term-Dependencies" class="headerlink" title="Tracking The Untrackable: Learning to Track Multiple Cues with Long-Term Dependencies"></a>Tracking The Untrackable: Learning to Track Multiple Cues with <strong>Long-Term Dependencies</strong></h4><ul>
 <li>Combine cues in a coherent end-to-end fashion over a <strong>long period of time.</strong></li>
@@ -358,6 +358,15 @@
 &lt;li&gt;Formulate the adaptive tracking problem as a decision-making process.&lt;/li&gt;
 &lt;li&gt;Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;Signiﬁcantly reduces the feedforward cost.&lt;/li&gt;
+&lt;li&gt;Train the agent ofﬂine in a reinforcement learning fashion.&lt;/li&gt;
+&lt;li&gt;Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.&lt;/li&gt;
+&lt;li&gt;However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.&lt;/li&gt;
+&lt;li&gt;The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -414,6 +423,43 @@
   </entry>
   
   <entry>
+    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
+    <link href="http://jacobkong.github.io/posts/1774603577/"/>
+    <id>http://jacobkong.github.io/posts/1774603577/</id>
+    <published>2017-10-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:35:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>行为检测论文笔记：Temporal Segment Networks</title>
     <link href="http://jacobkong.github.io/posts/3872446965/"/>
     <id>http://jacobkong.github.io/posts/3872446965/</id>
@@ -451,43 +497,6 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-    <link href="http://jacobkong.github.io/posts/1774603577/"/>
-    <id>http://jacobkong.github.io/posts/1774603577/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
     
     </summary>
     

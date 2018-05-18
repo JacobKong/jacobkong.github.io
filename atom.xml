@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>JacobKong</title>
+  <title>JacobKong&#39;s Blog</title>
   <subtitle>路漫漫其修远兮......</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
-  <updated>2018-05-18T02:33:35.000Z</updated>
+  <updated>2018-05-18T08:10:41.000Z</updated>
   <id>http://jacobkong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://jacobkong.github.io/posts/766618543/"/>
     <id>http://jacobkong.github.io/posts/766618543/</id>
     <published>2017-12-20T07:51:24.000Z</published>
-    <updated>2018-05-18T02:33:35.000Z</updated>
+    <updated>2018-05-18T08:10:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>本次主要总结了Temporal Action Detection相关的一些方法和特点。</p>
 <a id="more"></a>
@@ -50,7 +50,7 @@
     <link href="http://jacobkong.github.io/posts/679115822/"/>
     <id>http://jacobkong.github.io/posts/679115822/</id>
     <published>2017-11-25T07:51:24.000Z</published>
-    <updated>2017-11-30T07:00:21.000Z</updated>
+    <updated>2018-05-18T08:14:13.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
@@ -414,43 +414,6 @@
   </entry>
   
   <entry>
-    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-    <link href="http://jacobkong.github.io/posts/1774603577/"/>
-    <id>http://jacobkong.github.io/posts/1774603577/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>行为检测论文笔记：Temporal Segment Networks</title>
     <link href="http://jacobkong.github.io/posts/3872446965/"/>
     <id>http://jacobkong.github.io/posts/3872446965/</id>
@@ -488,6 +451,43 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
+    
+      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
+    
+      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
+    <link href="http://jacobkong.github.io/posts/1774603577/"/>
+    <id>http://jacobkong.github.io/posts/1774603577/</id>
+    <published>2017-10-24T07:51:24.000Z</published>
+    <updated>2017-11-29T08:35:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
     
     </summary>
     

@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作 | JacobKong&#39;s Blog</title>
+    <title>深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作 | JacobKong</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
     <meta name="description" content="Jelon个人前端小站" >
 
     
-    <link rel="alternative" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" >
+    <link rel="alternative" href="/atom.xml" title="JacobKong" type="application/atom+xml" >
     
     
     <link rel="shortcut icon" href="/favicon.ico" >
@@ -48,7 +48,7 @@
         <div class="logo">
             <a href="/">
                 <div class="cover">
-                    <span class="name">JacobKong&#39;s Blog</span>
+                    <span class="name">JacobKong</span>
                     <span class="description">路漫漫其修远兮......</span>
                 </div>
             </a>
@@ -127,7 +127,7 @@
     </p>
     <div class="post-content">
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
-<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">上一篇博客</a>。</p>
+<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/">上一篇博客</a>。</p>
 <p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="external">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
 <p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
 <a id="more"></a>
@@ -366,13 +366,13 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/论文笔记/">论文笔记</a>
-        <span class="badge">(24)</span>
+        <a href="/categories/经验/">经验</a>
+        <span class="badge">(4)</span>
     </li>
     
     <li>
-        <a href="/categories/经验/">经验</a>
-        <span class="badge">(4)</span>
+        <a href="/categories/论文笔记/">论文笔记</a>
+        <span class="badge">(24)</span>
     </li>
     
     <li>
@@ -389,6 +389,8 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/保研/" title="保研">保研 (1)</a>
+  
     <a class="tag-item" href="/tags/Pedestrian-Detection/" title="Pedestrian Detection">Pedestrian Detection (7)</a>
   
     <a class="tag-item" href="/tags/行人检测/" title="行人检测">行人检测 (7)</a>
@@ -398,8 +400,6 @@
     <a class="tag-item" href="/tags/综述/" title="综述">综述 (4)</a>
   
     <a class="tag-item" href="/tags/Caltech/" title="Caltech">Caltech (2)</a>
-  
-    <a class="tag-item" href="/tags/保研/" title="保研">保研 (1)</a>
   
     <a class="tag-item" href="/tags/Object-Detection/" title="Object Detection">Object Detection (16)</a>
   

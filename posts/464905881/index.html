@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测 | JacobKong&#39;s Blog</title>
+    <title>深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测 | JacobKong</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
     <meta name="description" content="Jelon个人前端小站" >
 
     
-    <link rel="alternative" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" >
+    <link rel="alternative" href="/atom.xml" title="JacobKong" type="application/atom+xml" >
     
     
     <link rel="shortcut icon" href="/favicon.ico" >
@@ -48,7 +48,7 @@
         <div class="logo">
             <a href="/">
                 <div class="cover">
-                    <span class="name">JacobKong&#39;s Blog</span>
+                    <span class="name">JacobKong</span>
                     <span class="description">路漫漫其修远兮......</span>
                 </div>
             </a>
@@ -133,7 +133,7 @@
 <li>Alternative training(alt-opt)</li>
 <li>Approximate joint training(end-to-end)</li>
 </ul>
-<p>两种方法有什么不同，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/" target="_blank" rel="external">这篇博客</a>，推荐使用第二种，因为第二种使用的显存更小，而且训练会更快，同时准确率差不多，两种方式需要修改的代码是不一样的，同时faster rcnn提供了三种训练模型，小型的ZF model，中型的VGG_CNN_M_1024和大型的VGG16,论文中说VGG16效果比其他两个好，但是同时占用更大的GPU显存(~11GB)</p>
+<p>两种方法有什么不同，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/">这篇博客</a>，推荐使用第二种，因为第二种使用的显存更小，而且训练会更快，同时准确率差不多，两种方式需要修改的代码是不一样的，同时faster rcnn提供了三种训练模型，小型的ZF model，中型的VGG_CNN_M_1024和大型的VGG16,论文中说VGG16效果比其他两个好，但是同时占用更大的GPU显存(~11GB)</p>
 <p>我使用的是<strong>VGG model + alternative training</strong>，需要检测的类别只有一类，加上背景所以总共是两类(background + person)。</p>
 <p>下面修改模型文件：</p>
 <ol>
@@ -376,13 +376,13 @@
 <ul class="widget-bd">
     
     <li>
-        <a href="/categories/论文笔记/">论文笔记</a>
-        <span class="badge">(24)</span>
+        <a href="/categories/经验/">经验</a>
+        <span class="badge">(4)</span>
     </li>
     
     <li>
-        <a href="/categories/经验/">经验</a>
-        <span class="badge">(4)</span>
+        <a href="/categories/论文笔记/">论文笔记</a>
+        <span class="badge">(24)</span>
     </li>
     
     <li>
@@ -399,6 +399,8 @@
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
+    <a class="tag-item" href="/tags/保研/" title="保研">保研 (1)</a>
+  
     <a class="tag-item" href="/tags/Pedestrian-Detection/" title="Pedestrian Detection">Pedestrian Detection (7)</a>
   
     <a class="tag-item" href="/tags/行人检测/" title="行人检测">行人检测 (7)</a>
@@ -408,8 +410,6 @@
     <a class="tag-item" href="/tags/综述/" title="综述">综述 (4)</a>
   
     <a class="tag-item" href="/tags/Caltech/" title="Caltech">Caltech (2)</a>
-  
-    <a class="tag-item" href="/tags/保研/" title="保研">保研 (1)</a>
   
     <a class="tag-item" href="/tags/Object-Detection/" title="Object Detection">Object Detection (16)</a>
   

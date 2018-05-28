@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
-  <updated>2018-05-28T07:35:27.000Z</updated>
+  <updated>2018-05-28T07:41:02.000Z</updated>
   <id>http://jacobkong.github.io/</id>
   
   <author>
@@ -16,14 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://jacobkong.github.io/posts/0/"/>
-    <id>http://jacobkong.github.io/posts/0/</id>
-    <published>2018-05-28T16:00:00.000Z</published>
-    <updated>2018-05-28T07:35:27.000Z</updated>
+    <title>行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</title>
+    <link href="http://jacobkong.github.io/posts/3697434189/"/>
+    <id>http://jacobkong.github.io/posts/3697434189/</id>
+    <published>2018-05-29T07:51:24.000Z</published>
+    <updated>2018-05-28T07:41:02.000Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">title: 行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</div><div class="line">categories: 论文笔记</div><div class="line">tags:</div><div class="line">  - Action Detection</div><div class="line">  - 行为检测</div><div class="line">abbrlink: </div><div class="line">date: 2018-05-29 15:51:24</div></pre></td></tr></table></figure>
-<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
+    <content type="html"><![CDATA[<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
 <a id="more"></a>
 <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
 <li><p>时间轴行为检测其实和目标检测相类似，因此目前许多行为检测的方法都受启发于目标检测的一些先进方法，比如R-CNN系列，先从整个视频中生成segments proposal，然后用分类器去对这些proposal进行分类。</p>
@@ -113,11 +112,16 @@
     
     <summary type="html">
     
-      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;title: 行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;categories: 论文笔记&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;tags:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  - Action Detection&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  - 行为检测&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;abbrlink: &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;date: 2018-05-29 15:51:24&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。&lt;/p&gt;
+      &lt;p&gt;这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。&lt;/p&gt;
     
     </summary>
     
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   

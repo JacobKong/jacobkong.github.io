@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jacobkong, 孔伟杰, Pedestrian Detection, Deep Learning, Caffe, Faster RCNN, Computer Vision, 行人检测, 深度学习, 目标检测, 计算机视觉" />
+  <meta name="keywords" content="Action Detection,行为检测," />
 
 
 
@@ -104,15 +104,22 @@
 
 
 
-<meta name="description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|视频分析|行人检测。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JacobKong's Blog">
-<meta property="og:url" content="http://jacobkong.github.io/archives/2018/05/index.html">
+<meta name="description" content="这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization">
+<meta property="og:url" content="http://jacobkong.github.io/posts/3697434189/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|视频分析|行人检测。">
+<meta property="og:description" content="这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1frr390sqxsj30ua0a4adx.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1frpy9obbp6j30g70bsjss.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1frpysrksxjj30fq0b53zx.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1frq0h25kllj30g20goadr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1frq0m3der6j30ft07d0u2.jpg">
+<meta property="og:updated_time" content="2018-05-28T07:41:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JacobKong's Blog">
-<meta name="twitter:description" content="欢迎来到孔伟杰（@JacobKong_Dev）的博客。 本人目前是北大信工的研一菜鸟一枚。 研究兴趣：计算机视觉|视频分析|行人检测。">
+<meta name="twitter:title" content="行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization">
+<meta name="twitter:description" content="这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1frr390sqxsj30ua0a4adx.jpg">
 
 
 
@@ -140,14 +147,14 @@
 
 
 
-  <link rel="canonical" href="http://jacobkong.github.io/archives/2018/05/"/>
+  <link rel="canonical" href="http://jacobkong.github.io/posts/3697434189/"/>
 
 
 
 
 <script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
-  <title> 归档 | JacobKong's Blog </title>
+  <title> 行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization | JacobKong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -187,7 +194,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -319,66 +326,279 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 26 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
 
-      
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jacobkong.github.io/posts/3697434189/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jacob Kong">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="JacobKong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="JacobKong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-29T15:51:24+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/论文笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">论文笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/3697434189/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/3697434189/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/posts/3697434189/" class="leancloud_visitors" data-flag-title="行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
+        <p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
+<a id="more"></a>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li><p>时间轴行为检测其实和目标检测相类似，因此目前许多行为检测的方法都受启发于目标检测的一些先进方法，比如R-CNN系列，先从整个视频中生成segments proposal，然后用分类器去对这些proposal进行分类。</p>
+</li>
+<li><p>目前有一些方法将Faster R-CNN迁移到时间轴行为检测中，然而直接迁移过来引入一些挑战，如下：</p>
+<ul>
+<li><p>如何处理行动持续时间的巨大变化？</p>
+<blockquote>
+<p>因为行为会有许多时间长短不一的持续时间，从几秒到几分钟的行为片段都有，而Faster R-CNN利用anchor提proposal会在特征的temporal scope和anchor的span之间产生misalignment现象。<strong>我们提出了一个multi-tower网络和利用扩张时间卷积（dilated temporal convolutions）来解决alignment的问题。</strong></p>
+</blockquote>
+</li>
+<li><p>如何利用时间上下文信息？</p>
+<blockquote>
+<p>动作实例之前和之后的时刻包含关于定位和分类的关键信息（可以说比对象的空间上下文更重要）。Faster R-CNN没有利用时间上下文信息。<strong>我们建议通过扩展提案生成和动作分类中的感受野来明确地编码时间上下文。</strong></p>
+</blockquote>
+</li>
+<li><p>如何最好的去融合multi-stream的特征？</p>
+<blockquote>
+<p>对于Faster R-CNN探索这种RGB和Flow特征融合方面的工作有限。 我们提出了一个后期融合方案，并且经验性地证明了它在一般的早期融合方案上的优势。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>解决Faster R-CNN直接引入到时间轴行为检测中的上述3个挑战,并以此来提升Faster R-CNN在行为检测中的性能.</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>论文框架如下：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frr390sqxsj30ua0a4adx.jpg" alt="mage-20180528153210"></p>
+<p>本文提出了TAL-Net，有三个创新的结构改变：</p>
+<ul>
+<li><p>Receptive Field Alignment</p>
+<ul>
+<li><p>传统的anchor机制有一个缺点：每个时间点的锚点分类都有相同的单一的感受野。</p>
+</li>
+<li><p>为了解决这个问题，我们建议将每个锚点的感受野与它的时间跨度对齐。 这是通过两个关键因素实现的：multi-tower网络和扩张时间卷积（dilated temporal convolutions）。</p>
+</li>
+<li><p>给定一个一维feature map，我们的Segment Proposal Network 由K个temproal ConvNets 组成，每个K网络负责对特定比例的锚段进行分类.最重要的是，每个时间ConvNet都经过精心设计，使得其接受的字段大小与相关的锚点尺度一致。 在每个ConvNet结束时，我们分别应用两个核心大小为1的平行卷积层进行锚定分类和边界回归。</p>
+</li>
+<li><p>另一问题：如何设计具有可控感受野s的时间卷积？</p>
+<ul>
+<li><p>方法一：如果s=2L+1，则叠加L层卷积层得到相应的感受野。缺点是层数L随着s线性增加，很容易增加参数数量使网络过拟合。</p>
+</li>
+<li><p>方法二：在每一层卷积层后添加一个kernel size为2的pooling层，则感受野$s=2^{(L+1)}-1$，此时层数随着s成log变化，但是添加pooling层会减小输出feature map的分辨率，会影响定位准确率。</p>
+</li>
+<li><p>方法三：使用扩充时间卷积，这种卷积可以在扩充感受野的同时不损失分辨率。在我们的Segment Proposal Network中，每一个temporal ConvNet都只由2个dilated convolutional layers组成。为了获得一个目标感受野s，则第一层的dilated convolutional layers的dilation rate $r_1=s/6, r_2=(s/6)\times2$. </p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frpy9obbp6j30g70bsjss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Context Feature Extraction</p>
+<ul>
+<li><p>时间轴上下文信息十分重要</p>
+</li>
+<li><p>为了确保上下文特征用于锚定分类和边界回归，感受野必须覆盖时间轴上下文信息区域，可以通过将dilation rate加倍，即$r_1=s/6\times2, r_2=(s/6)\times2\times2$，如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1frpysrksxjj30fq0b53zx.jpg" alt=""></p>
+</li>
+<li><p>在动作分类阶段，我们要利用SoI pooling来为每个proposal提取一个固定尺寸的feature map</p>
+</li>
+</ul>
+</li>
+<li><p>Late Feature Fusion</p>
+<ul>
+<li>目前许多方法都在使用RGB和光流特征</li>
+<li>本文为双流特征提出了一个后融合的机制</li>
+<li>们首先使用两个不同的网络分别从RGB帧和叠加的光流中提取两个一维特征映射。 我们通过一个不同的Segment Proposal Network来处理每个feature ma，该网络并行地生成锚定分类和边界回归的逻辑。 我们使用来自两个网络的logits的元素平均值作为最终的逻辑来生成提议。 对于每个提案，我们在两个特征映射上并行执行SoI池，并在每个输出上应用不同的DNN分类器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><ul>
+<li><p>基于TensorFlow目标检测API</p>
+</li>
+<li><p>9个anchor，scales为{1, 2, 3, 4, 5, 6, 8, 11, 16}</p>
+</li>
+<li><p>NMS阈值为0.7去筛选proposal，保留前300个proposal用于分类</p>
+</li>
+<li><p>THUMOS’ 14检测结果</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1frq0h25kllj30g20goadr.jpg" alt=""></p>
+</li>
+<li><p>ActivityNet v1.3在验证集的检测结果</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1frq0m3der6j30ft07d0u2.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>相比于R-C3D，本文的方法解决了Multi-scale的问题，利用了上下文信息以及额外的光流信息，解决了目前许多方法中存在的大大小小的缺陷，组合成了一个较为完整的框架，因此在THUMOS’ 14数据集上检测效果达到最好，在ActivityNet数据集上也取得了很有竞争力的结果，但是还是不如SSN的结果。文中分析：THUMOS’ 14是一个更好的用来评估行为定位的数据集，因为其每段视频中包含有更多的行为实例，并且每段视频包含大量的背景活动。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>我认为除了第一点创新：利用dilated temporal convlutional组成感受野可控的multi-tower网络来解决multi-scale问题比较有创新外，另外两点创新其实不算特别有新意。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Action-Detection/" rel="tag"># Action Detection</a>
+          
+            <a href="/tags/行为检测/" rel="tag"># 行为检测</a>
+          
         </div>
       
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/679115822/" rel="next" title="论文调研：ICCV 2017论文调研">
+                <i class="fa fa-chevron-left"></i> 论文调研：ICCV 2017论文调研
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/posts/3697434189/" itemprop="url">
-              
-                <span itemprop="name">行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-29T15:51:24+08:00"
-              content="2018-05-29" >
-          05-29
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -386,6 +606,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -405,8 +636,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -498,6 +738,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">2.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验"><span class="nav-number">4.</span> <span class="nav-text">实验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">5.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">6.</span> <span class="nav-text">缺点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -602,11 +858,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
@@ -624,9 +878,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'jacobkong';
-      var disqus_identifier = 'archives/2018/05/index.html';
+      var disqus_identifier = 'posts/3697434189/';
 
-      var disqus_title = "";
+      var disqus_title = "行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization";
 
 
       function run_disqus_script(disqus_script) {
@@ -639,6 +893,13 @@
 
       run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
       
 
     </script>
@@ -780,26 +1041,6 @@
 
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

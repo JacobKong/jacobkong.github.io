@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
-  <updated>2018-05-28T07:41:02.000Z</updated>
+  <updated>2018-05-28T07:41:09.000Z</updated>
   <id>http://jacobkong.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://jacobkong.github.io/posts/3697434189/"/>
     <id>http://jacobkong.github.io/posts/3697434189/</id>
     <published>2018-05-29T07:51:24.000Z</published>
-    <updated>2018-05-28T07:41:02.000Z</updated>
+    <updated>2018-05-28T07:41:09.000Z</updated>
     
     <content type="html"><![CDATA[<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
 <a id="more"></a>

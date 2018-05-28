@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
-  <updated>2018-05-18T08:10:41.000Z</updated>
+  <updated>2018-05-28T07:35:27.000Z</updated>
   <id>http://jacobkong.github.io/</id>
   
   <author>
@@ -16,41 +16,117 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>行为检测总结：时间轴行为检测总结.md</title>
-    <link href="http://jacobkong.github.io/posts/766618543/"/>
-    <id>http://jacobkong.github.io/posts/766618543/</id>
-    <published>2017-12-20T07:51:24.000Z</published>
-    <updated>2018-05-18T08:10:41.000Z</updated>
+    <title></title>
+    <link href="http://jacobkong.github.io/posts/0/"/>
+    <id>http://jacobkong.github.io/posts/0/</id>
+    <published>2018-05-28T16:00:00.000Z</published>
+    <updated>2018-05-28T07:35:27.000Z</updated>
     
-    <content type="html"><![CDATA[<p>本次主要总结了Temporal Action Detection相关的一些方法和特点。</p>
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">title: 行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</div><div class="line">categories: 论文笔记</div><div class="line">tags:</div><div class="line">  - Action Detection</div><div class="line">  - 行为检测</div><div class="line">abbrlink: </div><div class="line">date: 2018-05-29 15:51:24</div></pre></td></tr></table></figure>
+<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
 <a id="more"></a>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>]]></content>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li><p>时间轴行为检测其实和目标检测相类似，因此目前许多行为检测的方法都受启发于目标检测的一些先进方法，比如R-CNN系列，先从整个视频中生成segments proposal，然后用分类器去对这些proposal进行分类。</p>
+</li>
+<li><p>目前有一些方法将Faster R-CNN迁移到时间轴行为检测中，然而直接迁移过来引入一些挑战，如下：</p>
+<ul>
+<li><p>如何处理行动持续时间的巨大变化？</p>
+<blockquote>
+<p>因为行为会有许多时间长短不一的持续时间，从几秒到几分钟的行为片段都有，而Faster R-CNN利用anchor提proposal会在特征的temporal scope和anchor的span之间产生misalignment现象。<strong>我们提出了一个multi-tower网络和利用扩张时间卷积（dilated temporal convolutions）来解决alignment的问题。</strong></p>
+</blockquote>
+</li>
+<li><p>如何利用时间上下文信息？</p>
+<blockquote>
+<p>动作实例之前和之后的时刻包含关于定位和分类的关键信息（可以说比对象的空间上下文更重要）。Faster R-CNN没有利用时间上下文信息。<strong>我们建议通过扩展提案生成和动作分类中的感受野来明确地编码时间上下文。</strong></p>
+</blockquote>
+</li>
+<li><p>如何最好的去融合multi-stream的特征？</p>
+<blockquote>
+<p>对于Faster R-CNN探索这种RGB和Flow特征融合方面的工作有限。 我们提出了一个后期融合方案，并且经验性地证明了它在一般的早期融合方案上的优势。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>解决Faster R-CNN直接引入到时间轴行为检测中的上述3个挑战,并以此来提升Faster R-CNN在行为检测中的性能.</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>论文框架如下：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frr390sqxsj30ua0a4adx.jpg" alt="mage-20180528153210"></p>
+<p>本文提出了TAL-Net，有三个创新的结构改变：</p>
+<ul>
+<li><p>Receptive Field Alignment</p>
+<ul>
+<li><p>传统的anchor机制有一个缺点：每个时间点的锚点分类都有相同的单一的感受野。</p>
+</li>
+<li><p>为了解决这个问题，我们建议将每个锚点的感受野与它的时间跨度对齐。 这是通过两个关键因素实现的：multi-tower网络和扩张时间卷积（dilated temporal convolutions）。</p>
+</li>
+<li><p>给定一个一维feature map，我们的Segment Proposal Network 由K个temproal ConvNets 组成，每个K网络负责对特定比例的锚段进行分类.最重要的是，每个时间ConvNet都经过精心设计，使得其接受的字段大小与相关的锚点尺度一致。 在每个ConvNet结束时，我们分别应用两个核心大小为1的平行卷积层进行锚定分类和边界回归。</p>
+</li>
+<li><p>另一问题：如何设计具有可控感受野s的时间卷积？</p>
+<ul>
+<li><p>方法一：如果s=2L+1，则叠加L层卷积层得到相应的感受野。缺点是层数L随着s线性增加，很容易增加参数数量使网络过拟合。</p>
+</li>
+<li><p>方法二：在每一层卷积层后添加一个kernel size为2的pooling层，则感受野$s=2^{(L+1)}-1$，此时层数随着s成log变化，但是添加pooling层会减小输出feature map的分辨率，会影响定位准确率。</p>
+</li>
+<li><p>方法三：使用扩充时间卷积，这种卷积可以在扩充感受野的同时不损失分辨率。在我们的Segment Proposal Network中，每一个temporal ConvNet都只由2个dilated convolutional layers组成。为了获得一个目标感受野s，则第一层的dilated convolutional layers的dilation rate $r_1=s/6, r_2=(s/6)\times2$. </p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1frpy9obbp6j30g70bsjss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Context Feature Extraction</p>
+<ul>
+<li><p>时间轴上下文信息十分重要</p>
+</li>
+<li><p>为了确保上下文特征用于锚定分类和边界回归，感受野必须覆盖时间轴上下文信息区域，可以通过将dilation rate加倍，即$r_1=s/6\times2, r_2=(s/6)\times2\times2$，如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1frpysrksxjj30fq0b53zx.jpg" alt=""></p>
+</li>
+<li><p>在动作分类阶段，我们要利用SoI pooling来为每个proposal提取一个固定尺寸的feature map</p>
+</li>
+</ul>
+</li>
+<li><p>Late Feature Fusion</p>
+<ul>
+<li>目前许多方法都在使用RGB和光流特征</li>
+<li>本文为双流特征提出了一个后融合的机制</li>
+<li>们首先使用两个不同的网络分别从RGB帧和叠加的光流中提取两个一维特征映射。 我们通过一个不同的Segment Proposal Network来处理每个feature ma，该网络并行地生成锚定分类和边界回归的逻辑。 我们使用来自两个网络的logits的元素平均值作为最终的逻辑来生成提议。 对于每个提案，我们在两个特征映射上并行执行SoI池，并在每个输出上应用不同的DNN分类器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><ul>
+<li><p>基于TensorFlow目标检测API</p>
+</li>
+<li><p>9个anchor，scales为{1, 2, 3, 4, 5, 6, 8, 11, 16}</p>
+</li>
+<li><p>NMS阈值为0.7去筛选proposal，保留前300个proposal用于分类</p>
+</li>
+<li><p>THUMOS’ 14检测结果</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1frq0h25kllj30g20goadr.jpg" alt=""></p>
+</li>
+<li><p>ActivityNet v1.3在验证集的检测结果</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1frq0m3der6j30ft07d0u2.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>相比于R-C3D，本文的方法解决了Multi-scale的问题，利用了上下文信息以及额外的光流信息，解决了目前许多方法中存在的大大小小的缺陷，组合成了一个较为完整的框架，因此在THUMOS’ 14数据集上检测效果达到最好，在ActivityNet数据集上也取得了很有竞争力的结果，但是还是不如SSN的结果。文中分析：THUMOS’ 14是一个更好的用来评估行为定位的数据集，因为其每段视频中包含有更多的行为实例，并且每段视频包含大量的背景活动。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>我认为除了第一点创新：利用dilated temporal convlutional组成感受野可控的multi-tower网络来解决multi-scale问题比较有创新外，另外两点创新其实不算特别有新意。</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;本次主要总结了Temporal Action Detection相关的一些方法和特点。&lt;/p&gt;
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;title: 行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;categories: 论文笔记&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;tags:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  - Action Detection&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  - 行为检测&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;abbrlink: &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;date: 2018-05-29 15:51:24&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。&lt;/p&gt;
     
     </summary>
     
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
-    <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
+    <title>论文调研：ICCV 2017论文调研</title>
     <link href="http://jacobkong.github.io/posts/679115822/"/>
     <id>http://jacobkong.github.io/posts/679115822/</id>
     <published>2017-11-25T07:51:24.000Z</published>
-    <updated>2018-05-18T08:59:07.000Z</updated>
+    <updated>2018-05-28T07:34:35.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
 <li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
@@ -423,101 +499,6 @@
   </entry>
   
   <entry>
-    <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-    <link href="http://jacobkong.github.io/posts/1774603577/"/>
-    <id>http://jacobkong.github.io/posts/1774603577/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:35:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。<a id="more"></a>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文提出了一个通用框架，可以准确地检测来自未修剪视频（Untrimmed videos）的各种行为。
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行为检测论文笔记：Temporal Segment Networks</title>
-    <link href="http://jacobkong.github.io/posts/3872446965/"/>
-    <id>http://jacobkong.github.io/posts/3872446965/</id>
-    <published>2017-10-24T07:51:24.000Z</published>
-    <updated>2017-11-29T08:32:44.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过<strong>有限的训练样本来</strong>学习这些模型。</li>
-<li>贡献<ul>
-<li>第一个贡献：TSN网络，一个新的基于视频的动作识别框架，其基于远程时间结构建模的思想，结合了<strong>稀疏的时间采样策略</strong>和<strong>视频级别（Video-level）监督</strong>，以使用整个动作视频实现有效地学习。</li>
-<li>第二个贡献：在时间段网络的帮助下，研究一系列的视频数据ConvNets的良好实践。本文的方法在HMDB51（69.4％）和UCF101（94.2％）的数据集上获得了最先进的表现。</li>
-<li>本文观察学习到的ConvNet模型，从而定性地展示了时间段网络的有效性并提出了良好实践。</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>Video-based行为检测应用：安全（security）、行为分析（behavior analysis）</li>
-<li>在行动识别方面，有两个关键和互补的方面：appearance和dynamics。</li>
-<li>ConvNets在视频动作识别中的应用受到两大障碍的阻碍<ul>
-<li>​</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;本文旨在发现设计有效的ConvNet体系结构以实现视频中的动作识别的原则，并通过&lt;strong&gt;有限的训练样本来&lt;/strong&gt;学习这些模型。&lt;/li&gt;
-&lt;li&gt;贡献&lt;ul&gt;
-&lt;li&gt;第一个贡献：TSN网络，一个新的基于视频的动作识别框架，其基于远程时间结构建模的思想，结合了&lt;strong&gt;稀疏的时间采样策略&lt;/strong&gt;和&lt;strong&gt;视频级别（Video-level）监督&lt;/strong&gt;，以使用整个动作视频实现有效地学习。&lt;/li&gt;
-&lt;li&gt;第二个贡献：在时间段网络的帮助下，研究一系列的视频数据ConvNets的良好实践。本文的方法在HMDB51（69.4％）和UCF101（94.2％）的数据集上获得了最先进的表现。&lt;/li&gt;
-&lt;li&gt;本文观察学习到的ConvNet模型，从而定性地展示了时间段网络的有效性并提出了良好实践。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Deep Learning" scheme="http://jacobkong.github.io/tags/Deep-Learning/"/>
-    
-      <category term="深度学习" scheme="http://jacobkong.github.io/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
-    
-      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Action Recognition" scheme="http://jacobkong.github.io/tags/Action-Recognition/"/>
-    
-      <category term="行为识别" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>深度学习论文笔记：DSSD</title>
     <link href="http://jacobkong.github.io/posts/2938514597/"/>
     <id>http://jacobkong.github.io/posts/2938514597/</id>
@@ -714,11 +695,11 @@
   </entry>
   
   <entry>
-    <title>深度学习论文笔记：R-FCN</title>
+    <title>目标检测论文笔记：R-FCN</title>
     <link href="http://jacobkong.github.io/posts/3678248031/"/>
     <id>http://jacobkong.github.io/posts/3678248031/</id>
     <published>2017-02-27T07:51:24.000Z</published>
-    <updated>2017-03-23T04:16:22.000Z</updated>
+    <updated>2018-05-28T07:35:11.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
 <li>提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。</li>
@@ -2632,6 +2613,322 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
       <category term="Object Detection" scheme="http://jacobkong.github.io/tags/Object-Detection/"/>
     
       <category term="目标检测" scheme="http://jacobkong.github.io/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</title>
+    <link href="http://jacobkong.github.io/posts/2397281138/"/>
+    <id>http://jacobkong.github.io/posts/2397281138/</id>
+    <published>2016-12-03T22:32:24.000Z</published>
+    <updated>2017-03-06T06:52:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+<li>Human Baseline 的标准是如何确定的?</li>
+<li><p>Ground-truth是什么意思？</p>
+<ul>
+<li>Groun-truth 指的是正确的标注（真实值）</li>
+<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+</ul>
+</li>
+<li><p>Intersection over Union（IoU）是什么？</p>
+<ul>
+<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
+</li>
+<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
+</li>
+<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+</li>
+<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>调查了当前最先进的方法与“完美单帧检测器”之间的差距。</li>
+<li>基于Caltech数据集创建了一个人工的基准。</li>
+<li>手工聚合了顶级检测器经常出现的错误。</li>
+<li><p>刻画了定位，前景 vs 背景两方面的错误</p>
+<ul>
+<li>针对定位错误：研究了训练集标记噪声对检测器性能的影响</li>
+<li>前景 vs 背景错误：研究了convnets，讨论了哪些因素影响其性能</li>
+</ul>
+</li>
+<li><p>提供了一个新的、更纯净的训练/测试标注集。</p>
+</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>我们的结果显示localization是高置信度false positives的重要来源</li>
+</ul>
+<h2 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h2><h3 id="Caltech-USA-pedestrian-detection-benchmark"><a href="#Caltech-USA-pedestrian-detection-benchmark" class="headerlink" title="Caltech-USA pedestrian detection benchmark"></a>Caltech-USA pedestrian detection benchmark</h3><ul>
+<li><p>最流行的数据集：Caltech-USA、KITTI</p>
+<ul>
+<li>Caltech-USA有2.5小时、30Hz的从LA街道的一个check里面录制的</li>
+<li>一共350000个标注、覆盖2300各单一的行人</li>
+<li>测试集：4024帧</li>
+</ul>
+</li>
+<li><p>MR: miss rate</p>
+</li>
+</ul>
+<h3 id="Filtered-channel-features-detector"><a href="#Filtered-channel-features-detector" class="headerlink" title="Filtered channel features detector"></a>Filtered channel features detector</h3><ul>
+<li>截止到最近的主要会议（CVPR 15），最好的方法是 <strong>Checkerboards</strong></li>
+<li>Checkerboards：是ICF的一种，ICF(Integral Channels Feature detector)</li>
+<li>目前最好的执行convnets方法对底层检测建议很敏感，因此我们首先通过优化过滤的通道特征检测器来关注这些建议。</li>
+<li>环境和光流可以提高检测（额外的提示）</li>
+</ul>
+<h2 id="Analyzing-the-state-of-the-art"><a href="#Analyzing-the-state-of-the-art" class="headerlink" title="Analyzing the state of the art"></a>Analyzing the state of the art</h2><h3 id="Are-we-reaching-saturation"><a href="#Are-we-reaching-saturation" class="headerlink" title="Are we reaching saturation?"></a>Are we reaching saturation?</h3><ul>
+<li>在现在的基准上，我们还有多少提升空间？为了回答这个问题，我们提出可一个人工的基准线作为最低极限。</li>
+<li>机器检测算法应该达到至少人类水平，最终超过人类水平。</li>
+<li>人工基准线——为了公平比较，关注于单帧单目检测，注释器需要根据行人外表和单帧环境来注释。</li>
+<li>Intersection over Union (IoU) ≥ 0.5 matching criterion。</li>
+<li>在所有情况下人类基准线表现远远超过当前最好的检测器，说明对于自动方法来说，还有提升空间。</li>
+</ul>
+<h3 id="Failure-analysis"><a href="#Failure-analysis" class="headerlink" title="Failure analysis"></a>Failure analysis</h3><h4 id="Error-sources"><a href="#Error-sources" class="headerlink" title="Error sources"></a>Error sources</h4><ul>
+<li><p>一个检测器可以有两类错误：</p>
+<ul>
+<li>假阳性（检测到了背景，或者很弱的定位检测）</li>
+<li>假阴性（低得分率或者错过某些行人检测，检测不全）</li>
+</ul>
+</li>
+<li><p>FP聚类成11个分类</p>
+</li>
+<li>FN聚类成6个分类，其中side view 和 cyclists是由于数据集偏差导致的，用这些案例的外部图像增强训练集可能是一个有效的策略。</li>
+<li>对于small pedestrains，发现低像素是主要困难来源，所以合理的利用所有像素，以及周围上下文是很必要的。</li>
+</ul>
+<h4 id="Oracle-test-cases"><a href="#Oracle-test-cases" class="headerlink" title="Oracle test cases"></a>Oracle test cases</h4><ul>
+<li>对于大多数执行最好的方法，localization和background-vs-forground误差对检测质量具有相等的影响。 他们同样重要。</li>
+</ul>
+<h4 id="Improved-Caltech-USA-annotations"><a href="#Improved-Caltech-USA-annotations" class="headerlink" title="Improved Caltech-USA annotations"></a>Improved Caltech-USA annotations</h4><ul>
+<li>原始注释是基于跨越多个帧内插稀疏注释（interpolating sparse annotations ），并且这些稀疏注释不一定位于评估的帧上。</li>
+<li><p>我们的目标是两方面：</p>
+<ul>
+<li>在一方面，我们希望提供对现有技术的更准确的评估，特别是适合于接近该问题的“最后20％”的评估。</li>
+<li>另一方面，我们希望有训练注释，并评估改进的注释导怎么样更好的检测。</li>
+</ul>
+</li>
+<li><p>总之，我们的新注释与人类基线在以下方面不同：训练和测试集都被注释，忽略区域和闭塞也被注释，完整的视频数据用于决策，并且允许同一图像的多个修订。</p>
+</li>
+</ul>
+<h3 id="Improving-the-state-of-the-art"><a href="#Improving-the-state-of-the-art" class="headerlink" title="Improving the state of the art"></a>Improving the state of the art</h3><h4 id="Impact-of-training-annotations"><a href="#Impact-of-training-annotations" class="headerlink" title="Impact of training annotations"></a>Impact of training annotations</h4><ul>
+<li><p>Pruning benefits:</p>
+<ul>
+<li>从原始到修剪注释的主要变化是删除注释错误，从修剪到新的，主要的变化是更好的对齐。</li>
+<li>我们在MRN-2中看到，更强的检测器更好地受益于更好的数据，并且检测质量的最大增益来自移除注释错误。</li>
+</ul>
+</li>
+<li><p>Alignment benefits:</p>
+<ul>
+<li>为了利用新的1×注释来利用9×剩余数据，我们在新的注释上训练模型，并使用该模型在9×部分上重新对准原始注释。<br> <img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsntx4jxj30hn06zwg1.jpg" alt="Snip20161204_2"></li>
+<li><p>因为新的注释更好地对齐，所以我们期望该模型能够修复原始注释中的轻微位置和缩放错误。</p>
+</li>
+<li><p>结果表明，使用检测器模型来提高整体数据对准确实是有效的，并且更好地对准训练数据导致更好的检测质量（在MRO和MRN中）。</p>
+</li>
+<li><p>使用高质量注释进行训练可提高整体检测质量，这得益于改进的对齐和减少的注释错误。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Convnets-for-pedestrian-detection"><a href="#Convnets-for-pedestrian-detection" class="headerlink" title="Convnets for pedestrian detection"></a>Convnets for pedestrian detection</h4><ul>
+<li><p>AlexNet 和 VGG16都在ImageNet上进行了预先训练，并使用SquaresChnFtrs建议对Caltech 10×（原始注释）进行了微调。</p>
+</li>
+<li><p>可以看出，VGG显着地减少了背景误差，而同时稍微增加了定位误差。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsqv4dcdj30df0c7gnt.jpg" alt="Snip20161204_3"></p>
+</li>
+<li><p>虽然卷积在图像分类和一般物体检测中具有很强的结果，但是当在小物体周围产生良好的局部检测分数时，它们似乎有局限性。 边界框回归（和NMS）是当前架构的一个关键因素。</p>
+</li>
+<li><p>表明神经网络的原始分类能力仍有改进的余地。</p>
+</li>
+</ul>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><ul>
+<li><p>相对于human baseline, there is a 10× gap still to be closed.</p>
+</li>
+<li><p>误差特性导致关于如何设计更好的检测器（在3.2节中提及;例如，对于人side-view的数据增加或在垂直轴上延伸检测器接收场）的具体建议。</p>
+</li>
+<li><p>我们通过衡量更好的注释对本地化准确性的影响，以及通过调查使用convnets来改善the background to foreground discrimination，来部分解决了一些问题。我们的研究结果表明，通过适当训练的ICF检测器可以实现显着更好的Alignment，并且，对于行人检测，Convent在localization上能力不强，但是可以通过边界框回归（bounding box regression）部分解决。 对于原始和新注释，所描述的检测方法都能达到最高性能。</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfsrgcdtaj30dh077jue.jpg" alt="Snip20161204_4"></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;文章疑问点&quot;&gt;&lt;a href=&quot;#文章疑问点&quot; class=&quot;headerlink&quot; title=&quot;文章疑问点&quot;&gt;&lt;/a&gt;文章疑问点&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Human Baseline 的标准是如何确定的?&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Ground-truth是什么意思？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Groun-truth 指的是正确的标注（真实值）&lt;/li&gt;
+&lt;li&gt;在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Intersection over Union（IoU）是什么？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;As long as we have these two sets of bounding boxes we can apply Intersection over Union.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;An Intersection over Union score &amp;gt; 0.5 is normally considered a “good” prediction.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
+&lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://jacobkong.github.io/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Review" scheme="http://jacobkong.github.io/tags/Review/"/>
+    
+      <category term="综述" scheme="http://jacobkong.github.io/tags/%E7%BB%BC%E8%BF%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
+    <link href="http://jacobkong.github.io/posts/287090227/"/>
+    <id>http://jacobkong.github.io/posts/287090227/</id>
+    <published>2016-12-01T22:32:24.000Z</published>
+    <updated>2017-01-28T08:21:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
+<li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><ul>
+<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
+<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
+<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
+<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
+<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
+<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
+</ul>
+<h2 id="Main-approaches-to-improve-pedestrian-detection"><a href="#Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="Main approaches to improve pedestrian detection"></a>Main approaches to improve pedestrian detection</h2><ul>
+<li><p>40+种行人检测的方法：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
+</li>
+</ul>
+<ul>
+<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
+</ul>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><h3 id="Solution-families"><a href="#Solution-families" class="headerlink" title="Solution families"></a>Solution families</h3><ul>
+<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
+</ul>
+<ol>
+<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
+<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
+<li><p>决策林（ChnFtrs，Roerei等）。</p>
+</li>
+<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
+</li>
+</ol>
+<h3 id="Better-classiﬁers"><a href="#Better-classiﬁers" class="headerlink" title="Better classiﬁers"></a>Better classiﬁers</h3><ul>
+<li>特征和分类器之间的没有明确的界限</li>
+</ul>
+<h3 id="Additional-data"><a href="#Additional-data" class="headerlink" title="Additional data"></a>Additional data</h3><ul>
+<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
+<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
+</ul>
+<h3 id="Exploiting-context"><a href="#Exploiting-context" class="headerlink" title="Exploiting context"></a>Exploiting context</h3><ul>
+<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
+</ul>
+<h3 id="Deformable-parts"><a href="#Deformable-parts" class="headerlink" title="Deformable parts"></a>Deformable parts</h3><ul>
+<li>对于行人检测，结果是有竞争性的，但不显着。</li>
+<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
+</ul>
+<h3 id="Multi-scale-models"><a href="#Multi-scale-models" class="headerlink" title="Multi-scale models"></a>Multi-scale models</h3><ul>
+<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
+<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
+</ul>
+<h3 id="Deep-architectures"><a href="#Deep-architectures" class="headerlink" title="Deep architectures"></a>Deep architectures</h3><ul>
+<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
+<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
+</ul>
+<h3 id="Better-features"><a href="#Better-features" class="headerlink" title="Better features"></a>Better features</h3><ul>
+<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
+<li>越来越多样化的特性已经显示系统地提高性能。</li>
+<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
+<ul>
+<li>6个梯度方向，</li>
+<li>1个梯度幅度</li>
+<li><p>3个颜色通道</p>
+</li>
+<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
+</li>
+</ul>
+</li>
+<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
+</li>
+<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
+</li>
+</ul>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><ul>
+<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
+<ul>
+<li>更好的特征（§3.9</li>
+<li>附加数据（§3.4）</li>
+<li>上下文信息（§3.5）</li>
+</ul>
+</li>
+</ul>
+<h3 id="Reviewing-the-eﬀect-of-features-特征的影响"><a href="#Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="Reviewing the eﬀect of features(特征的影响)"></a>Reviewing the eﬀect of features(特征的影响)</h3><ul>
+<li>DCT: (discrete cosine transform)离散余弦变换</li>
+<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
+</ul>
+<h3 id="Complementarity-of-approaches"><a href="#Complementarity-of-approaches" class="headerlink" title="Complementarity of approaches"></a>Complementarity of approaches</h3><ul>
+<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
+<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
+<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
+<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。&lt;/li&gt;
+&lt;li&gt;用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Pedestrian Detection" scheme="http://jacobkong.github.io/tags/Pedestrian-Detection/"/>
+    
+      <category term="行人检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
+    
+      <category term="Review" scheme="http://jacobkong.github.io/tags/Review/"/>
+    
+      <category term="综述" scheme="http://jacobkong.github.io/tags/%E7%BB%BC%E8%BF%B0/"/>
     
   </entry>
   

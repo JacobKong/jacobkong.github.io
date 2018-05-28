@@ -4,18 +4,35 @@
 
     
   <url>
-    <loc>http://jacobkong.github.io/posts/679115822/</loc>
-    <lastmod>2018-05-18T08:59:07.000Z</lastmod>
+    <loc>http://jacobkong.github.io/posts/0/</loc>
+    <lastmod>2018-05-28T07:35:27.000Z</lastmod>
     <data>
         <display>
-        <title>行为识别论文笔记：行为分类深度模型的总结.md</title>
-        <pubTime>2017-11-25T07:51:24.000Z</pubTime>
+        <title></title>
+        <pubTime>2018-05-28T16:00:00.000Z</pubTime>
         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jacobkong.github.io/posts/3678248031/</loc>
+    <lastmod>2018-05-28T07:35:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>目标检测论文笔记：R-FCN</title>
+        <pubTime>2017-02-27T07:51:24.000Z</pubTime>
+        
+        <tag>Object Detection</tag>
+         
+        <tag>目标检测</tag>
+         
         <tag>Deep Learning</tag>
          
         <tag>深度学习</tag>
-         
-        <tag>论文调研</tag>
          
          
            
@@ -28,20 +45,18 @@
 
     
   <url>
-    <loc>http://jacobkong.github.io/posts/766618543/</loc>
-    <lastmod>2018-05-18T08:10:41.000Z</lastmod>
+    <loc>http://jacobkong.github.io/posts/679115822/</loc>
+    <lastmod>2018-05-28T07:34:35.000Z</lastmod>
     <data>
         <display>
-        <title>行为检测总结：时间轴行为检测总结.md</title>
-        <pubTime>2017-12-20T07:51:24.000Z</pubTime>
+        <title>论文调研：ICCV 2017论文调研</title>
+        <pubTime>2017-11-25T07:51:24.000Z</pubTime>
         
         <tag>Deep Learning</tag>
          
         <tag>深度学习</tag>
          
-        <tag>Action Detection</tag>
-         
-        <tag>行为检测</tag>
+        <tag>论文调研</tag>
          
          
            
@@ -109,66 +124,6 @@
 
     
   <url>
-    <loc>http://jacobkong.github.io/posts/1774603577/</loc>
-    <lastmod>2017-11-29T08:35:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>行为检测论文笔记：A Pursuit of Temporal Accuracy in General Activity Detection</title>
-        <pubTime>2017-10-24T07:51:24.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>深度学习</tag>
-         
-        <tag>Action Detection</tag>
-         
-        <tag>行为检测</tag>
-         
-        <tag>Action Recognition</tag>
-         
-        <tag>行为识别</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jacobkong.github.io/posts/3872446965/</loc>
-    <lastmod>2017-11-29T08:32:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>行为检测论文笔记：Temporal Segment Networks</title>
-        <pubTime>2017-10-24T07:51:24.000Z</pubTime>
-        
-        <tag>Deep Learning</tag>
-         
-        <tag>深度学习</tag>
-         
-        <tag>Action Detection</tag>
-         
-        <tag>行为检测</tag>
-         
-        <tag>Action Recognition</tag>
-         
-        <tag>行为识别</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://jacobkong.github.io/posts/2938514597/</loc>
     <lastmod>2017-04-01T02:16:57.000Z</lastmod>
     <data>
@@ -202,32 +157,6 @@
         <title>深度学习论文笔记：Deep Residual Learning for Image Recognition</title>
         <pubTime>2017-03-23T07:51:24.000Z</pubTime>
         
-        <tag>Deep Learning</tag>
-         
-        <tag>深度学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jacobkong.github.io/posts/3678248031/</loc>
-    <lastmod>2017-03-23T04:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习论文笔记：R-FCN</title>
-        <pubTime>2017-02-27T07:51:24.000Z</pubTime>
-        
-        <tag>Object Detection</tag>
-         
-        <tag>目标检测</tag>
-         
         <tag>Deep Learning</tag>
          
         <tag>深度学习</tag>
@@ -693,32 +622,6 @@
         <tag>Review</tag>
          
         <tag>综述</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jacobkong.github.io/posts/285415955/</loc>
-    <lastmod>2017-01-28T08:13:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>行人检测论文笔记：Taking a Deeper Look at Pedestrians</title>
-        <pubTime>2016-12-03T22:32:24.000Z</pubTime>
-        
-        <tag>Pedestrian Detection</tag>
-         
-        <tag>行人检测</tag>
-         
-        <tag>Deep Learning</tag>
-         
-        <tag>深度学习</tag>
          
          
            

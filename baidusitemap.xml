@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://jacobkong.github.io/posts/3531717168/</loc>
+    <lastmod>2018-05-31T07:55:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>行为检测论文笔记：One-shot Action Localization by Learning Sequence Matching Network</title>
+        <pubTime>2018-05-30T07:51:24.000Z</pubTime>
+        
+        <tag>Action Detection</tag>
+         
+        <tag>行为检测</tag>
+         
+         
+           
+             
+              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://jacobkong.github.io/posts/3697434189/</loc>
-    <lastmod>2018-05-28T07:41:09.000Z</lastmod>
+    <lastmod>2018-05-30T09:13:50.000Z</lastmod>
     <data>
         <display>
         <title>行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</title>

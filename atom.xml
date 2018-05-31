@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
-  <updated>2018-05-28T07:41:09.000Z</updated>
+  <updated>2018-05-31T07:55:22.000Z</updated>
   <id>http://jacobkong.github.io/</id>
   
   <author>
@@ -16,11 +16,135 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>行为检测论文笔记：One-shot Action Localization by Learning Sequence Matching Network</title>
+    <link href="http://jacobkong.github.io/posts/3531717168/"/>
+    <id>http://jacobkong.github.io/posts/3531717168/</id>
+    <published>2018-05-30T07:51:24.000Z</published>
+    <updated>2018-05-31T07:55:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的另一篇，基于学习的时间轴动作定位方法需要大量的训练数据。 然而，这样的大规模视频数据集不仅非常难以获得而且可能因为存在无数的动作类别而不实用。 当训练样本少且罕见时，当前方法的弊端就暴露出来了。为了解决这个挑战，本文的解决方案是采用匹配网络的One-shot学习技术，并利用相关性来挖掘和定位以前没有看过类别的行为。 本文在THUMOS14和ActivityNet数据集上评估我们的一次性动作定位方法。</p>
+<a id="more"></a>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>现在显存的基于深度学习的行为定位的方法都采用很强的监督学习策略，需要大量的标注数据，非常耗时去收集。</li>
+<li>虽然转移学习或模型预训练可能在一定程度上缓解了这个问题，但处理新的动作类别和将学习的网络模型以高数据效率适应到新场景中仍然具有挑战性。</li>
+<li>在本文中，考虑one(few)-shot的动作定位学习场景：给出一个（或几个）新动作类的例子，通常每个类一个例子，我们的目标是检测未修剪视频中所有出现的每个类。</li>
+<li>目前很少有工作将one-shot learning应用到检测时空特征目标中。</li>
+</ul>
+<h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>为缓解目前用来训练的动作视频数据量稀少且难以获取的问题，利用one(few)-shot learning的方法，通过少量训练样本即可达到时间轴定位以及未见过的动作的预测，提高模型的泛化性能。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>论文框架如下：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1frto52bt5ej30rj0e0gpp.jpg" alt=""></p>
+<ul>
+<li><p>本文开发了一种新颖的<strong>元学习（meta-learning）策略</strong>，将<strong>视频序列匹配</strong>的任务级先验知识集成到学习动作定位中。 我们的一次学习策略的关键思想是动作视频的直观，结构化表示适合于用来匹配（部分）序列（matching  sequences），以及一种相似性度量，它允许我们将动作示例的标签转换为未修剪视频中的<strong>动作提议</strong>。</p>
+</li>
+<li><p>本文提出了一个新的Matching Network结构，首先生成许多proposal，然后这些proposal送入到三个网络组件中进行动作标签预测：</p>
+<ul>
+<li><p><strong>Video Encoder Network：</strong>它为每个行动建议和参考行动计算一个segment-based的动作表示，它维护行动的时间结构并用于准确定位。</p>
+<ul>
+<li>该网络的性能依赖于候选proposal和参考视频之间的能否良好对应，为了实现准确对齐，我们打算在行动表示中保留动作视频的时间结构。 为此，我们开发了一个利用ranking LSTM来获得segment-based的视频表示，以便将每个动作实例编码为固定长度序列的视频片段特征。</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1frua9d9df8j30fs0b8q5p.jpg" alt=""></p>
+</li>
+<li><p><strong>Similarity Network:</strong> 将行动建议利用相似性网络与每个参考行动（reference action）进行比较，该网络在每个时间步骤生成一组相关分数。</p>
+<ul>
+<li><p>类似于Matching Network，网络首先计算每个单独示例$x_i$相对于整个支持集（support set）的完整上下文嵌入</p>
+</li>
+<li><p>然后给定一个行动建议$\hat{x}$及其编码向量$g(x_i)$，相似性网络计算提议表示与所有示例之间的<strong>余弦距离</strong>：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fruajf2q51j30b701wwej.jpg" alt="mage-20180531100105"></p>
+</li>
+<li><p>接着基于上述距离，原始匹配网络使用关注机制和投票策略将测试数据分类到支持集中的一个类中</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1frub8m9vjtj309t029weg.jpg" alt="mage-20180531102522"></p>
+</li>
+<li><p>我们注意到，由于支持集只由前景类组成，这种分类方法不适用于定位任务，我们还必须区分前景和背景。 因此，在本文的 one-shot action localization 架构中，我们使用相似性网络计算相关分数，并设计一个单独的标签网络来推断每个提案的类别标签（包括背景）。</p>
+</li>
+</ul>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1frua9w27e6j30fs0b2di1.jpg" alt=""></p>
+</li>
+<li><p><strong>Labeling Network:</strong> 设置不同长度的时间窗口，根据时间窗口内的encoding vector和correlation scores，第三个网络会在每个时间步骤中预测提案的动作类别标签（作为前景类别或背景之一）。</p>
+<ul>
+<li>标记网络直接应用于相关矩阵。 类似于通过比较余弦距离进行分类，我们通过在短暂的时间跨度上在相关矩阵上应用全连接层来比较相关矩阵的相同列的不同行，并且输出在前景和通过sigmoid激活的背景。</li>
+<li>全连接网络沿时间维度滑过相关矩阵，为每个提案确定前景/背景。 在标签网络确定为前景的提议中，公式6应用于预测动作标签，如框架图的上半部分所示。</li>
+<li>相关矩阵包含有关特定特定类的信息以及提案是属于背景还是属于前景。 例如，如果与一个示例的关联比其他示例的关联高得多，那么该提议很可能属于前景并且与示例具有相同的动作标签; 如果与所有例子的相关性都比较低，那么它可能属于背景。 <strong>标签网络通过训练学习这些标准。</strong></li>
+<li>还要注意标签网络在某种意义上<strong>独立于动作类别</strong>，因为它应用于相关矩阵而不是每个视频的特征表示。 这意味着它学到的标准应该适用于输入来自不同类别的视频，<strong>这使得它适用于一次性预测。</strong></li>
+<li>后处理阶段：我们结合多尺度 proposal-level 预测来获得frame-level的单帧级预测，并将相同标号的相邻帧分组以获得动作实例。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>本文的定位系统是针对 one-shot action localization 而设计的，相应的 Meta Learning Formulation 可用于模型的训练。 系统的每个组成部分都是可导的，并且可以对系统进行端到端的培训。 然而，为了获得更好的初始化和性能，我们对<strong>Video Encoder Network</strong>和<strong>Similarity Network</strong>进行了预训练。 </p>
+<ul>
+<li><p>Meta Learning Formulation</p>
+<ul>
+<li>在元学习中，模型在一组训练任务的元阶段进行训练，并对另一组测试任务进行评估</li>
+<li>元学习的目标是在元测试任务分布中找到最小化损失的模型</li>
+</ul>
+</li>
+<li><p>Optimization for the Localization System</p>
+<ul>
+<li><p>损失函数为：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1frujibjlk1j30bw01c748.jpg" alt=""></p>
+<p>其中，两个损失函数分别如下：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1frujixrzcpj30dk03h74i.jpg" alt="mage-20180531151204"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1frujj5jzvsj30cy02udfy.jpg" alt="mage-20180531151217"></p>
+</li>
+</ul>
+</li>
+<li><p>Pretraining for Video Encoder &amp; Similarity Net</p>
+<ul>
+<li><p>预训练两者的损失函数：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1frujmmshe5j30df01wq2y.jpg" alt="mage-20180531151538"></p>
+</li>
+<li><p>利用到了一个Ranking Loss，其直观的想法是：当给予越来越多的视频内容，分类器会生成越来越置信度高的预测</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><ul>
+<li><p>实验在<strong>Thumos14</strong>和<strong>ActivityNet 1.2</strong>上进行评估</p>
+</li>
+<li><p><strong>One-shot问题设置要求测试期间的类别不得存在在训练期间</strong>，因此在训练和测试过程中需要对两个数据集进行划分，从而达到这一要求</p>
+</li>
+<li><p>训练和测试阶段有很多细节，建议看论文，这里不再赘述</p>
+</li>
+<li><p>和强监督方法的比较，我们从表1和表2可以看出，虽然one-shot和全监督行为检测之间仍然存在性能差距，但我们的方法在以one-shot设置进行测试时，显着优于目前最先进的方法。 我们在Thumos14数据集上使用更多的训练数据，每类15个样本进一步测试我们的方法。 我们的结果表明，性能出现明显提升，而CDC只有很小的提升，这表明我们的方法相对于样本数量<strong>具有良好的可扩展性</strong>。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1frujw8cs54j30fz0a1q59.jpg" alt="mage-20180531152451"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1frujwobo2qj30fw0ct40u.jpg" alt="mage-20180531152512"></p>
+</li>
+<li><p>还有一些消融探究实验，这里也不再赘述</p>
+</li>
+</ul>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>针对目前视频数据集标注费时、难以获得等痛点，作者首次将one(few)-shot的方法引入了时间轴定位，很有创新点，和弱监督学习有异曲同工之妙</li>
+<li>提出了一种基于匹配网络框架的动作定位问题的<strong>元学习方法</strong>，它能够捕获<strong>任务级别（task-level）的先验知识</strong></li>
+<li>后处理中的grouping策略可以要用在我之前的工作中</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>性能目前看来并不是特别理想，和全监督的方法还有差距，还有很多改进的空间，这可能需要多去了解一些<strong>one-shot learning或transfer learning</strong>等方向的论文。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的另一篇，基于学习的时间轴动作定位方法需要大量的训练数据。 然而，这样的大规模视频数据集不仅非常难以获得而且可能因为存在无数的动作类别而不实用。 当训练样本少且罕见时，当前方法的弊端就暴露出来了。为了解决这个挑战，本文的解决方案是采用匹配网络的One-shot学习技术，并利用相关性来挖掘和定位以前没有看过类别的行为。 本文在THUMOS14和ActivityNet数据集上评估我们的一次性动作定位方法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Action Detection" scheme="http://jacobkong.github.io/tags/Action-Detection/"/>
+    
+      <category term="行为检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%B8%BA%E6%A3%80%E6%B5%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</title>
     <link href="http://jacobkong.github.io/posts/3697434189/"/>
     <id>http://jacobkong.github.io/posts/3697434189/</id>
     <published>2018-05-29T07:51:24.000Z</published>
-    <updated>2018-05-28T07:41:09.000Z</updated>
+    <updated>2018-05-30T09:13:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
 <a id="more"></a>
@@ -2788,137 +2912,6 @@ Pr(Class_{i}|Object)*Pr(Object)*IOU^{truth}_{pred}=Pr(Class_{i})*IOU^{truth}_{pr
 &lt;ul&gt;
 &lt;li&gt;FPPI: False Positive Per Image&lt;/li&gt;
 &lt;li&gt;Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="论文笔记" scheme="http://jacobkong.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="Pedestrian Detection" scheme="http://jacobkong.github.io/tags/Pedestrian-Detection/"/>
-    
-      <category term="行人检测" scheme="http://jacobkong.github.io/tags/%E8%A1%8C%E4%BA%BA%E6%A3%80%E6%B5%8B/"/>
-    
-      <category term="Review" scheme="http://jacobkong.github.io/tags/Review/"/>
-    
-      <category term="综述" scheme="http://jacobkong.github.io/tags/%E7%BB%BC%E8%BF%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</title>
-    <link href="http://jacobkong.github.io/posts/287090227/"/>
-    <id>http://jacobkong.github.io/posts/287090227/</id>
-    <published>2016-12-01T22:32:24.000Z</published>
-    <updated>2017-01-28T08:21:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
-</ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
-<li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
-</ul>
-<a id="more"></a>
-<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><ul>
-<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
-<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
-<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
-<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
-<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
-<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
-</ul>
-<h2 id="Main-approaches-to-improve-pedestrian-detection"><a href="#Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="Main approaches to improve pedestrian detection"></a>Main approaches to improve pedestrian detection</h2><ul>
-<li><p>40+种行人检测的方法：</p>
-<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
-</li>
-</ul>
-<ul>
-<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
-</ul>
-<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><h3 id="Solution-families"><a href="#Solution-families" class="headerlink" title="Solution families"></a>Solution families</h3><ul>
-<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
-</ul>
-<ol>
-<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
-<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
-<li><p>决策林（ChnFtrs，Roerei等）。</p>
-</li>
-<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
-</li>
-</ol>
-<h3 id="Better-classiﬁers"><a href="#Better-classiﬁers" class="headerlink" title="Better classiﬁers"></a>Better classiﬁers</h3><ul>
-<li>特征和分类器之间的没有明确的界限</li>
-</ul>
-<h3 id="Additional-data"><a href="#Additional-data" class="headerlink" title="Additional data"></a>Additional data</h3><ul>
-<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
-<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
-</ul>
-<h3 id="Exploiting-context"><a href="#Exploiting-context" class="headerlink" title="Exploiting context"></a>Exploiting context</h3><ul>
-<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
-</ul>
-<h3 id="Deformable-parts"><a href="#Deformable-parts" class="headerlink" title="Deformable parts"></a>Deformable parts</h3><ul>
-<li>对于行人检测，结果是有竞争性的，但不显着。</li>
-<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
-</ul>
-<h3 id="Multi-scale-models"><a href="#Multi-scale-models" class="headerlink" title="Multi-scale models"></a>Multi-scale models</h3><ul>
-<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
-<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
-</ul>
-<h3 id="Deep-architectures"><a href="#Deep-architectures" class="headerlink" title="Deep architectures"></a>Deep architectures</h3><ul>
-<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
-<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
-</ul>
-<h3 id="Better-features"><a href="#Better-features" class="headerlink" title="Better features"></a>Better features</h3><ul>
-<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
-<li>越来越多样化的特性已经显示系统地提高性能。</li>
-<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
-<ul>
-<li>6个梯度方向，</li>
-<li>1个梯度幅度</li>
-<li><p>3个颜色通道</p>
-</li>
-<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
-</li>
-</ul>
-</li>
-<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
-</li>
-<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
-</li>
-</ul>
-<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><ul>
-<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
-<ul>
-<li>更好的特征（§3.9</li>
-<li>附加数据（§3.4）</li>
-<li>上下文信息（§3.5）</li>
-</ul>
-</li>
-</ul>
-<h3 id="Reviewing-the-eﬀect-of-features-特征的影响"><a href="#Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="Reviewing the eﬀect of features(特征的影响)"></a>Reviewing the eﬀect of features(特征的影响)</h3><ul>
-<li>DCT: (discrete cosine transform)离散余弦变换</li>
-<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
-</ul>
-<h3 id="Complementarity-of-approaches"><a href="#Complementarity-of-approaches" class="headerlink" title="Complementarity of approaches"></a>Complementarity of approaches</h3><ul>
-<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
-<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
-</ul>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
-<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
-<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
-<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Abstract&quot;&gt;&lt;a href=&quot;#Abstract&quot; class=&quot;headerlink&quot; title=&quot;Abstract&quot;&gt;&lt;/a&gt;Abstract&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。&lt;/li&gt;
-&lt;li&gt;用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。&lt;/li&gt;
 &lt;/ul&gt;
     
     </summary>

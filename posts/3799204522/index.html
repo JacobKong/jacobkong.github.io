@@ -116,7 +116,7 @@
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8h7m3emnj30nb0o7gzt.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8hm9zxzsj313e09gwjz.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg">
-<meta property="og:updated_time" content="2018-06-12T13:29:07.000Z">
+<meta property="og:updated_time" content="2018-06-12T13:31:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记">
 <meta name="twitter:description" content="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时">
@@ -473,7 +473,7 @@
 <p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8hm9zxzsj313e09gwjz.jpg" alt=""></p>
 <p>本方法很重要的一个创新点：结合了GAN中的Image-to-image translation模型来仅仅为静态图像即可生成相应的光流图，所预测出的光流是十分准确的，同时也提升了行为识别的准确性，思想值得借鉴。</p>
 <h2 id="论文五：Compressed-Video-Action-Recognition"><a href="#论文五：Compressed-Video-Action-Recognition" class="headerlink" title="论文五：Compressed Video Action Recognition"></a>论文五：Compressed Video Action Recognition</h2><p>这是今年CVPR 2018中做行为识别的另一篇文章。本文很重要的一个创新点是：利用压缩视频作为输入来进行视频中的行为识别。原始的视频帧数据往往具有巨大的尺寸而且高时间冗余，关于动作的有用信息很容易淹没在许多不相关的背景数据中。利用压缩后的视频具有许多好处：首先由于视频压缩（使用H.264，HEVC等）可将原始视频信息量降低两个数量级；其次视频中压缩中的motion vector提供了额外的motion信息，这是RGB图像所不具备的；而且压缩视频排除了空间可变性，这样提高了模型的泛化性；最后压缩视频模型会更快更简单更准确；因此本文建议直接在压缩视频上训练深层网络。</p>
-<p>大多数现代编解码器将视频分成I帧（内编码帧），P帧（预测帧）和零个或多个B帧（双向帧）。I帧是常规图像并且被压缩。 P帧引用前面的帧并仅编码相对前一帧所需要的‘变化’。B帧可以被视为特殊的P帧，其中运动向量是双向计算的，并且只要在参考中没有循环就可以引用未来帧。</p>
+<p>大多数现代编解码器将视频分成I帧（内编码帧），P帧（预测帧）和零个或多个B帧（双向帧）。I帧是常规图像并且被压缩。P帧引用前面的帧并仅编码相对前一帧所需要的‘变化’。B帧可以被视为特殊的P帧，其中运动向量是双向计算的，并且只要在参考中没有循环就可以引用未来帧。</p>
 <p>本文工作将视频压缩后得到的用于描述两帧之间变化的motion vector、residual帧图像（如下图所示）作为各种SOTA网络中输入进行行为识别，都得到了很明显的提升，而且更快速、更简单、更准确。</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg" alt=""></p>
 
@@ -522,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/2173074278/" rel="prev" title="【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】">
-                【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/3309988052/" rel="prev" title="行为识别论文笔记：Something about Temporal Reasoning">
+                行为识别论文笔记：Something about Temporal Reasoning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -601,7 +601,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

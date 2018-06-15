@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Object Detection,目标检测,Deep Learning,深度学习," />
+  <meta name="keywords" content="Action Recognition,行为识别," />
 
 
 
@@ -104,34 +104,20 @@
 
 
 
-<meta name="description" content="Abstract
-本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。
-为实现这一目的：我们通过将ResNet-101与SSD结合。然后，我们用deconvolution layers来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，特别是对于小物体，从而称之为DSSD。
-我们通过仔细的加入额外的learned">
+<meta name="description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习论文笔记：DSSD">
-<meta property="og:url" content="http://jacobkong.github.io/posts/2938514597/index.html">
+<meta property="og:title" content="行为识别论文笔记：Something about Temporal Reasoning">
+<meta property="og:url" content="http://jacobkong.github.io/posts/3309988052/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="Abstract
-本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。
-为实现这一目的：我们通过将ResNet-101与SSD结合。然后，我们用deconvolution layers来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，特别是对于小物体，从而称之为DSSD。
-我们通过仔细的加入额外的learned">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cf9kja4j30wd0beta0.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cpqgt1rj311z0gxtbt.jpg">
-<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe6cyu3qi7j311j0f9aca.jpg">
-<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6d85jld2j30ht0g9wfq.jpg">
-<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe6ykpyluhj30s30bgwlo.jpg">
-<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6yl98p6tj30rp080dka.jpg">
-<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNc79gy1fe6ylysfswj30s809ldjq.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6ymnt5vsj30rp0cnn1k.jpg">
-<meta property="og:updated_time" content="2017-04-01T02:16:57.000Z">
+<meta property="og:description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fsbnaih331j31030gigqj.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fsbvlm0snzj30hn0imjv3.jpg">
+<meta property="og:updated_time" content="2018-06-15T08:29:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习论文笔记：DSSD">
-<meta name="twitter:description" content="Abstract
-本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。
-为实现这一目的：我们通过将ResNet-101与SSD结合。然后，我们用deconvolution layers来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，特别是对于小物体，从而称之为DSSD。
-我们通过仔细的加入额外的learned">
-<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cf9kja4j30wd0beta0.jpg">
+<meta name="twitter:title" content="行为识别论文笔记：Something about Temporal Reasoning">
+<meta name="twitter:description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg">
 
 
 
@@ -159,14 +145,14 @@
 
 
 
-  <link rel="canonical" href="http://jacobkong.github.io/posts/2938514597/"/>
+  <link rel="canonical" href="http://jacobkong.github.io/posts/3309988052/"/>
 
 
 
 
 <script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
-  <title> 深度学习论文笔记：DSSD | JacobKong's Blog </title>
+  <title> 行为识别论文笔记：Something about Temporal Reasoning | JacobKong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -348,7 +334,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jacobkong.github.io/posts/2938514597/">
+  <link itemprop="mainEntityOfPage" href="http://jacobkong.github.io/posts/3309988052/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jacob Kong">
@@ -372,7 +358,7 @@
             
             
               
-                深度学习论文笔记：DSSD
+                行为识别论文笔记：Something about Temporal Reasoning
               
             
           </h1>
@@ -387,8 +373,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-31T15:51:24+08:00">
-                2017-03-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T15:51:24+08:00">
+                2018-06-10
               </time>
             
 
@@ -428,8 +414,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/2938514597/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2938514597/" itemprop="commentCount"></span>
+                <a href="/posts/3309988052/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/3309988052/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -439,7 +425,7 @@
 
           
           
-             <span id="/posts/2938514597/" class="leancloud_visitors" data-flag-title="深度学习论文笔记：DSSD">
+             <span id="/posts/3309988052/" class="leancloud_visitors" data-flag-title="行为识别论文笔记：Something about Temporal Reasoning">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -466,91 +452,46 @@
       
 
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。</li>
-<li>为实现这一目的：我们通过将<strong>ResNet-101</strong>与<strong>SSD</strong>结合。然后，我们用<strong>deconvolution layers</strong>来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，<strong>特别是对于小物体</strong>，从而称之为<strong>DSSD</strong>。</li>
-<li>我们通过仔细的加入额外的<strong>learned transformations阶段</strong>，具体来说是一个用于在deconvolution中前向传递连接的模块，以及一个新的输出模型，使得这个新的方法变得可行，并为之后的研究提供一个潜在的道路。</li>
-<li>我们的DSSD具有513×513的输入，在VOC2007测试中达到81.5％de的mAP，VOC2012测试为80.0％de的mAP，COCO为33.2％的mAP，<strong>在每个数据集上优于最先进的R-FCN</strong> 。</li>
-</ul>
+        <p>在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。</p>
 <a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>最近的一些目标检测方法回归到了<strong>滑动窗口技术</strong>，这种技术随着更强大的整合了深度学习的机器学习框架而回归。</li>
-<li>Faster RCNN -&gt; YOLO -&gt; SSD.</li>
-<li>回顾最近的这些优秀的目标检测框架，要想提高检测准确率，一个很明显的目标就是：利用更好的特征网络并且添加更多的上下文，特别是对于小物体，另外还要提高边界框预测过程的空间分辨率。</li>
-<li>在目标检测之外，最近有一个集成上下文的工作，利用所谓的<strong>“encoder-decoder”网络</strong>。该网络中间的bottleneck layer用于编码关于输入图像的信息，然后逐渐地更大的层将其解码到整个图像的map中。所形成的wide，narrow，wide的网络结构通常被称为沙漏。</li>
-<li>但是有必要仔细构建用于集成反卷积的组合模块和输出模块，以在训练期间隔绝ResNet-101层，从而允许有效的学习。</li>
-</ul>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
-<li>SPPnet, Fast R-CNN, Faster R-CNN, R-FCN, YOLO：使用卷积网络的最上面的层来进行不同尺度的物体检测。</li>
-<li>通过在ConvNet中开发多层来提高检测精度的方法有多重。<ul>
-<li>第一种方法：组合了ConvNet不同层的特征图，并使用组合特征图进行预测。</li>
-<li>ION利用L2 normalization来结合多个VGGNet和池化层的特征来进行目标检测。<ul>
-<li>HyperNet也是使用类似于ION的方法。</li>
-<li>但是这种结合多层特征的方法不仅增加内存，而且降低了模型的速度。</li>
+<h2 id="论文一：Temporal-Relational-Reasoning-in-Videos"><a href="#论文一：Temporal-Relational-Reasoning-in-Videos" class="headerlink" title="论文一：Temporal Relational Reasoning in Videos"></a>论文一：Temporal Relational Reasoning in Videos</h2><p><strong>时间关系推理</strong>是指连接物体或实体随时间有意义变化的能力。受启发于Relation Network，本文提出了一个时间关系网络（Temporal Relation Network ，TRN），用来在多时间尺度上学习并推理视频帧之间的时间依赖关系，该网络可以思想很简单，可以很容易的集成到现有的卷积神经网络中。</p>
+<p>首先本文定义了时间关系（Temporal Relations）。给定一段视频V，选取n个有序的视频帧序列${f_1,f_2,…,f_n}$，则第$f_i$和$f_j$帧的关系定义如下：</p>
+<script type="math/tex; mode=display">
+T_2(V)=h_\delta(\sum_{i<j}g_\theta(f_i,f_j))</script><p>其中函数$h<em>\delta$和$g</em>\theta$用于融合不同帧的特征，这里使用了简单的多层感知机（MLP）来实现。这里i和j的选取是随机的。将该2-frame的关系概念可以拓展到3-frame或者更多。</p>
+<p>通过将不同时间维度的关系特征融合到一起，即可躲到多时间维度的时间关系，如下：</p>
+<script type="math/tex; mode=display">
+MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进行训练和测试：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg" alt="image-20180615101817238"></p>
+<p>输入一段视频，随机选2帧一组、3帧一组、4帧一组分别提取CNN特征，然后进行最后简单的相加融合，得到最终的检测结果</p>
+<p>目前可以用来做时间关系推理的数据集有Something-Something, Jester, 和Charades。其中Something-Something是最近提出的数据集，主要是用于人-物体交互动作识别，里面有174类，比如：“Tearing Something into two pieces”、‘Tearing Something just a little bit’、‘Turn something upside down’以及 ‘Pretending to turn something upside down’。对于这些类别的识别需要很好的时间推理能力，单独通过空间特征时很难准确识别的。本文提出的方法在三个数据集上都能很好的发现视频中的时间关系，超过了许多其他原本做行为识别很好的方法，说明了本文方法的有效性。</p>
+<h2 id="A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition"><a href="#A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition" class="headerlink" title="A Closer Look at Spatiotemporal Convolutions for Action Recognition"></a>A Closer Look at Spatiotemporal Convolutions for Action Recognition</h2><p>这篇文章是CVPR 2018中关于行为识别的一篇文章。主要是利用2D和3D卷积层设计了不同的组合结构来进行视频中时间推理的研究。具体作者对比并设计了如下卷积残差块，所有如下结构都是残差网络结构，因此忽略掉了残差：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fsbnaih331j31030gigqj.jpg" alt="image-20180615101658111"></p>
+<ul>
+<li><p>R2D：在整个clip上运用2D卷积</p>
+<p>2D卷积忽略了视频中的时间顺序，将一个clip中的L帧类比于通道数。R2D网络中的第一个卷积层就已经将视频的整个时间维度信息折叠，这阻止了后续层中的任何时间推理。</p>
+</li>
+<li><p>f-R2D：在frames上运用2D卷积</p>
+<p>该网络结构将每个frame单独处理，对每个frame都运用同样的2D卷积核，而非将L个frame当成输入的通道数。在这种情况下，在卷积层中不进行时间建模，并且顶部的全局时空池化层简单地融合了L帧单独提取的信息。 因此将此架构变体称为f-R2D（基于帧的R2D）。</p>
+</li>
+<li><p>R3D：3D卷积</p>
+<p>3D CNN 保留了时间信息，并通过网络层传播。 张量$z<em>i$在这种情况下是4D的，并且具有尺寸$N_i×L×H_i×W_i$，其中$N i$是在第i个块中使用的滤波器的数量。 每个滤波器都是四维的，它的大小为$N</em>{i-1}×t×d×d$，其中t表示滤波器的时间尺度的范围（在本文中，使用t = 3）。 因为t &lt;L，所以过滤器现在可以在3D中进行卷积，即在时间和空间维度上进行卷积。 图1(d)说明了这种CNN体系结构。</p>
+</li>
+<li><p>MCx和rMCx：混合3D-2D卷积</p>
+<p>本文的一个假设是运动(motion)或时间（temporal）建模（即3D卷积）可能对早期层特别有用，而在更高水平的语义抽象（后期层）中，运动或时间建模则不是必需的。<strong>因此，合理的体系结构可以从3D卷积开始并切换到在顶层使用2D卷积。</strong></p>
+<p>由于在这项工作中本文考虑了具有5组卷积的3D ResNets（R3D）结构，我们的第一个变体是用2D卷积代替第5组中的所有3D卷积。我们用MC5（混合卷积）表示这个变体。我们设计了第二个变体，替换第4组和第5组中的3D卷积为2D卷积，并将该模型命名为MC4（意思是来自第4组，更深层的所有卷积都是2D）。遵循这种模式，我们还创建了MC3和MC2变体。我们忽略考虑MC1，因为它相当于fR2D。图1(b)说明了这种CNN体系结构。</p>
+<p>另一种假设是，时间建模可能在深层更有利，因为可以通过2D卷积提前捕获外观信息。为了说明这种可能性，我们还尝试了“反转”混合卷积。按照MC模型的命名约定，我们将这些模型表示为rMC2，rMC3，rMC4和rMC5。因此，rMC3将包括块1和块2中的2D卷积，以及组3和更深组中的3D卷积。图1(c)说明了这种CNN体系结构。</p>
+</li>
+<li><p>R(2+1)D：(2+1)D卷积</p>
+<p>另一种可能的理论是全3D卷积可以通过2D卷积+1D卷积来更方便地近似，将空间和时间建模分解成两个单独的步骤。 因此，本文设计了一个名为R(2 + 1)D的网络体系结构，其中我们用一个由$M<em>i$个尺度为$N</em>{i-1}×1×d×d$ 的2D卷积核和$N<em>i$个尺度为$M_i×t×1×1$的时间卷积滤波器组成的(2 + 1)D块代替了$N_i$个大小为$N</em>{i-1}×t×d×d$的三维卷积滤波器。超参数$M_i$确定信号在空间中投影的中间子空间的维数和时间卷积，具体如下。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fsbvlm0snzj30hn0imjv3.jpg" alt=""></p>
+<p>相比于3D卷积，(2+1)D分解有两个好处：</p>
+<ul>
+<li>第一：尽管没有改变参数的数量，但由于每个块中的2D和3D卷积之间的额外的ReLU，所以它使网络中非线性映射的数量增加了一倍。<strong>增加非线性的数量增加了可以表示的函数的复杂性，也如VGG网络[27]中指出的那样，通过应用多个更小的滤波器以及其间的附加非线性来逼近大滤波器的影响</strong>。</li>
+<li>第二：将3D卷积强制划分为单独的空间和时间分量使得优化更容易。与具有相同容量的3D卷积网络相比，<strong>这表现在较低的训练误差上。</strong>对于相同数量的层（和参数），与R3D相比，R(2+1)D不仅产生更低的测试误差，而且还产生更低的训练误差。这表明当时空滤波器因式分解时优化变得更容易。<strong>这表明优化的便利性随着深度变大而增加。</strong></li>
 </ul>
 </li>
-<li>第二种方法：使用ConvNet中的不同层来预测不同尺度的对象。<ul>
-<li>因为不同层中的节点具有不同的接收域，所以自然会<strong>从具有大型接收场的层预测大对象，并使用具有小接收场的层来预测小物体。</strong></li>
-<li>SSD将不同尺度的默认框扩展到ConvNet中的多个层，并强制执行每一层专注于预测一定规模的对象。</li>
-<li>S-CNN [2]在ConvNet的多层应用去卷积，以在使用层去学习region proposal和pool feature之前<strong>增加feature maps的分辨率。</strong></li>
-<li>然而，为了很好地检测小物体，这些方法需要从具有小的接收场和密集特征图的浅层中使用一些信息，这可能导致在检测小对象性能较低，因为浅层具有较少的关于对象的语义信息。</li>
-<li>通过使用deconvolution layers和skip connections,，我们可以在密集（去卷积）特征图中注入更多的信息，从而有助于预测小物体。</li>
 </ul>
-</li>
-<li>另外还有一个工作方法，尽量去包括预测的上下文信息。<ul>
-<li>Multi-Region CNN</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Deconvolutional-DSSD-model-Single-Shot-Detection"><a href="#Deconvolutional-DSSD-model-Single-Shot-Detection" class="headerlink" title="Deconvolutional (DSSD) model Single Shot Detection"></a>Deconvolutional (DSSD) model Single Shot Detection</h3><h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cf9kja4j30wd0beta0.jpg" alt=""></p>
-<ul>
-<li>SSD构建于base network之上，添加了一些逐渐见效的卷积层，如上图蓝色部分。</li>
-<li>每个添加的层和一些较早的基本网络层用于预测某些预定义的边界框的分数和偏移。 </li>
-<li>这些预测由3x3x＃个通道维数的滤波器执行，一个滤波器用于产生每个类别分数，一个用于回归边界框的每个维度。 </li>
-<li>它使用非最大抑制（NMS）对预测进行后处理，以获得最终检测结果。 </li>
-</ul>
-<h3 id="Using-Residual-101-in-place-of-VGG"><a href="#Using-Residual-101-in-place-of-VGG" class="headerlink" title="Using Residual-101 in place of VGG"></a>Using Residual-101 in place of VGG</h3><p>将Base Network从VGG16换为ResNet-101并未提升结果，但是添加额外的<strong>prediction module</strong>会显著地提成性能。</p>
-<h3 id="prediction-module"><a href="#prediction-module" class="headerlink" title="prediction module"></a>prediction module</h3><p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fe6cpqgt1rj311z0gxtbt.jpg" alt=""></p>
-<ul>
-<li>在原始SSD中，目标函数直接应用于所选择的特征图，并且由于梯度的大幅度，使用L2标准化层用于conv4 3层。</li>
-<li>MS-CNN指出，改进每个任务的子网可以提高准确性，按照这个原则，我们为每个预测层添加一个残差块，如图2变体（c）所示。</li>
-<li>我们还尝试了原始SSD方法（a）和具有跳过连接（b）的残余块的版本以及两个顺序的残余块（d）。 我们注意到，<strong>ResNet-101和预测模块似乎显著优于对于较高分辨率输入图像没有预测模块的VGG。</strong></li>
-</ul>
-<h3 id="Deconvolutional-SSD"><a href="#Deconvolutional-SSD" class="headerlink" title="Deconvolutional SSD"></a>Deconvolutional SSD</h3><p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe6cyu3qi7j311j0f9aca.jpg" alt=""></p>
-<ul>
-<li>为了在检测中包含更多的高层次上下文，我们将prediction module转移到在原始SSD设置之后放置的一系列去卷积层中，有效地制作了非对称沙漏网络结构。</li>
-<li>添加额外的去卷积层，以连续增加feature maps layers的分辨率。为了加强特征，我们采用了沙漏模型中“<strong>跳跃连接</strong>”的想法。</li>
-<li>尽管沙漏模型在编码器和解码器阶段均包含对称层，但由于两个原因，我们使解码器阶段非常浅。</li>
-</ul>
-<h3 id="Deconvolution-Module"><a href="#Deconvolution-Module" class="headerlink" title="Deconvolution Module"></a>Deconvolution Module</h3><p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6d85jld2j30ht0g9wfq.jpg" alt=""></p>
-<ul>
-<li>为了帮助整合早期特征图和去卷积层的信息，我们引入了一个去卷积模块，如图3所示。</li>
-<li>首先，在每个卷积层之后添加BN层。</li>
-<li>第二，我们使用学习的去卷积层代替双线性上采样。</li>
-<li>最后，我们测试不同的组合方法：element-wise sum and element-wise product。</li>
-</ul>
-<h3 id="Traning"><a href="#Traning" class="headerlink" title="Traning"></a>Traning</h3><ul>
-<li>我们遵循与SSD相同的训练政策。</li>
-<li>在原始SSD模型中，长宽比为2和3的boxes从实验中证明是有用的。为了了解训练数据（PASCAL VOC 2007和2012年 trainval）中边界框的纵横比，我们以training box运行K-means聚类，以方格平方根为特征。我们从两个集群开始，如果错误可以提高20％以上，就会增加集群的数量。经过试验因此，我们决定在每个预测层添加一个宽高比1.6，并使用（1.6, 2.0, 3.0）。</li>
-</ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
-<li>PASCAL VOC2007 test detection results.</li>
-</ul>
-<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe6ykpyluhj30s30bgwlo.jpg" alt=""></p>
-<ul>
-<li>PASCAL 2012 test detection results.</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6yl98p6tj30rp080dka.jpg" alt=""></p>
-<ul>
-<li>COCO test-dev2015 detection results.</li>
-</ul>
-<p><img src="https://ww3.sinaimg.cn/large/006tNc79gy1fe6ylysfswj30s809ldjq.jpg" alt=""></p>
-<ul>
-<li>Comparison of Speed &amp; Accuracy on PASCAL VOC2007 test.</li>
-</ul>
-<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1fe6ymnt5vsj30rp0cnn1k.jpg" alt=""></p>
+<p>本文我们提出的体系结构R(2+1)D实现了在Sports-1M，Kinetics，UCF101和HMDB51数据集上技术水平相当或更好的结果。希望能够激发新的网络设计，以利用时空卷积潜在的效能和建模的灵活性。</p>
 
       
     </div>
@@ -574,13 +515,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Object-Detection/" rel="tag"># Object Detection</a>
+            <a href="/tags/Action-Recognition/" rel="tag"># Action Recognition</a>
           
-            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
-          
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-          
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+            <a href="/tags/行为识别/" rel="tag"># 行为识别</a>
           
         </div>
       
@@ -589,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/3085218970/" rel="next" title="深度学习论文笔记：Deep Residual Learning for Image Recognition">
-                <i class="fa fa-chevron-left"></i> 深度学习论文笔记：Deep Residual Learning for Image Recognition
+              <a href="/posts/3799204522/" rel="next" title="论文笔记：CVPR 2018 关于行为识别论文略读笔记">
+                <i class="fa fa-chevron-left"></i> 论文笔记：CVPR 2018 关于行为识别论文略读笔记
               </a>
             
           </div>
@@ -599,8 +536,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/679115822/" rel="prev" title="行为识别论文笔记：行为分类深度模型的总结.md">
-                行为识别论文笔记：行为分类深度模型的总结.md <i class="fa fa-chevron-right"></i>
+              <a href="/posts/2173074278/" rel="prev" title="【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】">
+                【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -767,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-DSSD-model-Single-Shot-Detection"><span class="nav-number">3.1.</span> <span class="nav-text">Deconvolutional (DSSD) model Single Shot Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">3.2.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using-Residual-101-in-place-of-VGG"><span class="nav-number">3.3.</span> <span class="nav-text">Using Residual-101 in place of VGG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prediction-module"><span class="nav-number">3.4.</span> <span class="nav-text">prediction module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolutional-SSD"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolutional SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution-Module"><span class="nav-number">3.6.</span> <span class="nav-text">Deconvolution Module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Traning"><span class="nav-number">3.7.</span> <span class="nav-text">Traning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">4.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文一：Temporal-Relational-Reasoning-in-Videos"><span class="nav-number">1.</span> <span class="nav-text">论文一：Temporal Relational Reasoning in Videos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition"><span class="nav-number">2.</span> <span class="nav-text">A Closer Look at Spatiotemporal Convolutions for Action Recognition</span></a></li></ol></div>
             
 
           </div>
@@ -897,9 +834,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'jacobkong';
-      var disqus_identifier = 'posts/2938514597/';
+      var disqus_identifier = 'posts/3309988052/';
 
-      var disqus_title = "深度学习论文笔记：DSSD";
+      var disqus_title = "行为识别论文笔记：Something about Temporal Reasoning";
 
 
       function run_disqus_script(disqus_script) {

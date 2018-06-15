@@ -69,7 +69,7 @@
     <link href="http://jacobkong.github.io/posts/3309988052/"/>
     <id>http://jacobkong.github.io/posts/3309988052/</id>
     <published>2018-06-10T07:51:24.000Z</published>
-    <updated>2018-06-15T08:29:29.000Z</updated>
+    <updated>2018-06-15T08:29:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。</p>
 <a id="more"></a>

@@ -133,11 +133,11 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
     <link href="http://jacobkong.github.io/posts/3799204522/"/>
     <id>http://jacobkong.github.io/posts/3799204522/</id>
     <published>2018-06-02T07:51:24.000Z</published>
-    <updated>2018-06-17T09:05:57.000Z</updated>
+    <updated>2018-06-17T09:10:11.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition"><a href="#论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition" class="headerlink" title="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition"></a>论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition</h2><p>这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时间信息，其在视频分析领域已经被很多工作证明是一个很有用的特征。但是目前的双流网络Two-Stream在训练时其实还是比较麻烦的，因为需要单独对视频提取光流图，然后送到网络的另一至进行训练；而且如果数据集很大的话，光流图和RGB图像合起来得有原视频数据大小的好几倍，也十分消耗硬盘空间。因此思考如何利用单流网络同时利用RGB特征以及类似光流的特征去进行训练是一个值得思考的问题。本文从光流本身的定义出发，给了我们一个关于该问题很好的启发。该方法也在UCF-101逮到了96%的分类准确率，超过了不用Kinetics数据集预训练的I3D模型，可见该方法的有效性。</p>
 <a id="more"></a>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fs2q4e9o1wj30yy0nf7cz.jpg" alt="image-20180607170447318"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fseagxexxdj30vx0pyn82.jpg" alt=""></p>
 <p>本文提出的光流引导特征（OFF），它使网络能够通过快速和稳健的方法提取时间信息。 OFF由光流的定义导出，并与光流正交。该特征由水平和垂直方向上的特征图的空间梯度以及从不同帧的特征图之间的差异获得的时间梯度组成，OFF操作是CNN特征上的像素级运算，而且所有操作都是可导的，因此整个过程是可以端到端训练的，而且可以应用到仅有RGB输入的网络中去同时有效提取空间和时间特征。</p>
 <h2 id="论文二：Recognize-Actions-by-Disentangling-Components-of-Dynamics"><a href="#论文二：Recognize-Actions-by-Disentangling-Components-of-Dynamics" class="headerlink" title="论文二：Recognize Actions by Disentangling Components of Dynamics"></a>论文二：Recognize Actions by Disentangling Components of Dynamics</h2><p>这是今年CVPR 2018中做行为识别的另一篇文章。<strong>本文和第一篇论文的中心思想相似：都是想通过原始的RGB图像直接在网络中间接获得类似光流的特征，从而减少目前双流网络中计算光流模块导致的额外开销。</strong>因此本文提出了一个新的用于视频表征学习的ConvNet框架，其可以完全从原始视频帧中推导出动态信息，而不需进行额外的光流估计。具体网络框架如下：</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fsea15nqunj315o0m3ah8.jpg" alt=""></p>

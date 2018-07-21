@@ -104,16 +104,12 @@
 
 
 
-<meta name="description" content="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时">
+<meta name="description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记">
+<meta property="og:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
 <meta property="og:url" content="http://jacobkong.github.io/posts/3799204522/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fseagxexxdj30vx0pyn82.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fsea15nqunj315o0m3ah8.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fs44dyxu0aj30kl0migsy.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fs8h8br7cvj30l10qitfh.jpg">
+<meta property="og:description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn7ji98pj30hf0ah0v5.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn6vdgtfj310k08rwjw.jpg">
@@ -121,11 +117,13 @@
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8h7m3emnj30nb0o7gzt.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8hm9zxzsj313e09gwjz.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg">
-<meta property="og:updated_time" content="2018-06-18T13:20:00.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1ftgf47w7i3j30te0d8diu.jpg">
+<meta property="og:image" content="http://jacobkong.github.io/../../../../../../var/folders/2c/k786p2fd5mb4jp5l3cmd7m3w0000gp/T/abnerworks.Typora/image-20180721152747380.png">
+<meta property="og:updated_time" content="2018-07-21T07:45:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记">
-<meta name="twitter:description" content="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fseagxexxdj30vx0pyn82.jpg">
+<meta name="twitter:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
+<meta name="twitter:description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg">
 
 
 
@@ -160,7 +158,7 @@
 
 <script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
-  <title> 论文笔记：CVPR 2018 关于行为识别论文略读笔记 | JacobKong's Blog </title>
+  <title> 论文笔记：CVPR 2018 关于行为识别论文略读笔记（二） | JacobKong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -366,7 +364,7 @@
             
             
               
-                论文笔记：CVPR 2018 关于行为识别论文略读笔记
+                论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）
               
             
           </h1>
@@ -433,7 +431,7 @@
 
           
           
-             <span id="/posts/3799204522/" class="leancloud_visitors" data-flag-title="论文笔记：CVPR 2018 关于行为识别论文略读笔记">
+             <span id="/posts/3799204522/" class="leancloud_visitors" data-flag-title="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -460,24 +458,7 @@
       
 
       
-        <h2 id="论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition"><a href="#论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition" class="headerlink" title="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition"></a>论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition</h2><p>这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时间信息，其在视频分析领域已经被很多工作证明是一个很有用的特征。但是目前的双流网络Two-Stream在训练时其实还是比较麻烦的，因为需要单独对视频提取光流图，然后送到网络的另一至进行训练；而且如果数据集很大的话，光流图和RGB图像合起来得有原视频数据大小的好几倍，也十分消耗硬盘空间。因此思考如何利用单流网络同时利用RGB特征以及类似光流的特征去进行训练是一个值得思考的问题。本文从光流本身的定义出发，给了我们一个关于该问题很好的启发。该方法也在UCF-101逮到了96%的分类准确率，超过了不用Kinetics数据集预训练的I3D模型，可见该方法的有效性。</p>
-<a id="more"></a>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fseagxexxdj30vx0pyn82.jpg" alt=""></p>
-<p>本文提出的光流引导特征（OFF），它使网络能够通过快速和稳健的方法提取时间信息。 OFF由光流的定义导出，并与光流正交。该特征由水平和垂直方向上的特征图的空间梯度以及从不同帧的特征图之间的差异获得的时间梯度组成，OFF操作是CNN特征上的像素级运算，而且所有操作都是可导的，因此整个过程是可以端到端训练的，而且可以应用到仅有RGB输入的网络中去同时有效提取空间和时间特征。</p>
-<h2 id="论文二：Recognize-Actions-by-Disentangling-Components-of-Dynamics"><a href="#论文二：Recognize-Actions-by-Disentangling-Components-of-Dynamics" class="headerlink" title="论文二：Recognize Actions by Disentangling Components of Dynamics"></a>论文二：Recognize Actions by Disentangling Components of Dynamics</h2><p>这是今年CVPR 2018中做行为识别的另一篇文章。<strong>本文和第一篇论文的中心思想相似：都是想通过原始的RGB图像直接在网络中间接获得类似光流的特征，从而减少目前双流网络中计算光流模块导致的额外开销。</strong>因此本文提出了一个新的用于视频表征学习的ConvNet框架，其可以完全从原始视频帧中推导出动态信息，而不需进行额外的光流估计。具体网络框架如下：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fsea15nqunj315o0m3ah8.jpg" alt=""></p>
-<p>大致流程为：给定一个连续的帧序列，该模型首先产生一些低级特征映射，然后将其馈入三个分支，分别是静态外观（Static Appearance，上），外观动态（Apparent Motion，中）和外观变化（Appearance Change，下）。 这些分支分别计算其对应的高级特征并进行预测。 最后，这些预测被合并为最终的预测。最后，3个组件预测出的结果将通过求平均的方式融合到一起生成最终的预测。</p>
-<p>其中在静态外观分支，通过迭代地应用2D卷积，空间2D池化和时间1D池化来逐渐提取外观特征；在外观动态分支，主要提取视频帧中特征点的空间位移，主要第一次引入了Cost Volume来进行外观动态的估计；在外观变化分支中，由于不是所有的变化都能够通过外观动态表解释，诸如物体外观的固有变化或照明变化的其他因素也可能导致视频帧的变化，不同于以前使用RGB-diff的方法，本文提出了一个叫做warped differences的方法来表征外观变化。</p>
-<p>通过在UCF101和Kinetics两个数据集上进行验证，本文的方法在仅使用RGB图像帧的前提下也能取得很有竞争力的结果，而且具有很高的效率，证明了方法的优越性和有效性。</p>
-<h2 id="论文三：2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning"><a href="#论文三：2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning" class="headerlink" title="论文三：2D/3D Pose Estimation and Action Recognition using Multitask Deep Learning"></a>论文三：2D/3D Pose Estimation and Action Recognition using Multitask Deep Learning</h2><p>这是今年CVPR 2018中利用姿态做行为识别的一篇文章，主要突出了一个多任务网络来同时做2D和3D的姿态估计以及2D和3D的行为识别，同时利用姿态估计的结果来促进行为识别任务的性能。<strong>这也是解决问题的一个很好的出发点，就是利用两个任务来互相促进</strong>。</p>
-<p>下图是网络的整体框架图，输入静态的RGB图像，同时进行姿态估计和行为识别。其中的姿态估计模型是利用基于回归的方法，其中利用了一个可微分的Softargmax来联合2D和3D的姿态估计。其中的动作识别方法分为两部分，一部分基于身体关节坐标序列，我们称之为<strong>基于姿态的识别</strong>，另一部分基于一系列视觉特征，我们称其为<strong>基于外观的识别</strong>。 将每个部分的结果组合起来估计最终的动作标签。</p>
-<p>作者在MPII, Human3.6M, Penn Action 和 NTU四个数据集上进行了实验，验证了模型在两个任务上的有效性。</p>
-<p>本文值得借鉴的一个思想就是：利用多任务之间的互相促进，来提升各自任务的有效性。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fs44dyxu0aj30kl0migsy.jpg" alt=""></p>
-<h2 id="论文四：Deep-Progressive-Reinforcement-Learning-for-Skeleton-based-Action-Recognition"><a href="#论文四：Deep-Progressive-Reinforcement-Learning-for-Skeleton-based-Action-Recognition" class="headerlink" title="论文四：Deep Progressive Reinforcement Learning for Skeleton-based Action Recognition"></a>论文四：Deep Progressive Reinforcement Learning for Skeleton-based Action Recognition</h2><p>这是今年CVPR 2018中基于骨架（Skeleton-based）来做行为识别的一篇文章，但是一个重要的创新点是利用增强学习首先找到一段视频帧中最具动作代表性的帧，丢弃掉序列中的不明确帧，然后利用基于图的神经网络来捕捉关节连接点之间的依赖关系，从而达到行为识别的目的。框架图如下：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fs8h8br7cvj30l10qitfh.jpg" alt=""></p>
-<p><strong>方法大致流程为：</strong>给定一个人体关节的视频，我们首先选择框架提取网络（FDNet）来提取视频中的关键帧，这是由提出的深度渐进式强化学习方法进行训练所得到。 我们根据两个重要因素逐步调整每个状态下的选定帧。 一个是所选帧用于动作识别的所具备的判别能力。 另一个是所选帧与整个动作序列的关系。然后，我们采用<strong>基于图的卷积神经网络（GCNN）</strong>，它保留了人体关节之间的依赖关系，以处理所选关键帧以进行动作识别。 本文的方法在三个广泛使用的数据集上实现了非常有竞争力的性能。</p>
-<h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
+        <h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg" alt=""></p>
 <p>方法大致流程为：首先在每个帧中运行目前最先进的人体姿态估计器，并为每个人体关节获取热图。<strong>这些热图对每个像素的概率进行编码以包含特定的关节</strong>。<strong>我们使用取决于视频片段帧的相对时间的颜色对这些热度图进行着色</strong>。如下图所示的为不同通道下的随时间的上色机制：</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn7ji98pj30hf0ah0v5.jpg" alt=""></p>
@@ -495,6 +476,33 @@
 <p>大多数现代编解码器将视频分成I帧（内编码帧），P帧（预测帧）和零个或多个B帧（双向帧）。I帧是常规图像并且被压缩。P帧引用前面的帧并仅编码相对前一帧所需要的‘变化’。B帧可以被视为特殊的P帧，其中运动向量是双向计算的，并且只要在参考中没有循环就可以引用未来帧。</p>
 <p>本文工作将视频压缩后得到的用于描述两帧之间变化的motion vector、residual帧图像（如下图所示）作为各种SOTA网络中输入进行行为识别，都得到了很明显的提升，而且更快速、更简单、更准确。</p>
 <p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg" alt=""></p>
+<h2 id="论文八：What-have-we-learned-from-deep-representations-for-action-recognition"><a href="#论文八：What-have-we-learned-from-deep-representations-for-action-recognition" class="headerlink" title="论文八：What have we learned from deep representations for action recognition?"></a>论文八：What have we learned from deep representations for action recognition?</h2><p>这是今年CVPR 2018中对行为识别任务时空特征研究的一篇探究性文章。这篇文章通过可视化双流网络具体所学习到的时空特征来探究视频中行为识别这一任务。我们展示了用于外观和运动物体的局部检测器，以形成用于识别人类行为的分布式表示。</p>
+<p>目前的可视化方法有三类：</p>
+<ul>
+<li>Visualization for given inputs.</li>
+<li>Activation maximization.</li>
+<li>Generative Adversarial Networks (GANs).</li>
+</ul>
+<p>本文的可视化方法是基于activation maximization并将它们扩展到时空域，以便在双流融合模型中找到各个单元的首选时空输入，我们将问题表述为在输入空间中搜索的（正则化的）<strong>基于梯度的优化问题</strong>，方法框架如下图所示。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1ftgf47w7i3j30te0d8diu.jpg" alt=""></p>
+<p>方法流程为：随机初始化的输入呈现给我们模型的光流和外观路径。 我们计算特征图一直到我们想要可视化的特定图层。 选择单个目标特征通道c，并且执行激活最大化（activation maximization）以分两步产生优选输入（preferred input）。 首先，影响c的输入上的导数是通过将目标损耗（在所有位置上求和）反向计算到输入层来计算的。 其次，通过学习速率缩放传播的梯度并将其添加到当前输入。 这些操作由图2中的虚线红线说明。基于梯度的优化以自适应降低的学习速率迭代地执行这些步骤，直到输入收敛为止。 重要的是，在此优化过程中，网络权重不会改变，<strong>只有输入接收更改</strong>。 </p>
+<p>主要的结论有如下四点：</p>
+<ul>
+<li>第一：相比于分开单独学习外观以及运动特征，cross-stream可以学习到真正的时空特征</li>
+<li>第二：网络可以学习高度类别已知的本地表示，也可以学习适用于一系列类的通用表示。</li>
+<li>第三：通过网络结构，特征变得更加抽象并且对于对获得期望的分布不重要的数据（比如不同速度间的motion模式）显示出逐渐增加的不变性。</li>
+<li>第四：可视化不仅可用于揭示学习的表示，还可用于揭示训练数据的特性并解释系统的失败情况。</li>
+</ul>
+<h2 id="论文八：Non-local-Neural-Networks"><a href="#论文八：Non-local-Neural-Networks" class="headerlink" title="论文八：Non-local Neural Networks"></a>论文八：Non-local Neural Networks</h2><p>这是今年CVPR 2018中做利用Non-local方法去做行为识别的一篇文章。long-range的依赖捕捉是深度学习的核心问题，对于序列数据，recurrent操作是主要的方法，对于图像数据，long-range依赖通过多层的卷积形成的感受野来捕捉。但卷积和recurrent操作都是local的操作，在本文中，受启发于计算机视觉的经典non-local均值法，作者提出了进行non-local操作的通用构建块系列，来捕获long-range依赖性的。本文中的non-local操作将所有位置处的特征的加权和作为某一位置的响应。直观一点，如下图所示：</p>
+<p><img src="../../../../../../var/folders/2c/k786p2fd5mb4jp5l3cmd7m3w0000gp/T/abnerworks.Typora/image-20180721152747380.png" alt="image-20180721152747380"></p>
+<p>使用非本地操作有几个优点：</p>
+<ul>
+<li>（a）与循环和卷积操作的渐进行为相反，非本地操作通过计算任意两个位置之间的相互作用直接捕获长程依赖性，而不管它们的位置距离如何; </li>
+<li>（b）正如我们在实验中所表明的那样，非局部操作是有效的，即使只有几层（例如5）也能达到最佳效果; </li>
+<li>（c）最后，我们的非本地操作保持可变输入大小，并且可以很容易地与其他操作组合（例如，我们将使用的卷积）。</li>
+</ul>
+<p>该non-local构建块可以集成到目前许多计算机视觉框架中。通过在视频分类任务上进行验证，我们的non-local模型也可以在Kinetics和Charades数据集上取得很有竞争力的结果；在静态图像识别中，我们的non-local模型提高了在COCO数据集上的对象检测/分割和姿态估计任务，证明了模型的有效性。</p>
+<p>​       </p>
 
       
     </div>
@@ -541,8 +549,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/3309988052/" rel="prev" title="行为识别论文笔记：Something about Temporal Reasoning">
-                行为识别论文笔记：Something about Temporal Reasoning <i class="fa fa-chevron-right"></i>
+              <a href="/posts/3799204522/" rel="prev" title="论文笔记：CVPR 2018 关于行为识别论文略读笔记（一）">
+                论文笔记：CVPR 2018 关于行为识别论文略读笔记（一） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,7 +628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -709,7 +717,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文二：Recognize-Actions-by-Disentangling-Components-of-Dynamics"><span class="nav-number">2.</span> <span class="nav-text">论文二：Recognize Actions by Disentangling Components of Dynamics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文三：2D-3D-Pose-Estimation-and-Action-Recognition-using-Multitask-Deep-Learning"><span class="nav-number">3.</span> <span class="nav-text">论文三：2D/3D Pose Estimation and Action Recognition using Multitask Deep Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文四：Deep-Progressive-Reinforcement-Learning-for-Skeleton-based-Action-Recognition"><span class="nav-number">4.</span> <span class="nav-text">论文四：Deep Progressive Reinforcement Learning for Skeleton-based Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><span class="nav-number">5.</span> <span class="nav-text">论文五：PoTion: Pose MoTion Representation for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文六：Im2Flow-Motion-Hallucination-from-Static-Images-for-Action-Recognition"><span class="nav-number">6.</span> <span class="nav-text">论文六：Im2Flow: Motion Hallucination from Static Images for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文七：Compressed-Video-Action-Recognition"><span class="nav-number">7.</span> <span class="nav-text">论文七：Compressed Video Action Recognition</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">论文五：PoTion: Pose MoTion Representation for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文六：Im2Flow-Motion-Hallucination-from-Static-Images-for-Action-Recognition"><span class="nav-number">2.</span> <span class="nav-text">论文六：Im2Flow: Motion Hallucination from Static Images for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文七：Compressed-Video-Action-Recognition"><span class="nav-number">3.</span> <span class="nav-text">论文七：Compressed Video Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文八：What-have-we-learned-from-deep-representations-for-action-recognition"><span class="nav-number">4.</span> <span class="nav-text">论文八：What have we learned from deep representations for action recognition?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文八：Non-local-Neural-Networks"><span class="nav-number">5.</span> <span class="nav-text">论文八：Non-local Neural Networks</span></a></li></ol></div>
             
 
           </div>
@@ -841,7 +849,7 @@
       var disqus_shortname = 'jacobkong';
       var disqus_identifier = 'posts/3799204522/';
 
-      var disqus_title = "论文笔记：CVPR 2018 关于行为识别论文略读笔记";
+      var disqus_title = "论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）";
 
 
       function run_disqus_script(disqus_script) {

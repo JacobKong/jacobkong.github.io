@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Action Recognition,行为识别," />
+  <meta name="keywords" content="Action Recognition,行为识别,CVPR 2018," />
 
 
 
@@ -104,20 +104,26 @@
 
 
 
-<meta name="description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
+<meta name="description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="行为识别论文笔记：Something about Temporal Reasoning">
-<meta property="og:url" content="http://jacobkong.github.io/posts/3309988052/index.html">
+<meta property="og:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
+<meta property="og:url" content="http://jacobkong.github.io/posts/2879360315/index.html">
 <meta property="og:site_name" content="JacobKong's Blog">
-<meta property="og:description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fsbnaih331j31030gigqj.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fsbvlm0snzj30hn0imjv3.jpg">
-<meta property="og:updated_time" content="2018-07-20T07:55:43.000Z">
+<meta property="og:description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn7ji98pj30hf0ah0v5.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn6vdgtfj310k08rwjw.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn9ov2p1j30hj08cgnn.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8h7m3emnj30nb0o7gzt.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8hm9zxzsj313e09gwjz.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1ftgf47w7i3j30te0d8diu.jpg">
+<meta property="og:image" content="http://jacobkong.github.io/../../../../../../var/folders/2c/k786p2fd5mb4jp5l3cmd7m3w0000gp/T/abnerworks.Typora/image-20180721152747380.png">
+<meta property="og:updated_time" content="2018-07-21T08:10:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="行为识别论文笔记：Something about Temporal Reasoning">
-<meta name="twitter:description" content="在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg">
+<meta name="twitter:title" content="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
+<meta name="twitter:description" content="论文五：PoTion: Pose MoTion Representation for Action Recognition和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg">
 
 
 
@@ -145,14 +151,14 @@
 
 
 
-  <link rel="canonical" href="http://jacobkong.github.io/posts/3309988052/"/>
+  <link rel="canonical" href="http://jacobkong.github.io/posts/2879360315/"/>
 
 
 
 
 <script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
-  <title> 行为识别论文笔记：Something about Temporal Reasoning | JacobKong's Blog </title>
+  <title> 论文笔记：CVPR 2018 关于行为识别论文略读笔记（二） | JacobKong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -334,7 +340,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jacobkong.github.io/posts/3309988052/">
+  <link itemprop="mainEntityOfPage" href="http://jacobkong.github.io/posts/2879360315/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jacob Kong">
@@ -358,7 +364,7 @@
             
             
               
-                行为识别论文笔记：Something about Temporal Reasoning
+                论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）
               
             
           </h1>
@@ -373,8 +379,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T15:51:24+08:00">
-                2018-06-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-15T15:51:24+08:00">
+                2018-06-15
               </time>
             
 
@@ -414,8 +420,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/3309988052/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/3309988052/" itemprop="commentCount"></span>
+                <a href="/posts/2879360315/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="posts/2879360315/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,7 +431,7 @@
 
           
           
-             <span id="/posts/3309988052/" class="leancloud_visitors" data-flag-title="行为识别论文笔记：Something about Temporal Reasoning">
+             <span id="/posts/2879360315/" class="leancloud_visitors" data-flag-title="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -452,46 +458,52 @@
       
 
       
-        <p>在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。</p>
+        <h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
 <a id="more"></a>
-<h2 id="论文一：Temporal-Relational-Reasoning-in-Videos"><a href="#论文一：Temporal-Relational-Reasoning-in-Videos" class="headerlink" title="论文一：Temporal Relational Reasoning in Videos"></a>论文一：Temporal Relational Reasoning in Videos</h2><p><strong>时间关系推理</strong>是指连接物体或实体随时间有意义变化的能力。受启发于Relation Network，本文提出了一个时间关系网络（Temporal Relation Network ，TRN），用来在多时间尺度上学习并推理视频帧之间的时间依赖关系，该网络可以思想很简单，可以很容易的集成到现有的卷积神经网络中。</p>
-<p>首先本文定义了时间关系（Temporal Relations）。给定一段视频V，选取n个有序的视频帧序列${f_1,f_2,…,f_n}$，则第$f_i$和$f_j$帧的关系定义如下：</p>
-<script type="math/tex; mode=display">
-T_2(V)=h_\delta(\sum_{i<j}g_\theta(f_i,f_j))</script><p>其中函数$h<em>\delta$和$g</em>\theta$用于融合不同帧的特征，这里使用了简单的多层感知机（MLP）来实现。这里i和j的选取是随机的。将该2-frame的关系概念可以拓展到3-frame或者更多。</p>
-<p>通过将不同时间维度的关系特征融合到一起，即可躲到多时间维度的时间关系，如下：</p>
-<script type="math/tex; mode=display">
-MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进行训练和测试：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fsbnbv7b24j30yi0f1qfx.jpg" alt="image-20180615101817238"></p>
-<p>输入一段视频，随机选2帧一组、3帧一组、4帧一组分别提取CNN特征，然后进行最后简单的相加融合，得到最终的检测结果</p>
-<p>目前可以用来做时间关系推理的数据集有Something-Something, Jester, 和Charades。其中Something-Something是最近提出的数据集，主要是用于人-物体交互动作识别，里面有174类，比如：“Tearing Something into two pieces”、‘Tearing Something just a little bit’、‘Turn something upside down’以及 ‘Pretending to turn something upside down’。对于这些类别的识别需要很好的时间推理能力，单独通过空间特征时很难准确识别的。本文提出的方法在三个数据集上都能很好的发现视频中的时间关系，超过了许多其他原本做行为识别很好的方法，说明了本文方法的有效性。</p>
-<h2 id="论文二：A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition"><a href="#论文二：A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition" class="headerlink" title="论文二：A Closer Look at Spatiotemporal Convolutions for Action Recognition"></a>论文二：A Closer Look at Spatiotemporal Convolutions for Action Recognition</h2><p>这篇文章是CVPR 2018中关于行为识别的一篇文章。主要是利用2D和3D卷积层设计了不同的组合结构来进行视频中时间推理的研究。具体作者对比并设计了如下卷积残差块，所有如下结构都是残差网络结构，因此忽略掉了残差：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fsbnaih331j31030gigqj.jpg" alt="image-20180615101658111"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg" alt=""></p>
+<p>方法大致流程为：首先在每个帧中运行目前最先进的人体姿态估计器，并为每个人体关节获取热图。<strong>这些热图对每个像素的概率进行编码以包含特定的关节</strong>。<strong>我们使用取决于视频片段帧的相对时间的颜色对这些热度图进行着色</strong>。如下图所示的为不同通道下的随时间的上色机制：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn7ji98pj30hf0ah0v5.jpg" alt=""></p>
+<p>对于每个关节，我们对所有帧上的彩色热图进行求和，以获得整个视频片段的PoTion表示。如下图所示为某一关节点聚合之后的色彩图，使用了不同的聚合方式：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn6vdgtfj310k08rwjw.jpg" alt=""></p>
+<p>给定这种表示形式，我们训练一个浅层CNN架构，包含6个卷积层和一个完全连接的层来执行动作分类，CNN结构如下：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn9ov2p1j30hj08cgnn.jpg" alt="image-20180618211827050"></p>
+<p>整个这个网络可以从头开始训练，并胜过其他姿势表示商法。而且，由于网络很浅并且以整个视频clip的紧凑表示为输入，因此训练例如非常快速。在一台用于HMDB的GPU上只需要4个小时，而标准的双流方法则需要几天的培训和仔细的初始化[5,43]。另外，PoTion可以看做是标准外观和运动流的补充。与RGB和光学流程的I3D [5]结合使用时，我们在JHMDB，HMDB，UCF101上获得了最先进的性能。</p>
+<h2 id="论文六：Im2Flow-Motion-Hallucination-from-Static-Images-for-Action-Recognition"><a href="#论文六：Im2Flow-Motion-Hallucination-from-Static-Images-for-Action-Recognition" class="headerlink" title="论文六：Im2Flow: Motion Hallucination from Static Images for Action Recognition"></a>论文六：Im2Flow: Motion Hallucination from Static Images for Action Recognition</h2><p>这是今年CVPR 2018中在<strong>静态图像</strong>中做行为识别的一篇文章。静态图像动作识别需要系统识别发生在单张照片中的行为。 该问题对于基于人类行为和事件组织照片集合（例如，在网络，社交媒体上的照片）具有实际意义。现有的一些方法都仅仅依据图像的表象特征——物体、场景和肢体姿势来区分单张静态图像中的动作，但是这样的方法会忽略图像中所包含的丰富的动态结构和动作。为了挖掘单张图片所包含的motion信息，本文提出了一种为单张图片产生类似光流的图像，表示图像中所蕴含的未来的可能的motion。 其中一个<strong>关键的想法是</strong>：从数千个未标记的视频中学习一个先验的短期动态，一次来在新的静态图像上推断的预期光流，然后训练利用RGB流和光流来进行的动作的识别。框架图如下：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8h7m3emnj30nb0o7gzt.jpg" alt=""></p>
+<p><strong>方法大致流程为：</strong>首先通过观察上千个包含各种动作的未标注的视频中学习一个动作的先验知识（motion prior）；然后利用下图中的Image-to-image translation模型，去将一个RGB图像转化为上图右边类似的光流图，改光流图是3通道的，前两个通道是motion angle $\theta\in[0,2\pi]$，第三个通道是幅度M。最后通过RGB图像和得到的光流图像去共同进行行为识别。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fs8hm9zxzsj313e09gwjz.jpg" alt=""></p>
+<p>本方法很重要的一个创新点：结合了GAN中的Image-to-image translation模型来仅仅为静态图像即可生成相应的光流图，所预测出的光流是十分准确的，同时也提升了行为识别的准确性，思想值得借鉴。</p>
+<h2 id="论文七：Compressed-Video-Action-Recognition"><a href="#论文七：Compressed-Video-Action-Recognition" class="headerlink" title="论文七：Compressed Video Action Recognition"></a>论文七：Compressed Video Action Recognition</h2><p>这是今年CVPR 2018中做行为识别的另一篇文章。本文很重要的一个创新点是：利用压缩视频作为输入来进行视频中的行为识别。原始的视频帧数据往往具有巨大的尺寸而且高时间冗余，关于动作的有用信息很容易淹没在许多不相关的背景数据中。利用压缩后的视频具有许多好处：首先由于视频压缩（使用H.264，HEVC等）可将原始视频信息量降低两个数量级；其次视频中压缩中的motion vector提供了额外的motion信息，这是RGB图像所不具备的；而且压缩视频排除了空间可变性，这样提高了模型的泛化性；最后压缩视频模型会更快更简单更准确；因此本文建议直接在压缩视频上训练深层网络。</p>
+<p>大多数现代编解码器将视频分成I帧（内编码帧），P帧（预测帧）和零个或多个B帧（双向帧）。I帧是常规图像并且被压缩。P帧引用前面的帧并仅编码相对前一帧所需要的‘变化’。B帧可以被视为特殊的P帧，其中运动向量是双向计算的，并且只要在参考中没有循环就可以引用未来帧。</p>
+<p>本文工作将视频压缩后得到的用于描述两帧之间变化的motion vector、residual帧图像（如下图所示）作为各种SOTA网络中输入进行行为识别，都得到了很明显的提升，而且更快速、更简单、更准确。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fs8ps5lpmpj30nk0cv0xn.jpg" alt=""></p>
+<h2 id="论文八：What-have-we-learned-from-deep-representations-for-action-recognition"><a href="#论文八：What-have-we-learned-from-deep-representations-for-action-recognition" class="headerlink" title="论文八：What have we learned from deep representations for action recognition?"></a>论文八：What have we learned from deep representations for action recognition?</h2><p>这是今年CVPR 2018中对行为识别任务时空特征研究的一篇探究性文章。这篇文章通过可视化双流网络具体所学习到的时空特征来探究视频中行为识别这一任务。我们展示了用于外观和运动物体的局部检测器，以形成用于识别人类行为的分布式表示。</p>
+<p>目前的可视化方法有三类：</p>
 <ul>
-<li><p>R2D：在整个clip上运用2D卷积</p>
-<p>2D卷积忽略了视频中的时间顺序，将一个clip中的L帧类比于通道数。R2D网络中的第一个卷积层就已经将视频的整个时间维度信息折叠，这阻止了后续层中的任何时间推理。</p>
-</li>
-<li><p>f-R2D：在frames上运用2D卷积</p>
-<p>该网络结构将每个frame单独处理，对每个frame都运用同样的2D卷积核，而非将L个frame当成输入的通道数。在这种情况下，在卷积层中不进行时间建模，并且顶部的全局时空池化层简单地融合了L帧单独提取的信息。 因此将此架构变体称为f-R2D（基于帧的R2D）。</p>
-</li>
-<li><p>R3D：3D卷积</p>
-<p>3D CNN 保留了时间信息，并通过网络层传播。 张量$z<em>i$在这种情况下是4D的，并且具有尺寸$N_i×L×H_i×W_i$，其中$N i$是在第i个块中使用的滤波器的数量。 每个滤波器都是四维的，它的大小为$N</em>{i-1}×t×d×d$，其中t表示滤波器的时间尺度的范围（在本文中，使用t = 3）。 因为t &lt;L，所以过滤器现在可以在3D中进行卷积，即在时间和空间维度上进行卷积。 图1(d)说明了这种CNN体系结构。</p>
-</li>
-<li><p>MCx和rMCx：混合3D-2D卷积</p>
-<p>本文的一个假设是运动(motion)或时间（temporal）建模（即3D卷积）可能对早期层特别有用，而在更高水平的语义抽象（后期层）中，运动或时间建模则不是必需的。<strong>因此，合理的体系结构可以从3D卷积开始并切换到在顶层使用2D卷积。</strong></p>
-<p>由于在这项工作中本文考虑了具有5组卷积的3D ResNets（R3D）结构，我们的第一个变体是用2D卷积代替第5组中的所有3D卷积。我们用MC5（混合卷积）表示这个变体。我们设计了第二个变体，替换第4组和第5组中的3D卷积为2D卷积，并将该模型命名为MC4（意思是来自第4组，更深层的所有卷积都是2D）。遵循这种模式，我们还创建了MC3和MC2变体。我们忽略考虑MC1，因为它相当于fR2D。图1(b)说明了这种CNN体系结构。</p>
-<p>另一种假设是，时间建模可能在深层更有利，因为可以通过2D卷积提前捕获外观信息。为了说明这种可能性，我们还尝试了“反转”混合卷积。按照MC模型的命名约定，我们将这些模型表示为rMC2，rMC3，rMC4和rMC5。因此，rMC3将包括块1和块2中的2D卷积，以及组3和更深组中的3D卷积。图1(c)说明了这种CNN体系结构。</p>
-</li>
-<li><p>R(2+1)D：(2+1)D卷积</p>
-<p>另一种可能的理论是全3D卷积可以通过2D卷积+1D卷积来更方便地近似，将空间和时间建模分解成两个单独的步骤。 因此，本文设计了一个名为R(2 + 1)D的网络体系结构，其中我们用一个由$M<em>i$个尺度为$N</em>{i-1}×1×d×d$ 的2D卷积核和$N<em>i$个尺度为$M_i×t×1×1$的时间卷积滤波器组成的(2 + 1)D块代替了$N_i$个大小为$N</em>{i-1}×t×d×d$的三维卷积滤波器。超参数$M_i$确定信号在空间中投影的中间子空间的维数和时间卷积，具体如下。</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fsbvlm0snzj30hn0imjv3.jpg" alt=""></p>
-<p>相比于3D卷积，(2+1)D分解有两个好处：</p>
+<li>Visualization for given inputs.</li>
+<li>Activation maximization.</li>
+<li>Generative Adversarial Networks (GANs).</li>
+</ul>
+<p>本文的可视化方法是基于activation maximization并将它们扩展到时空域，以便在双流融合模型中找到各个单元的首选时空输入，我们将问题表述为在输入空间中搜索的（正则化的）<strong>基于梯度的优化问题</strong>，方法框架如下图所示。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1ftgf47w7i3j30te0d8diu.jpg" alt=""></p>
+<p>方法流程为：随机初始化的输入呈现给我们模型的光流和外观路径。 我们计算特征图一直到我们想要可视化的特定图层。 选择单个目标特征通道c，并且执行激活最大化（activation maximization）以分两步产生优选输入（preferred input）。 首先，影响c的输入上的导数是通过将目标损耗（在所有位置上求和）反向计算到输入层来计算的。 其次，通过学习速率缩放传播的梯度并将其添加到当前输入。 这些操作由图2中的虚线红线说明。基于梯度的优化以自适应降低的学习速率迭代地执行这些步骤，直到输入收敛为止。 重要的是，在此优化过程中，网络权重不会改变，<strong>只有输入接收更改</strong>。 </p>
+<p>主要的结论有如下四点：</p>
 <ul>
-<li>第一：尽管没有改变参数的数量，但由于每个块中的2D和3D卷积之间的额外的ReLU，所以它使网络中非线性映射的数量增加了一倍。<strong>增加非线性的数量增加了可以表示的函数的复杂性，也如VGG网络[27]中指出的那样，通过应用多个更小的滤波器以及其间的附加非线性来逼近大滤波器的影响</strong>。</li>
-<li>第二：将3D卷积强制划分为单独的空间和时间分量使得优化更容易。与具有相同容量的3D卷积网络相比，<strong>这表现在较低的训练误差上。</strong>对于相同数量的层（和参数），与R3D相比，R(2+1)D不仅产生更低的测试误差，而且还产生更低的训练误差。这表明当时空滤波器因式分解时优化变得更容易。<strong>这表明优化的便利性随着深度变大而增加。</strong></li>
+<li>第一：相比于分开单独学习外观以及运动特征，cross-stream可以学习到真正的时空特征</li>
+<li>第二：网络可以学习高度类别已知的本地表示，也可以学习适用于一系列类的通用表示。</li>
+<li>第三：通过网络结构，特征变得更加抽象并且对于对获得期望的分布不重要的数据（比如不同速度间的motion模式）显示出逐渐增加的不变性。</li>
+<li>第四：可视化不仅可用于揭示学习的表示，还可用于揭示训练数据的特性并解释系统的失败情况。</li>
 </ul>
-</li>
+<h2 id="论文八：Non-local-Neural-Networks"><a href="#论文八：Non-local-Neural-Networks" class="headerlink" title="论文八：Non-local Neural Networks"></a>论文八：Non-local Neural Networks</h2><p>这是今年CVPR 2018中做利用Non-local方法去做行为识别的一篇文章。long-range的依赖捕捉是深度学习的核心问题，对于序列数据，recurrent操作是主要的方法，对于图像数据，long-range依赖通过多层的卷积形成的感受野来捕捉。但卷积和recurrent操作都是local的操作，在本文中，受启发于计算机视觉的经典non-local均值法，作者提出了进行non-local操作的通用构建块系列，来捕获long-range依赖性的。本文中的non-local操作将所有位置处的特征的加权和作为某一位置的响应。直观一点，如下图所示：</p>
+<p><img src="../../../../../../var/folders/2c/k786p2fd5mb4jp5l3cmd7m3w0000gp/T/abnerworks.Typora/image-20180721152747380.png" alt="image-20180721152747380"></p>
+<p>使用非本地操作有几个优点：</p>
+<ul>
+<li>（a）与循环和卷积操作的渐进行为相反，非本地操作通过计算任意两个位置之间的相互作用直接捕获长程依赖性，而不管它们的位置距离如何; </li>
+<li>（b）正如我们在实验中所表明的那样，非局部操作是有效的，即使只有几层（例如5）也能达到最佳效果; </li>
+<li>（c）最后，我们的非本地操作保持可变输入大小，并且可以很容易地与其他操作组合（例如，我们将使用的卷积）。</li>
 </ul>
-<p>本文我们提出的体系结构R(2+1)D实现了在Sports-1M，Kinetics，UCF101和HMDB51数据集上技术水平相当或更好的结果。希望能够激发新的网络设计，以利用时空卷积潜在的效能和建模的灵活性。</p>
+<p>该non-local构建块可以集成到目前许多计算机视觉框架中。通过在视频分类任务上进行验证，我们的non-local模型也可以在Kinetics和Charades数据集上取得很有竞争力的结果；在静态图像识别中，我们的non-local模型提高了在COCO数据集上的对象检测/分割和姿态估计任务，证明了模型的有效性。</p>
+<p>​       </p>
 
       
     </div>
@@ -519,6 +531,8 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
           
             <a href="/tags/行为识别/" rel="tag"># 行为识别</a>
           
+            <a href="/tags/CVPR-2018/" rel="tag"># CVPR 2018</a>
+          
         </div>
       
 
@@ -526,8 +540,8 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/3799204522/" rel="next" title="论文笔记：CVPR 2018 关于行为识别论文略读笔记（一）">
-                <i class="fa fa-chevron-left"></i> 论文笔记：CVPR 2018 关于行为识别论文略读笔记（一）
+              <a href="/posts/3309988052/" rel="next" title="行为识别论文笔记：Something about Temporal Reasoning">
+                <i class="fa fa-chevron-left"></i> 行为识别论文笔记：Something about Temporal Reasoning
               </a>
             
           </div>
@@ -536,8 +550,8 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/2879360315/" rel="prev" title="论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）">
-                论文笔记：CVPR 2018 关于行为识别论文略读笔记（二） <i class="fa fa-chevron-right"></i>
+              <a href="/posts/2173074278/" rel="prev" title="【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】">
+                【CleanMyMac 3 最新版 官方正版序列号 全网最低 85元】【送Office 365 订阅 永久升级版账号 仅需25元】 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -704,7 +718,7 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文一：Temporal-Relational-Reasoning-in-Videos"><span class="nav-number">1.</span> <span class="nav-text">论文一：Temporal Relational Reasoning in Videos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文二：A-Closer-Look-at-Spatiotemporal-Convolutions-for-Action-Recognition"><span class="nav-number">2.</span> <span class="nav-text">论文二：A Closer Look at Spatiotemporal Convolutions for Action Recognition</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><span class="nav-number">1.</span> <span class="nav-text">论文五：PoTion: Pose MoTion Representation for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文六：Im2Flow-Motion-Hallucination-from-Static-Images-for-Action-Recognition"><span class="nav-number">2.</span> <span class="nav-text">论文六：Im2Flow: Motion Hallucination from Static Images for Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文七：Compressed-Video-Action-Recognition"><span class="nav-number">3.</span> <span class="nav-text">论文七：Compressed Video Action Recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文八：What-have-we-learned-from-deep-representations-for-action-recognition"><span class="nav-number">4.</span> <span class="nav-text">论文八：What have we learned from deep representations for action recognition?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论文八：Non-local-Neural-Networks"><span class="nav-number">5.</span> <span class="nav-text">论文八：Non-local Neural Networks</span></a></li></ol></div>
             
 
           </div>
@@ -834,9 +848,9 @@ MT_N(V)=T_2(V)+T_3(V)+...+T_N(V)</script><p>最后利用如下网络结构图进
 
     <script type="text/javascript">
       var disqus_shortname = 'jacobkong';
-      var disqus_identifier = 'posts/3309988052/';
+      var disqus_identifier = 'posts/2879360315/';
 
-      var disqus_title = "行为识别论文笔记：Something about Temporal Reasoning";
+      var disqus_title = "论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）";
 
 
       function run_disqus_script(disqus_script) {

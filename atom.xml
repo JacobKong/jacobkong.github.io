@@ -69,9 +69,10 @@
     <link href="http://jacobkong.github.io/posts/3799204522/"/>
     <id>http://jacobkong.github.io/posts/3799204522/</id>
     <published>2018-06-15T07:51:24.000Z</published>
-    <updated>2018-07-21T08:01:07.000Z</updated>
+    <updated>2018-07-21T08:02:25.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
+<a id="more"></a>
 <p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsfn0dgjr7j30qr0oin4e.jpg" alt=""></p>
 <p>方法大致流程为：首先在每个帧中运行目前最先进的人体姿态估计器，并为每个人体关节获取热图。<strong>这些热图对每个像素的概率进行编码以包含特定的关节</strong>。<strong>我们使用取决于视频片段帧的相对时间的颜色对这些热度图进行着色</strong>。如下图所示的为不同通道下的随时间的上色机制：</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsfn7ji98pj30hf0ah0v5.jpg" alt=""></p>
@@ -120,7 +121,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition&quot;&gt;&lt;a href=&quot;#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition
+      &lt;h2 id=&quot;论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition&quot;&gt;&lt;a href=&quot;#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition&quot; class=&quot;headerlink&quot; title=&quot;论文五：PoTion: Pose MoTion Representation for Action Recognition&quot;&gt;&lt;/a&gt;论文五：PoTion: Pose MoTion Representation for Action Recognition&lt;/h2&gt;&lt;p&gt;和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：&lt;/p&gt;
     
     </summary>
     

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>JacobKong&#39;s Blog</title>
-  <subtitle>路漫漫其修远兮......</subtitle>
+  
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jacobkong.github.io/"/>
@@ -9,7 +9,7 @@
   <id>http://jacobkong.github.io/</id>
   
   <author>
-    <name>Jacob Kong</name>
+    <name>Weijie Kong</name>
     
   </author>
   

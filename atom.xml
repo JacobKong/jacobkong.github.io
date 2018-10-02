@@ -69,7 +69,7 @@
     <link href="http://jacobkong.github.io/posts/2879360315/"/>
     <id>http://jacobkong.github.io/posts/2879360315/</id>
     <published>2018-06-15T07:51:24.000Z</published>
-    <updated>2018-07-21T08:10:20.000Z</updated>
+    <updated>2018-07-21T08:10:29.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
 <a id="more"></a>

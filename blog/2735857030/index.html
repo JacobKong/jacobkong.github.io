@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>行人检测论文笔记：Fast Feature Pyramids for Object Detection? | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="相关知识点
+Overcomplete Representations:
+
+Overcomplete：Such a complete system is overcomplete if removal of a $\phi {j}$ from the system results in a system (i.e., ${\phi {i}}_((i\in J\backslash {j))}$) th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行人检测论文笔记：Fast Feature Pyramids for Object Detection?">
+<meta property="og:url" content="http://jacobkong.github.io/blog/2735857030/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="相关知识点
+Overcomplete Representations:
+
+Overcomplete：Such a complete system is overcomplete if removal of a $\phi {j}$ from the system results in a system (i.e., ${\phi {i}}_((i\in J\backslash {j))}$) th">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg">
+<meta property="og:updated_time" content="2017-02-18T12:55:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="行人检测论文笔记：Fast Feature Pyramids for Object Detection?">
+<meta name="twitter:description" content="相关知识点
+Overcomplete Representations:
+
+Overcomplete：Such a complete system is overcomplete if removal of a $\phi {j}$ from the system results in a system (i.e., ${\phi {i}}_((i\in J\backslash {j))}$) th">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-行人检测论文笔记：Fast Feature Pyramids for Object Detection?" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      行人检测论文笔记：Fast Feature Pyramids for Object Detection?
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-11-23T22:32:24.000Z" itemprop="datePublished">Nov 24, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>Overcomplete Representations:</p>
+<ul>
+<li>Overcomplete：Such a complete system is overcomplete if removal of a $\phi <em>{j}$ from the system results in a system (i.e., ${\phi </em>{i}}_((i\in J\backslash {j))}$) that is still complete.</li>
+<li>In different research, such as signal processing and function approximation, overcompleteness can help researchers to achieve a more stable, more robust, or more compact decomposition than using a basis.[2]</li>
+</ul>
+</li>
+<li><p>Image pyramid：影响金字塔</p>
+<ul>
+<li>影像金字塔由原始影像按一定规则生成的由细到粗不同分辨率的影像集。</li>
+<li>指在同一的空间参照下，根据用户需要以不同分辨率进行存储与显示，形成分辨率由粗到细、数据量由小到大的金字塔结构。</li>
+<li>图像编码和渐进式图像传输</li>
+<li>从图中可以看出, 从金字塔的底层开始每四个相邻的像素经过重采样生成一个新的像素, 依此重复进行, 直到金字塔的顶层。重采样的方法一般有以下三种: 双线性插值、最临近像元法、三次卷积法。</li>
+<li>金字塔是一种能对栅格影像按逐级降低分辨率的拷贝方式存储的方法。通过选择一个与显示区域相似的分辨率，只需进行少量的查询和少量的计算，从而减少显示时间。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfr9u09c3j305r064dfv.jpg" alt=""></p>
+<ul>
+<li>Gradient Histograms:</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>The computational bottleneck of many modern detectors is the <strong>computation of features</strong> at every scale of a finely-sampled image pyramid.</li>
+<li>The approach is general and is widely applicable to vision algorithms requiring fine-grained multi-scale analysis.</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Multi-orientation decompostion: 多向分解，是图像处理中的基本技术。</li>
+<li><p>在每个尺度和方向分别分析图像结构的想法起源于多个来源:</p>
+<ul>
+<li>哺乳动物视觉系统生理学的测量</li>
+<li>有关视觉信息的统计和编码的原则性推理</li>
+<li>谐波分析</li>
+<li>谐波分析（多速率滤波)</li>
+</ul>
+</li>
+<li><p>灵长类视觉系统显示：条纹皮层细胞（粗略的等价于图像的小波展开）在数量上超过视网膜神经节细胞（图像像素的近似表示）10^2到10^3.</p>
+</li>
+<li>这些表示相对于视点，照明和图像变形的变化的鲁棒性是Overcomplete Representations 优越性能的促成因素。</li>
+<li>不幸的是，更高的检测正确率通常伴随着更高的计算开销。</li>
+<li>在计算开销和为了提高检测和降低错误率而使用更复杂的表示之间是没有必要做权衡的。</li>
+<li>自然图像具有分形统计，使得我们可以利用这一点来更可靠的预测图像跨尺度结构。</li>
+<li><p>我们证明了我们提出的快速特征金字塔与三个不同的检测框架的有效性：</p>
+<ul>
+<li>积分通道特征（ICF）</li>
+<li>聚集通道特征（积分通道特征的新颖变体）</li>
+<li>可变形零件模型（DPM）</li>
+</ul>
+</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>Scale Space Theory: 尺度空间理论</li>
+<li>Cascades, coarse-to-fine search, distance transforms, etc., 全部都关注于对提前计算好的图像特征来优化分类速度。</li>
+<li>本方法专注于快速特征金字塔的构建，因此与上面的方法可以起到互补的效果。</li>
+<li>行人检测的最佳执行方法和PASCAL VOC是基于多尺度特征金字塔的滑动窗口; 快速特征金字塔非常适合于这种滑动窗口检测器。</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2735857030/" data-id="cjifprje60008y768be40ye8g" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2735857030/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Pedestrian-Detection/">Pedestrian Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行人检测/">行人检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/3084343215/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/3091185356/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">行人检测论文笔记：Pedestrian Detection - An Evaluation of the State of the Art</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/2735857030/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

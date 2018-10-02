@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>深度学习论文笔记：YOLO9000 | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Abstract
+YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
+利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
+
+
+YOLO9000：
+是提出的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习论文笔记：YOLO9000">
+<meta property="og:url" content="http://jacobkong.github.io/blog/2102833929/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="Abstract
+YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
+利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
+
+
+YOLO9000：
+是提出的一">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fck21bicicj308j0byabg.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgy1fckj905lbrj30bm0co75r.jpg">
+<meta property="og:updated_time" content="2018-05-18T04:04:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习论文笔记：YOLO9000">
+<meta name="twitter:description" content="Abstract
+YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。
+本论文提出两个模型，YOLOv2和YOLO9000。
+YOLOv2：
+是对YOLO改进后的提升模型。
+利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。
+
+
+YOLO9000：
+是提出的一">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-深度学习论文笔记：YOLO9000" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      深度学习论文笔记：YOLO9000
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-08T03:56:20.000Z" itemprop="datePublished">Feb 08, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。</li>
+<li>YOLOv2：<ul>
+<li>是对YOLO改进后的提升模型。</li>
+<li>利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。</li>
+</ul>
+</li>
+<li>YOLO9000：<ul>
+<li>是提出的一种联合在检测和分类数据集上训练的模型，<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测</strong>。</li>
+<li>可以检测超过9000个类。</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>目前，许多检测方法依旧约束在很小的物体集上。</li>
+<li>目前，目标检测数据集相比于用于分类和标注的数据集来说，是有限制的。<ul>
+<li>最常见的检测数据集包含数十到数十万的图像，具有几十到几百个标签，比如Pascal、CoCo、ImageNet。 </li>
+<li>分类数据集具有数以百万计的图像，具有数万或数十万种类别，如ImageNet。</li>
+</ul>
+</li>
+<li>目标检测数据集永远不会达到和分类数据集一样的等级。</li>
+<li>本论文提出一种方法，利用分类数据集来作为检测数据集，将两种截然不同的数据集结合。</li>
+<li>本论文提出一个在目标检测和分类数据集上联合训练的方法。<strong>此方法利用标记的检测图像学习精确定位对象，而它使用分类图像增加其词汇和鲁棒性。</strong></li>
+</ul>
+<h2 id="Better"><a href="#Better" class="headerlink" title="Better"></a>Better</h2><ul>
+<li><p>YOLO产生很多的定位错误。而且YOLO相比于region proposal-based方法有着相对较低的recall（查全率）。<strong>所以主要任务是在保持分类准确率的前提下，提高recall和减少定位错误。</strong></p>
+</li>
+<li><p>我们从过去的工作中融合了我们自己的各种新想法，以提高YOLO的性能。 结果的摘要可以在表中找到：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcizngrvjoj30eq05paas.jpg" alt=""></p>
+</li>
+</ul>
+<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a><strong>Batch Normalization</strong></h3><ul>
+<li>得到2%的mAP的提升，使用Batch Normalization，我们可以从模型中删除dropout，而不会出现过度缺陷。</li>
+</ul>
+<h3 id="High-Resolution-Classiﬁer"><a href="#High-Resolution-Classiﬁer" class="headerlink" title="High Resolution Classiﬁer"></a><strong>High Resolution Classiﬁer</strong></h3><ul>
+<li>对于YOLOv2，我们首先在ImageNet对全部448×448分辨率图像上进行10epochs的微调来调整分类网络。  然后我们在检测时调整resulting network。 这种高分辨率分类网络使我们增加了近4％的mAP。</li>
+</ul>
+<h3 id="Convolutional-With-Anchor-Boxes"><a href="#Convolutional-With-Anchor-Boxes" class="headerlink" title="Convolutional With Anchor Boxes"></a><strong>Convolutional With Anchor Boxes</strong></h3><ul>
+<li>YOLO利用卷积特征提取器最顶端的全连接层来直接预测BB的坐标。而Faster R-CNN是利用首选的priors来预测BB。</li>
+<li>预测BB的偏移而不是坐标可以简化问题，并使网络更容易学习。本论文从YOLO中移去了全连接层，并且利用anchor box来预测BB。</li>
+<li>我们移去了pooling层，使得网络的卷积层的输出有更高的像素。</li>
+<li>同时将网络缩减到在416*416像素的图片上操作。 我们这样做是因为我们想要特征图中具有奇数个位置，因此存在单个中心单元。</li>
+<li>当我们移动到anchor boxes时，我们也将class prediction机制与空间位置解耦，而是为每个anchor box预测的类和对象。 同YOLO一样，objectness prediction仍然预测ground truth和所提出的框的IOU，并且class predictions预测该类的条件概率，假定存在对象。(没太懂)</li>
+</ul>
+<h3 id="Dimension-Clusters"><a href="#Dimension-Clusters" class="headerlink" title="Dimension Clusters"></a><strong>Dimension Clusters</strong></h3><ul>
+<li><p>将YOLO与anchor boxes结合有两个问题，<strong>第一个是anchor box的长宽是认为选定的。</strong></p>
+</li>
+<li><p>我们不是手动选择先验（priors），而是在训练集边界框上运行k-means聚类，以自动找到好的先验。</p>
+<ul>
+<li><p>我们真正想要的是导致良好的IOU分数的priors，这是独立于盒子的大小。 因此，对于我们的distance metric，我们使用：</p>
+<script type="math/tex; mode=display">
+d(box, centroid) = 1-IOU(box,centroid)</script></li>
+<li><p>我们选择<strong>k = 5</strong>作为模型复杂性和高召回率之间的良好权衡。这样非常不同于相比于人工选择的boxes。更多的又高又瘦的boxes。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Direct-location-prediction"><a href="#Direct-location-prediction" class="headerlink" title="Direct location prediction"></a><strong>Direct location prediction</strong></h3><ul>
+<li><p>将YOLO与anchor boxes结合有两个问题，<strong>第二个模型不稳定，特别是在早期迭代中。</strong></p>
+</li>
+<li><p>并非预测偏移，我们遵循YOLO的方法并预测相对于网格单元的位置的位置坐标。 这将ground truth限制在0和1之间。我们使用<strong>逻辑激活</strong>来约束网络的预测落在该范围内。</p>
+</li>
+<li><p>网络为每一个BB预测5个坐标：$t_x, t_y, t_w, t_h, t_o$.</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcjw1fcjb6g0tdpj309203r0st.jpg" alt="">  <img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcjbl2jwc6j30bj09k3z4.jpg" alt=""></p>
+</li>
+<li><p>结合Dimension Clusters和Direct location prediction，YOLO提升5%的mAP。</p>
+</li>
+</ul>
+<h3 id="Fine-Grained-Features"><a href="#Fine-Grained-Features" class="headerlink" title="Fine-Grained Features"></a><strong>Fine-Grained Features</strong></h3><ul>
+<li>修改后的YOLO在13<em>13的feature map上进行检测。 虽然这对于大对象是足够的，但是它可以从用于定位较小对象的<em>*细粒度特征</em></em>中受益。</li>
+<li>添加一个传递层，将分辨率从前面的层变为从26 x 26分辨率。</li>
+</ul>
+<h3 id="Multi-Scale-Training"><a href="#Multi-Scale-Training" class="headerlink" title="Multi-Scale Training"></a><strong>Multi-Scale Training</strong></h3><ul>
+<li>我们希望YOLOv2可以足够鲁邦在不同尺寸的images上进行训练。</li>
+<li>并非使用固定的输入图像尺寸，我们在每几次迭代后改变网络。每10batches，我们的网络随机选择一个新的图像尺寸。</li>
+</ul>
+<h2 id="Faster"><a href="#Faster" class="headerlink" title="Faster"></a>Faster</h2><ul>
+<li>大多数检测框架依赖VGG-16作为基本特征提取器。VGG-16是一个强大、准确的分类网络，但是也很复杂。</li>
+<li>YOLO框架使用的基于Googlenet架构的修改后的网络。比VGG-16快速，但是准确性比VGG-16稍差。</li>
+</ul>
+<h3 id="Darknet-19"><a href="#Darknet-19" class="headerlink" title="Darknet-19"></a>Darknet-19</h3><ul>
+<li><p>供YOLOv2使用的新的分类模型。</p>
+</li>
+<li><p>最终模型叫做darknet-19，有着19个卷积层和5个maxpooling层。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fck21bicicj308j0byabg.jpg" alt=""></p>
+</li>
+<li><p>Darknet-19处理每张图片只需要5.58 billion的操作。</p>
+</li>
+</ul>
+<h3 id="Training-for-classification"><a href="#Training-for-classification" class="headerlink" title="Training for classification"></a>Training for classification</h3><ul>
+<li>在标准的ImageNet 1000类的数据集上利用随机梯度下降训练160 epochs。开始学习率为0.1，polynomial rate decay 是4，weight decay是0.0005，动量是0.9。</li>
+<li>在训练期间，我们使用标准的数据增加技巧，包括随机裁剪，旋转，以及色调，饱和度和曝光偏移。</li>
+<li>在224x224分辨率的图像上进行预训练，然后在448x448分辨率的图像上进行微调。</li>
+</ul>
+<h3 id="Training-for-detection"><a href="#Training-for-detection" class="headerlink" title="Training for detection"></a>Training for detection</h3><ul>
+<li>我们通过去除最后的卷积层来修改这个网络，并且替代地增加具有1024个滤波器的三个3×3卷积层，每个跟随着具有我们需要检测所需的输出数量的最后的1×1卷积层。</li>
+<li><strong>passthrough层</strong>的添加：使网络能够使用fine grain feature。</li>
+</ul>
+<h2 id="Stronger"><a href="#Stronger" class="headerlink" title="Stronger"></a>Stronger</h2><ul>
+<li>本论文提出一种机制，用来将分类和检测数据结合起来再一起训练。<ul>
+<li>在训练过程中，当看到用于检测的被标注的图片，我们会使用基于YOLOv2的代价函数进行反向传播。</li>
+<li>在训练过程中，当看到分类图片，我们只从框架中用来分类部分来传递损失。</li>
+</ul>
+</li>
+<li>这种方法的challenge：<ul>
+<li>检测数据集中的标签是大分类，而分类数据集的标签是小分类，<strong>所以我们需要找一个方法来融合这些标签</strong>。</li>
+<li>用来分类的许多方法都是使用softmax层来计算最后的概率分布，<strong>使用softmax层会假设类之间是互斥的</strong>，但是如何用本方法融合数据集，类之间本身不是互斥的。</li>
+</ul>
+</li>
+<li>我们所以使用multi-label模型来结合数据集，不假设类之间互斥。<strong>这种方法忽略了我们已知的数据的结构。</strong></li>
+</ul>
+<h3 id="Hierarchical-classification"><a href="#Hierarchical-classification" class="headerlink" title="Hierarchical classification"></a>Hierarchical classification</h3><ul>
+<li>ImageNet标签是从<strong>WordNet</strong>中得来，<strong>一种结构化概念和标签之间如何联系的语言数据库</strong>。</li>
+<li>WordNet是<strong>连接图结构</strong>，而非树。我们相反并不实用整个图结构，我们将问题简化成从ImageNet的概念中构建有结构的树。</li>
+<li>WordTree</li>
+</ul>
+<h3 id="Dataset-combination-with-WordTree"><a href="#Dataset-combination-with-WordTree" class="headerlink" title="Dataset combination with WordTree"></a>Dataset combination with WordTree</h3><ul>
+<li><p>我们可以使用WordTree来介个数据集。</p>
+</li>
+<li><p>将数据集中分类映射成树中的下义词。</p>
+</li>
+<li><p>举例：将ImageNet和COCO数据集结合：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1fckj905lbrj30bm0co75r.jpg" alt=""></p>
+</li>
+<li><p>WordNet十分多样化，所以我们可以利用这种技术到大多数数据集。</p>
+</li>
+</ul>
+<h3 id="Joint-classiﬁcation-and-detection"><a href="#Joint-classiﬁcation-and-detection" class="headerlink" title="Joint classiﬁcation and detection"></a>Joint classiﬁcation and detection</h3><ul>
+<li>将COCO数据集和ImageNet数据集结合，训练处一个特别大规模的检测器。</li>
+<li>对应的WordTree有9418个类。</li>
+<li>ImageNet是一个更大的数据集，因此我们通过对COCO进行过采样来平衡数据集，使ImageNet只以4：1的倍数来增大。</li>
+<li>当我们的网络看见一张用来检测的图片，我们正常反向传播loss。对于分类loss，我们只在该label对应层次之上反向传播loss。<strong>比如：如果标签是“dog”，我们会在树中的“German Shepherd”和“Golden Retriever”中进一步预测错误，因为我们没有这些信息。</strong></li>
+<li>当我们的网络看见一张用来分来的照片，我们只反向传递分类loss。</li>
+<li>使用这种联合训练，YOLO 9000使用COCO中的检测数据学习找到图像中的对象，并使用ImageNet中的数据学习分类各种各样的对象。</li>
+<li>在ImageNet上利用YOLO9000来做detection，从而进行评估。ImageNet和COCO只有44个相同的类分类，意味着YOLO9000在利用部分监督来进行检测。</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。<ul>
+<li>YOLOv2：是对YOLO改进后的提升模型。更快更先进。此外，它可以以各种图像大小运行，以提供速度和精度之间的权衡。</li>
+<li>YOLO9000：是提出的一种联合在检测和分类数据集上训练的模型，可以为没有任何标注检测标签的数据进行检测。可以检测超过9000个类。使用WordTree技术来组合不同来源的数据。</li>
+</ul>
+</li>
+<li>我们创造出许多目标检测之外的技术：<ul>
+<li>WordTree representation.</li>
+<li>Dataset combination.</li>
+<li>Multi-scale training.</li>
+</ul>
+</li>
+<li>下一步工作：我们希望利用相似的技术来进行weakly supervised image segmentation.</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2102833929/" data-id="cjifprjgb001fy768jrcbiqbn" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2102833929/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/3118967289/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">深度学习论文笔记：SSD</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/2094641206/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">深度学习论文笔记：YOLO</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/2102833929/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

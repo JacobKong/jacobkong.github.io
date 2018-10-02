@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>行人检测论文笔记：Histograms of Oriented Gradients for Human Detection | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="相关知识点
+从TP、FP、TN、FN到ROC曲线、miss rate
+
+TP：true positive，实际是正例，预测为正例
+FP：false positive，实际为负例，预测为正例
+TN：true negative，实际为负例，预测为负例
+FN：false negative，实际为正例，预测为负例
+
+
+
+
+
+fnr+tpr=1, fpr+tnr=1
+miss rate = FNR = 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行人检测论文笔记：Histograms of Oriented Gradients for Human Detection">
+<meta property="og:url" content="http://jacobkong.github.io/blog/3084343215/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="相关知识点
+从TP、FP、TN、FN到ROC曲线、miss rate
+
+TP：true positive，实际是正例，预测为正例
+FP：false positive，实际为负例，预测为正例
+TN：true negative，实际为负例，预测为负例
+FN：false negative，实际为正例，预测为负例
+
+
+
+
+
+fnr+tpr=1, fpr+tnr=1
+miss rate = FNR = 1">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrffyhsdj30eu03mjrv.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfi9crxj30ww05udiy.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfj1a8sj3066017q2t.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfhlpopj30ck095gmg.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfkf2vgj302604a0sn.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfltceqj304m00ndfp.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfl4bwqj305d00r0sm.jpg">
+<meta property="og:updated_time" content="2017-01-28T08:59:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="行人检测论文笔记：Histograms of Oriented Gradients for Human Detection">
+<meta name="twitter:description" content="相关知识点
+从TP、FP、TN、FN到ROC曲线、miss rate
+
+TP：true positive，实际是正例，预测为正例
+FP：false positive，实际为负例，预测为正例
+TN：true negative，实际为负例，预测为负例
+FN：false negative，实际为正例，预测为负例
+
+
+
+
+
+fnr+tpr=1, fpr+tnr=1
+miss rate = FNR = 1">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrffyhsdj30eu03mjrv.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-行人检测论文笔记：Histograms of Oriented Gradients for Human Detection" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      行人检测论文笔记：Histograms of Oriented Gradients for Human Detection
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-11-28T22:32:24.000Z" itemprop="datePublished">Nov 29, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><p>从TP、FP、TN、FN到ROC曲线、miss rate</p>
+<ul>
+<li>TP：true positive，实际是正例，预测为正例</li>
+<li>FP：false positive，实际为负例，预测为正例</li>
+<li>TN：true negative，实际为负例，预测为负例</li>
+<li>FN：false negative，实际为正例，预测为负例</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrffyhsdj30eu03mjrv.jpg" alt=""></p>
+<ul>
+<li>fnr+tpr=1, fpr+tnr=1</li>
+<li>miss rate = FNR = 1 - true positive<ul>
+<li>对于一个确定的阈值t，FPR和TPR是确定的，得到一个(fpr,tpr)元组。</li>
+<li>当t增加， # FP也减小， # TN增加，则fpr减小；</li>
+<li>当t增加， # TP减小， # FN增加，则tpr减小。</li>
+<li>也就是说，当阈值t从0变化到1，fpr和tpr也单调减小，从(1，1)减小到(0,0)</li>
+<li>miss rate = 1 - true positive rate，那么对应的YoX图像，也就是miss rate - false positive rate图像，就应当是单调下降的曲线。</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>定向梯度直方图（HOG）描述符的网格显著优于现有的人体检测特征集。</li>
+<li>在重叠描述符块中的 <strong>精细尺度梯度</strong> ， <strong>精细定向分箱</strong> ， <strong>相对粗略的空间分箱</strong> 和 <strong>高质量局部对比度标准化</strong> 对于良好的结果都是重要的。</li>
+<li>新的数据集</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>第一需求：robust feature set.</li>
+<li>我们研究了人类监测的特征集问题，发现 <strong>本地归一化的定向梯度直方图（HOG）</strong> 描述符提供优异的性能相对于其他现有特征集包括小波。</li>
+<li>提出的描述符让人联想到 <strong>边缘方向直方图</strong> [4,5]， <strong>SIFT描述符</strong> [12]和 <strong>形状上下文</strong> [1]，但与它们的不同点是：HOG描述器是在一个网格密集的大小统一的细胞单元（dense grid of uniformly spaced cells）上计算，而且为了提高性能，还采用了重叠的局部对比度归一化（overlapping local contrast normalization）技术。</li>
+</ul>
+<h2 id="Previous-Work"><a href="#Previous-Work" class="headerlink" title="Previous Work"></a>Previous Work</h2><h2 id="Overview-of-the-Method"><a href="#Overview-of-the-Method" class="headerlink" title="Overview of the Method"></a>Overview of the Method</h2><ul>
+<li>The method is based on evaluating well-normalized local histograms of image gradient orientations in a dense grid.</li>
+<li>基本思想是，在一副图像中，局部目标的 <strong>表象</strong> 和 <strong>形状</strong> （appearance and shape）能够被梯度或边缘的方向密度分布很好地描述，即使没有对应的梯度或边缘位置的精确知识。</li>
+<li>具体的实现方法是：首先将图像分成小的连通区域，我们把它叫细胞单元（cell）。然后采集细胞单元中各像素点的梯度的或边缘的方向直方图。最后把这些直方图组合起来就可以构成特征描述器。</li>
+<li>为了提高性能，我们还可以把这些局部直方图在图像的更大的范围内（我们把它叫区间或block）进行对比度归一化（contrast-normalized），所采用的方法是：先计算各直方图在这个区间（block）中的密度，然后根据这个密度对区间中的各个细胞单元做归一化。 <strong>通过这个归一化后，能对光照变化和阴影获得更好的效果。</strong></li>
+<li>整体的物体检测链：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfi9crxj30ww05udiy.jpg" alt=""></p>
+<ul>
+<li><p>这些基于稀疏特征的表示的成功有点遮蔽了HOG作为密集图像描述符的能力和简单性。</p>
+</li>
+<li><p>HOG/SIFT表示方法有几个优点。</p>
+<ul>
+<li>由于HOG方法是在图像的局部细胞单元上操作，所以它对图像几何的（geometric）和光学的（photometric）形变都能保持很好的不变性，这两种形变只会出现在更大的空间领域上。</li>
+<li>他捕捉了局部形状非常具有特征性的边和梯度特征。</li>
+<li>在局部表示中对局部的几何和光度变换的不变性更容易控制。</li>
+<li>如果它们远小于局部空间或方向仓尺寸，则平移或旋转几乎没有差别。</li>
+</ul>
+</li>
+<li><p>作者通过实验发现，在粗的空域抽样（coarse spatial sampling）、精细的方向抽样（fine orientation sampling）以及较强的局部光学归一化（strong local photometric normalization）等条件下，只要行人大体上能够保持直立的姿势，就容许行人有一些细微的肢体动作，这些细微的动作可以被忽略而不影响检测效果。综上所述，HOG方法是特别适合于做图像中的行人检测的。</p>
+</li>
+</ul>
+<h2 id="Data-Sets-and-Methodology"><a href="#Data-Sets-and-Methodology" class="headerlink" title="Data Sets and Methodology"></a>Data Sets and Methodology</h2><ul>
+<li>hard examples</li>
+<li>Detection Error Tradeoff (DET) curves on a log-log scale. miss rate(1-Recall / FN/(TP+FN)) verses FPPW. 值越低越好。</li>
+<li>DET图和ROC图提供的信息一眼，但是前者允许小概率更容易的去分布。</li>
+<li>FPPW：NUMBER_OF_FALSE_POSITIVE/NUMBER_OF_WINDOWS</li>
+<li>我们的DET曲线通常相当浅，所以即使非常小的缺失率的改善也等同于在不变缺失率下的情况下FPPW中的大增益。</li>
+</ul>
+<h2 id="Overview-of-Results"><a href="#Overview-of-Results" class="headerlink" title="Overview of Results"></a>Overview of Results</h2><ul>
+<li>Generalized Haar Wavelets.</li>
+<li>PCA-SIFT.</li>
+<li>Shape Contexts.</li>
+</ul>
+<h2 id="Implementation-and-Performance-Study"><a href="#Implementation-and-Performance-Study" class="headerlink" title="Implementation and Performance Study"></a>Implementation and Performance Study</h2><ul>
+<li><p>默认检测器：</p>
+<ul>
+<li>RGB colour space with no gamma correction</li>
+<li>[−1, 0, 1] gradient filter with no smoothing</li>
+<li>linear gradient voting into 9 orientation bins in 0◦ –180◦</li>
+<li>16×16 pixel blocks of four 8×8 pixel cells</li>
+<li>Gaussian spatial win- dow with σ = 8 pixel</li>
+<li>L2-Hys (Lowe-style clipped L2 norm) block normalization</li>
+<li>block spacing stride of 8 pixels (hence 4-fold coverage of each cell)</li>
+<li>64×128 detection window;</li>
+<li>linear SVM classifier.</li>
+</ul>
+</li>
+<li><p>主要的结论是，为了良好的性能，应该使用细尺度导数（基本上没有平滑），许多定向仓,中等大小，强归一化，重叠的描述符块。</p>
+</li>
+</ul>
+<h3 id="Gamma-Colour-Normalization"><a href="#Gamma-Colour-Normalization" class="headerlink" title="Gamma/Colour Normalization"></a>Gamma/Colour Normalization</h3><h3 id="Gradient-Computation"><a href="#Gradient-Computation" class="headerlink" title="Gradient Computation"></a>Gradient Computation</h3><ul>
+<li>最通常用的方法就是简单的应用一个一维的离散的梯度模版分别应用在水平和垂直方向上去。可以使用如下的卷积核进行卷积：</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfj1a8sj3066017q2t.jpg" alt=""></p>
+<h3 id="Spatial-Orientation-Binning-方向单元划分"><a href="#Spatial-Orientation-Binning-方向单元划分" class="headerlink" title="Spatial / Orientation Binning(方向单元划分)"></a>Spatial / Orientation Binning(方向单元划分)</h3><ul>
+<li>每个块内的每个像素对 <strong>方向直方图</strong> 进行投票</li>
+<li>每个像素基于以其为中心的梯度元素的方向计算边缘取向直方图通道的 加权投票，并且投票被累积到在称为 <strong>单元</strong> 的局部空间区域上的 <strong>方向仓</strong> 中。</li>
+<li>每个块的形状可以是矩形或圆形的</li>
+<li>方向直方图的方向取值可以是0-180度或者0-360度，这取决于梯度是否有符号。无符号梯度（0-180º），有符号梯度（0-360º）</li>
+<li>为了减少混叠，投票在相邻仓中心之间以取向和位置双向内插。</li>
+<li>至于投票的权重，可以是梯度的幅度本身或者是它的函数。投票是像素处的梯度幅度的函数，或者是幅度本身、其平方、其平方根或者表示像素的边缘的软出现/缺失的幅度的限幅形式。在定向编码对于良好的性能是至关重要的。</li>
+<li>梯度幅度本身通常产生最好的结果。其它可选的方案是采用幅度的平方或开方，或者幅度的裁剪版本。</li>
+<li>Dalal和Triggs发现在人的检测实验中，把方向分为 <strong>9个通道(bin)</strong> 效果最好</li>
+</ul>
+<h3 id="Normalization-and-Descriptor-Blocks"><a href="#Normalization-and-Descriptor-Blocks" class="headerlink" title="Normalization and Descriptor Blocks"></a>Normalization and Descriptor Blocks</h3><ul>
+<li>由于照明的局部变化和前景-背景对比度，梯度强度在可以在很宽范围内变化。所以梯度强度必须要局部地归一化，这需要把方格(cells)集结成更大、在空间上连结的区()</li>
+<li><strong>有效的局部对比度归一化</strong> 对于良好的性能是必不可少的。</li>
+<li>我们评估了多种不同的 <strong>归一化schemes(normalization schemes)</strong> ，他们大多数都是基于将单元格（cells）分组成更大的空间块（spatial blocks）<em>  </em>并且对比地单独对每个块进行归一化。</li>
+<li><strong>最终描述符</strong> 是来自检测窗口中的所有块的归一化单元响应的所有分量的 <strong>向量</strong> 。</li>
+<li><p>R-HOG：R-HOG块和SIFT描述符有许多相似之处，但是他们用途十分不同。</p>
+<ul>
+<li><p>R-HOG跟SIFT描述器看起来很相似，但他们的不同之处是：</p>
+<ul>
+<li>R-HOG是在单一尺度下、密集的网格内、没有对方向排序的情况下被计算出来；</li>
+<li>而SIFT描述器是在多尺度下、稀疏的图像关键点上、对方向排序的情况下被计算出来。</li>
+<li>R-HOG是各区间被组合起来用于对空域信息进行编码，而SIFT的各描述器是单独使用的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>它们在密集网格中以单个尺度计算而没有主要取向对准，并且用作隐式地去编码相对于检测窗口的空间位置的较大代码矢量的一部分，而SIFT在稀疏集合的 <strong>尺度不变关键点处</strong> 被计算，旋转以对准它们的主导方向，并单独使用。</p>
+</li>
+<li>SIFT被优化用于稀疏宽基线匹配，R-HOG用于空间形式的密集鲁棒编码。</li>
+<li><p>R-HOG区块一般来说是多个方格子组成的，由三个参数表示：</p>
+<ul>
+<li>每个区块(block)有多少方格(cell)、</li>
+<li>每个方格(cell)有几个像素(pixel)、</li>
+<li>每个方格(cell)直方图有多少频道(bin)。</li>
+</ul>
+</li>
+<li><p>对于人体检测，3x3的单元块，6x6的像素单元块儿表现最好，同时直方图是9通道。</p>
+</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfhlpopj30ck095gmg.jpg" alt=""></p>
+<ul>
+<li><p>当其太小（1×1单元块，即，单独取向上的归一化）时，有价值的空间信息被抑制。</p>
+</li>
+<li><p>在对直方图做处理之前，给每个区间加一个高斯空域窗口是非常必要的，因为这样可以降低边缘的周围像素点的权重。</p>
+</li>
+<li><p>C-HOG</p>
+<ul>
+<li>每个空间单元包含梯度加权取向单元的堆叠而不是单个取向无关的边缘计数。</li>
+<li>对数极坐标网格最初是由允许附近结构的精细编码与较宽上下文的粗略编码相结合的思想，以及从灵长类动物的 <strong>视野</strong> 到 <strong>V1皮层</strong> 的变换是 <strong>对数的</strong></li>
+<li>然而，具有非常少的径向箱的小描述符反而能给出最好的性能，因此在实践中 <strong>几乎没有不均匀性或上下文</strong> 。</li>
+<li>我们评估了C-HOG几何的两个变体，一个具有 <strong>单个圆形中心细胞</strong> （类似于[14]的GLOH特征），以及中心细胞被分成 <strong>角形扇区的形状上下文</strong> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfkf2vgj302604a0sn.jpg" alt=""></p>
+<ul>
+<li><p>C-HOG的4个参数：</p>
+<ul>
+<li><p>the numbers of angular(角度盒子的个数）；</p>
+</li>
+<li><p>the numbers of radias(半径盒子个数)</p>
+</li>
+<li>the radius of the central bin in pixels（中心仓的半径（以像素为单位））</li>
+<li>the expansion factor for subsequent (半径的伸展因子）</li>
+</ul>
+</li>
+<li><p>为了良好的性能，最佳的参数设置为：4个角度盒子、2个半径盒子、中心盒子半径为4个像素、伸展因子为2</p>
+</li>
+<li><p>4像素是中央bin的最佳半径，但3和5给出类似的结果。</p>
+</li>
+<li><p>C-HOG看起来很像基于形状上下文（英语：Shape context）的方法，但不同之处是：C-HOG的区间中包含的细胞单元有多个方向通道，而基于形状上下文的方法仅仅只用到了一个单一的边缘存在数。[4]</p>
+</li>
+<li><p>Block Normalization schemes：引入v表示一个还没有被归一化的向量，它包含了给定区间（block）的所有直方图信息。vk 表示 v 的 k 阶范数，这里的 k={1,2}。用 e 表示一个很小的常数。一共4种不同的块规范化schemes</p>
+<ul>
+<li><p>L2-morm,<br><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrfgn4coj305l00tq2t.jpg" alt=""></p>
+</li>
+<li><p>L2-Hys, 它可以通过先进行L2-norm，对结果进行截短（clipping），然后再重新归一化得到。</p>
+</li>
+<li><p>L1-norm,<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrfltceqj304m00ndfp.jpg" alt=""></p>
+</li>
+<li><p>L1-sqrt,L1-norm followed by square root<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrfl4bwqj305d00r0sm.jpg" alt=""></p>
+</li>
+<li><p>作者发现：采用L2-Hys, L2-norm, 和 L1-sqrt方式所取得的效果是一样的，L1-norm稍微表现出一点点不可靠性。</p>
+</li>
+</ul>
+</li>
+<li><p>Centre-surround normalization.</p>
+</li>
+</ul>
+<h3 id="Detector-Window-and-Context"><a href="#Detector-Window-and-Context" class="headerlink" title="Detector Window and Context"></a>Detector Window and Context</h3><h3 id="Classifier"><a href="#Classifier" class="headerlink" title="Classifier"></a>Classifier</h3><p>最后一步就是把提取的HOG特征输入到SVM分类器中，寻找一个最优超平面作为决策函数。作者采用的方法是：使用免费的SVMLight软件包加上HOG分类器来寻找测试图像中的行人。</p>
+<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><ul>
+<li>在甲酸梯度前进行任何程度的平滑处理都会毁掉HOG的结果，因为许多可供的图像信息都是从细尺度的突出边界形成的。</li>
+<li>详单，梯度应该在当前金字塔层的最细可供尺度上被计算，修改或者用于方向投票并且只有在那之后在模糊空间。</li>
+<li>其次，强的局部对比正常化对于良好的结果至关重要，传统的中心环绕样式方案不是最好的选择。</li>
+<li>更好的结果可以通过相对于不同的局部支持对每个元素（边缘，单元）进行几次标准化，并将结果作为独立信号来实现。</li>
+</ul>
+<h2 id="Summary-and-Conclusions"><a href="#Summary-and-Conclusions" class="headerlink" title="Summary and Conclusions"></a>Summary and Conclusions</h2><ul>
+<li><p>我们研究了各种描述符参数的影响，并得出结论，在重叠描述符块中的</p>
+<ul>
+<li>精细尺度梯度，</li>
+<li>精细定向binning，</li>
+<li>相对粗糙的空间binning</li>
+<li>高质量局部对比度归一化 对于良好的性能都是重要的。</li>
+</ul>
+</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3084343215/" data-id="cjifprjec000ay768i13nxum8" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3084343215/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Pedestrian-Detection/">Pedestrian Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行人检测/">行人检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/783616645/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/2735857030/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">行人检测论文笔记：Fast Feature Pyramids for Object Detection?</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/3084343215/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

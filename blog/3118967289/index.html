@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>深度学习论文笔记：SSD | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="知识点
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习论文笔记：SSD">
+<meta property="og:url" content="http://jacobkong.github.io/blog/3118967289/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="知识点
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcjw1fcqyi2ogdnj30bj03l3yr.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcqyjitcw7j30eh01kjrg.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcjw1fcr0sa2183j308k0190sn.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcjw1fcr148r96xj30e70563zd.jpg">
+<meta property="og:updated_time" content="2017-02-16T02:30:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习论文笔记：SSD">
+<meta name="twitter:description" content="知识点
+Jaccard overlap, Jaccard similarity:Jaccard coefficient:
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。所以Jaccard overlap其实就是IoU。">
+<meta name="twitter:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-深度学习论文笔记：SSD" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      深度学习论文笔记：SSD
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-13T09:53:54.000Z" itemprop="datePublished">Feb 13, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。<br><strong>所以Jaccard overlap其实就是IoU。</strong><a id="more"></a>
+</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>SSD: 利用单个深度神经网络的目标检测方法。将边界框的输出空间离散化为一组默认框，在每个feature map位置上有着不同的宽高比和尺度。</li>
+<li>在预测的时候，网络针对每个默认框中的每个存在的对象类别产生分数，并且对框的进行调整以更好地匹配对象形状。</li>
+<li><strong>在多尺度图像处理方面</strong>，网络组合来自具有不同分辨率的多个feature map的预测，以自然地处理各种尺寸的对象。</li>
+<li>相比于基于object proposal的方法，SSD是简单地，因为它能够<strong>完全消除</strong>proposal generation和后续的<strong>像素或者特征重冲采样阶段</strong>，所有的计算都封装在单独的网络中。</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>目前的目标检测系统是以下方法的变体：假设边界框（bounding box），对每个框进行像素或特征重取样，采用高质量分类器。</li>
+<li>评估速度方法：<strong>SPF (seconds per frame)</strong>.</li>
+<li>提出第一个基于深度网络的不需要为BB进行resample pixels or features的目标检测器，并能够同样达到高准确率。</li>
+<li>本论文的贡献（具体看论文）：<ul>
+<li>引入了SSD。</li>
+<li>SSD的核心。</li>
+<li>为了实现高检测准确率，引入了在不同尺度和横纵比的feature maps上进行预测。</li>
+<li>End-to-end training 以及高准确率，机试在低分辨率图片。</li>
+<li>在PASCAL VOC、COCO和ILSVRC上进行试验，具有很强的竞争力。</li>
+</ul>
+</li>
+</ul>
+<h2 id="The-Single-Shot-Detector-SSD"><a href="#The-Single-Shot-Detector-SSD" class="headerlink" title="The Single Shot Detector (SSD)"></a>The Single Shot Detector (SSD)</h2><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><ul>
+<li>基于前向卷积神经网络，产生固定尺寸的BB集，以及这些BB中存在物体的分数，之后跟随者一个非极大值抑制步骤来产生最终检测。</li>
+<li><p>网络前面的几层是基于标准的用于产生高质量图像分类的架构，我们成为<strong>基础网络</strong>。我们给网络然后添加了<strong>辅助的结构</strong>来产生检测结构。辅助网络具备以下关键特征：</p>
+<ul>
+<li><p><strong>用于检测的多尺寸特征图。</strong>在基础网络后面<strong>添加额外几个卷积层</strong>，在尺寸上逐层递减，从而能够在不同尺寸上检测。（Overfeat和YOLO都只是在单独尺寸的feature map上进行操作。）</p>
+</li>
+<li><p><strong>用来预测的卷积预测器</strong>（Convolutional predictors）。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fcq4bw59jtj30j109i3zs.jpg" alt=""></p>
+</li>
+<li><p><strong>默认的boxes和aspect ratios。</strong>我们将一组默认边界框与每个feature map单元关联，用于网络顶部的多个特征映射。在每个feature map单元格中，我们预测相对于单元格中的默认框形状的偏移，以及指示每个框中存在类实例的每类分数。（本论文中的default boxes类似于Faster R-CNN中的anchor boxes，然而我们将他用于不同分辨率的几个feature maps中）</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1fcp21vqfpgj30le0ey0xb.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li><p>训练SSD和训练使用region proposals的典型检测器之间的<strong>关键区别是</strong>：ground truth信息需要分配给固定的检测器输出集合中的特定输出。</p>
+</li>
+<li><p>训练涉及到：</p>
+<ul>
+<li>choosing the set of default boxes and scales for detection。</li>
+<li>hard negative mining。</li>
+<li>data augmentation strategies（数据增加策略）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Matching-strategy"><a href="#Matching-strategy" class="headerlink" title="Matching strategy"></a><strong>Matching strategy</strong></h4><p>在训练过程中，对于每一个ground truth，我们都从默认框中选择每个不同的位置、aspect ratio、scale的bounding boxes。首先匹配最好的jaccard overlap的default box（类似于MultiBox），但与MultiBox不同的是，我们然后匹配default box与任何ground truth，只要jaccard overlap高于阈值（0.5）。<strong>这样简化了学习问题。</strong></p>
+<h4 id="Training-objective"><a href="#Training-objective" class="headerlink" title="Training objective"></a><strong>Training objective</strong></h4><p>整体的代价函数是localization loss和confidence loss之和：</p>
+<script type="math/tex; mode=display">
+L(x,c,l,g)=\frac{1}{N}(L_{conf}(x,c)+\alpha L_{loc}(x,l,g))</script><ul>
+<li><p>N是匹配的default boxes的数量，N=0时，loss=0。</p>
+</li>
+<li><p>localization loss是predicted box和ground truth box之间的<strong>Smooth L1 loss</strong>（类似于Faster R-CNN）。我们预测default box的中心$(cx,cy)$，以及宽度$(w)$和长度$(h)$。</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcjw1fcqyi2ogdnj30bj03l3yr.jpg" alt=""></p>
+</li>
+<li><p>confidence loss是多个类confidence$(c)$之间的<strong>softmax loss</strong>。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1fcqyjitcw7j30eh01kjrg.jpg" alt=""></p>
+</li>
+<li><p>权值$\alpha$通过交叉验证设为1。</p>
+</li>
+</ul>
+<h4 id="Choosing-scales-and-aspect-ratios-for-default-boxes"><a href="#Choosing-scales-and-aspect-ratios-for-default-boxes" class="headerlink" title="Choosing scales and aspect ratios for default boxes"></a>Choosing scales and aspect ratios for default boxes</h4><ul>
+<li><p>不同于将照片处理为不同尺寸再结合结果的方法，本论文通过利用单个神经网络中不同层的feature maps，可以达到同样的效果，同时可以在所有尺寸中共享权值。</p>
+</li>
+<li><p><strong>利用较低层的feature maps可以提高semantic segmentation质量，应为较低层往往可以捕捉到更精细的细节。</strong></p>
+</li>
+<li><p>我们同时使用较低和较高层的feature maps来进行检测。</p>
+</li>
+<li><p>网络中不同层的feature maps有着不同的接受域的尺寸。</p>
+</li>
+<li><p>假设我们想要使用m个feature maps用来检测，则每个feature map的default boxes的scale可以这样计算：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcjw1fcr0sa2183j308k0190sn.jpg" alt=""></p>
+</li>
+<li><p>通过结合在许多feature maps上所有位置上的所有的有着不同scale和aspect ratio的default boxes，我们可以产生对不同物体大小和形状的各种预测。</p>
+</li>
+<li><p>如下图中，狗在8x8的feature map中没有匹配的default box，因此在训练中会被作为负样本，但是在4x4的feature map中有着匹配的feature map。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcjw1fcr148r96xj30e70563zd.jpg" alt=""></p>
+</li>
+</ul>
+<h4 id="Hard-negative-mining"><a href="#Hard-negative-mining" class="headerlink" title="Hard negative mining"></a>Hard negative mining</h4><ul>
+<li>通过匹配阶段后，default boxes中会产生大量的negatives，尤其是当可能的default boxes数量非常大时。<strong>这导致positive和negative时间严重的不平衡。</strong></li>
+<li>我们将negative examples的default boxes通过其最高的confidence loss进行排序，然后选择较高的几个，使negative examples和positive examples之间的比例保持在3:1之间。<strong>这样会更快的优化和更稳定的训练。</strong></li>
+</ul>
+<h2 id="Experimental-Results"><a href="#Experimental-Results" class="headerlink" title="Experimental Results"></a>Experimental Results</h2><ul>
+<li>所有的实验都是基于VGG16。</li>
+<li>将fc6和fc7转化为卷积层，从fc6和fc7中取样子参数。</li>
+<li>将pool5从2x2-s2转化为3x3-s1。</li>
+<li>使用a trous algorithm来填补“holes”。</li>
+<li>移去了所有的dropout层和fc8层。</li>
+<li>用SGD进行微调。</li>
+<li>学习率$10^{-3}$，动量0.9，weight decay是0.0005，batch size是32.</li>
+</ul>
+<h3 id="PASCAL-VOC2007"><a href="#PASCAL-VOC2007" class="headerlink" title="PASCAL VOC2007"></a>PASCAL VOC2007</h3><ul>
+<li><strong>“xavier” method</strong>来初始化新加入的层的参数。</li>
+<li>通过detection analysis tool分析后，显示SSD有着<strong>更少的localization错误</strong>，因为其能够直接去学习regress物体的形状，并分类，而非使用两个互相解耦的步骤。</li>
+<li>然而，SSD对于相似的物体会有更多的混淆，特别是animals，一部分原因。</li>
+<li>SSD对bounding boxes尺寸是十分敏感的。提升输入尺寸可能会提升小物体检测，但依旧有许多空间提升。</li>
+</ul>
+<h3 id="Model-analysis"><a href="#Model-analysis" class="headerlink" title="Model analysis"></a>Model analysis</h3><ul>
+<li>Data augmentation很重要。</li>
+<li>更多的default boxes的形状可能会更好。</li>
+<li>Atrous is faster：如果不使用更改后的VGG-16，虽然结果一样，但是速度回降低20%。</li>
+<li>不同分辨率中多个输出层会更好。<strong>SSD的主要贡献</strong>是在不同输出层上使用不同尺度的默认框。</li>
+</ul>
+<h3 id="PASCAL-VOC2012"><a href="#PASCAL-VOC2012" class="headerlink" title="PASCAL VOC2012"></a>PASCAL VOC2012</h3><ul>
+<li>和PASCAL VOC2007一样的实验设置。</li>
+<li>在2012 trainval+2007 trainval+2007 test上进行训练，在2012 test上进行测试。</li>
+</ul>
+<h3 id="COCO"><a href="#COCO" class="headerlink" title="COCO"></a>COCO</h3><ul>
+<li>COCO中的物体比PASCAL VOC中的物体小，所以我们在所有层上使用更小的default boxes</li>
+</ul>
+<h3 id="Data-Augmentation-for-Small-Object-Accuracy"><a href="#Data-Augmentation-for-Small-Object-Accuracy" class="headerlink" title="Data Augmentation for Small Object Accuracy"></a>Data Augmentation for Small Object Accuracy</h3><ul>
+<li>对SSD来说，对小物体分类的任务相对Faster R-CNN来说会更难。</li>
+<li>Data augmentation对于特高性能是十分显著的，尤其是小数据及。</li>
+<li>改进SSD的另一种方法是设计更好的平铺默认框（tiling of default boxes），使其位置和尺度更好地与特征图上每个位置的接收场对准。</li>
+</ul>
+<h3 id="Inference-time"><a href="#Inference-time" class="headerlink" title="Inference time"></a>Inference time</h3><ul>
+<li>考虑到从我们的方法生成的大量框，有必要在推理期间有效地执行非最大抑制（nms）。</li>
+<li>通过使用0.01的限制阈值，我们可以过滤大多数bounding boxes。 然后我们应用nms，每个类别的jaccard重叠0.45，并保持每个图像前200个检测。</li>
+<li>80%的前向传递时间被花费在了base network，所以使用一个更快的base network可以提高速度。</li>
+</ul>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li>有两种已建立的用于图像中的对象检测的方法类别，<strong>一种基于滑动窗口，另一种基于region proposal classification。</strong></li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>我们模型的一个<strong>关键特性</strong>是使用多尺度卷积边界框输出附加到网络顶部的多个特征图。</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3118967289/" data-id="cjifprjgg001iy768jiyvtxjt" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3118967289/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/3678248031/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">目标检测论文笔记：R-FCN</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/2102833929/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">深度学习论文笔记：YOLO9000</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/3118967289/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

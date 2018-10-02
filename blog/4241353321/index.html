@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Abstract
+mAP: mean average precision，平均准确度
+我们的方法结合两个关键的见解：
+
+第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
+<meta property="og:url" content="http://jacobkong.github.io/blog/4241353321/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="Abstract
+mAP: mean average precision，平均准确度
+我们的方法结合两个关键的见解：
+
+第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
+<meta property="og:updated_time" content="2017-01-28T09:00:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation">
+<meta name="twitter:description" content="Abstract
+mAP: mean average precision，平均准确度
+我们的方法结合两个关键的见解：
+
+第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。
+当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-05T22:32:24.000Z" itemprop="datePublished">Dec 06, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>mAP: mean average precision，平均准确度</li>
+<li><p>我们的方法结合两个关键的见解：</p>
+<ul>
+<li>第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。</li>
+<li>当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>关于各种视觉识别任务的上一个十年的进展主要基于SIFT和HOG的使用</li>
+<li><p>实现这个结果需要解决两个问题：</p>
+<ul>
+<li>利用深度网络将对象定位</li>
+<li>仅利用少量的注释检测数据来训练训练高容量模型。</li>
+</ul>
+</li>
+<li>我们通过在“使用区域识别”范例内操作，来解决CNN定位问题</li>
+<li>在测试时，我们的方法为输入图像生成大约2000个类别无关区域提案，使用CNN从每个proposal中提取固定长度的特征向量，然后使用类别特定的线性SVM对每个区域进行分类。</li>
+<li>检测中面临的第二个挑战是标记的数据不足，目前可用的数据数量不足以训练大型CNN。这个问题的常规解决方案是使用无监督预训练，然后是监督 fine-tuning。</li>
+<li>我们发现，对于CNN，有很大比例的参数（94%）可以在检测精度的适度降低的情况下被去除。</li>
+<li>我们证明一个简单的 <strong>边界框回归方法（bounding box regression）</strong> 显着减少误定位，这是主要的误差模式(error mode)。</li>
+<li>在开发技术细节之前，我们注意到，因为R-CNN在是区域上操作，所以很自然将其扩展到语义分割（semantic segmentation）的任务。</li>
+</ul>
+<h2 id="Object-detection-with-R-CNN"><a href="#Object-detection-with-R-CNN" class="headerlink" title="Object detection with R-CNN"></a>Object detection with R-CNN</h2><ul>
+<li><p>我们的对象检测系统由三个模块组成:</p>
+<ul>
+<li>首先生成类别独立(category-independent)区域proposal。 这些proposal定义了可用于检测器的候选检测集合。</li>
+<li>第二个模块是大卷积神经网络，从每个区域提取固定长度的特征向量。</li>
+<li>第三个模块是一类特定类型的线性SVM。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Module-design"><a href="#Module-design" class="headerlink" title="Module design"></a>Module design</h3><ul>
+<li><p>Region proposals: 目前有很多用来生成category-independent的region proposal的方法：</p>
+<ul>
+<li>Objectness</li>
+<li>selective search</li>
+<li>category-independent object proposals</li>
+<li>constrained parametric min-cuts (CPMC)</li>
+<li>multi-scale combinatorial grouping</li>
+<li>detect mitotic cells by applying a CNN to regularly-spaced square crops, which are a special case of region proposals.(通过将CNN应用于规则间隔的方形作物来检测有丝分裂细胞，这是区域提案的特殊情况。)</li>
+</ul>
+</li>
+<li><p>虽然R-CNN与特定区域建议方法无关，但我们使用选择性搜索(selective search)来实现与先前检测工作的受控比较</p>
+</li>
+<li><p>Feature extraction:我们从每个区域提案中提取一个4096维特征向量，特征通过前向传播对227×227 RGB图像通过 <strong>五个卷积层和两个完全连接的层</strong> 计算。</p>
+</li>
+<li>无论候选区域的大小或宽高比如何，我们都会将其周围的紧密边界框中的所有像素装到所需的大小(227x227像素尺寸)。</li>
+</ul>
+<h3 id="Test-time-detection"><a href="#Test-time-detection" class="headerlink" title="Test-time detection"></a>Test-time detection</h3><ul>
+<li>在测试时，我们对测试图像运行选择性搜索以提取大约2000个区域建议（我们在所有实验中使用选择性搜索的“快速模式（fast mode）”）。</li>
+<li>给定图像中的所有得分区域，我们应用贪心非最大抑制(greedy non-maximum suppression)（对于每个类独立地），如果与的饭较高的区域有重叠，且IoU大于学习到的阈值，则该拒绝区域。</li>
+<li><p>Run-time analysis.两个属性使检测更高校。</p>
+<ul>
+<li>首先，所有CNN参数在所有类别中共享。</li>
+<li>第二，CNN计算的特征向量与其他常见方法（例如具有视觉词袋编码的空间棱金字塔）相比是 <strong>低维的</strong> 。</li>
+<li>唯一的类特定(class-specific)计算是特征和SVM权重之间的点积和非最大抑制。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><ul>
+<li>除了用随机初始化的21路分类层（对于20个VOC类加上背景）替换CNN的ImageNet特定的1000路分类层之外，CNN架构是不变的。</li>
+<li>我们将所有region proposal与一个ground-truth重叠为IoU&gt;0.5，作为该框类的阳性，其余作为阴性。</li>
+<li>我们以0.001的学习速率（初始预训练速率的1/10）开始SGD，这允许精细调整进行，而不是破坏初始化。</li>
+<li>一旦提取特征并应用训练标签，我们对每个类优化一个线性SVM。</li>
+<li>由于训练数据太大，无法记忆，我们采用标准 <strong>hard negative mining method</strong> 。</li>
+</ul>
+<h3 id="Results-on-PASCAL-VOC-2010-12"><a href="#Results-on-PASCAL-VOC-2010-12" class="headerlink" title="Results on PASCAL VOC 2010-12"></a>Results on PASCAL VOC 2010-12</h3><h2 id="Visualization-ablation-and-modes-of-error"><a href="#Visualization-ablation-and-modes-of-error" class="headerlink" title="Visualization, ablation, and modes of error"></a>Visualization, ablation, and modes of error</h2><h3 id="Visualizing-learned-features"><a href="#Visualizing-learned-features" class="headerlink" title="Visualizing learned features"></a>Visualizing learned features</h3><ul>
+<li>pool-5，是网络第五个也是最后一个卷基层的max-pool层的输出。（是一个max-pooling层）</li>
+<li>The pool-5 feature map is 6 × 6 × 256 = 9216维。</li>
+<li>忽略边界效应，每个pool-5单元在原始227×227像素输入中具有195×195像素的接收场。</li>
+</ul>
+<h3 id="Ablation-studies"><a href="#Ablation-studies" class="headerlink" title="Ablation studies"></a>Ablation studies</h3><ul>
+<li>Fc6与pool-5全连接，为了计算特征，他它将 <strong>4096×9216的权重矩阵乘以pool-5的feature map</strong> （重新形成为9216维矢量），然后添加偏差矢量。</li>
+<li>Fc7是网络的最后一层，通过将由fc 6计算的特征乘以 <strong>4096×4096</strong> 权重矩阵，并类似地添加偏置矢量和应用半波整流来实现。</li>
+<li>大多数CNN的表示能力来自它的卷积层，而不是来自大得多的密集连接的层。</li>
+<li>All R-CNN variants strongly outperform the three DPM baselines</li>
+</ul>
+<h3 id="Detection-error-analysis"><a href="#Detection-error-analysis" class="headerlink" title="Detection error analysis"></a>Detection error analysis</h3><h3 id="Bounding-box-regression"><a href="#Bounding-box-regression" class="headerlink" title="Bounding box regression"></a>Bounding box regression</h3><h2 id="Semantic-segmentation"><a href="#Semantic-segmentation" class="headerlink" title="Semantic segmentation"></a>Semantic segmentation</h2><ul>
+<li>full</li>
+<li>fg</li>
+<li>full+fg</li>
+<li>The fg strategy slightly outperforms full, indicating that the masked region shape provides a stronger signal, matching our intuition.</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>之前最好的性能系统是将多个低级图像特征与来自对象检测器和场景分类器的高级上下文组合在一起的复杂集合。</li>
+<li>本文提出了一个简单和可扩展的对象检测算法，与PASCAL VOC 2012上的最佳以前的结果相比提供30％的相对改进。</li>
+<li>我们推测“supervised pre-training/domain-speciﬁc ﬁne-tuning”范例将对各种数据缺乏的视觉问题高度有效。</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/4241353321/" data-id="cjifprjf1000ry768kdcko31i" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/4241353321/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/3054155989/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/2553947436/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/4241353321/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

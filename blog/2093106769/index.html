@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作 | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作">
+<meta property="og:url" content="http://jacobkong.github.io/blog/2093106769/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNbRwly1fctnwv48gzj30h701waa0.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tNbRwly1fctobmg8rkj302f03vjrc.jpg">
+<meta property="og:updated_time" content="2017-02-28T06:55:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作">
+<meta name="twitter:description" content="前言Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得re">
+<meta name="twitter:image" content="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      深度学习实践经验：用Faster R-CNN训练行人检测数据集Caltech——准备工作
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-01-15T22:32:24.000Z" itemprop="datePublished">Jan 16, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Faster R-CNN是Ross Girshick大神在Fast R-CNN基础上提出的又一个更加快速、更高mAP的用于目标检测的深度学习框架，它对Fast R-CNN进行的最主要的优化就是在Region Proposal阶段，引入了Region Proposal Network (RPN)来进行Region Proposal，同时可以达到和检测网络共享整个图片的卷积网络特征的目标，使得region proposal几乎是<strong>cost free</strong>的。</p>
+<p>关于Faster R-CNN的详细介绍，可以参考我<a href="http://jacobkong.github.io/posts/3802700508/">上一篇博客</a>。</p>
+<p>Faster R-CNN的代码是开源的，有两个版本：<a href="https://github.com/ShaoqingRen/faster_rcnn" target="_blank" rel="external">MATLAB版本(<strong>faster_rcnn</strong>)</a>，<a href="https://github.com/rbgirshick/py-faster-rcnn" target="_blank" rel="external">Python版本(<strong>py-faster-rcnn</strong>)</a>。</p>
+<p>这里我主要使用的是Python版本，Python版本在测试期间会比MATLAB版本慢10%，因为Python layers中的一些操作是在CPU中执行的，但是准确率应该是差不多的。</p>
+<a id="more"></a>
+<h2 id="准备工作1——py-faster-rcnn的编译安装测试"><a href="#准备工作1——py-faster-rcnn的编译安装测试" class="headerlink" title="准备工作1——py-faster-rcnn的编译安装测试"></a>准备工作1——py-faster-rcnn的编译安装测试</h2><h3 id="py-faster-rcnn的编译安装"><a href="#py-faster-rcnn的编译安装" class="headerlink" title="py-faster-rcnn的编译安装"></a>py-faster-rcnn的编译安装</h3><ol>
+<li><p>克隆Faster R-CNN仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/rbgirshick/py-faster-rcnn.git</div></pre></td></tr></table></figure>
+<p>一定要加上<code>--recursive</code>标志，假设克隆后的文件夹名字叫<code>py-faster-rcnn</code></p>
+</li>
+<li><p>编译Cython模块：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> py-faster-rcnn/lib</div><div class="line">make</div></pre></td></tr></table></figure>
+</li>
+<li><p>编译里面的Caffe和pycaffe：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> py-faster-rcnn/caffe-fast-rcnn</div><div class="line"><span class="comment"># 按照编译Caffe的方法，进行编译</span></div><div class="line"><span class="comment"># 注意Makefile.config的修改，这里不再赘述Caffe的安装</span></div><div class="line"><span class="comment"># 编译</span></div><div class="line">make -j8 &amp;&amp; make pycaffe</div></pre></td></tr></table></figure>
+</li>
+<li><p>这里贴上我的<code>Makefile.config</code>文件代码，根据你的情况进行相应修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## Refer to http://caffe.berkeleyvision.org/installation.html</span></div><div class="line"><span class="comment"># Contributions simplifying and improving our build system are welcome!</span></div><div class="line"></div><div class="line"><span class="comment"># cuDNN acceleration switch (uncomment to build with cuDNN).</span></div><div class="line">USE_CUDNN := 1</div><div class="line"></div><div class="line"><span class="comment"># CPU-only switch (uncomment to build without GPU support).</span></div><div class="line"><span class="comment"># CPU_ONLY := 1</span></div><div class="line"></div><div class="line"><span class="comment"># uncomment to disable IO dependencies and corresponding data layers</span></div><div class="line"><span class="comment"># USE_OPENCV := 0</span></div><div class="line"><span class="comment"># USE_LEVELDB := 0</span></div><div class="line"><span class="comment"># USE_LMDB := 0</span></div><div class="line"></div><div class="line"><span class="comment"># uncomment to allow MDB_NOLOCK when reading LMDB files (only if necessary)</span></div><div class="line"><span class="comment"># You should not set this flag if you will be reading LMDBs with any</span></div><div class="line"><span class="comment"># possibility of simultaneous read and write</span></div><div class="line"><span class="comment"># ALLOW_LMDB_NOLOCK := 1</span></div><div class="line"></div><div class="line"><span class="comment"># Uncomment if you're using OpenCV 3</span></div><div class="line">OPENCV_VERSION := 3</div><div class="line"></div><div class="line"><span class="comment"># To customize your choice of compiler, uncomment and set the following.</span></div><div class="line"><span class="comment"># N.B. the default for Linux is g++ and the default for OSX is clang++</span></div><div class="line"><span class="comment"># CUSTOM_CXX := g++</span></div><div class="line"></div><div class="line"><span class="comment"># CUDA directory contains bin/ and lib/ directories that we need.</span></div><div class="line">CUDA_DIR := /usr/<span class="built_in">local</span>/cuda</div><div class="line"><span class="comment"># On Ubuntu 14.04, if cuda tools are installed via</span></div><div class="line"><span class="comment"># "sudo apt-get install nvidia-cuda-toolkit" then use this instead:</span></div><div class="line"><span class="comment"># CUDA_DIR := /usr</span></div><div class="line"></div><div class="line"><span class="comment"># CUDA architecture setting: going with all of them.</span></div><div class="line"><span class="comment"># For CUDA &lt; 6.0, comment the *_50 lines for compatibility.</span></div><div class="line">CUDA_ARCH := -gencode arch=compute_20,code=sm_20 \</div><div class="line">-gencode arch=compute_20,code=sm_21 \</div><div class="line">-gencode arch=compute_30,code=sm_30 \</div><div class="line">-gencode arch=compute_35,code=sm_35 \</div><div class="line">-gencode arch=compute_50,code=sm_50 \</div><div class="line">-gencode arch=compute_50,code=compute_50</div><div class="line"></div><div class="line"><span class="comment"># BLAS choice:</span></div><div class="line"><span class="comment"># atlas for ATLAS (default)</span></div><div class="line"><span class="comment"># mkl for MKL</span></div><div class="line"><span class="comment"># open for OpenBlas</span></div><div class="line">BLAS :=mkl</div><div class="line"><span class="comment"># Custom (MKL/ATLAS/OpenBLAS) include and lib directories.</span></div><div class="line"><span class="comment"># Leave commented to accept the defaults for your choice of BLAS</span></div><div class="line"><span class="comment"># (which should work)!</span></div><div class="line"><span class="comment"># BLAS_INCLUDE := /path/to/your/blas</span></div><div class="line"><span class="comment"># BLAS_LIB := /path/to/your/blas</span></div><div class="line"></div><div class="line"><span class="comment"># Homebrew puts openblas in a directory that is not on the standard search path</span></div><div class="line"><span class="comment"># BLAS_INCLUDE := $(shell brew --prefix openblas)/include</span></div><div class="line"><span class="comment"># BLAS_LIB := $(shell brew --prefix openblas)/lib</span></div><div class="line"></div><div class="line"><span class="comment"># This is required only if you will compile the matlab interface.</span></div><div class="line"><span class="comment"># MATLAB directory should contain the mex binary in /bin.</span></div><div class="line">MATLAB_DIR := /usr/<span class="built_in">local</span>/MATLAB/R2016b</div><div class="line"><span class="comment"># MATLAB_DIR := /Applications/MATLAB_R2012b.app</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">NOTE:</span> this is required only if you will compile the python interface.</span></div><div class="line"><span class="comment"># We need to be able to find Python.h and numpy/arrayobject.h.</span></div><div class="line"><span class="comment"># PYTHON_INCLUDE := /usr/include/python2.7 \</span></div><div class="line">/usr/lib/python2.7/dist-packages/numpy/core/include</div><div class="line"><span class="comment"># Anaconda Python distribution is quite popular. Include path:</span></div><div class="line"><span class="comment"># Verify anaconda location, sometimes it's in root.</span></div><div class="line">ANACONDA_HOME := $(HOME)/anaconda</div><div class="line">PYTHON_INCLUDE := $(ANACONDA_HOME)/include \</div><div class="line">$(ANACONDA_HOME)/include/python2.7 \</div><div class="line">$(ANACONDA_HOME)/lib/python2.7/site-packages/numpy/core/include \</div><div class="line">$ /usr/include/python2.7</div><div class="line"><span class="comment"># Uncomment to use Python 3 (default is Python 2)</span></div><div class="line"><span class="comment"># PYTHON_LIBRARIES := boost_python3 python3.5m</span></div><div class="line"><span class="comment"># PYTHON_INCLUDE := /usr/include/python3.5m \</span></div><div class="line"><span class="comment"># /usr/lib/python3.5/dist-packages/numpy/core/include</span></div><div class="line"></div><div class="line"><span class="comment"># We need to be able to find libpythonX.X.so or .dylib.</span></div><div class="line"><span class="comment"># PYTHON_LIB := /usr/lib</span></div><div class="line">PYTHON_LIB := $(ANACONDA_HOME)/lib</div><div class="line"></div><div class="line"><span class="comment"># Homebrew installs numpy in a non standard path (keg only)</span></div><div class="line"><span class="comment"># PYTHON_INCLUDE += $(dir $(shell python -c 'import numpy.core; print(numpy.core.__file__)'))/include</span></div><div class="line"><span class="comment"># PYTHON_LIB += $(shell brew --prefix numpy)/lib</span></div><div class="line"></div><div class="line"><span class="comment"># Uncomment to support layers written in Python (will link against Python libs)</span></div><div class="line">WITH_PYTHON_LAYER := 1</div><div class="line"></div><div class="line"><span class="comment"># Whatever else you find you need goes here.</span></div><div class="line"><span class="comment"># INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include</span></div><div class="line"><span class="comment"># LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib</span></div><div class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/<span class="built_in">local</span>/include /usr/include/hdf5/serial </div><div class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/<span class="built_in">local</span>/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</div><div class="line"></div><div class="line"><span class="comment"># If Homebrew is installed at a non standard location (for example your home directory) and you use it for general dependencies</span></div><div class="line"><span class="comment"># INCLUDE_DIRS += $(shell brew --prefix)/include</span></div><div class="line"><span class="comment"># LIBRARY_DIRS += $(shell brew --prefix)/lib</span></div><div class="line"></div><div class="line"><span class="comment"># Uncomment to use `pkg-config` to specify OpenCV library paths.</span></div><div class="line"><span class="comment"># (Usually not necessary -- OpenCV libraries are normally installed in one of the above $LIBRARY_DIRS.)</span></div><div class="line"><span class="comment"># USE_PKG_CONFIG := 1</span></div><div class="line"></div><div class="line"><span class="comment"># N.B. both build and distribute dirs are cleared on `make clean`</span></div><div class="line">BUILD_DIR := build</div><div class="line">DISTRIBUTE_DIR := distribute</div><div class="line"></div><div class="line"><span class="comment"># Uncomment for debugging. Does not work on OSX due to https://github.com/BVLC/caffe/issues/171</span></div><div class="line"><span class="comment"># DEBUG := 1</span></div><div class="line"></div><div class="line"><span class="comment"># The ID of the GPU that 'make runtest' will use to run unit tests.</span></div><div class="line">TEST_GPUID := 0</div><div class="line"></div><div class="line"><span class="comment"># enable pretty build (comment to see full commands)</span></div><div class="line">Q ?= @</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Demo运行"><a href="#Demo运行" class="headerlink" title="Demo运行"></a>Demo运行</h3><p>为了检验你的py-faster-rcnn是否成功安装，作者给出了一个demo，可以利用在PASCAL VOC2007数据集上体现训练好的模型，来进行demo的运行，步骤如下：</p>
+<ol>
+<li><p>下载预训练好的Faster R-CNN检测器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> py-faster-rcnn</div><div class="line">./data/scripts/fetch_faster_rcnn_models.sh</div></pre></td></tr></table></figure>
+<p>这条命令会自动下载名为<code>faster_rcnn_models.tgz</code>的文件，解压后会创建<code>data/faster_rcnn_models</code>文件夹，里面会有两个模型：</p>
+<ul>
+<li>ZF_faster_rcnn_final.caffemodel：在ZF网络模型下训练所得</li>
+<li>VGG16_faster_rcnn_final.caffemodel：在VGG16网络模型下训练所得。</li>
+</ul>
+</li>
+<li><p>运行demo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> py-faster-rcnn</div><div class="line">./tools/demo.py</div></pre></td></tr></table></figure>
+</li>
+<li><p>demo会检测5张图片，这5张图片放在<code>data/demo/</code>文件夹下，其中一张的检测结果如下：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwgy1fcthbwzgobj30gv0e0wh9.jpg" alt=""></p>
+</li>
+<li><p>至此如果上述过程没有出错，那么py-faster-rcnn算是成功编译安装。</p>
+</li>
+<li><p>若出现报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ImportError: /xx/xx/xx/py-faster-rcnn/tools/../lib/nms/cpu_nms.so: undefined symbol: PyFPE_jbuf</div></pre></td></tr></table></figure>
+<p>需要将<code>lib/fast_rcnn/nms_wrapper.py</code>文件中的<code>from nms.cpu_nms import cpu_nms</code>注释掉即可。</p>
+</li>
+</ol>
+<h2 id="准备工作2——Caltech数据集"><a href="#准备工作2——Caltech数据集" class="headerlink" title="准备工作2——Caltech数据集"></a>准备工作2——Caltech数据集</h2><p>由于Faster R-CNN的一部分实验是在PASCAL VOC2007数据集上进行的，所以要想用Faster R-CNN训练我们自己的数据集，首先应该搞清楚PASCAL VOC2007数据集中的目录、图片、标注格式，这样我们才能用自己的数据集制作出类似于PASCAL VOC2007类似的数据集，供Faster R-CNN来进行训练及测试。</p>
+<h3 id="获取PASCAL-VOC2007数据集"><a href="#获取PASCAL-VOC2007数据集" class="headerlink" title="获取PASCAL VOC2007数据集"></a>获取PASCAL VOC2007数据集</h3><p>这一部分不是必须的，如果你需要PASCAL VOC2007数据集，可以利用以下命令获取数据集，但<strong>我们下载VOC数据集的目的主要是观察他的文件结构和文件内容，以便于我们构建符合要求的自己的数据集。</strong></p>
+<ol>
+<li><p>创建一个专门用来存数据集的地方，假设是<code>$HOME/data</code>文件夹。</p>
+</li>
+<li><p>下载PASCAL VOC2007的训练、验证和测试数据集：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/data</div><div class="line">wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar</div><div class="line">wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载完后用以下命令解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar xvf VOCtrainval_06-Nov-2007.tar</div><div class="line">tar xvf VOCtest_06-Nov-2007.tar</div></pre></td></tr></table></figure>
+</li>
+<li><p>会得到如下文件结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$HOME</span>/data/VOCdevkit/                        <span class="comment"># 根文件夹</span></div><div class="line"><span class="variable">$HOME</span>/data/VOCdevkit/VOC2007                 <span class="comment"># VOC2007文件夹</span></div><div class="line"><span class="variable">$HOME</span>/data/VOCdevkit/VOC2007/Annotations     <span class="comment"># 标记文件夹</span></div><div class="line"><span class="variable">$HOME</span>/data/VOCdevkit/VOC2007/ImageSets       <span class="comment"># 供train.txt、test.txt、val.txt等文件存放的文件夹</span></div><div class="line"><span class="variable">$HOME</span>/data/VOCdevkit/VOC2007/JPEGImages      <span class="comment"># 存放图片文件夹</span></div><div class="line"><span class="comment"># ... 以及其他的文件夹及子文件夹 ...</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>创建快捷方式symlinks来连接到VOC数据集存放的地方：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> py-faster-rcnn/data</div><div class="line">ln <span class="_">-s</span> <span class="variable">$HOME</span>/data/VOCdevkit/ VOCdevkit</div></pre></td></tr></table></figure>
+<p>这里需要把<code>$HOME/data/VOCdevkit/</code>改为你存放<code>VOCdevkit</code>文件夹的路径</p>
+<p><strong>最好使用symlinks来在共享同一份数据集，防止数据集多处拷贝，占用空间。</strong></p>
+</li>
+<li><p>至此VOC数据集创建完毕。</p>
+</li>
+</ol>
+<h3 id="PASCAL-VOC数据集的分析"><a href="#PASCAL-VOC数据集的分析" class="headerlink" title="PASCAL VOC数据集的分析"></a>PASCAL VOC数据集的分析</h3><p>PASCAL VOC数据集的文件结构，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">└── VOCdevkit</div><div class="line">    └── VOC2007　</div><div class="line">        ├── Annotations　　</div><div class="line">        ├── ImageSets　　</div><div class="line">        │   ├── Layout　　</div><div class="line">        │   ├── Main　　</div><div class="line">        │   └── Segmentation　　</div><div class="line">        ├── JPEGImages　　</div><div class="line">        ├── SegmentationClass　　</div><div class="line">        └── SegmentationObject</div></pre></td></tr></table></figure>
+<h4 id="Annotations"><a href="#Annotations" class="headerlink" title="Annotations"></a>Annotations</h4><p>该文件夹主要用来存放图片标注（即为ground truth），文件是.xml格式，每张图片都有一个.xml文件与之对应。选取其中一个文件进行如下分析：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">annotation</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">folder</span>&gt;</span>VOC2007<span class="tag">&lt;/<span class="name">folder</span>&gt;</span> # 必须有，父文件夹的名称</div><div class="line">	<span class="tag">&lt;<span class="name">filename</span>&gt;</span>000005.jpg<span class="tag">&lt;/<span class="name">filename</span>&gt;</span>　#　必须有</div><div class="line">	<span class="tag">&lt;<span class="name">source</span>&gt;</span>　# 可有可无</div><div class="line">		<span class="tag">&lt;<span class="name">database</span>&gt;</span>The VOC2007 Database<span class="tag">&lt;/<span class="name">database</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">annotation</span>&gt;</span>PASCAL VOC2007<span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">image</span>&gt;</span>flickr<span class="tag">&lt;/<span class="name">image</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">flickrid</span>&gt;</span>325991873<span class="tag">&lt;/<span class="name">flickrid</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">owner</span>&gt;</span>　# 可有可无</div><div class="line">		<span class="tag">&lt;<span class="name">flickrid</span>&gt;</span>archintent louisville<span class="tag">&lt;/<span class="name">flickrid</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>?<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">owner</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">size</span>&gt;</span>　# 表示图像大小</div><div class="line">		<span class="tag">&lt;<span class="name">width</span>&gt;</span>500<span class="tag">&lt;/<span class="name">width</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">height</span>&gt;</span>375<span class="tag">&lt;/<span class="name">height</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">depth</span>&gt;</span>3<span class="tag">&lt;/<span class="name">depth</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">size</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">segmented</span>&gt;</span>0<span class="tag">&lt;/<span class="name">segmented</span>&gt;</span>　# 用于分割</div><div class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span>　# 目标信息，类别，bbox信息，图片中每个目标对应一个<span class="tag">&lt;<span class="name">object</span>&gt;</span>标签</div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>chair<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Rear<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>0<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>0<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>263<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>211<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>324<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>339<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">object</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>chair<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">pose</span>&gt;</span>Unspecified<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">truncated</span>&gt;</span>1<span class="tag">&lt;/<span class="name">truncated</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">difficult</span>&gt;</span>1<span class="tag">&lt;/<span class="name">difficult</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">bndbox</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">xmin</span>&gt;</span>5<span class="tag">&lt;/<span class="name">xmin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ymin</span>&gt;</span>244<span class="tag">&lt;/<span class="name">ymin</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">xmax</span>&gt;</span>67<span class="tag">&lt;/<span class="name">xmax</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">ymax</span>&gt;</span>374<span class="tag">&lt;/<span class="name">ymax</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">bndbox</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">object</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">annotation</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>需要注意的</strong>，对于我们自己准备的xml标记文件中，每个<code>&lt;object&gt;</code>标签中的<code>&lt;xmin&gt;</code>和<code>&lt;ymin&gt;</code>标签中所对应的坐标值最好大于0，千万不能为负数，否则在训练过程中会报错：<code>AssertionError: assert (boxes[:, 2]) &gt;= boxes[:, 0]).all()</code>，如下：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNbRwly1fctnwv48gzj30h701waa0.jpg" alt=""></p>
+<p>所以为了能够顺利训练，一定要仔细检查自己的xml文件中的左上角的坐标是否都为正。我被这个bug卡了一两天，最终把自己标记中所有的错误坐标找出来，才得以顺利训练。</p>
+<h4 id="ImageSets"><a href="#ImageSets" class="headerlink" title="ImageSets"></a>ImageSets</h4><p>ImageSets文件夹下有三个子文件夹，这里我们只需关注Main文件夹即可。Main文件夹下主要用到的是train.txt、val.txt、test.txt、trainval.txt文件，每个文件中写着供训练、验证、测试所用的文件名的集合，如下：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tNbRwly1fctobmg8rkj302f03vjrc.jpg" alt=""></p>
+<h4 id="JPEGImages"><a href="#JPEGImages" class="headerlink" title="JPEGImages"></a>JPEGImages</h4><p>JPEGImages文件夹下主要存放着所有的.jpg文件格式的输入图片，不在赘述。</p>
+<h3 id="制作VOC类似的Caltech数据集"><a href="#制作VOC类似的Caltech数据集" class="headerlink" title="制作VOC类似的Caltech数据集"></a>制作VOC类似的Caltech数据集</h3><p>经过以上对PASCAL VOC数据集文件结构的分析，我们仿照其，创建首先创建类似的文件结构即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">└── VOCdevkit</div><div class="line">    └── VOC2007　</div><div class="line">    └── Caltech　</div><div class="line">        ├── Annotations　　</div><div class="line">        ├── ImageSets　　　</div><div class="line">        │   └── Main　　</div><div class="line">        └── JPEGImages</div></pre></td></tr></table></figure>
+<p>我建议将Caltech文件创建一个symlinks链接到VOCdevkit文件夹之下，因为这样会方便之后训练代码的修改。</p>
+<ul>
+<li>至于<a href="https://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/" target="_blank" rel="external">Caltech数据集</a>如何从.seq文件转化为一张张.jpg图片，这里可以<a href="https://github.com/mitmul/caltech-pedestrian-dataset-converter" target="_blank" rel="external">参考这里</a>。</li>
+<li>至于Annotations中一个个.xml标记文件是实验室师兄给我的，<a href="https://github.com/mitmul/caltech-pedestrian-dataset-converter" target="_blank" rel="external">上面提到的方法</a>也可以转化，但是并不符合要求。</li>
+<li>至于ImageSets中的train.txt是根据.xml文件得来的，test.txt是每个seq中每隔30帧取一帧图片得来的。</li>
+</ul>
+<p>以上所有和<a href="https://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/" target="_blank" rel="external">Caltech数据集</a>有关的文件，都可以直接邮件与我联系，我直接发给你，可以省下不少制作数据集的时间。</p>
+<h2 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h2><ol>
+<li><a href="http://www.cnblogs.com/louyihang-loves-baiyan/p/4885659.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external"><strong>FastRCNN 训练自己数据集 (1编译配置)</strong></a></li>
+<li><a href="https://saicoco.github.io/object-detection-4/" target="_blank" rel="external"><strong>目标检测—Faster RCNN2</strong></a></li>
+</ol>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2093106769/" data-id="cjifprjfz0013y768hzelaws4" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2093106769/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/464905881/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/3802700508/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">深度学习论文笔记：Faster R-CNN</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/2093106769/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

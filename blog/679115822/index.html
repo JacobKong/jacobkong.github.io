@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>行为识别论文笔记：行为分类深度模型的总结.md | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行为识别论文笔记：行为分类深度模型的总结.md">
+<meta property="og:url" content="http://jacobkong.github.io/blog/679115822/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg">
+<meta property="og:updated_time" content="2017-11-29T08:42:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="行为识别论文笔记：行为分类深度模型的总结.md">
+<meta name="twitter:description" content="本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-行为分类论文笔记：行为分类模型的总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      行为识别论文笔记：行为分类深度模型的总结.md
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-11-24T07:51:24.000Z" itemprop="datePublished">Nov 24, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
+<a id="more"></a>
+<p>虽然近年来图像表示体系结构的发展已经迅速成熟，但视频的前端运行架构仍然不够清晰。当前视频体系结构中的一些主要差异在于convolutional and layers operators是使用2D（基于图像的）还是3D（基于视频的）kernels; 无论网络输入是RGB视频或者还是包含预先计算的光流，在2D ConvNets的情况下，对于信息如何跨帧传播，这可以通过使用诸如LSTM之类的temporally-recurrent layers或者随着时间的推移进行特征聚合来完成。</p>
+<p>图1显示了我们评估的五种体系结构的图形概述。<br><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fly3z4y2x1j316f0cxaf1.jpg" alt="图 1. 各种视频架构。其中K表示一个视频中全部的帧数，N表示一段视频相邻帧子集"></p>
+<h3 id="模型1：ConvNet-LSTM"><a href="#模型1：ConvNet-LSTM" class="headerlink" title="模型1：ConvNet+LSTM"></a>模型1：ConvNet+LSTM</h3><p>图像分类网络的高性能使得我们尝试只需很少的改变就能将其重用于视频中。 通过使用它们针对每个独立帧提取特征，然后集中在整个视频中来提取预测结果来实现这一目标。 这是bag of words图像建模方法的精神; 但是在实践中使用方便的同时，还存在完全忽略时间结构的问题（例如，模型不能很好的区分开门和关门）。</p>
+<p>理论上，更令人满意的方法是向模型添加一个recurrent layer，例如可以对状态进行编码的LSTM，并捕获<strong>时间顺序</strong>和<strong>长程依赖性</strong>。 本文在有512个隐藏单元的Inception-V1的最后的平均池化层之后防止了一个有着BN的LSTM层， 一个全连接层被添加到分类器的顶部。</p>
+<p>该模型对所有时间步骤的输出上使用交叉熵损失进行训练。 在测试过程中，我们只考虑最后一帧的输出。</p>
+<h3 id="模型2：3D-ConvNets"><a href="#模型2：3D-ConvNets" class="headerlink" title="模型2：3D ConvNets"></a>模型2：3D ConvNets</h3><p>3D ConvNets似乎是一种更自然的视频建模方法，其就像标准的卷积网络一样，但是具有时空卷积核。<strong>它们有一个非常重要的特征</strong>：它们直接创建时空数据的分层表示。这些模型的一个问题是，由于附加的内核维度，它们比2D ConvNets<strong>有更多的参数</strong>，这使得它们<strong>更难以训练</strong>。另外，它们似乎排除了ImageNet预训练的好处，因此以前的工作定义了相对较浅的架构，并且都是train from scratch。基准测试的结果具有提升的前景，但是与最新的技术水平相比还不具有竞争性，使得这种类型的模型成为评估我们大型数据集的好选择。</p>
+<p>在本文中，我们实现了一个C3D模型的小变体，它在顶部有8个卷积层，5个池化层和2个完全连接的层。模型的输入与原始实现相同，使用112×112像素共16帧。与原始C3D不同的是，我们在所有卷积和全连接层之后使用了batch normalization。另一个区别在于对于第一个池化层，我们使用stride=2而不是stride=1，这减少了内存占用，并允许更大批量 - 这对于批量标准化非常重要。使用这一步，我们能够使用标准的K40 GPU在每个GPU上每批处理15个视频。</p>
+<h3 id="模型3：Two-Stream-Networks"><a href="#模型3：Two-Stream-Networks" class="headerlink" title="模型3：Two-Stream Networks"></a>模型3：Two-Stream Networks</h3><p>来自ConvNets最后层的特征，LSTM可以模拟高层次的变化，但是可能无法捕获在许多情况下非常关键的精细的low-level动作。训练也是昂贵的，因为它需要通过多帧来展开网络以便反向传播。</p>
+<p>Simonyan和Zisserman介绍了一种不同的非常实用的方法，在通过两个副本ImageNet预先训练的ConvNet后，通过对来自单个RGB帧的预测和10个外部计算的光流帧的预测进行平均，来对视频的短时间快照进行建模。光流 stream有一个自适应的输入卷积层，输入通道的数量是光流帧的两倍（因为流量有两个通道，水平和垂直），在测试时，多个快照从视频中采样，并对动作预测进行平均。这被证明在现有的基准测试中得到了非常高的性能，同时非常有效地进行训练和测试。</p>
+<p>最近的一个扩展[8]将最后一个网络卷积层之后的空间流和光流融合起来，显示出对HMDB的一些改进，同时需要较少的测试时间增量（快照采样）。我们的实现大致使用了Inception-V1。网络的输入是5个连续的RGB帧，相隔10帧，以及相应的光流片段。 Inception-V1（5×7×7特征网格，对应于时间x和y维度）的最后一个平均汇聚层之前的空间和运动特征通过具有512个输出通道的3×3×3的3D卷积层，然后是3×3×3的3D最大池层，并通过最终的完全连接层。这些新层的权重用高斯噪声初始化。</p>
+<p>两种模型（原始双流和3D融合版本）都是端对端训练（包括原始模型中的双流平均流程）。</p>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/679115822/" data-id="cjifprjh2001uy768sar4mqmw" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/679115822/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/679115822/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">论文调研：ICCV 2017论文调研</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/2938514597/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">深度学习论文笔记：DSSD</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/679115822/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

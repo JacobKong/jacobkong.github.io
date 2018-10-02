@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Chapter 9 Convolutional Networks（卷积神经网络）
+卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。
+
+The Convolution Operation
+The convolution operation is typically denoted with an asterisk:
+
+
+
+
+
+在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks">
+<meta property="og:url" content="http://jacobkong.github.io/blog/783616645/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="Chapter 9 Convolutional Networks（卷积神经网络）
+卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。
+
+The Convolution Operation
+The convolution operation is typically denoted with an asterisk:
+
+
+
+
+
+在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpf8xjmyj30oq0lqn0c.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpduscrij30ee0eqdho.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpjpefj30ee0bzgmu.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdnsj0rj30k00je76j.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdmenf3j30vy0qlwk3.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdrfrclj30jn0orjya.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg">
+<meta property="og:updated_time" content="2017-02-17T12:50:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks">
+<meta name="twitter:description" content="Chapter 9 Convolutional Networks（卷积神经网络）
+卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。
+
+The Convolution Operation
+The convolution operation is typically denoted with an asterisk:
+
+
+
+
+
+在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通">
+<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-11-30T22:32:24.000Z" itemprop="datePublished">Dec 01, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Chapter-9-Convolutional-Networks（卷积神经网络）"><a href="#Chapter-9-Convolutional-Networks（卷积神经网络）" class="headerlink" title="Chapter 9 Convolutional Networks（卷积神经网络）"></a>Chapter 9 Convolutional Networks（卷积神经网络）</h2><ul>
+<li>卷积网络仅仅是在其至少一个层中使用卷积代替一般矩阵乘法的神经网络。</li>
+</ul>
+<h3 id="The-Convolution-Operation"><a href="#The-Convolution-Operation" class="headerlink" title="The Convolution Operation"></a>The Convolution Operation</h3><ul>
+<li>The convolution operation is typically denoted with an asterisk:</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfpf9zrgzj307m025t8n.jpg" alt=""></p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdsn8cgj305r01l0sm.jpg" alt=""></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdhwyqcj30b5028q2y.jpg" alt=""></p>
+<ul>
+<li>在卷积网络术语中，卷积的第一个参数（在本例中为函数x）通常称为 <strong>输入</strong> ，第二个参数（在本例中为函数w）作为 <strong>内核</strong> 。 <strong>输出</strong> 有时称为 <strong>特征映射(feature map)</strong> 。</li>
+<li>在机器学习应用中， <strong>输入</strong> 通常是多维数据数组，并且 <strong>内核</strong> 通常是由学习算法调整的多维参数数组。</li>
+<li>我们将这些多维数组称为 <strong>张量（tensors）</strong> 。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>这意味着在实践中，我们可以实现无限求和作为对有限数量的数组元素的求和。</li>
+<li>二维卷积：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdof15bj30ge01yglp.jpg" alt=""><br>two-dimensional kernel K 卷积是可交换的，这意味着我们可以等价地写，但这样会带来 <strong>kernel-ﬂipping</strong><br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdiudboj30gf01wglq.jpg" alt=""><br>后一种会更更容易用机器学习库来实现。</li>
+<li>许多神经网络库实现了一个称为互相关（cross-correlation）的相关函数，它与卷积相同，但是没有翻转（flipping）内核：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdwxyypj30fw01vdfy.jpg" alt=""></p>
+<ul>
+<li>卷积的一个例子：</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpf8xjmyj30oq0lqn0c.jpg" alt=""></p>
+<ul>
+<li>离散卷积可以被看作是乘以矩阵的乘法。</li>
+<li>Toeplitz矩阵：常对角矩阵（又称特普利茨矩阵）是指每条左上至右下的对角线均为常数的矩阵，不论是正方形或长方形的。</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpayklj30c30au74r.jpg" alt=""></p>
+<ul>
+<li>在二维中，双块循环矩阵（doubly block circulant matrix）对应于卷积。</li>
+<li>卷积通常对应于非常稀疏的矩阵。</li>
+<li>任何与矩阵乘法一起作用并且不依赖于矩阵结构的特定属性的神经网络算法都应该与卷积一起工作，这样就不需要对神经网络的任何进一步的改变。</li>
+</ul>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
+<li><p>卷积利用三个重要的想法，可以帮助改进机器学习系统:</p>
+<ul>
+<li>稀疏的连接（sparse interactions）</li>
+<li>参数共享（parameter sharing）</li>
+<li>等值表示（equivariant representations）</li>
+<li>此外卷积可以处理各种大小输入。</li>
+</ul>
+</li>
+<li><p>Sparse Interactions：这是通过使内核小于输入来实现的。</p>
+<ul>
+<li>我们需要存储更少的参数，这既减少了模型的内存需求，又提高了其统计效率。</li>
+<li>计算输出需要更少的操作。</li>
+<li>在深卷积网络中，较深层中的单元可以与输入的较大部分间接交互，This allows the network to eﬃciently describe complicated interactions between many variables by constructing such interactions from simple building blocks that each describe only sparse interactions.<br><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpduscrij30ee0eqdho.jpg" alt=""></li>
+<li>Sparse connectivity, viewed from below<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
+<li>Sparse connectivity, viewed from above<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdvqhssj30ea0em0ul.jpg" alt=""></li>
+<li>在卷积网络的较深层中的单元的接收场大于在浅层中的单元的接收场。这意味着即使卷积网络中的直接连接非常稀疏，更深层中的单元也可以间接地连接到所有或大部分输入图像。</li>
+</ul>
+</li>
+<li><p>Parameter sharing：参数共享是指对模型中的多个函数使用相同的参数。</p>
+<ul>
+<li>也可以叫 <strong>Tied Weights（捆绑权值），因为应用于一个输入的权重的值与在其他地方应用的权重的值有关。</strong></li>
+<li>在卷积神经网络中，卷积核中的每一个元素都会在input中的每一个位置使用。</li>
+<li>在存储器要求和统计效率方面，卷积比密集矩阵乘法显着更有效。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdpjpefj30ee0bzgmu.jpg" alt=""></p>
+<ul>
+<li><p>黑色箭头表示在卷积模型中3元素核的中心元素的使用。</p>
+</li>
+<li><p>Equivariant：说一个函数是等变的意味着如果输入改变，输出以相同的方式改变。</p>
+<ul>
+<li>一个函数f(x)与函数g <strong>等变</strong> 如果f(g(x)) = g(f(x)).</li>
+<li>当处理时间序列数据时，这意味着卷积产生一种时间线，显示输入中不同特征的出现。</li>
+<li>This is useful for when we know that some function of a small number of neighboring pixels is useful when applied to multiple input locations.</li>
+<li>卷积不是自然地等同于一些其他变换，例如图像的尺度或旋转的变化。</li>
+</ul>
+</li>
+<li><p>卷积是描述在整个输入上应用小的局部区域的相同线性变换的变换的非常有效的方式。</p>
+</li>
+</ul>
+<h3 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h3><ul>
+<li><p>卷积网络的一个典型层由三个阶段组成:</p>
+<ul>
+<li>在第一阶段，该层并行执行几个卷积以产生一组线性激活（linear activation）。</li>
+<li>在第二阶段，每个线性激活通过非线性激活函数，例如整流线性激活函数。这一阶段成为 <strong>detector stage</strong>.</li>
+<li>在第三阶段，我们使用池化函数（pooing function）来进一步修改层的输出。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdnsj0rj30k00je76j.jpg" alt=""></p>
+<ul>
+<li><p>pooling function是用附近的汇总统计来替换特定位置的网络的输出。</p>
+</li>
+<li><p>在所有情况下，池化有助于使表示变得对于相对于 <strong>输入的小平移</strong> 几乎不变（invariant）。</p>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdmenf3j30vy0qlwk3.jpg" alt=""></p>
+<ul>
+<li><p><strong>如果我们更关心某些特征是否存在而不是完全在哪里，那么本地变换的不变性可以是非常有用的属性。</strong></p>
+</li>
+<li><p>池的使用可以被视为添加一个无限强的先验，层所学习的函数必须对小的变换是不变的。</p>
+</li>
+<li>如果我们在单独的参数化的卷积输出上进行赤化，则特征可以学习到对哪一种变换进行不变。</li>
+<li>利用卷积和pooling的卷积网络架构：</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfpdrfrclj30jn0orjya.jpg" alt=""></p>
+<h3 id="Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior"><a href="#Convolution-and-Pooling-as-an-Inﬁnitely-Strong-Prior" class="headerlink" title="Convolution and Pooling as an Inﬁnitely Strong Prior"></a>Convolution and Pooling as an Inﬁnitely Strong Prior</h3><ul>
+<li>弱先验是具有高熵的先验分布，例如具有高方差的高斯分布。</li>
+<li>强先验具有非常低的熵，例如具有低方差的高斯分布。这样的先验在确定参数在哪里结束方面起更积极的作用。</li>
+<li>总的来说，我们可以认为卷积可以用来为一个层的参数引入一个无限强的先验概率分布。</li>
+<li>同样，池的使用是保证每个单位对小的变换保持不变性的无限强的先验。</li>
+<li><p>但是将卷积网视为具有无限强的先验的完全连接的网络可以给我们一些关于卷积网如何工作的见解。</p>
+<ul>
+<li>一个关键的见解是卷积和池化可能导致欠拟合。</li>
+<li>从这个观点的另一个关键的见解是，我们应该只比较卷积模型与统计学习性能基准中的其他卷积模型。对于许多图像数据集，对于排列不变的模型存在单独的基准，并且必须通过学习发现拓扑的概念，以及具有由他们的设计者硬编码到其中的空间关系的知识的模型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Variants-of-the-Basic-Convolution-Function"><a href="#Variants-of-the-Basic-Convolution-Function" class="headerlink" title="Variants of the Basic Convolution Function"></a>Variants of the Basic Convolution Function</h3><ul>
+<li><p>首先，当我们在神经网络的上下文中提到卷积时，我们通常实际上意味着一种由许多卷积应用并行组成的操作。</p>
+<ul>
+<li>这是因为单个内核的卷积只能提取一种特征，虽然在许多空间位置。 通常我们希望我们网络的每一层都能在许多位置提取多种特征。</li>
+</ul>
+</li>
+<li><p>此外，输入通常不仅仅是是一个网格的真是数据，反而是矢量值的观测网格。</p>
+</li>
+<li><p>这些多通道操作可交换，仅当每个操作具有与输入通道相同数量的输出通道。</p>
+</li>
+<li>我们可能想跳过内核的一些位置，以减少计算成本，我们可以认为这是下采样全卷积函数的输出。</li>
+<li>如果我们只想对输出中每个方向的每s个像素进行采样，那么我们可以定义下采样卷积函数c：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfpdkzazkj30dk01jwei.jpg" alt=""><br>我们将s称为这个下采样卷积的步幅。 也可以为每个运动方向定义一个单独的步幅。</li>
+</ul>
+<ul>
+<li><p>零填充：</p>
+<ul>
+<li>任何卷积网络实现的一个基本特征是具备隐含地对输入V进行零填充以便使其更宽的能力。</li>
+<li>零填充输入允许我们独立地控制内核宽度和输出的大小。</li>
+<li>没有零填充，我们被迫选择快速缩小网络的空间范围并且使用小内核 - 这两个方案，显着地限制了网络的表达力。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpdu1l9yj30jk0f376p.jpg" alt=""></p>
+<ul>
+<li><p>三种zero-padding的情况：</p>
+<ul>
+<li>valid convolution</li>
+<li>same convolution</li>
+<li>full convolution</li>
+</ul>
+</li>
+<li><p>Unshared convolution</p>
+</li>
+<li>Tiled convolution：在卷积层和本地连接层之间提供了折中。我们不是在每个空间位置学习一组独立的权重，而是学习一组内核，从而我们在空间移动时旋转内核。</li>
+<li><p>这三个操作做够计算所有训练一个前向卷积网络需要的梯度，以及基于卷积的转置来训练具有重建函数的卷积网络。</p>
+<ul>
+<li>卷积</li>
+<li>从输出到权值反向传播</li>
+<li>从输出到输入反向传播</li>
+</ul>
+</li>
+</ul>
+<h3 id="Structured-Outputs"><a href="#Structured-Outputs" class="headerlink" title="Structured Outputs"></a>Structured Outputs</h3><ul>
+<li>卷积网络可以用于输出高维度的结构化对象，而不仅仅是预测分类任务的类标签或回归任务的实际值。</li>
+<li>Pixel labeling：像素标记</li>
+<li>循环周期卷积网络（recurrent convolutional network）：</li>
+</ul>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfpfbmq7mj307o07d0t3.jpg" alt=""></p>
+<h3 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h3><ul>
+<li><p>与卷积网络一起使用的数据通常由几个通道组成，每个通道是在空间或时间的某个点观察不同的量。</p>
+<ul>
+<li>卷积网络的一个优点是它们还可以处理具有变化的空间范围的输入。</li>
+<li>有时，网络的输出允许具有 <strong>可变大小以及输入</strong> ，例如如果我们想要为输入的每个像素分配类标签。 <strong>在这种情况下，不需要额外的设计工作了</strong> 。</li>
+<li>在其他情况下，网络必须产生一些固定大小的输出，例如，如果我们要为整个图像分配单个类标签。 <strong>在这种情况下，我们必须进行一些额外的设计步骤</strong> ，例如插入一个池化层，其池区域的大小与输入的大小成比例，以 <strong>保持固定数量</strong> 的池化输出。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Eﬃcient-Convolution-Algorithms"><a href="#Eﬃcient-Convolution-Algorithms" class="headerlink" title="Eﬃcient Convolution Algorithms"></a>Eﬃcient Convolution Algorithms</h3><ul>
+<li>现代卷积网络应用通常涉及包含超过一百万个单元的网络。</li>
+<li><strong>卷积等效于使用傅立叶变换将输入和内核两者转换到频域，执行两个信号的逐点乘法，并使用逆傅里叶变换转换回到时域。</strong></li>
+<li>当内核是可分离的，原始的卷积是效率低下的。</li>
+<li>设计更快的执行卷积或近似卷积的方法，而不损害模型的准确性是一个活跃的研究领域。</li>
+</ul>
+<h3 id="Random-or-Unsupervised-Features"><a href="#Random-or-Unsupervised-Features" class="headerlink" title="Random or Unsupervised Features"></a>Random or Unsupervised Features</h3><ul>
+<li>通常，卷积网络训练中最昂贵的部分是学习特征。</li>
+<li>降低卷积网络训练成本的一种方式是使用未以受监督方式训练的特征。</li>
+<li><p>有三种不需要监督学习来获得卷积内核的策略：</p>
+<ul>
+<li>一个是简单地 <strong>随机初始化</strong> 它们。</li>
+<li>另一个是用手设计它们，例如通过设置每个内核以在特定方向或尺度检测边缘。</li>
+<li>最后，可以使用无监督标准来学习内核。</li>
+</ul>
+</li>
+<li><p>随机滤波器在卷积网络中通常工作得很好</p>
+</li>
+<li>一个折中的方法是学习特征，但使用： <strong>每个梯度步骤不需要完全正向和反向传播的</strong> 方法。 与多层感知器一样，我们使用 <strong>贪婪层式预训练</strong> ，独立地训练第一层，然后从第一层提取一次所有特征，然后利用这些特征隔离的训练第二层，等等。</li>
+<li>不是一次训练整个卷积层，我们可以训练一个小补丁的模型，如用k-means。 然后，我们可以使用来自这个patch-based的模型的参数来定义卷积层的内核。</li>
+<li>今天，大多数卷积网络以纯粹监督的方式训练，在每次训练迭代中使用通过整个网络的完全正向和反向传播。</li>
+</ul>
+<h3 id="The-Neuroscientiﬁc-Basis-for-Convolutional-Networks"><a href="#The-Neuroscientiﬁc-Basis-for-Convolutional-Networks" class="headerlink" title="The Neuroscientiﬁc Basis for Convolutional Networks"></a>The Neuroscientiﬁc Basis for Convolutional Networks</h3><h3 id="Convolutional-Networks-and-the-History-of-Deep-Learning"><a href="#Convolutional-Networks-and-the-History-of-Deep-Learning" class="headerlink" title="Convolutional Networks and the History of Deep Learning"></a>Convolutional Networks and the History of Deep Learning</h3><ul>
+<li>为了处理一维，顺序数据，我们接下来转向神经网络框架的另一个强大的专业化： <strong>循环神经网络（Recurrent neural networks）</strong> 。</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/783616645/" data-id="cjifprjeh000fy768h5lsxeh2" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/783616645/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/287090227/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/3084343215/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">行人检测论文笔记：Histograms of Oriented Gradients for Human Detection</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/783616645/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

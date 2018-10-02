@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned? | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Abstract
+这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。
+
+Introduction
+更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。
+用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?">
+<meta property="og:url" content="http://jacobkong.github.io/blog/287090227/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="Abstract
+这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。
+
+Introduction
+更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。
+用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg">
+<meta property="og:updated_time" content="2017-01-28T08:21:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?">
+<meta name="twitter:description" content="Abstract
+这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。
+
+Introduction
+更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。
+用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+
+
+      <article id="post-行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 class="article-title header" itemprop="name">
+      行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-01T22:32:24.000Z" itemprop="datePublished">Dec 02, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>这种新的决策林探测器在挑战性的Caltech-USA数据集上实现了当前最好的已知性能。</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>更重要的是，这是一个有着已建立的基准和评估指标的良好定义的问题。</li>
+<li>用于对象检测的的主要范例有——”Viola＆Jones变体“，HOG + SVM模板，可变形部分检测器（DPM）和卷积神经网络（ConvNets）都已经被探索用于此任务。</li>
+</ul>
+<a id="more"></a>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><ul>
+<li>INRIA, ETH, TUD-Brussels, Daimler, Caltech-USA, and KITTI是使用最广的数据集。</li>
+<li>INRIA：INRIA是最古老的，因此具有相对较少的图像。 然而，从不同设置（城市，海滩，山脉等）的行人的高质量注释，这是为什么它被普遍选择用来训练。</li>
+<li>Daimler没有被所有的方法考虑，因为它缺乏颜色通道。</li>
+<li>Daimler stereo，ETH和KITTI提供立体声信息。</li>
+<li>所有数据集但INRIA都是从视频获取的，因此可以使用光流作为附加提示。</li>
+<li>今天，Caltech-USA和KITTY是行人检测的主要基准。 两者都相对较大和具有挑战性。</li>
+</ul>
+<h2 id="Main-approaches-to-improve-pedestrian-detection"><a href="#Main-approaches-to-improve-pedestrian-detection" class="headerlink" title="Main approaches to improve pedestrian detection"></a>Main approaches to improve pedestrian detection</h2><ul>
+<li><p>40+种行人检测的方法：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfron76nbj30gx0p8gv7.jpg" alt="Snip20161202_22"></p>
+</li>
+</ul>
+<ul>
+<li>我们不是讨论方法的个体特性，而是识别区分每种方法（表1的对号）的关键方面，并对其进行分组。 我们在下面的小节讨论这些方面。</li>
+</ul>
+<h3 id="Training-data"><a href="#Training-data" class="headerlink" title="Training data"></a>Training data</h3><h3 id="Solution-families"><a href="#Solution-families" class="headerlink" title="Solution families"></a>Solution families</h3><ul>
+<li>总体上，我们注意到在40多种方法中，我们可以辨别三个家庭：</li>
+</ul>
+<ol>
+<li>DPM变体（MultiResC [33]，MT-DPM [39]等）</li>
+<li>深度网络（JointDeep [40]，ConvNet [13] ]等）</li>
+<li><p>决策林（ChnFtrs，Roerei等）。</p>
+</li>
+<li><p>在表1中，我们将这些家族分别识别为DPM，DN和DF。</p>
+</li>
+</ol>
+<h3 id="Better-classiﬁers"><a href="#Better-classiﬁers" class="headerlink" title="Better classiﬁers"></a>Better classiﬁers</h3><ul>
+<li>特征和分类器之间的没有明确的界限</li>
+</ul>
+<h3 id="Additional-data"><a href="#Additional-data" class="headerlink" title="Additional data"></a>Additional data</h3><ul>
+<li>一些方法探索在训练和测试时间利用额外的信息来改进检测。 他们考虑立体图像[45]，光流（使用以前的帧，例如MultiFtr + Motion [22]和ACF + SDt [42]），跟踪[46]或来自其他传感器 。</li>
+<li>到目前为止，仅基于单个单目图像帧的方法已经能够跟上由附加信息引入的性能改进。</li>
+</ul>
+<h3 id="Exploiting-context"><a href="#Exploiting-context" class="headerlink" title="Exploiting context"></a>Exploiting context</h3><ul>
+<li>上下文为行人检测提供了一致的改进，虽然改进的规模比额外的测试数据（§3.4）和深层架构（§3.8）要低。 大部分检测质量必须来自其他来源。</li>
+</ul>
+<h3 id="Deformable-parts"><a href="#Deformable-parts" class="headerlink" title="Deformable parts"></a>Deformable parts</h3><ul>
+<li>对于行人检测，结果是有竞争性的，但不显着。</li>
+<li>对于行人检测，除了遮挡处理的情况之外，仍然没有关于部件和部件的必要性的明确证据。</li>
+</ul>
+<h3 id="Multi-scale-models"><a href="#Multi-scale-models" class="headerlink" title="Multi-scale models"></a>Multi-scale models</h3><ul>
+<li>最近已经注意到，不同分辨率的训练不同模型系统地将性能提高1〜2MR百分点</li>
+<li>尽管不断改进，他们对最终质量的贡献是相当小的。</li>
+</ul>
+<h3 id="Deep-architectures"><a href="#Deep-architectures" class="headerlink" title="Deep architectures"></a>Deep architectures</h3><ul>
+<li>尽管有共同的叙述，仍然没有明确的证据表明深层网络有利于行人检测的学习功能</li>
+<li>最成功的方法使用这样的架构来模拟部件，遮挡和上下文的更高级别方面。 获得的结果与DPM和决策林方法相同，使得使用这样涉及的结构的 <strong>优点仍不清楚</strong> 。</li>
+</ul>
+<h3 id="Better-features"><a href="#Better-features" class="headerlink" title="Better features"></a>Better features</h3><ul>
+<li>特征更多，具有更丰富和更高维的表示，分类任务变得更容易，从而改善结果。</li>
+<li>越来越多样化的特性已经显示系统地提高性能。</li>
+<li><p>尽管通过添加许多渠道的改进，顶级性能检测器仍然达到仅有10个通道：</p>
+<ul>
+<li>6个梯度方向，</li>
+<li>1个梯度幅度</li>
+<li><p>3个颜色通道</p>
+</li>
+<li><p>我们命名这些 <strong>HOG + LUV</strong> 。</p>
+</li>
+</ul>
+</li>
+<li><p>应当注意，还没有更好的用于行人检测的特征可以通过深度学习方法获得。</p>
+</li>
+<li><p>下一个科学的步骤将是开发一个更深刻的理解，什么使好的功能更哈珀，以及如何设计更好的特征。</p>
+</li>
+</ul>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><ul>
+<li><p>基于我们在上一节中的分析，在对检测质量的影响方面，三个方面似乎是最有希望的：</p>
+<ul>
+<li>更好的特征（§3.9</li>
+<li>附加数据（§3.4）</li>
+<li>上下文信息（§3.5）</li>
+</ul>
+</li>
+</ul>
+<h3 id="Reviewing-the-eﬀect-of-features-特征的影响"><a href="#Reviewing-the-eﬀect-of-features-特征的影响" class="headerlink" title="Reviewing the eﬀect of features(特征的影响)"></a>Reviewing the eﬀect of features(特征的影响)</h3><ul>
+<li>DCT: (discrete cosine transform)离散余弦变换</li>
+<li>自VJ以来的许多进展可以通过使用基于定向梯度和颜色信息的更好的特征来解释。 对这些众所周知的特征（例如，基于DCT的投影）的简单调整仍然可以产生显着的改进。</li>
+</ul>
+<h3 id="Complementarity-of-approaches"><a href="#Complementarity-of-approaches" class="headerlink" title="Complementarity of approaches"></a>Complementarity of approaches</h3><ul>
+<li>在重新审视4.1节中单帧特征的影响之后，我们现在考虑更好的特征（HOG + LUV + DCT），附加数据（通过光流）和上下文（通过人对人的交互）的互补。</li>
+<li>我们的实验表明，即使从强检测器开始，添加额外的特征，流量和上下文信息在很大程度上是互补的（增加12％，而不是3 + 7 + 5％）。</li>
+</ul>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>虽然这些功能中的一些可能是由学习驱动的，但它们主要是通过尝试和错误手工制作的。</li>
+<li>Better features + optical flow + context的结合可以在Caltech-USA上产生最好的检测性能。</li>
+<li>The main challenge ahead seems to develop a deeper understanding of <strong>what makes good features good</strong>, so as to enable the <strong>design of even better ones</strong>.</li>
+</ul>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/287090227/" data-id="cjifprjel000hy768bd2cholk" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/287090227/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Pedestrian-Detection/">Pedestrian Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/综述/">综述</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行人检测/">行人检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+          
+<nav id="article-nav" class="white">
+  <div class="nav-wrapper">
+    <ul class="row">
+    
+      <li class="col s6">
+        <a href="/blog/2397281138/" id="article-nav-newer" class="article-nav-link-wrap grey-text text-darken-1 truncate">
+          <i class="fa fa-arrow-left"></i>
+          <span class="article-nav-title">行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</span>
+        </a>
+      </li>
+    
+
+    
+      <li class="col s6">
+        <a href="/blog/783616645/" id="article-nav-older" class="article-nav-link-wrap grey-text text-darken-1 right-align truncate">
+          <span class="article-nav-title">深度学习读书笔记：DeepLearningBook - Chapter 9 - Conventional Networks</span>
+          <i class="fa fa-arrow-right"></i>
+        </a>
+      </li>
+    
+
+    </ul>
+  </div>
+</nav>
+
+
+        
+      </article>
+
+
+      
+
+      <hr />
+
+      <section id="comments">
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  
+  <script>
+    var disqus_shortname = 'jacobkong';
+    
+    var disqus_url = 'http://jacobkong.github.io/blog/287090227/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  
+
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

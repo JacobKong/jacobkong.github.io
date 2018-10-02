@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Blog: 2017/11 | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JacobKong's Blog">
+<meta property="og:url" content="http://jacobkong.github.io/blog/2017/11/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JacobKong's Blog">
+<meta name="twitter:description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    <div class="container">
+  <div class="row">
+    <div class="col s12">
+
+      
+
+      
+        
+
+      <article id="post-论文调研：ICCV论文总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/679115822/">论文调研：ICCV 2017论文调研</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-11-25T07:51:24.000Z" itemprop="datePublished">Nov 25, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
+<li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
+<li>Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.</li>
+<li>Formulate the adaptive tracking problem as a decision-making process.</li>
+<li>Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Signiﬁcantly reduces the feedforward cost.</li>
+<li>Train the agent ofﬂine in a reinforcement learning fashion.</li>
+<li>Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.</li>
+<li>However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.</li>
+<li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/679115822/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/679115822/" data-id="cjifprjh4001xy768zi4o6i96" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/679115822/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/论文调研/">论文调研</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行为分类论文笔记：行为分类模型的总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/679115822/">行为识别论文笔记：行为分类深度模型的总结.md</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-11-24T07:51:24.000Z" itemprop="datePublished">Nov 24, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/679115822/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/679115822/" data-id="cjifprjh2001uy768sar4mqmw" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/679115822/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+
+
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

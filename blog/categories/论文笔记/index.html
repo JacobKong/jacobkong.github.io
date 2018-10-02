@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Category: 论文笔记 | JacobKong&#39;s Blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JacobKong's Blog">
+<meta property="og:url" content="http://jacobkong.github.io/blog/categories/论文笔记/index.html">
+<meta property="og:site_name" content="JacobKong's Blog">
+<meta property="og:description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JacobKong's Blog">
+<meta name="twitter:description" content="欢迎来到孔伟杰的博客。 本人本科毕业于东北大学软件学院，目前在北大信工攻读硕士。 研究兴趣：计算机视觉|视频行为分析|行人检测。">
+
+  
+    <link rel="alternate" href="/atom.xml" title="JacobKong&#39;s Blog" type="application/atom+xml" />
+  
+
+  
+  <!--[if lte IE 10 ]><link rel="shortcut icon" href="/images/favicon.ico"><![endif]-->
+  <!--[if !IE]><!-->
+  <link rel="shortcut icon" href="/images/favicon.png">
+
+  <meta name="msapplication-TileImage" content="/images/favicon.png"/>
+  <meta name="msapplication-TileColor" content="#000000"/>
+
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png" />
+
+  <link rel="icon" sizes="256x256" href="/images/favicon.png" />
+  <!--<![endif]-->
+  
+
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro|Material+Icons|Raleway:400,300,700" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="/css/vendors.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+
+  <script src="/js/vendors.js"></script>
+
+  <script>
+    define('jquery', function () {
+      return window.jQuery;
+    });
+  </script>
+
+
+</head>
+<body>
+
+  <div class="navbar-fixed">
+  <nav id="main-navbar" class="grey lighten-5 z-depth-0" role="navigation">
+    <div class="nav-wrapper container">
+
+      <a id="logo-container" href="/" class="brand-logo center-align">
+        <span>JacobKong&#39;s Blog</span>
+        <sub></sub>
+      </a>
+
+      <ul class="right hide-on-med-and-down">
+        
+          <li>
+            <a class="main-nav-link" href="/">Home</a>
+          </li>
+        
+          <li>
+            <a class="main-nav-link" href="/posts">Blog</a>
+          </li>
+        
+      </ul>
+
+      <a href="#" data-activates="nav-mobile" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+  
+  <li>
+    <a class="main-nav-link" href="/">Home</a>
+  </li>
+  
+  <li>
+    <a class="main-nav-link" href="/posts">Blog</a>
+  </li>
+  
+</ul>
+
+
+  <div id="main-container">
+    <div class="container">
+  <div class="row">
+    <div class="col s12">
+
+      
+
+      
+        
+
+      <article id="post-论文笔记：CVPR 2018 关于行为识别论文略读笔记2" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2879360315/">论文笔记：CVPR 2018 关于行为识别论文略读笔记（二）</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-06-15T07:51:24.000Z" itemprop="datePublished">Jun 15, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition"><a href="#论文五：PoTion-Pose-MoTion-Representation-for-Action-Recognition" class="headerlink" title="论文五：PoTion: Pose MoTion Representation for Action Recognition"></a>论文五：PoTion: Pose MoTion Representation for Action Recognition</h2><p>和上面两篇论文类似，这篇文章主要是利用人体关键点（Keypoint）来做行为识别。目前的许多方法主要是双流网络来分别处理外观（appearance）和动态（motion）。在本篇文章中，作者引入了一种新颖的表示方式，可以优雅地编码某些语义关键点的移动。我们使用人体关节作为这些关键点，编码后的维度固定的特征称为：PoTion，将该特征图输送到简单的CNN中即可用用来行为识别分类。方法框架图如下：</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2879360315/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2879360315/" data-id="cjjv4fsx600010868fzkj09vj" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2879360315/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/CVPR-2018/">CVPR 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行为识别论文笔记：Something about Temporal Reasoning" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3309988052/">行为识别论文笔记：Something about Temporal Reasoning</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-06-10T07:51:24.000Z" itemprop="datePublished">Jun 10, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>在视频的行为识别中，影响性能很重要的一点：就是模型能否提取出强有力的时间信息。虽然有的行为光从单张图像的空间特征就能大概判断出其中所包含的动作是什么，但是还是有很多动作需要从其随时间的变化才能准确判断出来。最近看了几篇关于视频中时间推理（Temproal Reasioning）的文章，这里顺便整理一下。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3309988052/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3309988052/" data-id="cjifprjhw0029y768sa1trt7r" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3309988052/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-论文笔记：CVPR 2018 关于行为识别论文略读笔记1" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3799204522/">论文笔记：CVPR 2018 关于行为识别论文略读笔记（一）</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-06-02T07:51:24.000Z" itemprop="datePublished">Jun 02, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition"><a href="#论文一：Optical-Flow-Guided-Feature-A-Fast-and-Robust-Motion-Representation-for-Video-Action-Recognition" class="headerlink" title="论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition"></a>论文一：Optical Flow Guided Feature: A Fast and Robust Motion Representation for Video Action Recognition</h2><p>这是今年CVPR 2018中做行为识别的一篇文章，提出了一个叫做光流引导的特征（Optical Flow guided Feature，OFF）。时间信息是视频行为识别的关键，二光流可以很好的表征时间信息，其在视频分析领域已经被很多工作证明是一个很有用的特征。但是目前的双流网络Two-Stream在训练时其实还是比较麻烦的，因为需要单独对视频提取光流图，然后送到网络的另一至进行训练；而且如果数据集很大的话，光流图和RGB图像合起来得有原视频数据大小的好几倍，也十分消耗硬盘空间。因此思考如何利用单流网络同时利用RGB特征以及类似光流的特征去进行训练是一个值得思考的问题。本文从光流本身的定义出发，给了我们一个关于该问题很好的启发。该方法也在UCF-101逮到了96%的分类准确率，超过了不用Kinetics数据集预训练的I3D模型，可见该方法的有效性。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3799204522/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3799204522/" data-id="cjjv4fswt00000868zirqb6k3" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3799204522/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/CVPR-2018/">CVPR 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行为检测论文笔记：One-shot Action Localization" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3531717168/">行为检测论文笔记：One-shot Action Localization by Learning Sequence Matching Network</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-05-30T07:51:24.000Z" itemprop="datePublished">May 30, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的另一篇，基于学习的时间轴动作定位方法需要大量的训练数据。 然而，这样的大规模视频数据集不仅非常难以获得而且可能因为存在无数的动作类别而不实用。 当训练样本少且罕见时，当前方法的弊端就暴露出来了。为了解决这个挑战，本文的解决方案是采用匹配网络的One-shot学习技术，并利用相关性来挖掘和定位以前没有看过类别的行为。 本文在THUMOS14和ActivityNet数据集上评估了本文的one-shot动作定位方法。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3531717168/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3531717168/" data-id="cjifprjhd0022y768finj2ef0" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3531717168/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Detection/">Action Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为检测/">行为检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行为检测论文笔记：Rethinking" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3697434189/">行为检测论文笔记：Rethinking the Faster R-CNN Architecture for Temporal Action Localization</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-05-29T07:51:24.000Z" itemprop="datePublished">May 29, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>这是今年CVPR 2018中接受为数不多的动作时间轴定位论文中的一篇，解决了目前现存方法中的3个问题：（1）Multi-scale的动作片段；（2）Temproal context的利用；（3）Multi-stream 特征融合。方法在THUMOS’ 14数据集上的提议和检测任务上达到目前最好的效果（mAP@tIoU=0.5达到42.8%），在ActivityNet数据及上取得了具有挑战性的效果。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3697434189/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3697434189/" data-id="cjifprjh9001zy7684h5jxik4" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3697434189/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Detection/">Action Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为检测/">行为检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-论文调研：ICCV论文总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/679115822/">论文调研：ICCV 2017论文调研</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-11-25T07:51:24.000Z" itemprop="datePublished">Nov 25, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Visual-object-tracking"><a href="#Visual-object-tracking" class="headerlink" title="Visual object tracking"></a>Visual object tracking</h2><ul>
+<li><h4 id="Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades"><a href="#Learning-Policies-for-Adaptive-Tracking-with-Deep-Feature-Cascades" class="headerlink" title="Learning Policies for Adaptive Tracking with Deep Feature Cascades"></a>Learning Policies for Adaptive Tracking with Deep Feature Cascades</h4><ul>
+<li>Our fundamental insight is to take an adaptive approach, where easy frames are processed with cheap features (such as pixel values), while challenging frames are processed with invariant but expensive deep features.</li>
+<li>Formulate the adaptive tracking problem as a decision-making process.</li>
+<li>Learn an agent to decide whether to locate objects with high conﬁdence on an early layer, or continue processing subsequent layers of a network.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Signiﬁcantly reduces the feedforward cost.</li>
+<li>Train the agent ofﬂine in a reinforcement learning fashion.</li>
+<li>Obviously, the major computational burden comes from the forward pass through the entire network, and can be larger with deeper architectures.</li>
+<li>However, when the object is visually distinct or barely moves, early layers are in most scenarios sufﬁcient for precise localization - offering the potential for substantial computational savings.</li>
+<li>The agent learns to ﬁnd the target at each layer, and decides if it is conﬁdent enough to output and stop there.</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/679115822/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/679115822/" data-id="cjifprjh4001xy768zi4o6i96" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/679115822/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/论文调研/">论文调研</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行为分类论文笔记：行为分类模型的总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/679115822/">行为识别论文笔记：行为分类深度模型的总结.md</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-11-24T07:51:24.000Z" itemprop="datePublished">Nov 24, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <p>本次主要总结了目前常见一些经典的基于深度学习的行为分类模型。其中的主要内容来自于论文《Quo Vadis, Action Recognition? A New Model and the Kinetics Dataset》中的Related Work部分的总结。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/679115822/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/679115822/" data-id="cjifprjh2001uy768sar4mqmw" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/679115822/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：DSSD" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2938514597/">深度学习论文笔记：DSSD</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-03-31T07:51:24.000Z" itemprop="datePublished">Mar 31, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文的主要贡献在于在当前最好的通用目标检测器中加入了额外的上下文信息。</li>
+<li>为实现这一目的：我们通过将<strong>ResNet-101</strong>与<strong>SSD</strong>结合。然后，我们用<strong>deconvolution layers</strong>来丰富了SSD + Residual-101，以便在物体检测中引入额外的large-scale的上下文，并提高准确性，<strong>特别是对于小物体</strong>，从而称之为<strong>DSSD</strong>。</li>
+<li>我们通过仔细的加入额外的<strong>learned transformations阶段</strong>，具体来说是一个用于在deconvolution中前向传递连接的模块，以及一个新的输出模型，使得这个新的方法变得可行，并为之后的研究提供一个潜在的道路。</li>
+<li>我们的DSSD具有513×513的输入，在VOC2007测试中达到81.5％de的mAP，VOC2012测试为80.0％de的mAP，COCO为33.2％的mAP，<strong>在每个数据集上优于最先进的R-FCN</strong> 。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2938514597/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2938514597/" data-id="cjifprjgu001py768c93h5jfl" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2938514597/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：Deep Residual Learning for Image Recognition" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3085218970/">深度学习论文笔记：Deep Residual Learning for Image Recognition</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-03-23T07:51:24.000Z" itemprop="datePublished">Mar 23, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文是何凯明大神的又一篇CVPR最佳论文。</li>
+<li>网络越深越难训练，所以我们提出一个residual learning framework从而减轻网络的训练，该网络比以前使用的网络要深得多。</li>
+<li>我们明确地将参考层的输入来作为学习残差函数，而不是学习无参考的函数（unreferenced functions）。</li>
+<li>我们提供全面的经验证据，表明这些残留网络更容易优化，并可以从显着增加的深度中获得准确性。</li>
+<li>这些残留网络的集合在ImageNet测试集上达到3.57％的误差。 该结果在ILSVRC 2015分类任务中荣获第一名。</li>
+<li><strong>深度对于许多CV领域的任务都十分重要的。</strong>由于我们网络很深，我们在COCO对象检测数据集上获得了28％的相对改进。我们还荣获了ImageNet检测，ImageNet定位，COCO检测和COCO分割任务的第一名。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3085218970/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3085218970/" data-id="cjifprjgy001sy768v5kxh27l" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3085218970/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：R-FCN" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3678248031/">目标检测论文笔记：R-FCN</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-27T07:51:24.000Z" itemprop="datePublished">Feb 27, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>提出了一个region-based, fully convolutional的网络来准确高效的进行物体检测。</li>
+<li>不同于Fast/Faster R-CNN，其应用了计算成本很高的每个区域子网络数百次，本论文的region-based detector是完全卷积化的，几乎一张图像上所有的计算都是共享的。</li>
+<li>为了实现这一目标，我们提出position-sensitive score maps，以解决在图像分类的平移不变性（translation-invariance）和物体检测中的平移可变性（translation-variance）之间的困境。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3678248031/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3678248031/" data-id="cjifprjgl001my7686g44jv7d" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3678248031/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：SSD" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3118967289/">深度学习论文笔记：SSD</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-13T09:53:54.000Z" itemprop="datePublished">Feb 13, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>Jaccard overlap, Jaccard similarity:<br>Jaccard coefficient:<script type="math/tex; mode=display">
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的集合：两个集合交集的大小/两个集合并集的大小，交集=并集意味着2个集合完全重合。<br><strong>所以Jaccard overlap其实就是IoU。</strong>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3118967289/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3118967289/" data-id="cjifprjgg001iy768jiyvtxjt" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3118967289/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：YOLO9000" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2102833929/">深度学习论文笔记：YOLO9000</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-08T03:56:20.000Z" itemprop="datePublished">Feb 08, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>YOLO9000: a state-of-the-art, real-time 的目标检测系统，可以检测超过9000种的物体分类。</li>
+<li>本论文提出两个模型，<strong>YOLOv2和YOLO9000</strong>。</li>
+<li>YOLOv2：<ul>
+<li>是对YOLO改进后的提升模型。</li>
+<li>利用新颖的，多尺度训练的方法，YOLOv2模型可以在多种尺度上运行，在速度与准确性上更容易去trade off。</li>
+</ul>
+</li>
+<li>YOLO9000：<ul>
+<li>是提出的一种联合在检测和分类数据集上训练的模型，<strong>这种联合训练的方法使得YOLO9000能够为没有标签的检测数据目标类预测</strong>。</li>
+<li>可以检测超过9000个类。</li>
+</ul>
+</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2102833929/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2102833929/" data-id="cjifprjgb001fy768jrcbiqbn" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2102833929/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：YOLO" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2094641206/">深度学习论文笔记：YOLO</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-02-02T11:49:53.000Z" itemprop="datePublished">Feb 02, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>之前的物体检测的方法是使用分类器来进行检测。</li>
+<li>相反，本论文将对象检测作为空间分离的边界框和相关类概率的回归问题。</li>
+<li>本论文的YOLO模型能达到45fps的实时图像处理效果。</li>
+<li>Fast YOLO：小型的网络版本，可达到155fps。</li>
+<li>与目前的检测系统相比，YOLO会产生更多的定位错误，但是会更少的去在背景中产生false positive。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2094641206/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2094641206/" data-id="cjifprjg6001by7689zy2vwmb" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2094641206/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：Faster R-CNN" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3802700508/">深度学习论文笔记：Faster R-CNN</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-16T22:32:24.000Z" itemprop="datePublished">Dec 17, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li><strong>Region Proposal的计算</strong>是基于Region Proposal算法来假设物体位置的物体检测网络比如：<strong>SPPnet, Fast R-CNN</strong>运行时间的瓶颈。</li>
+<li>Faster R-CNN引入了<strong>Region Proposal Network（RPN）</strong>来和检测网络共享整个图片的卷积网络特征，因此使得region proposal几乎是<strong>cost free</strong>的。</li>
+<li>RPN-&gt;预测物体边界（object bounds）和在每一位置的分数（objectness score）</li>
+<li>通过在一个网络中共享RPN和Fast R-CNN的卷积特征来融合两者——<strong>使用“attention”机制。</strong></li>
+<li>300 proposals pre image.</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3802700508/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3802700508/" data-id="cjifprjfw0010y768ir0o48yn" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3802700508/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：Fast R-CNN" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/1679631826/">深度学习论文笔记：Fast R-CNN</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-07T22:32:24.000Z" itemprop="datePublished">Dec 08, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>mAP：detection quality.</li>
+</ul>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>本文提出一种基于快速区域的卷积网络方法（快速R-CNN）用于对象检测。</li>
+<li>快速R-CNN采用多项创新技术来提高训练和测试速度，同时提高检测精度。</li>
+<li>采用VGG16的网络：VGG: 16 layers of 3x3 convolution interleaved with max pooling + 3 fully-connected layers</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/1679631826/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/1679631826/" data-id="cjifprjfq000xy768q97ywwih" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/1679631826/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/3054155989/">深度学习论文笔记：Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-06T22:32:24.000Z" itemprop="datePublished">Dec 07, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>现有的深卷积神经网络（CNN）需要固定尺寸（例如，224×224）的输入图像。</li>
+<li>新的网络结构，称为SPP-net，可以生成固定长度的表示，而不管图像大小/规模。</li>
+<li>使用SPP-net，我们从整个图像只计算一次特征图，然后在任意区域（子图像）中池特征以生成固定长度表示以训练检测器。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/3054155989/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/3054155989/" data-id="cjifprjfo000vy7688qit7mx7" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/3054155989/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/4241353321/">深度学习论文笔记：Rich feature hierarchies for accurate object detection and semantic segmentation</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-05T22:32:24.000Z" itemprop="datePublished">Dec 06, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>mAP: mean average precision，平均准确度</li>
+<li><p>我们的方法结合两个关键的见解：</p>
+<ul>
+<li>第一：采用高容量的卷积神经网络来从上到下的进行region proposal，从而实现定位和分割物体。</li>
+<li>当标记的训练数据稀缺时，可以先对辅助数据集（任务）进行受监督的预训练， 随后是基于域进行特定调整，产生显着的性能提升。</li>
+</ul>
+</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/4241353321/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/4241353321/" data-id="cjifprjf1000ry768kdcko31i" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/4241353321/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2553947436/">行人检测论文笔记：Fused DNN - A deep neural network fusion approach to fast and robust pedestrian detection</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-04T22:32:24.000Z" itemprop="datePublished">Dec 05, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><ul>
+<li><strong>L1范数</strong> 也称为最小绝对偏差（LAD），最小绝对误差（LAE）。它基本上最小化目标值(Yi)和估计值(f(xi))之间的绝对差(S)的和</li>
+</ul>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgw1fbfqk8unvtj306d0273ye.jpg" alt=""></p>
+<ul>
+<li>L2范数也称为最小二乘。它基本上最小化目标值(Yi)和估计值(f(xi))之间的差(S)的平方的和</li>
+</ul>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfqk9chp0j305w01wjra.jpg" alt=""></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>所提出的网络融合架构允许多个网络的并行处理来提高速度。</li>
+<li>首先是一个深度卷积网络被训练为一个物体检测器来生成所有有可能的不同尺寸和遮挡的行人候选集。</li>
+<li>然后，多个深度神经网络被并行使用来之后提炼这些行人候选集。</li>
+<li>我们引入基于软拒绝的网络融合方法将来自所有网络的软度量融合在一起，以产生最终置信分数。</li>
+<li>此外，我们提出了一种用于将逐像素语义分割网络（ pixel-wise semantic segmentation network）集成到网络融合架构中作为行人检测器的加强的方法。</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2553947436/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2553947436/" data-id="cjifprjex000py7685p9xefbp" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2553947436/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行人检测论文笔记：Robust Real-Time Face Detection" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2903903730/">行人检测论文笔记：Robust Real-Time Face Detection</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-03T22:32:24.000Z" itemprop="datePublished">Dec 04, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>傅里叶变换的一个推论：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg" alt=""></li>
+</ul>
+<p>一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。</p>
+<ul>
+<li><p>卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg" alt=""><br>整个过程的核心就是“（反转），移动，乘积，求和”</p>
+</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2903903730/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2903903730/" data-id="cjifprjes000ly768fsinz2ig" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2903903730/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行人检测论文笔记：How Far are We from Solving Pedestrian Detection?" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2397281138/">行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-03T22:32:24.000Z" itemprop="datePublished">Dec 04, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+<li>Human Baseline 的标准是如何确定的?</li>
+<li><p>Ground-truth是什么意思？</p>
+<ul>
+<li>Groun-truth 指的是正确的标注（真实值）</li>
+<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+</ul>
+</li>
+<li><p>Intersection over Union（IoU）是什么？</p>
+<ul>
+<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
+</li>
+<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
+</li>
+<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+</li>
+<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2397281138/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2397281138/" data-id="cjifprjep000ky768byy6gqsv" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2397281138/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Pedestrian-Detection/">Pedestrian Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/综述/">综述</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行人检测/">行人检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+
+
+      
+        <nav id="page-nav">
+          <span class="page-number current">1</span><a class="page-number" href="/blog/categories/论文笔记/page/2/">2</a><a class="extend next" rel="next" href="/blog/categories/论文笔记/page/2/">Next &raquo;</a>
+        </nav>
+      
+
+
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <footer class="page-footer grey darken-2">
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2018 Weijie Kong
+
+        <div class="right">
+          Powered by <a href="http://hexo.io/" rel="nofollow" class="white-text" target="_blank">Hexo</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

@@ -124,6 +124,168 @@
       
         
 
+      <article id="post-行人检测论文笔记：How Far are We from Solving Pedestrian Detection?" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2397281138/">行人检测论文笔记：How Far are We from Solving Pedestrian Detection?</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-03T22:32:24.000Z" itemprop="datePublished">Dec 04, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="文章疑问点"><a href="#文章疑问点" class="headerlink" title="文章疑问点"></a>文章疑问点</h2><ul>
+<li>Human Baseline 的标准是如何确定的?</li>
+<li><p>Ground-truth是什么意思？</p>
+<ul>
+<li>Groun-truth 指的是正确的标注（真实值）</li>
+<li>在有监督学习中，数据是有标注的，以(x, t)的形式出现，其中x是输入数据，t是标注.正确的t标注是ground truth，错误的标记则不是。（也有人将所有标注数据都叫做ground truth）。</li>
+</ul>
+</li>
+<li><p>Intersection over Union（IoU）是什么？</p>
+<ul>
+<li><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset.</p>
+</li>
+<li><p>Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU.</p>
+</li>
+<li><p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+</li>
+<li><p>An Intersection over Union score &gt; 0.5 is normally considered a “good” prediction.</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfsw1e3pcj308c06i0ss.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>FPPI: False Positive Per Image</li>
+<li>Oracle Experiment: An oracle experiment is used to compare your actual system to how your system would behave if some component of it always did the right thing.</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2397281138/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2397281138/" data-id="cjrnebv2d000v1k2papddur72" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2397281138/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Pedestrian-Detection/">Pedestrian Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Review/">Review</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/综述/">综述</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行人检测/">行人检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-行人检测论文笔记：Robust Real-Time Face Detection" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/2903903730/">行人检测论文笔记：Robust Real-Time Face Detection</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2016-12-03T22:32:24.000Z" itemprop="datePublished">Dec 04, 2016</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
+<li>傅里叶变换的一个推论：<br><img src="https://ww4.sinaimg.cn/large/006tKfTcgw1fbfrudkda8j308h01d3yg.jpg" alt=""></li>
+</ul>
+<p>一个时域下的复杂信号函数可以分解成多个简单信号函数的和，然后对各个子信号函数做傅里叶变换并再次求和，就求出了原信号的傅里叶变换。</p>
+<ul>
+<li><p>卷积定理(Convolution Theorem)：信号f和信号g的卷积的傅里叶变换，等于f、g各自的傅里叶变换的积<br><img src="https://ww3.sinaimg.cn/large/006tKfTcgw1fbfrue2zlyj304n01gdfp.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfrufxyw0j306z0263yf.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgw1fbfru90t5uj30jt09j75c.jpg" alt=""><br>整个过程的核心就是“（反转），移动，乘积，求和”</p>
+</li>
+</ul>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/2903903730/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/2903903730/" data-id="cjrnebv1h000d1k2pe130j5wk" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/2903903730/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
       <article id="post-行人检测论文笔记：Ten Years of Pedestrian Detection, What Have We Learned?" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
@@ -171,7 +333,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/287090227/" data-id="cjmrx0rqz000itq2pybf9zjx5" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/287090227/" data-id="cjrnebv0k00071k2pijz41yrk" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/287090227/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -256,7 +418,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3084343215/" data-id="cjmrx0rqf000btq2pcl1ckgmm" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3084343215/" data-id="cjrnebv0i00061k2p8surgqqo" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3084343215/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -340,7 +502,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/2735857030/" data-id="cjmrx0rq60009tq2pw8yqzwx6" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/2735857030/" data-id="cjrnebv1c000b1k2p3f8i51af" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/2735857030/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -433,7 +595,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3091185356/" data-id="cjmrx0rpf0007tq2pr317cvg4" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3091185356/" data-id="cjrnebv0600031k2pseyhjbtq" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3091185356/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -511,7 +673,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/4124170924/" data-id="cjmrx0rop0003tq2ppa8s26o3" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/4124170924/" data-id="cjrnebuzx00021k2pje1b4vmv" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/4124170924/#disqus_thread" class="article-comment-link">Comments</a>
             

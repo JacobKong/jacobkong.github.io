@@ -124,6 +124,127 @@
       
         
 
+      <article id="post-论文笔记：行为预测(Action Prediction:Anticipation)相关论文略读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/1352025799/">论文笔记：行为预测(Action Prediction / Anticipation)相关论文略读笔记</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-07-20T07:51:24.000Z" itemprop="datePublished">Jul 20, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction"><a href="#论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction" class="headerlink" title="论文一：Part-Activated Deep Reinforcement Learning for Action Prediction"></a>论文一：Part-Activated Deep Reinforcement Learning for Action Prediction</h2><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxntax0ywlj30tn0beqa8.jpg" alt=""></p>
+<p>现有的许多行为预测的方法会用到整个帧的演化来对动作建模，这不能避免当前动作所带来的噪声，特别是在早期预测中。为了解决这个问题，我们设计了PA-DRL，通过在深层强化学习框架下提取骨架proposal来开发人体结构。具体而言，我们从人体的不同part单独提取特征，并激活特征中与动作相关的部分以增强表征。 我们的方法不仅利用了人体的结构信息，而且还考虑了表达动作的显着部分。 我们在三个流行的动作预测数据集上评估我们的方法：UT-Interaction，BIT-Interaction和UCF101。 我们的实验结果表明，我们的方法通过最先进的技术实现了性能。</p>
+<h2 id="Temporal-Recurrent-Networks-for-Online-Action-Detection"><a href="#Temporal-Recurrent-Networks-for-Online-Action-Detection" class="headerlink" title="Temporal Recurrent Networks for Online Action Detection"></a>Temporal Recurrent Networks for Online Action Detection</h2><p>以前的预测方法仅根据历史信息来进行预判，而不利用未来信息</p>
+<p>动机：1）与仅仅关注过去相比，联合建模当前行动识别和未来在训练中的行动预期将迫使网络学习更具辨别力的表示；2）明确预测将来会发生什么作为额外时间背景的来源，将有助于在测试时对当前行动进行分类。实验也有验证这一点，方法架构图如下：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxopqyz1r3j30tg0aojwh.jpg" alt=""></p>
+<p>主要是重新设计了一个RNNcell，这样在原本RNN的基础上额外加入了未来信息来达到目的。</p>
+<h2 id="Action-Prediction-from-Videos-via-Memorizing-Hard-to-Predict-Samples"><a href="#Action-Prediction-from-Videos-via-Memorizing-Hard-to-Predict-Samples" class="headerlink" title="Action Prediction from Videos via Memorizing Hard-to-Predict Samples"></a>Action Prediction from Videos via Memorizing Hard-to-Predict Samples</h2><p>这是AAAI-2018的一篇关于行为预测的文章。文章有提出行为预测的一个困难点在于：在某些动作中，由于视觉相似性，开始的几帧特征是不具有足够的辨别力以进行准确分类。如何解决这个问题对于行为预测的性能也是至关重要的，这样可以帮助分类器尽早的对行为进行分类，虽然最近的研究表明，当观察到一半长度的视频时，预测性能通常就会变得稳定，但还是有必要越早发现具有判别性的特征越好。因此本文提出了加入Memory机制，从而在训练阶段记住难以预测的训练样本。</p>
+<p>为了帮助更好的预测，本工作使用了未来的信息。在实现上是采用具有前向连接和后向连接的双层双向LSTM来表征时间动作演变并捕获用于预测的未来信息。这一点和Bidirectional Attentive Fusion With Context Gating for Dense Video Captioning这篇论文的想法有点像。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxpx4wuva0j30ki08djuf.jpg" alt=""></p>
+
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/1352025799/" data-id="cjrnebv7y005k1k2p5hu1lubg" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/1352025799/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Prediction/">Action Prediction</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ECCV-2018/">ECCV 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-论文笔记：ECCV 2018 关于行为识别论文略读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/913319064/">论文笔记：ECCV 2018 关于行为识别论文略读笔记</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-07-20T07:51:24.000Z" itemprop="datePublished">Jul 20, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="论文一：Multi-Fiber-Networks-for-Video-Recognition"><a href="#论文一：Multi-Fiber-Networks-for-Video-Recognition" class="headerlink" title="论文一：Multi-Fiber Networks for Video Recognition"></a>论文一：Multi-Fiber Networks for Video Recognition</h2>
+            
+          </div>
+
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/913319064/" data-id="cjrnebv7i005a1k2pw734g3u9" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/913319064/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ECCV-2018/">ECCV 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
       <article id="post-论文笔记：CVPR 2018 关于行为识别论文略读笔记2" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
@@ -165,7 +286,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/2879360315/" data-id="cjmrx0rux002dtq2pa3n7h5l4" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/2879360315/" data-id="cjrnebv7r005h1k2pe0qnwwg1" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/2879360315/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -229,7 +350,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3309988052/" data-id="cjmrx0rut002atq2ppfynv495" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3309988052/" data-id="cjrnebv7d00531k2pafgfre5m" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3309988052/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -293,7 +414,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3799204522/" data-id="cjmrx0ruo0026tq2p2rph525o" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3799204522/" data-id="cjrnebv7l005d1k2prsf0kl14" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3799204522/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -357,7 +478,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3531717168/" data-id="cjmrx0ruj0023tq2pc5cilw3t" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3531717168/" data-id="cjrnebv71004w1k2p8zslwnva" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3531717168/#disqus_thread" class="article-comment-link">Comments</a>
             
@@ -421,7 +542,7 @@
           
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/3697434189/" data-id="cjmrx0rud0020tq2p6e76j7os" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/3697434189/" data-id="cjrnebv7500501k2pkmyvtr9w" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3697434189/#disqus_thread" class="article-comment-link">Comments</a>
             

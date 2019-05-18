@@ -140,7 +140,7 @@
       
         
 
-      <article id="post-论文笔记：行为预测(Action Prediction:Anticipation)相关论文略读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-论文笔记：GNN Survey" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
           
@@ -150,7 +150,7 @@
               
   
     <h1 itemprop="name" class="header">
-      <a class="article-title " href="/blog/1352025799/">论文笔记：行为预测(Action Prediction / Anticipation)相关论文略读笔记</a>
+      <a class="article-title " href="/blog/4197138744/">论文笔记：A Comprehensive Survey on Graph Neural Networks</a>
     </h1>
   
 
@@ -159,35 +159,61 @@
 
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2018-07-20T07:51:24.000Z" itemprop="datePublished">Jul 20, 2018</time>
+              <time datetime="2019-05-18T14:51:24.000Z" itemprop="datePublished">May 18, 2019</time>
             </div>
           </header>
 
 
           <div class="article-entry " itemprop="articleBody">
             
-              <h2 id="论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction"><a href="#论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction" class="headerlink" title="论文一：Part-Activated Deep Reinforcement Learning for Action Prediction"></a>论文一：Part-Activated Deep Reinforcement Learning for Action Prediction</h2><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxntax0ywlj30tn0beqa8.jpg" alt=""></p>
-<p>现有的许多行为预测的方法会用到整个帧的演化来对动作建模，这不能避免当前动作所带来的噪声，特别是在早期预测中。为了解决这个问题，我们设计了PA-DRL，通过在深层强化学习框架下提取骨架proposal来开发人体结构。具体而言，我们从人体的不同part单独提取特征，并激活特征中与动作相关的部分以增强表征。 我们的方法不仅利用了人体的结构信息，而且还考虑了表达动作的显着部分。 我们在三个流行的动作预测数据集上评估我们的方法：UT-Interaction，BIT-Interaction和UCF101。 我们的实验结果表明，我们的方法通过最先进的技术实现了性能。</p>
+              <ul>
+<li><h3 id="GNN的发展"><a href="#GNN的发展" class="headerlink" title="GNN的发展"></a>GNN的发展</h3><ul>
+<li>Spectral graph theory: The ﬁrst prominent research on GCNs is presented in Bruna et al. (2013), which develops a variant of graph convolution based on spectral graph theory<ul>
+<li>Since that time, there have been increasing improvements, extensions, and approximations on spectral-based graph convolutional networks</li>
+</ul>
+</li>
+<li>Spatial-based graph convolutional networks: As spectral methods usually handle the whole graph simultaneously and are difﬁcult to parallel or scale to large graphs, spatial-based graph convolutional networks have rapidly developed recently<ul>
+<li>Together with sampling strategies, the computation can be performed in a batch of nodes instead of the whole graph [24], [27], which has the potential to improve the efﬁciency.</li>
+</ul>
+</li>
+<li>Others: In addition to graph convolutional networks, many alternative graph neural networks have been developed in the past few years.<ul>
+<li>These approaches include graph attention networks, graph autoencoders, graph generative networks, and graph spatial-temporal networks.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h3 id="GNN-vs-Network-embedding"><a href="#GNN-vs-Network-embedding" class="headerlink" title="GNN vs Network embedding"></a>GNN vs Network embedding</h3><ul>
+<li>两者属于相交的关系，交集是Deep learning</li>
+<li>Network embedding aims to represent network vertices into a low-dimensional vector space, by preserving both network topology structure and node content information, so that any subsequent graph analytics tasks such as classiﬁcation, clustering, and recommendation can be easily performed by using simple off-the-shelf learning machine algorithm</li>
+<li>Many network embedding algorithms are typically unsupervised algorithms and they can be broadly classiﬁed into three groups [32]<ul>
+<li>matrix factorization [38], [39]</li>
+<li>random walks [40]</li>
+<li>deep learning approaches</li>
+</ul>
+</li>
+<li>The deep learning approaches for network embedding at the same time belong to graph neural networks, which include graph autoencoder-based algorithms (e.g., DNGR [41] and SDNE [42]) and graph convolution neural networks with unsupervised training(e.g., GraphSage [24]).</li>
+<li><img src="http://ww3.sinaimg.cn/large/006tNc79gy1g35m24yir6j30dd08gdh4.jpg" alt="image-20190518104429873"></li>
+</ul>
+</li>
+<li><p>GNN分类，5类</p>
+<ul>
+<li><img src="http://ww2.sinaimg.cn/large/006tNc79gy1g35m2qa2bwj30c90av408.jpg" alt="image-20190518104510256"></li>
+</ul>
+</li>
+</ul>
+
             
           </div>
 
           
-            <p class="article-more-link">
-              <a href="/blog/1352025799/#more" class="waves-effect waves-light btn red lighten-2">
-                Read More
-                &nbsp;
-                <i class="fa fa-plus-circle"></i>
-              </a>
-            </p>
-          
 
           <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/1352025799/" data-id="cjrnebv7y005k1k2p5hu1lubg" class="article-share-link">Share</a>
+            <a data-url="http://jacobkong.github.io/blog/4197138744/" data-id="cjvtc6o3c00000e0frsvw9k5x" class="article-share-link">Share</a>
             
-              <a href="http://jacobkong.github.io/blog/1352025799/#disqus_thread" class="article-comment-link">Comments</a>
+              <a href="http://jacobkong.github.io/blog/4197138744/#disqus_thread" class="article-comment-link">Comments</a>
             
             
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Prediction/">Action Prediction</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ECCV-2018/">ECCV 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Graph-Neural-Networks/">Graph Neural Networks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/图神经网络/">图神经网络</a></li></ul>
 
           </footer>
 
@@ -244,6 +270,71 @@
             
             
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Recognition/">Action Recognition</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ECCV-2018/">ECCV 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
+      <article id="post-论文笔记：行为预测(Action Prediction:Anticipation)相关论文略读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/1352025799/">论文笔记：行为预测(Action Prediction / Anticipation)相关论文略读笔记</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2018-07-20T07:51:24.000Z" itemprop="datePublished">Jul 20, 2018</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction"><a href="#论文一：Part-Activated-Deep-Reinforcement-Learning-for-Action-Prediction" class="headerlink" title="论文一：Part-Activated Deep Reinforcement Learning for Action Prediction"></a>论文一：Part-Activated Deep Reinforcement Learning for Action Prediction</h2><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxntax0ywlj30tn0beqa8.jpg" alt=""></p>
+<p>现有的许多行为预测的方法会用到整个帧的演化来对动作建模，这不能避免当前动作所带来的噪声，特别是在早期预测中。为了解决这个问题，我们设计了PA-DRL，通过在深层强化学习框架下提取骨架proposal来开发人体结构。具体而言，我们从人体的不同part单独提取特征，并激活特征中与动作相关的部分以增强表征。 我们的方法不仅利用了人体的结构信息，而且还考虑了表达动作的显着部分。 我们在三个流行的动作预测数据集上评估我们的方法：UT-Interaction，BIT-Interaction和UCF101。 我们的实验结果表明，我们的方法通过最先进的技术实现了性能。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/1352025799/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/1352025799/" data-id="cjrnebv7y005k1k2p5hu1lubg" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/1352025799/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Action-Prediction/">Action Prediction</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ECCV-2018/">ECCV 2018</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/行为识别/">行为识别</a></li></ul>
 
           </footer>
 
@@ -1144,70 +1235,6 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
       
         
 
-      <article id="post-深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测" class="article article-type-post" itemscope itemprop="blogPost">
-
-        <div class="article-inner">
-          
-
-          <header class="article-header">
-          
-              
-  
-    <h1 itemprop="name" class="header">
-      <a class="article-title " href="/blog/464905881/">深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</a>
-    </h1>
-  
-
-
-          
-
-            <div class="article-meta">
-              <i class="fa fa-calendar"></i>
-              <time datetime="2017-01-16T22:32:24.000Z" itemprop="datePublished">Jan 17, 2017</time>
-            </div>
-          </header>
-
-
-          <div class="article-entry " itemprop="articleBody">
-            
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已经介绍了如何准备数据集，以及如何修改数据集读写接口来操作数据集，接下来我来说明一下怎么来训练网络和之后的检测过程。</p>
-            
-          </div>
-
-          
-            <p class="article-more-link">
-              <a href="/blog/464905881/#more" class="waves-effect waves-light btn red lighten-2">
-                Read More
-                &nbsp;
-                <i class="fa fa-plus-circle"></i>
-              </a>
-            </p>
-          
-
-          <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/464905881/" data-id="cjrnebv2t00141k2py4tg62w5" class="article-share-link">Share</a>
-            
-              <a href="http://jacobkong.github.io/blog/464905881/#disqus_thread" class="article-comment-link">Comments</a>
-            
-            
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
-
-          </footer>
-
-        </div>
-
-        
-      </article>
-
-
-      
-
-
-
-
-      
-        
-
       <article id="post-深度学习实践经验：用Faster R-CNN训练Caltech数据集——修改读写接口" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
@@ -1227,7 +1254,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2017-01-16T22:32:24.000Z" itemprop="datePublished">Jan 17, 2017</time>
+              <time datetime="2017-01-16T22:32:24.000Z" itemprop="datePublished">Jan 16, 2017</time>
             </div>
           </header>
 
@@ -1272,6 +1299,70 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
       
         
 
+      <article id="post-深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测" class="article article-type-post" itemscope itemprop="blogPost">
+
+        <div class="article-inner">
+          
+
+          <header class="article-header">
+          
+              
+  
+    <h1 itemprop="name" class="header">
+      <a class="article-title " href="/blog/464905881/">深度学习实践经验：用Faster R-CNN训练Caltech数据集——训练检测</a>
+    </h1>
+  
+
+
+          
+
+            <div class="article-meta">
+              <i class="fa fa-calendar"></i>
+              <time datetime="2017-01-16T22:32:24.000Z" itemprop="datePublished">Jan 16, 2017</time>
+            </div>
+          </header>
+
+
+          <div class="article-entry " itemprop="articleBody">
+            
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前面已经介绍了如何准备数据集，以及如何修改数据集读写接口来操作数据集，接下来我来说明一下怎么来训练网络和之后的检测过程。</p>
+            
+          </div>
+
+          
+            <p class="article-more-link">
+              <a href="/blog/464905881/#more" class="waves-effect waves-light btn red lighten-2">
+                Read More
+                &nbsp;
+                <i class="fa fa-plus-circle"></i>
+              </a>
+            </p>
+          
+
+          <footer class="article-footer">
+            <a data-url="http://jacobkong.github.io/blog/464905881/" data-id="cjrnebv2t00141k2py4tg62w5" class="article-share-link">Share</a>
+            
+              <a href="http://jacobkong.github.io/blog/464905881/#disqus_thread" class="article-comment-link">Comments</a>
+            
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
+
+          </footer>
+
+        </div>
+
+        
+      </article>
+
+
+      
+
+
+
+
+      
+        
+
       <article id="post-深度学习实践经验：用Faster R-CNN训练Caltech数据集——准备工作" class="article article-type-post" itemscope itemprop="blogPost">
 
         <div class="article-inner">
@@ -1291,7 +1382,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2017-01-15T22:32:24.000Z" itemprop="datePublished">Jan 16, 2017</time>
+              <time datetime="2017-01-15T22:32:24.000Z" itemprop="datePublished">Jan 15, 2017</time>
             </div>
           </header>
 
@@ -1358,7 +1449,7 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
 
             <div class="article-meta">
               <i class="fa fa-calendar"></i>
-              <time datetime="2016-12-16T22:32:24.000Z" itemprop="datePublished">Dec 17, 2016</time>
+              <time datetime="2016-12-16T22:32:24.000Z" itemprop="datePublished">Dec 16, 2016</time>
             </div>
           </header>
 
@@ -1389,77 +1480,6 @@ J(A,B)=\frac{|A\cap B|}{|A\cup B|}</script>A,B分别代表符合某种条件的�
             <a data-url="http://jacobkong.github.io/blog/3802700508/" data-id="cjrnebv2c000t1k2p3dt33vy3" class="article-share-link">Share</a>
             
               <a href="http://jacobkong.github.io/blog/3802700508/#disqus_thread" class="article-comment-link">Comments</a>
-            
-            
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>
-
-          </footer>
-
-        </div>
-
-        
-      </article>
-
-
-      
-
-
-
-
-      
-        
-
-      <article id="post-深度学习论文笔记：Fast R-CNN" class="article article-type-post" itemscope itemprop="blogPost">
-
-        <div class="article-inner">
-          
-
-          <header class="article-header">
-          
-              
-  
-    <h1 itemprop="name" class="header">
-      <a class="article-title " href="/blog/1679631826/">深度学习论文笔记：Fast R-CNN</a>
-    </h1>
-  
-
-
-          
-
-            <div class="article-meta">
-              <i class="fa fa-calendar"></i>
-              <time datetime="2016-12-07T22:32:24.000Z" itemprop="datePublished">Dec 08, 2016</time>
-            </div>
-          </header>
-
-
-          <div class="article-entry " itemprop="articleBody">
-            
-              <h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><ul>
-<li>mAP：detection quality.</li>
-</ul>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>本文提出一种基于快速区域的卷积网络方法（快速R-CNN）用于对象检测。</li>
-<li>快速R-CNN采用多项创新技术来提高训练和测试速度，同时提高检测精度。</li>
-<li>采用VGG16的网络：VGG: 16 layers of 3x3 convolution interleaved with max pooling + 3 fully-connected layers</li>
-</ul>
-            
-          </div>
-
-          
-            <p class="article-more-link">
-              <a href="/blog/1679631826/#more" class="waves-effect waves-light btn red lighten-2">
-                Read More
-                &nbsp;
-                <i class="fa fa-plus-circle"></i>
-              </a>
-            </p>
-          
-
-          <footer class="article-footer">
-            <a data-url="http://jacobkong.github.io/blog/1679631826/" data-id="cjrnebv2m00111k2pp71barpu" class="article-share-link">Share</a>
-            
-              <a href="http://jacobkong.github.io/blog/1679631826/#disqus_thread" class="article-comment-link">Comments</a>
             
             
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Object-Detection/">Object Detection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/目标检测/">目标检测</a></li></ul>

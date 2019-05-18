@@ -3,10 +3,9 @@
 
 
     
-    
   <url>
     <loc>http://jacobkong.github.io/blog/4197138744/</loc>
-    <lastmod>2019-05-18T09:55:56.035Z</lastmod>
+    <lastmod>2019-05-18T10:20:42.038Z</lastmod>
     <data>
         <display>
         <title>论文笔记：A Comprehensive Survey on Graph Neural Networks</title>
@@ -26,6 +25,7 @@
     </url>
 
     
+    
   <url>
     <loc>http://jacobkong.github.io/blog/1352025799/</loc>
     <lastmod>2019-02-02T13:27:12.890Z</lastmod>
@@ -39,30 +39,6 @@
         <tag>ECCV 2018</tag>
          
         <tag>Action Prediction</tag>
-         
-         
-           
-             
-              <breadCrumb title="论文笔记" url="http://jacobkong.github.io/blog/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jacobkong.github.io/blog/913319064/</loc>
-    <lastmod>2019-02-02T11:30:31.431Z</lastmod>
-    <data>
-        <display>
-        <title>论文笔记：ECCV 2018 关于行为识别论文略读笔记</title>
-        <pubTime>2018-07-20T07:51:24.000Z</pubTime>
-        
-        <tag>Action Recognition</tag>
-         
-        <tag>行为识别</tag>
-         
-        <tag>ECCV 2018</tag>
          
          
            
